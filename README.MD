@@ -2,7 +2,7 @@
 
 [![Java CI with Gradle](https://github.com/andrei-punko/math-pde/actions/workflows/gradle.yml/badge.svg)](https://github.com/andrei-punko/math-pde/actions/workflows/gradle.yml)
 
-Migration to Java some part of C/C++ code from [math-library](https://github.com/andrei-punko/math-library) repository
+Migration to Java some part of C/C++ code from my [math-library](https://github.com/andrei-punko/math-library) repository
 
 ## Prerequisites
 
@@ -23,6 +23,12 @@ The finite-difference method was used, in result we get tridiagonal system of li
 and solve it with help of tridiagonal matrix algorithm (or Thomas algorithm).
 
 In Russian - algorithm has name "Progonka" (метод прогонки).
+
+## How to build
+
+```shell
+./gradlew clean build
+```
 
 ## Usage notes
 
