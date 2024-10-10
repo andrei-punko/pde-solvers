@@ -1,6 +1,5 @@
 package by.andd3dfx.util;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
