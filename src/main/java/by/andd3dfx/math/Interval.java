@@ -1,11 +1,9 @@
 package by.andd3dfx.math;
 
 import by.andd3dfx.util.FileUtil;
-import lombok.Getter;
 
 import java.util.function.Function;
 
-@Getter
 public class Interval {
 
     private double x1;
@@ -23,6 +21,18 @@ public class Interval {
 
     public Interval(double x1, double x2, int n) {
         reborn(x1, x2, n);
+    }
+
+    public double x1() {
+        return x1;
+    }
+
+    public double x2() {
+        return x2;
+    }
+
+    public int n() {
+        return n;
     }
 
     public void reborn(double x1, double x2, double h) {
@@ -57,7 +67,7 @@ public class Interval {
 
     void saveFunc(Interval spaceInterval, Function<Double, Double> func, String fileName) {
         var sb = new StringBuilder();
-        for (var i = 0; i <= spaceInterval.getN(); i++) {
+        for (var i = 0; i <= spaceInterval.n(); i++) {
             var x = spaceInterval.x(i);
             var y = func.apply(x);
             sb.append("%s %s\n".formatted(x, y));
@@ -67,7 +77,7 @@ public class Interval {
 
     void saveFunc(Interval timeInterval, Function<Double, Double> xFunc, Function<Double, Double> yFunc, String fileName) {
         var sb = new StringBuilder();
-        for (var i = 0; i <= timeInterval.getN(); i++) {
+        for (var i = 0; i <= timeInterval.n(); i++) {
             var time = timeInterval.x(i);
             var x = xFunc.apply(time);
             var y = yFunc.apply(time);

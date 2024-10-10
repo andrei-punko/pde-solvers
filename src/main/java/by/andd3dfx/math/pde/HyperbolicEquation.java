@@ -16,7 +16,7 @@ public class HyperbolicEquation extends Equation {
     public void solve(double h, double tau) {
         super.solve(h, tau);
 
-        int N = area.x().getN();
+        int N = area.x().n();
         var A = new Matrix(N);
         var B = new Matrix(N);
         var C = new Matrix(N);
@@ -48,7 +48,7 @@ public class HyperbolicEquation extends Equation {
 
         // Реализация разностной схемы
         //
-        for (int j = 0; j <= area.t().getN() - 2; j++) {
+        for (int j = 0; j <= area.t().n() - 2; j++) {
             for (int i = 1; i < N; i++) {
                 double
                         _u = arr.data(j, i - 1),

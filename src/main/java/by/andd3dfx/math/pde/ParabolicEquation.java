@@ -16,7 +16,7 @@ public class ParabolicEquation extends Equation {
     public void solve(double h, double tau) {
         super.solve(h, tau);
 
-        int N = area.x().getN();
+        int N = area.x().n();
         Matrix A = new Matrix(N);
         Matrix B = new Matrix(N);
         Matrix C = new Matrix(N);
@@ -24,7 +24,7 @@ public class ParabolicEquation extends Equation {
         Matrix U = new Matrix(N + 1);     // Коэффициенты для метода прогонки
         double _2h2 = 2 * h * h, _2h2_tau = _2h2 / tau;
 
-        for (int j = 0; j < area.t().getN(); j++) {
+        for (int j = 0; j < area.t().n(); j++) {
             for (int i = 1; i < N; i++) {
                 double
                         _u = arr.data(j, i - 1),

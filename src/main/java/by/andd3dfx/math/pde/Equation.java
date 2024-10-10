@@ -72,11 +72,11 @@ public abstract class Equation {
 
     public void solve(double h, double tau) {
         assert (h > 0 && tau > 0);                      // установка шагов по пространственной и временной координатам
-        area.x().reborn(area.x().getX1(), area.x().getX2(), h);
-        area.t().reborn(area.t().getX1(), area.t().getX2(), tau);
+        area.x().reborn(area.x().x1(), area.x().x2(), h);
+        area.t().reborn(area.t().x1(), area.t().x2(), tau);
 
-        arr = new Matrix(area.t().getN() + 1, area.x().getN() + 1); // Место для решения уравнения
-        for (var i = 0; i <= area.x().getN(); i++) {
+        arr = new Matrix(area.t().n() + 1, area.x().n() + 1); // Место для решения уравнения
+        for (var i = 0; i <= area.x().n(); i++) {
             arr.setX(i, gU0(area.x().x(i)));            // задание начального значения
         }
     }
@@ -88,11 +88,11 @@ public abstract class Equation {
     public void sUt(String fileName, double t[], int size) {
         for (var i = 0; i < size; i++) {
             var tInterval = area.t();
-            assert (tInterval.getX1() <= t[i] && t[i] <= tInterval.getX2());
+            assert (tInterval.x1() <= t[i] && t[i] <= tInterval.x2());
         }
 
         var sb = new StringBuilder();
-        for (var i = 0; i <= area.x().getN(); i++) {
+        for (var i = 0; i <= area.x().n(); i++) {
             sb.append(area.x().x(i));
             for (int j = 0; j < size; j++) {
                 sb.append(" " + arr.data(area.t().i(t[j]), i));
@@ -108,11 +108,11 @@ public abstract class Equation {
 
     public void sUx(String fileName, double x[], int size) {
         for (int i = 0; i < size; i++) {
-            assert (area.x().getX1() <= x[i] && x[i] <= area.x().getX2());
+            assert (area.x().x1() <= x[i] && x[i] <= area.x().x2());
         }
 
         var sb = new StringBuilder();
-        for (int i = 0; i <= area.t().getN(); i++) {
+        for (int i = 0; i <= area.t().n(); i++) {
             sb.append(area.t().x(i));
             for (int j = 0; j < size; j++) {
                 sb.append(" " + arr.data(i, area.x().i(x[j])));
