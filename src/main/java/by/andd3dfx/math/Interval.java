@@ -31,6 +31,10 @@ public class Interval {
         return x2;
     }
 
+    public double h() {
+        return h;
+    }
+
     public int n() {
         return n;
     }
