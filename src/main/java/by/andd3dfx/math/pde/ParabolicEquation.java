@@ -2,7 +2,7 @@ package by.andd3dfx.math.pde;
 
 /**
  * Parabolic equation:
- * M(x,t,U)*dU_dt = K(x,t,U)*d2U_dt2 + V(x,t,U)*dU_dt + F(x,t,U) where U = U(x,t)
+ * M(x,t,U)*dU_dt = dU(K(x,t,U)*dU_dt)_dt + V(x,t,U)*dU_dt + F(x,t,U) where U = U(x,t)
  */
 public class ParabolicEquation extends Equation {
 

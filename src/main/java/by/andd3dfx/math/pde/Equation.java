@@ -169,7 +169,7 @@ public abstract class Equation {
      * @param t        time
      */
     public void sUt(String fileName, double t) {
-        sUt(fileName, new double[]{0, t});
+        sUt(fileName, new double[]{t});
     }
 
     /**
@@ -202,7 +202,7 @@ public abstract class Equation {
      * @param x        space coordinate
      */
     public void sUx(String fileName, double x) {
-        sUx(fileName, new double[]{0, x});
+        sUx(fileName, new double[]{x});
     }
 
     /**
