@@ -32,4 +32,4 @@ In Russian - algorithm has name "Progonka" (метод прогонки).
 
 ## Usage notes
 
-Should be added later, at this moment - just read provided code
+Check classes javadocs

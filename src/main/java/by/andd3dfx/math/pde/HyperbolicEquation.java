@@ -2,14 +2,38 @@ package by.andd3dfx.math.pde;
 
 public class HyperbolicEquation extends Equation {
 
+    /**
+     * Create hyperbolic equation
+     *
+     * @param x1 left space coordinate
+     * @param x2 right space coordinate
+     * @param t2 right time coordinate
+     * @param lbt type of left border condition (1/2/3)
+     * @param rbt type of right border condition (1/2/3)
+     * @param lH coefficient for 3rd border condition type of left border
+     * @param rH coefficient for 3rd border condition type of right border
+     */
     public HyperbolicEquation(double x1, double x2, double t2, int lbt, int rbt, double lH, double rH) {
         super(x1, x2, t2, lbt, rbt, lH, rH);
     }
 
+    /**
+     * Create hyperbolic equation
+     *
+     * @param x1 left space coordinate
+     * @param x2 right space coordinate
+     * @param t2 right time coordinate
+     */
     public HyperbolicEquation(double x1, double x2, double t2) {
         this(x1, x2, t2, 1, 1, 1, 1);
     }
 
+    /**
+     * Solve equation using provided space & time steps
+     *
+     * @param h   space step
+     * @param tau time step
+     */
     @Override
     public void solve(double h, double tau) {
         super.solve(h, tau);
