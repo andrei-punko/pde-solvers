@@ -1,9 +1,8 @@
 package by.andd3dfx.util;
 
-import lombok.SneakyThrows;
+import by.andd3dfx.math.Interval;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,18 +12,43 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 class FileUtilTest {
 
-    private final String GENERATED_FILE_NAME = "./build/tmp.txt";
-    private final String EXPECTED_FILE_NAME = "./src/test/resources/tmp.txt";
+    private final String BUILD_PATH = "./build/";
+    private final String RESOURCES_PATH = "./src/test/resources/";
 
     @Test
     void serialize() throws IOException {
+        var generatedFileName = BUILD_PATH + "serialize.txt";
+        var expectedFileName = RESOURCES_PATH + "serialize.txt";
         StringBuilder sb = new StringBuilder();
         sb.append("one two\n");
         sb.append("three four\n");
 
-        FileUtil.serialize(GENERATED_FILE_NAME, sb);
+        FileUtil.serialize(generatedFileName, sb);
 
-        checkGeneratedFileContent(GENERATED_FILE_NAME, EXPECTED_FILE_NAME);
+        checkGeneratedFileContent(generatedFileName, expectedFileName);
+    }
+
+
+    @Test
+    void saveFuncSimple() throws IOException {
+        var generatedFileName = BUILD_PATH + "saveFuncSimple.txt";
+        var expectedFileName = RESOURCES_PATH + "saveFuncSimple.txt";
+        var interval = new Interval(-1, 9, 10);
+
+        FileUtil.saveFunc(interval, (x) -> x * x, generatedFileName);
+
+        checkGeneratedFileContent(generatedFileName, expectedFileName);
+    }
+
+    @Test
+    void saveFuncForParameterizedXAndY() throws IOException {
+        var generatedFileName = BUILD_PATH + "saveFuncForParameterizedXAndY.txt";
+        var expectedFileName = RESOURCES_PATH + "saveFuncForParameterizedXAndY.txt";
+        var interval = new Interval(-1, 9, 10);
+
+        FileUtil.saveFunc(interval, (t) -> t * 10, (t) -> 2 * t + 1, generatedFileName);
+
+        checkGeneratedFileContent(generatedFileName, expectedFileName);
     }
 
     private void checkGeneratedFileContent(String generatedFileName, String expectedOutputFileName) throws IOException {
@@ -42,5 +66,4 @@ class FileUtilTest {
                     generatedFileLines[i], is(expectedFileLines[i]));
         }
     }
-
 }

@@ -76,14 +76,4 @@ class IntervalTest {
         assertThat(interval.i(5.9)).isEqualTo(1);
         assertThat(interval.i(6.1)).isEqualTo(2);
     }
-
-    @Test
-    void saveFuncSimple() {
-        // TODO
-    }
-
-    @Test
-    void saveFuncForParameterizedXAndY() {
-        // TODO
-    }
 }

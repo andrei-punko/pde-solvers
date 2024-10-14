@@ -1,9 +1,5 @@
 package by.andd3dfx.math;
 
-import by.andd3dfx.util.FileUtil;
-
-import java.util.function.Function;
-
 public class Interval {
 
     private double x1;
@@ -67,26 +63,5 @@ public class Interval {
         assert (x1 <= x && x <= x2);
 
         return (int) ((x - x1) / h);
-    }
-
-    void saveFunc(Interval spaceInterval, Function<Double, Double> func, String fileName) {
-        var sb = new StringBuilder();
-        for (var i = 0; i <= spaceInterval.n(); i++) {
-            var x = spaceInterval.x(i);
-            var y = func.apply(x);
-            sb.append("%s %s\n".formatted(x, y));
-        }
-        FileUtil.serialize(fileName, sb);
-    }
-
-    void saveFunc(Interval timeInterval, Function<Double, Double> xFunc, Function<Double, Double> yFunc, String fileName) {
-        var sb = new StringBuilder();
-        for (var i = 0; i <= timeInterval.n(); i++) {
-            var time = timeInterval.x(i);
-            var x = xFunc.apply(time);
-            var y = yFunc.apply(time);
-            sb.append("%s %s\n".formatted(x, y));
-        }
-        FileUtil.serialize(fileName, sb);
     }
 }
