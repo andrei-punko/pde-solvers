@@ -36,7 +36,7 @@ public class ParabolicEquation extends Equation {
      */
     @Override
     public void solve(double h, double tau) {
-        super.solve(h, tau);
+        prepare(h, tau);
 
         int N = area.x().n();
         var A = new double[N];

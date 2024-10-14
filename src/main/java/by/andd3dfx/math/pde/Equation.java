@@ -137,7 +137,9 @@ public abstract class Equation {
      * @param h   space step
      * @param tau time step
      */
-    public void solve(double h, double tau) {
+    public abstract void solve(double h, double tau);
+
+    protected void prepare(double h, double tau) {
         assert (h > 0 && tau > 0);                      // установка шагов по пространственной и временной координатам
         area.x().reborn(area.x().left(), area.x().right(), h);
         area.t().reborn(area.t().left(), area.t().right(), tau);
