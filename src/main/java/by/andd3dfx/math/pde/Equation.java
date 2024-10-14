@@ -160,20 +160,20 @@ public abstract class Equation {
         return gUx(area.x().i(x));
     }
 
-    protected void progonka(int N, Matrix A, Matrix B, Matrix C, Matrix F, double m1, double n1, double m2, double n2, Matrix Y) {
-        Matrix Alpha = new Matrix(N + 1);
-        Matrix Beta = new Matrix(N + 1);
+    protected void progonka(int N, double[] A, double[] B, double[] C, double[] F, double m1, double n1, double m2, double n2, double[] Y) {
+        double[] Alpha = new double[N + 1];
+        double[] Beta = new double[N + 1];
 
-        Alpha.set(1, m1);
-        Beta.set(1, n1);
+        Alpha[1] = m1;
+        Beta[1] = n1;
         for (int i = 1; i < N; i++) {
-            Alpha.set(i + 1, B.get(i) / (C.get(i) - A.get(i) * Alpha.get(i)));
-            Beta.set(i + 1, (A.get(i) * Beta.get(i) + F.get(i)) / (C.get(i) - A.get(i) * Alpha.get(i)));
+            Alpha[i + 1] = B[i] / (C[i] - A[i] * Alpha[i]);
+            Beta[i + 1] = (A[i] * Beta[i] + F[i]) / (C[i] - A[i] * Alpha[i]);
         }
 
-        Y.set(N, (n2 + m2 * Beta.get(N)) / (1 - m2 * Alpha.get(N)));
+        Y[N] = (n2 + m2 * Beta[N]) / (1 - m2 * Alpha[N]);
         for (int i = N - 1; i >= 0; i--) {
-            Y.set(i, Alpha.get(i + 1) * Y.get(i + 1) + Beta.get(i + 1));
+            Y[i] = Alpha[i + 1] * Y[i + 1] + Beta[i + 1];
         }
     }
 }

@@ -1,7 +1,5 @@
 package by.andd3dfx.math.pde;
 
-import by.andd3dfx.math.Matrix;
-
 public class HyperbolicEquation extends Equation {
 
     public HyperbolicEquation(double x1, double x2, double t2, int l, int r, double lH, double rH) {
@@ -17,11 +15,11 @@ public class HyperbolicEquation extends Equation {
         super.solve(h, tau);
 
         int N = area.x().n();
-        var A = new Matrix(N);
-        var B = new Matrix(N);
-        var C = new Matrix(N);
-        var F = new Matrix(N);
-        var U = new Matrix(N + 1);    // Коэффициенты для метода прогонки
+        var A = new double[N];
+        var B = new double[N];
+        var C = new double[N];
+        var F = new double[N];
+        var U = new double[N + 1];    // Коэффициенты для метода прогонки
 
         double _2h = 2 * h,                        //Для ускорения вычислений
                 h2 = h * h,
@@ -63,10 +61,10 @@ public class HyperbolicEquation extends Equation {
                         Gamma = h2_tau * gL(x, t, u),
                         Delta = _2h2_tau2 * gM(x, t, u);
 
-                A.set(i, Alpha);
-                B.set(i, Beta);
-                C.set(i, Alpha + Beta - Gamma + Delta);
-                F.set(i, _u * Alpha + u_ * Beta - u * (Alpha + Beta + Gamma + Delta) + 2 * (arr.data(j + 1, i) * Delta + gF(x, t, u) * h2));
+                A[i] = Alpha;
+                B[i] = Beta;
+                C[i] = Alpha + Beta - Gamma + Delta;
+                F[i] = _u * Alpha + u_ * Beta - u * (Alpha + Beta + Gamma + Delta) + 2 * (arr.data(j + 1, i) * Delta + gF(x, t, u) * h2);
             }
 
             int nj = j + 2;
@@ -103,7 +101,7 @@ public class HyperbolicEquation extends Equation {
 
             progonka(N, A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
             for (int i = 0; i <= N; i++) {
-                arr.set(nj, i, U.get(i));
+                arr.set(nj, i, U[i]);
             }
         }
     }

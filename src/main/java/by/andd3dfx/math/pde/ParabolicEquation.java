@@ -1,7 +1,5 @@
 package by.andd3dfx.math.pde;
 
-import by.andd3dfx.math.Matrix;
-
 public class ParabolicEquation extends Equation {
 
     public ParabolicEquation(double x1, double x2, double t2, int l, int r, double lH, double rH) {
@@ -17,11 +15,11 @@ public class ParabolicEquation extends Equation {
         super.solve(h, tau);
 
         int N = area.x().n();
-        Matrix A = new Matrix(N);
-        Matrix B = new Matrix(N);
-        Matrix C = new Matrix(N);
-        Matrix F = new Matrix(N);
-        Matrix U = new Matrix(N + 1);     // Коэффициенты для метода прогонки
+        var A = new double[N];
+        var B = new double[N];
+        var C = new double[N];
+        var F = new double[N];
+        var U = new double[N + 1];    // Коэффициенты для метода прогонки
         double _2h2 = 2 * h * h, _2h2_tau = _2h2 / tau;
 
         for (int j = 0; j < area.t().n(); j++) {
@@ -40,10 +38,10 @@ public class ParabolicEquation extends Equation {
                         Beta = (gK(x, t, u) + gK(_x, t, _u) - gV(x, t, u) * h) / 2.,
                         Gamma = _2h2_tau * gM(x, t, u);
 
-                A.set(i, Beta);
-                B.set(i, Alpha);
-                C.set(i, Alpha + Beta + Gamma);
-                F.set(i, u_ * Alpha + _u * Beta - u * (Alpha + Beta - Gamma) + _2h2 * gF(x, t, u));
+                A[i] = Beta;
+                B[i] = Alpha;
+                C[i] = Alpha + Beta + Gamma;
+                F[i] = u_ * Alpha + _u * Beta - u * (Alpha + Beta - Gamma) + _2h2 * gF(x, t, u);
             }
 
             int nj = j + 1;
@@ -80,7 +78,7 @@ public class ParabolicEquation extends Equation {
 
             progonka(N, A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
             for (int i = 0; i <= N; i++) {
-                arr.set(nj, i, U.get(i));
+                arr.set(nj, i, U[i]);
             }
         }
     }
