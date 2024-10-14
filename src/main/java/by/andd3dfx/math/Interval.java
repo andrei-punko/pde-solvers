@@ -2,8 +2,8 @@ package by.andd3dfx.math;
 
 public class Interval {
 
-    private double x1;
-    private double x2;
+    private double left;
+    private double right;
     private double h;
     private int n;
 
@@ -11,20 +11,20 @@ public class Interval {
         this(0, 1, 1);
     }
 
-    public Interval(double x1, double x2, double h) {
-        reborn(x1, x2, h);
+    public Interval(double left, double right, double h) {
+        reborn(left, right, h);
     }
 
-    public Interval(double x1, double x2, int n) {
-        reborn(x1, x2, n);
+    public Interval(double left, double right, int n) {
+        reborn(left, right, n);
     }
 
-    public double x1() {
-        return x1;
+    public double left() {
+        return left;
     }
 
-    public double x2() {
-        return x2;
+    public double right() {
+        return right;
     }
 
     public double h() {
@@ -35,33 +35,33 @@ public class Interval {
         return n;
     }
 
-    public void reborn(double x1, double x2, double h) {
-        assert (x1 < x2 && h > 0 && h <= x2 - x1);
+    public void reborn(double left, double right, double h) {
+        assert (left < right && h > 0 && h <= right - left);
 
-        this.x1 = x1;
-        this.x2 = x2;
+        this.left = left;
+        this.right = right;
         this.h = h;
-        this.n = (int) Math.floor((x2 - x1) / h);    // если необходимо, n будет на 1 больше
+        this.n = (int) Math.floor((right - left) / h);    // если необходимо, n будет на 1 больше
     }
 
-    public void reborn(double x1, double x2, int n) {
-        assert (x1 < x2 && n > 0);
+    public void reborn(double left, double right, int n) {
+        assert (left < right && n > 0);
 
-        this.x1 = x1;
-        this.x2 = x2;
+        this.left = left;
+        this.right = right;
         this.n = n;
-        this.h = (x2 - x1) / (double) n;
+        this.h = (right - left) / (double) n;
     }
 
     public double x(int i) {
         assert (0 <= i && i <= n);
 
-        return x1 + i * h;
+        return left + i * h;
     }
 
     public int i(double x) {
-        assert (x1 <= x && x <= x2);
+        assert (left <= x && x <= right);
 
-        return (int) ((x - x1) / h);
+        return (int) ((x - left) / h);
     }
 }

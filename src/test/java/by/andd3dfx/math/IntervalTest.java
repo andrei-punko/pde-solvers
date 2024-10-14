@@ -10,8 +10,8 @@ class IntervalTest {
     void defaultConstructor() {
         var interval = new Interval();
 
-        assertThat(interval.x1()).isEqualTo(0.0);
-        assertThat(interval.x2()).isEqualTo(1.0);
+        assertThat(interval.left()).isEqualTo(0.0);
+        assertThat(interval.right()).isEqualTo(1.0);
         assertThat(interval.h()).isEqualTo(1.0);
         assertThat(interval.n()).isEqualTo(1);
     }
@@ -20,8 +20,8 @@ class IntervalTest {
     void paramsConstructorWithN() {
         var interval = new Interval(2.5, 10.5, 10);
 
-        assertThat(interval.x1()).isEqualTo(2.5);
-        assertThat(interval.x2()).isEqualTo(10.5);
+        assertThat(interval.left()).isEqualTo(2.5);
+        assertThat(interval.right()).isEqualTo(10.5);
         assertThat(interval.h()).isEqualTo(0.8);
         assertThat(interval.n()).isEqualTo(10);
     }
@@ -30,8 +30,8 @@ class IntervalTest {
     void paramsConstructorWithH() {
         var interval = new Interval(2.5, 10.5, 0.1);
 
-        assertThat(interval.x1()).isEqualTo(2.5);
-        assertThat(interval.x2()).isEqualTo(10.5);
+        assertThat(interval.left()).isEqualTo(2.5);
+        assertThat(interval.right()).isEqualTo(10.5);
         assertThat(interval.h()).isEqualTo(0.1);
         assertThat(interval.n()).isEqualTo(80);
     }
@@ -42,8 +42,8 @@ class IntervalTest {
 
         interval.reborn(5.0, 10.0, 100);
 
-        assertThat(interval.x1()).isEqualTo(5.0);
-        assertThat(interval.x2()).isEqualTo(10.0);
+        assertThat(interval.left()).isEqualTo(5.0);
+        assertThat(interval.right()).isEqualTo(10.0);
         assertThat(interval.h()).isEqualTo(0.05);
         assertThat(interval.n()).isEqualTo(100);
     }
@@ -54,8 +54,8 @@ class IntervalTest {
 
         interval.reborn(5.0, 10.0, 0.2);
 
-        assertThat(interval.x1()).isEqualTo(5.0);
-        assertThat(interval.x2()).isEqualTo(10.0);
+        assertThat(interval.left()).isEqualTo(5.0);
+        assertThat(interval.right()).isEqualTo(10.0);
         assertThat(interval.h()).isEqualTo(0.2);
         assertThat(interval.n()).isEqualTo(25);
     }

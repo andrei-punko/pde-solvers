@@ -2,8 +2,8 @@ package by.andd3dfx.math.pde;
 
 public class HyperbolicEquation extends Equation {
 
-    public HyperbolicEquation(double x1, double x2, double t2, int l, int r, double lH, double rH) {
-        super(x1, x2, t2, l, r, lH, rH);
+    public HyperbolicEquation(double x1, double x2, double t2, int lbt, int rbt, double lH, double rH) {
+        super(x1, x2, t2, lbt, rbt, lH, rH);
     }
 
     public HyperbolicEquation(double x1, double x2, double t2) {

@@ -7,19 +7,21 @@ import by.andd3dfx.util.FileUtil;
 
 public abstract class Equation {
 
-    protected int lbt, rbt;
-    protected double lh, rh;
+    protected int lbt;
+    protected int rbt;
+    protected double lh;
+    protected double rh;
     protected Area area;
     protected Matrix arr = new Matrix();
 
-    public Equation(double x1, double x2, double t2, int l, int r, double lH, double rH) {
-        assert (l >= 1 && l <= 3 && r >= 1 && r <= 3 && lH > 0 && rH > 0);
+    public Equation(double x1, double x2, double t2, int lbt, int rbt, double lH, double rH) {
+        assert (lbt >= 1 && lbt <= 3 && rbt >= 1 && rbt <= 3 && lH > 0 && rH > 0);
 
         area = new Area(new Interval(x1, x2, 1), new Interval(0, t2, 1));
-        lbt = l;
-        rbt = r;
-        lh = lH;
-        rh = rH;
+        this.lbt = lbt;
+        this.rbt = rbt;
+        this.lh = lH;
+        this.rh = rH;
     }
 
     public Equation(double x1, double x2, double t2) {
@@ -72,8 +74,8 @@ public abstract class Equation {
 
     public void solve(double h, double tau) {
         assert (h > 0 && tau > 0);                      // установка шагов по пространственной и временной координатам
-        area.x().reborn(area.x().x1(), area.x().x2(), h);
-        area.t().reborn(area.t().x1(), area.t().x2(), tau);
+        area.x().reborn(area.x().left(), area.x().right(), h);
+        area.t().reborn(area.t().left(), area.t().right(), tau);
 
         arr = new Matrix(area.t().n() + 1, area.x().n() + 1); // Место для решения уравнения
         for (var i = 0; i <= area.x().n(); i++) {
@@ -88,7 +90,7 @@ public abstract class Equation {
     public void sUt(String fileName, double t[], int size) {
         for (var i = 0; i < size; i++) {
             var tInterval = area.t();
-            assert (tInterval.x1() <= t[i] && t[i] <= tInterval.x2());
+            assert (tInterval.left() <= t[i] && t[i] <= tInterval.right());
         }
 
         var sb = new StringBuilder();
@@ -108,7 +110,7 @@ public abstract class Equation {
 
     public void sUx(String fileName, double x[], int size) {
         for (int i = 0; i < size; i++) {
-            assert (area.x().x1() <= x[i] && x[i] <= area.x().x2());
+            assert (area.x().left() <= x[i] && x[i] <= area.x().right());
         }
 
         var sb = new StringBuilder();
