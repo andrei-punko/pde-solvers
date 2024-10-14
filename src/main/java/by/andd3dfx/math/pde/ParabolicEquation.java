@@ -1,17 +1,21 @@
 package by.andd3dfx.math.pde;
 
+/**
+ * Parabolic equation:
+ * M(x,t,U)*dU_dt = K(x,t,U)*d2U_dt2 + V(x,t,U)*dU_dt + F(x,t,U) where U = U(x,t)
+ */
 public class ParabolicEquation extends Equation {
 
     /**
      * Create parabolic equation
      *
-     * @param x1 left space coordinate
-     * @param x2 right space coordinate
-     * @param t2 right time coordinate
-     * @param lbt  type of left border condition (1/2/3)
-     * @param rbt  type of right border condition (1/2/3)
-     * @param lH coefficient for 3rd border condition type of left border
-     * @param rH coefficient for 3rd border condition type of right border
+     * @param x1  left space coordinate
+     * @param x2  right space coordinate
+     * @param t2  right time coordinate
+     * @param lbt type of left border condition (1/2/3)
+     * @param rbt type of right border condition (1/2/3)
+     * @param lH  coefficient for 3rd border condition type of left border
+     * @param rH  coefficient for 3rd border condition type of right border
      */
     public ParabolicEquation(double x1, double x2, double t2, int lbt, int rbt, double lH, double rH) {
         super(x1, x2, t2, lbt, rbt, lH, rH);

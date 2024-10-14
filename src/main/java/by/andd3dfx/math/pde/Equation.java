@@ -50,7 +50,7 @@ public abstract class Equation {
     }
 
     /**
-     * Initial condition U0(x)
+     * Initial condition U(x,0) at moment t=0
      *
      * @param x coordinate
      * @return U value in asked coordinate
@@ -60,7 +60,7 @@ public abstract class Equation {
     }
 
     /**
-     * Left border condition U_left(t) (for 1st border type)
+     * Left border condition U(0,t) (for 1st border type)
      *
      * @param t time
      * @return U value in asked time moment on left border
@@ -70,7 +70,7 @@ public abstract class Equation {
     }
 
     /**
-     * Right border condition U_right(t) (for 1st border type)
+     * Right border condition U(d,t) (for 1st border type)
      *
      * @param t time
      * @return U value in asked time moment on right border
@@ -80,7 +80,7 @@ public abstract class Equation {
     }
 
     /**
-     * Left border condition dU_dt_left(t) (for 2nd border type)
+     * Left border condition dU_dt(0,t) (for 2nd border type)
      *
      * @param t time
      * @return dU_dt value in asked time moment on left border
@@ -90,7 +90,7 @@ public abstract class Equation {
     }
 
     /**
-     * Right border condition dU_dt_right(t) (for 2nd border type)
+     * Right border condition dU_dt(d,t) (for 2nd border type)
      *
      * @param t time
      * @return dU_dt value in asked time moment on right border
@@ -115,18 +115,30 @@ public abstract class Equation {
         return 0;
     }
 
+    /**
+     * Coefficient M(x,t,U) of equation for 2nd-order time derivative
+     */
     protected double gM(double x, double t, double U) {
         return 1;
     }
 
+    /**
+     * Coefficient K(x,t,U) of equation for 2nd-order space derivative
+     */
     protected double gK(double x, double t, double U) {
         return 1;
     }
 
+    /**
+     * Coefficient V(x,t,U) of equation for 1st-order space derivative
+     */
     protected double gV(double x, double t, double U) {
         return 0;
     }
 
+    /**
+     * Free addendum F(x,t,U) of equation
+     */
     protected double gF(double x, double t, double U) {
         return 0;
     }
@@ -151,7 +163,7 @@ public abstract class Equation {
     }
 
     /**
-     * Save data U(x) for asked time moment
+     * Save data U(x,t*) for asked time moment t*
      *
      * @param fileName file name
      * @param t        time
@@ -161,7 +173,7 @@ public abstract class Equation {
     }
 
     /**
-     * Save data U(x) for asked time moments. So in result we get some set of slices for several time moments
+     * Save data U(x,t_i) for asked time moments [t_i]. So in result we get some set of slices for several time moments
      *
      * @param fileName file name
      * @param t        times array
@@ -184,7 +196,7 @@ public abstract class Equation {
     }
 
     /**
-     * Save data U(t) for asked space coordinate x
+     * Save data U(x*,t) for asked space coordinate x*
      *
      * @param fileName file name
      * @param x        space coordinate
@@ -194,7 +206,7 @@ public abstract class Equation {
     }
 
     /**
-     * Save data U(t) for asked space coordinates. So in result we get some set of slices for several space coordinates
+     * Save data U(x_i,t) for asked space coordinates [x_i]. So in result we get some set of slices for several space coordinates
      *
      * @param fileName file name
      * @param x        coordinates array
@@ -228,7 +240,7 @@ public abstract class Equation {
     }
 
     /**
-     * Получение среза U(x) при заданном t
+     * Получение среза U(x,t*) при заданном t*
      */
     protected Matrix gUt(double t) {
         return gUt(area.t().i(t));
@@ -247,7 +259,7 @@ public abstract class Equation {
     }
 
     /**
-     * Получение среза U(t) при заданном x
+     * Получение среза U(x*,t) при заданном x*
      */
     protected Matrix gUx(double x) {
         return gUx(area.x().i(x));
