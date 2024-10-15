@@ -1,6 +1,7 @@
 package by.andd3dfx.util;
 
 import by.andd3dfx.math.Interval;
+import by.andd3dfx.math.Matrix;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -28,7 +29,6 @@ class FileUtilTest {
         checkGeneratedFileContent(generatedFileName, expectedFileName);
     }
 
-
     @Test
     void saveFuncSimple() throws IOException {
         var generatedFileName = BUILD_PATH + "saveFuncSimple.txt";
@@ -47,6 +47,36 @@ class FileUtilTest {
         var interval = new Interval(-1, 9, 10);
 
         FileUtil.saveFunc(interval, (t) -> t * 10, (t) -> 2 * t + 1, generatedFileName);
+
+        checkGeneratedFileContent(generatedFileName, expectedFileName);
+    }
+
+    @Test
+    void saveMatrixInOriginalView() throws IOException {
+        var generatedFileName = BUILD_PATH + "matrix-original.txt";
+        var expectedFileName = RESOURCES_PATH + "matrix-original.txt";
+        var m = new Matrix(2, 2);
+        m.set(0, 0, 5);
+        m.set(0, 1, 6);
+        m.set(1, 0, 9);
+        m.set(1, 1, 1);
+
+        FileUtil.save(m, generatedFileName, true);
+
+        checkGeneratedFileContent(generatedFileName, expectedFileName);
+    }
+
+    @Test
+    void saveMatrixInNotOriginalView() throws IOException {
+        var generatedFileName = BUILD_PATH + "matrix-not-original.txt";
+        var expectedFileName = RESOURCES_PATH + "matrix-not-original.txt";
+        var m = new Matrix(2, 2);
+        m.set(0, 0, 5);
+        m.set(0, 1, 6);
+        m.set(1, 0, 9);
+        m.set(1, 1, 1);
+
+        FileUtil.save(m, generatedFileName, false);
 
         checkGeneratedFileContent(generatedFileName, expectedFileName);
     }

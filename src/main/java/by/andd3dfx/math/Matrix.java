@@ -2,9 +2,7 @@ package by.andd3dfx.math;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 
-import java.io.FileWriter;
 import java.util.Arrays;
 
 @RequiredArgsConstructor
@@ -36,16 +34,28 @@ public class Matrix {
         return data(0, i);
     }
 
+    public void setX(int index, double value) {
+        data[index] = value;
+    }
+
+    public void set(int index, double value) {
+        data[index] = value;
+    }
+
     public double get(int i) {
-        return data(0, i);
+        return data(i, 0);
     }
 
     public double y(int i) {
         return data(1, i);
     }
 
-    private double data(int i) {
-        return data(i, 0);
+    public void setY(int index, double value) {
+        data[n + index] = value;
+    }
+
+    public void set(int i, int j, double value) {
+        data[i * n + j] = value;
     }
 
     public double data(int i, int j) {
@@ -53,39 +63,17 @@ public class Matrix {
         return data[i * n + j];
     }
 
-    public double max() {
-        return Arrays.stream(data).max().getAsDouble();
-    }
-
     public double min() {
         return Arrays.stream(data).min().getAsDouble();
     }
 
-    public Matrix set(double d) {
-        Arrays.fill(data, d);
-        return this;
+    public double max() {
+        return Arrays.stream(data).max().getAsDouble();
     }
 
-    @SneakyThrows
-    public void save(String fileName, boolean originalView) {
-        var file = new FileWriter(fileName);
-
-        if (originalView) {
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
-                    file.write(data(i, j) + " ");
-                }
-                file.write("\n");
-            }
-        } else {
-            for (int j = 0; j < n; j++) {
-                for (int i = 0; i < m; i++) {
-                    file.write(data(i, j) + " ");
-                }
-                file.write("\n");
-            }
-        }
-        file.close();
+    public Matrix fill(double d) {
+        Arrays.fill(data, d);
+        return this;
     }
 
     public void swapLines(int m1, int m2) {
@@ -106,21 +94,5 @@ public class Matrix {
             data[i * n + n1] = data[i * n + n2];
             data[i * n + n2] = tmp;
         }
-    }
-
-    public void setX(int index, double value) {
-        data[index] = value;
-    }
-
-    public void setY(int index, double value) {
-        data[n + index] = value;
-    }
-
-    public void set(int index, double value) {
-        data[index] = value;
-    }
-
-    public void set(int i, int j, double value) {
-        data[i * n + j] = value;
     }
 }

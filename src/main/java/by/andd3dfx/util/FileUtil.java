@@ -1,6 +1,8 @@
 package by.andd3dfx.util;
 
 import by.andd3dfx.math.Interval;
+import by.andd3dfx.math.Matrix;
+import lombok.SneakyThrows;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,5 +37,26 @@ public class FileUtil {
             sb.append("%s %s\n".formatted(x, y));
         }
         serialize(fileName, sb);
+    }
+
+    @SneakyThrows
+    public static void save(Matrix m, String fileName, boolean originalView) {
+        var file = new FileWriter(fileName);
+        if (originalView) {
+            for (int i = 0; i < m.getM(); i++) {
+                for (int j = 0; j < m.getN(); j++) {
+                    file.write(m.data(i, j) + " ");
+                }
+                file.write("\n");
+            }
+        } else {
+            for (int j = 0; j < m.getN(); j++) {
+                for (int i = 0; i < m.getM(); i++) {
+                    file.write(m.data(i, j) + " ");
+                }
+                file.write("\n");
+            }
+        }
+        file.close();
     }
 }

@@ -12,7 +12,7 @@ import by.andd3dfx.util.FileUtil;
 public abstract class Equation {
 
     protected Area area;
-    protected Matrix arr = new Matrix();
+    protected Matrix arr;
     protected final BorderCondition leftBorderCondition;
     protected final BorderCondition rightBorderCondition;
 
