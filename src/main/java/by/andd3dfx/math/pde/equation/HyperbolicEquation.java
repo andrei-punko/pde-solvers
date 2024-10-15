@@ -14,10 +14,10 @@ public class HyperbolicEquation extends Equation {
     /**
      * Create hyperbolic equation
      *
-     * @param x1  left space coordinate
-     * @param x2  right space coordinate
-     * @param t2  right time coordinate
-     * @param leftBorderCondition left border condition
+     * @param x1                   left space coordinate
+     * @param x2                   right space coordinate
+     * @param t2                   right time coordinate
+     * @param leftBorderCondition  left border condition
      * @param rightBorderCondition right border condition
      */
     public HyperbolicEquation(double x1, double x2, double t2,
@@ -50,10 +50,9 @@ public class HyperbolicEquation extends Equation {
                 h2_tau = h2 / tau,
                 _2h2_tau2 = 2 * Math.pow(h / tau, 2);
 
-        /* TODO: need to determine what values should be populated into these [1,0] and [1,N] cells
-        arr.set(1, 0, gLU(tau));        //Задание граничных значений на первом слое
-        arr.set(1, N, gRU(tau));
-         */
+        // Задание граничных значений на первом слое
+        arr.set(1, 0, calcFirstLayerValue(tau, arr.get(0, 0), area.x().left()));
+        arr.set(1, N, calcFirstLayerValue(tau, arr.get(0, N), area.x().right()));
 
         // Вычисление значения функции на первом слое для запуска разностной схемы
         //
@@ -123,6 +122,10 @@ public class HyperbolicEquation extends Equation {
                 arr.set(nj, i, U[i]);
             }
         }
+    }
+
+    private double calcFirstLayerValue(double tau, double u, double x) {
+        return u + tau * (gdU_dt(x) + tau / 2. / gM(x, 0, u) * gF(x, 0, u));
     }
 
     /**
