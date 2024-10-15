@@ -9,27 +9,16 @@ public class ParabolicEquation extends Equation {
     /**
      * Create parabolic equation
      *
-     * @param x1  left space coordinate
-     * @param x2  right space coordinate
-     * @param t2  right time coordinate
-     * @param lbt type of left border condition (1/2/3)
-     * @param rbt type of right border condition (1/2/3)
-     * @param lH  coefficient for 3rd border condition type of left border
-     * @param rH  coefficient for 3rd border condition type of right border
+     * @param x1                   left space coordinate
+     * @param x2                   right space coordinate
+     * @param t2                   right time coordinate
+     * @param leftBorderCondition  left border condition
+     * @param rightBorderCondition right border condition
      */
-    public ParabolicEquation(double x1, double x2, double t2, int lbt, int rbt, double lH, double rH) {
-        super(x1, x2, t2, lbt, rbt, lH, rH);
-    }
-
-    /**
-     * Create parabolic equation
-     *
-     * @param x1 left space coordinate
-     * @param x2 right space coordinate
-     * @param t2 right time coordinate
-     */
-    public ParabolicEquation(double x1, double x2, double t2) {
-        super(x1, x2, t2);
+    public ParabolicEquation(double x1, double x2, double t2,
+                             BorderCondition leftBorderCondition,
+                             BorderCondition rightBorderCondition) {
+        super(x1, x2, t2, leftBorderCondition, rightBorderCondition);
     }
 
     /**
@@ -77,34 +66,29 @@ public class ParabolicEquation extends Equation {
             double Nu[] = new double[3];
             double t = area.t().x(nj);
 
-            switch (lbt) {
-                case 1:
-                    Nu[1] = gLU(t);
-                    break;
-                case 2:
-                    Mu[1] = 1;
-                    Nu[1] = -h * gLdU_dx(t);
-                    break;
-                case 3:
-                    Mu[1] = 1 / (1 + h * lh);
-                    Nu[1] = h * lh * gLTeta(t) / (1 + h * lh);
-                    break;
-            }
-            switch (rbt) {
-                case 1:
-                    Nu[2] = gRU(t);
-                    break;
-                case 2:
-                    Mu[2] = 1;
-                    Nu[2] = h * gRdU_dx(t);
-                    break;
-                case 3:
-                    Mu[2] = 1 / (1 - h * rh);
-                    Nu[2] = -h * rh * gRTeta(t) / (1 - h * rh);
-                    break;
+            if (leftBorderCondition instanceof BorderConditionType1 condition) {
+                Nu[1] = condition.gU(t);
+            } else if (leftBorderCondition instanceof BorderConditionType2 condition) {
+                Mu[1] = 1;
+                Nu[1] = -h * condition.gdU_dx(t);
+            } else if (leftBorderCondition instanceof BorderConditionType3 condition) {
+                var lh = condition.gH();
+                Mu[1] = 1 / (1 + h * lh);
+                Nu[1] = h * lh * condition.gTheta(t) / (1 + h * lh);
             }
 
-            progonka(N, A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
+            if (rightBorderCondition instanceof BorderConditionType1 condition) {
+                Nu[2] = condition.gU(t);
+            } else if (rightBorderCondition instanceof BorderConditionType2 condition) {
+                Mu[2] = 1;
+                Nu[2] = h * condition.gdU_dx(t);
+            } else if (rightBorderCondition instanceof BorderConditionType3 condition) {
+                var rh = condition.gH();
+                Mu[2] = 1 / (1 - h * rh);
+                Nu[2] = -h * rh * condition.gTheta(t) / (1 - h * rh);
+            }
+
+            progonka(A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
             for (int i = 0; i <= N; i++) {
                 arr.set(nj, i, U[i]);
             }

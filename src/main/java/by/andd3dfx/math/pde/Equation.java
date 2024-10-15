@@ -10,43 +10,26 @@ import by.andd3dfx.util.FileUtil;
  */
 public abstract class Equation {
 
-    protected int lbt;
-    protected int rbt;
-    protected double lh;
-    protected double rh;
     protected Area area;
     protected Matrix arr = new Matrix();
+    protected final BorderCondition leftBorderCondition;
+    protected final BorderCondition rightBorderCondition;
 
     /**
      * Create equation
      *
-     * @param x1  left space coordinate
-     * @param x2  right space coordinate
-     * @param t2  right time coordinate
-     * @param lbt type of left border condition (1/2/3)
-     * @param rbt type of right border condition (1/2/3)
-     * @param lH  coefficient for 3rd border condition type of left border
-     * @param rH  coefficient for 3rd border condition type of right border
+     * @param x1                   left space coordinate
+     * @param x2                   right space coordinate
+     * @param t2                   right time coordinate
+     * @param leftBorderCondition  left border condition
+     * @param rightBorderCondition right border condition
      */
-    public Equation(double x1, double x2, double t2, int lbt, int rbt, double lH, double rH) {
-        assert (lbt >= 1 && lbt <= 3 && rbt >= 1 && rbt <= 3 && lH > 0 && rH > 0);
-
+    public Equation(double x1, double x2, double t2,
+                    BorderCondition leftBorderCondition,
+                    BorderCondition rightBorderCondition) {
         area = new Area(new Interval(x1, x2, 1), new Interval(0, t2, 1));
-        this.lbt = lbt;
-        this.rbt = rbt;
-        this.lh = lH;
-        this.rh = rH;
-    }
-
-    /**
-     * Create equation
-     *
-     * @param x1 left space coordinate
-     * @param x2 right space coordinate
-     * @param t2 right time coordinate
-     */
-    public Equation(double x1, double x2, double t2) {
-        this(x1, x2, t2, 1, 1, 1, 1);
+        this.leftBorderCondition = leftBorderCondition;
+        this.rightBorderCondition = rightBorderCondition;
     }
 
     /**
@@ -56,62 +39,6 @@ public abstract class Equation {
      * @return U value in asked coordinate
      */
     protected double gU0(double x) {
-        return 0;
-    }
-
-    /**
-     * Left border condition U(0,t) (for 1st border type)
-     *
-     * @param t time
-     * @return U value in asked time moment on left border
-     */
-    protected double gLU(double t) {
-        return 0;
-    }
-
-    /**
-     * Right border condition U(d,t) (for 1st border type)
-     *
-     * @param t time
-     * @return U value in asked time moment on right border
-     */
-    protected double gRU(double t) {
-        return 0;
-    }
-
-    /**
-     * Left border condition dU_dt(0,t) (for 2nd border type)
-     *
-     * @param t time
-     * @return dU_dt value in asked time moment on left border
-     */
-    protected double gLdU_dx(double t) {
-        return 0;
-    }
-
-    /**
-     * Right border condition dU_dt(d,t) (for 2nd border type)
-     *
-     * @param t time
-     * @return dU_dt value in asked time moment on right border
-     */
-    protected double gRdU_dx(double t) {
-        return 0;
-    }
-
-    /**
-     * Coefficient for 3rd border type of left border
-     * TODO: provide better description
-     */
-    protected double gLTeta(double t) {
-        return 0;
-    }
-
-    /**
-     * Coefficient for 3rd border type of right border
-     * TODO: provide better description
-     */
-    protected double gRTeta(double t) {
         return 0;
     }
 
@@ -268,7 +195,8 @@ public abstract class Equation {
     /**
      * Метод прогонки
      */
-    protected void progonka(int N, double[] A, double[] B, double[] C, double[] F, double m1, double n1, double m2, double n2, double[] Y) {
+    protected void progonka(double[] A, double[] B, double[] C, double[] F, double m1, double n1, double m2, double n2, double[] Y) {
+        int N = A.length;
         double[] Alpha = new double[N + 1];
         double[] Beta = new double[N + 1];
 
