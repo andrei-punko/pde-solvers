@@ -13,10 +13,10 @@ Gradle isn't required because of embedded Gradle presence in the project
 ## Supported PD equation types
 
 - Parabolic equation (described heat/mass transfer)  
-  Check [ParabolicEquation](src/main/java/by/andd3dfx/math/pde/ParabolicEquation.java) class for details
+  Check [ParabolicEquation](src/main/java/by/andd3dfx/math/pde/equation/ParabolicEquation.java) class for details
 
 - Hyperbolic equation (described oscillation processes)  
-  Check [HyperbolicEquation](src/main/java/by/andd3dfx/math/pde/HyperbolicEquation.java) class for details
+  Check [HyperbolicEquation](src/main/java/by/andd3dfx/math/pde/equation/HyperbolicEquation.java) class for details
 
 ## Solver
 The finite-difference method was used, in result we get tridiagonal system of linear equations 
@@ -32,4 +32,4 @@ In Russian - algorithm has name "Progonka" (метод прогонки).
 
 ## Usage notes
 
-Check classes javadocs
+Check [ParabolicEquationTest](src/test/java/by/andd3dfx/math/pde/equation/ParabolicEquationTest.java)
