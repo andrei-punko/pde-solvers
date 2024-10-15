@@ -1,4 +1,4 @@
-package by.andd3dfx.math.pde;
+package by.andd3dfx.math.pde.border;
 
 /**
  * Params for border condition type 2
@@ -6,7 +6,7 @@ package by.andd3dfx.math.pde;
 public class BorderConditionType2 implements BorderCondition {
 
     /**
-     * Border condition dU_dt(t)
+     * Border condition dU_dx(t)
      *
      * @param t time
      * @return dU_dt value in asked time moment on this border

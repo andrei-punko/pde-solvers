@@ -1,8 +1,9 @@
-package by.andd3dfx.math.pde;
+package by.andd3dfx.math.pde.equation;
 
 import by.andd3dfx.math.Area;
 import by.andd3dfx.math.Interval;
 import by.andd3dfx.math.Matrix;
+import by.andd3dfx.math.pde.border.BorderCondition;
 import by.andd3dfx.util.FileUtil;
 
 /**
@@ -105,17 +106,16 @@ public abstract class Equation {
      * @param fileName file name
      * @param t        times array
      */
-    public void sUt(String fileName, double t[]) {
+    public void sUt(String fileName, double[] t) {
         for (var t_i : t) {
-            var tInterval = area.t();
-            assert (tInterval.left() <= t_i && t_i <= tInterval.right());
+            assert (area.t().left() <= t_i && t_i <= area.t().right());
         }
 
         var sb = new StringBuilder();
         for (var i = 0; i <= area.x().n(); i++) {
             sb.append(area.x().x(i));
             for (var t_i : t) {
-                sb.append(" " + arr.data(area.t().i(t_i), i));
+                sb.append(" ").append(arr.data(area.t().i(t_i), i));
             }
             sb.append("\n");
         }
@@ -138,7 +138,7 @@ public abstract class Equation {
      * @param fileName file name
      * @param x        coordinates array
      */
-    public void sUx(String fileName, double x[]) {
+    public void sUx(String fileName, double[] x) {
         for (var x_i : x) {
             assert (area.x().left() <= x_i && x_i <= area.x().right());
         }
@@ -147,7 +147,7 @@ public abstract class Equation {
         for (int i = 0; i <= area.t().n(); i++) {
             sb.append(area.t().x(i));
             for (var x_i : x) {
-                sb.append(" " + arr.data(i, area.x().i(x_i)));
+                sb.append(" ").append(arr.data(i, area.x().i(x_i)));
             }
             sb.append("\n");
         }
@@ -167,7 +167,7 @@ public abstract class Equation {
     }
 
     /**
-     * Получение среза U(x,t*) при заданном t*
+     * Получение среза U(x, t*) при заданном t*
      */
     protected Matrix gUt(double t) {
         return gUt(area.t().i(t));
@@ -186,7 +186,7 @@ public abstract class Equation {
     }
 
     /**
-     * Получение среза U(x*,t) при заданном x*
+     * Получение среза U(x*, t) при заданном x*
      */
     protected Matrix gUx(double x) {
         return gUx(area.x().i(x));

@@ -1,4 +1,9 @@
-package by.andd3dfx.math.pde;
+package by.andd3dfx.math.pde.equation;
+
+import by.andd3dfx.math.pde.border.BorderCondition;
+import by.andd3dfx.math.pde.border.BorderConditionType1;
+import by.andd3dfx.math.pde.border.BorderConditionType2;
+import by.andd3dfx.math.pde.border.BorderConditionType3;
 
 /**
  * Hyperbolic equation:
@@ -87,8 +92,8 @@ public class HyperbolicEquation extends Equation {
             }
 
             int nj = j + 2;
-            double Mu[] = new double[3];
-            double Nu[] = new double[3];
+            double[] Mu = new double[3];
+            double[] Nu = new double[3];
             double t = area.t().x(nj);
 
             if (leftBorderCondition instanceof BorderConditionType1 condition) {

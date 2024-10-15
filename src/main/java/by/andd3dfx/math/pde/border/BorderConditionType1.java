@@ -1,4 +1,4 @@
-package by.andd3dfx.math.pde;
+package by.andd3dfx.math.pde.border;
 
 /**
  * Params for border condition type 1

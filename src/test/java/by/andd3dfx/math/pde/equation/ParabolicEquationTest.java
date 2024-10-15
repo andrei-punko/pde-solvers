@@ -1,6 +1,7 @@
-package by.andd3dfx.math.pde;
+package by.andd3dfx.math.pde.equation;
 
 import by.andd3dfx.math.Interval;
+import by.andd3dfx.math.pde.border.BorderConditionType1;
 import by.andd3dfx.util.FileUtil;
 import org.junit.jupiter.api.Test;
 
