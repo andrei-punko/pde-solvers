@@ -1,22 +1,24 @@
 package by.andd3dfx.math.pde.border;
 
 /**
- * Params for border condition type 3
+ * Params for border condition type 3 (упругое закрепление): dU_dx(X,t) = h*(U(X,t) - Theta(t))
  */
 public class BorderConditionType3 implements BorderCondition {
 
     /**
-     * TODO add description
+     * Theta(t) value in asked time moment on this border
+     *
      * @param t time
-     * @return ? value in asked time moment on this border
+     * @return Theta value
      */
     public double gTheta(double t) {
         return 0;
     }
 
     /**
-     * TODO add description
-     * @return
+     * h coefficient value on this border
+     *
+     * @return h value
      */
     public double gH() {
         return 0;
