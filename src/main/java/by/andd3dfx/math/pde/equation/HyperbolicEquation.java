@@ -59,9 +59,9 @@ public class HyperbolicEquation extends Equation {
         //
         for (int i = 1; i < N; i++) {
             double
-                    _u = arr.data(0, i - 1),
-                    u = arr.data(0, i),
-                    u_ = arr.data(0, i + 1),
+                    _u = arr.get(0, i - 1),
+                    u = arr.get(0, i),
+                    u_ = arr.get(0, i + 1),
                     x = area.x().x(i);
 
             arr.set(1, i, u + tau * (gdU_dt(x) + t_2 / gM(x, 0, u) * (
@@ -73,9 +73,9 @@ public class HyperbolicEquation extends Equation {
         for (int j = 0; j <= area.t().n() - 2; j++) {
             for (int i = 1; i < N; i++) {
                 double
-                        _u = arr.data(j, i - 1),
-                        u = arr.data(j, i),
-                        u_ = arr.data(j, i + 1),
+                        _u = arr.get(j, i - 1),
+                        u = arr.get(j, i),
+                        u_ = arr.get(j, i + 1),
 
                         x = area.x().x(i),
                         t = area.t().x(j),
@@ -88,7 +88,7 @@ public class HyperbolicEquation extends Equation {
                 A[i] = Alpha;
                 B[i] = Beta;
                 C[i] = Alpha + Beta - Gamma + Delta;
-                F[i] = _u * Alpha + u_ * Beta - u * (Alpha + Beta + Gamma + Delta) + 2 * (arr.data(j + 1, i) * Delta + gF(x, t, u) * h2);
+                F[i] = _u * Alpha + u_ * Beta - u * (Alpha + Beta + Gamma + Delta) + 2 * (arr.get(j + 1, i) * Delta + gF(x, t, u) * h2);
             }
 
             int nj = j + 2;

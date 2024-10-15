@@ -115,7 +115,7 @@ public abstract class Equation {
         for (var i = 0; i <= area.x().n(); i++) {
             sb.append(area.x().x(i));
             for (var t_i : t) {
-                sb.append(" ").append(arr.data(area.t().i(t_i), i));
+                sb.append(" ").append(arr.get(area.t().i(t_i), i));
             }
             sb.append("\n");
         }
@@ -147,7 +147,7 @@ public abstract class Equation {
         for (int i = 0; i <= area.t().n(); i++) {
             sb.append(area.t().x(i));
             for (var x_i : x) {
-                sb.append(" ").append(arr.data(i, area.x().i(x_i)));
+                sb.append(" ").append(arr.get(i, area.x().i(x_i)));
             }
             sb.append("\n");
         }
@@ -161,7 +161,7 @@ public abstract class Equation {
         var m = new Matrix(2, N);
         for (int i = 0; i <= N; i++) {
             m.setX(i, area.x().x(i));
-            m.setY(i, arr.data(it, i));
+            m.setY(i, arr.get(it, i));
         }
         return m;
     }
@@ -180,7 +180,7 @@ public abstract class Equation {
         var m = new Matrix(2, M);
         for (int i = 0; i <= M; i++) {
             m.setX(i, area.t().x(i));
-            m.setY(i, arr.data(i, ix));
+            m.setY(i, arr.get(i, ix));
         }
         return m;
     }

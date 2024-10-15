@@ -49,9 +49,9 @@ public class ParabolicEquation extends Equation {
         for (int j = 0; j < area.t().n(); j++) {
             for (int i = 1; i < N; i++) {
                 double
-                        _u = arr.data(j, i - 1),
-                        u = arr.data(j, i),
-                        u_ = arr.data(j, i + 1),
+                        _u = arr.get(j, i - 1),
+                        u = arr.get(j, i),
+                        u_ = arr.get(j, i + 1),
 
                         _x = area.x().x(i - 1),
                         x = area.x().x(i),

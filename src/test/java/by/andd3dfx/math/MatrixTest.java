@@ -80,15 +80,15 @@ class MatrixTest {
 
         m.swapLines(0, 2);
 
-        assertThat(m.data(0, 0)).isEqualTo(7);
-        assertThat(m.data(0, 1)).isEqualTo(0);
-        assertThat(m.data(0, 2)).isEqualTo(-5);
-        assertThat(m.data(1, 0)).isEqualTo(9);
-        assertThat(m.data(1, 1)).isEqualTo(1);
-        assertThat(m.data(1, 2)).isEqualTo(4);
-        assertThat(m.data(2, 0)).isEqualTo(5);
-        assertThat(m.data(2, 1)).isEqualTo(6);
-        assertThat(m.data(2, 2)).isEqualTo(7);
+        assertThat(m.get(0, 0)).isEqualTo(7);
+        assertThat(m.get(0, 1)).isEqualTo(0);
+        assertThat(m.get(0, 2)).isEqualTo(-5);
+        assertThat(m.get(1, 0)).isEqualTo(9);
+        assertThat(m.get(1, 1)).isEqualTo(1);
+        assertThat(m.get(1, 2)).isEqualTo(4);
+        assertThat(m.get(2, 0)).isEqualTo(5);
+        assertThat(m.get(2, 1)).isEqualTo(6);
+        assertThat(m.get(2, 2)).isEqualTo(7);
     }
 
     @Test
@@ -106,15 +106,15 @@ class MatrixTest {
 
         m.swapCols(1, 2);
 
-        assertThat(m.data(0, 0)).isEqualTo(5);
-        assertThat(m.data(1, 0)).isEqualTo(9);
-        assertThat(m.data(2, 0)).isEqualTo(7);
-        assertThat(m.data(0, 1)).isEqualTo(7);
-        assertThat(m.data(1, 1)).isEqualTo(4);
-        assertThat(m.data(2, 1)).isEqualTo(-5);
-        assertThat(m.data(0, 2)).isEqualTo(6);
-        assertThat(m.data(1, 2)).isEqualTo(1);
-        assertThat(m.data(2, 2)).isEqualTo(0);
+        assertThat(m.get(0, 0)).isEqualTo(5);
+        assertThat(m.get(1, 0)).isEqualTo(9);
+        assertThat(m.get(2, 0)).isEqualTo(7);
+        assertThat(m.get(0, 1)).isEqualTo(7);
+        assertThat(m.get(1, 1)).isEqualTo(4);
+        assertThat(m.get(2, 1)).isEqualTo(-5);
+        assertThat(m.get(0, 2)).isEqualTo(6);
+        assertThat(m.get(1, 2)).isEqualTo(1);
+        assertThat(m.get(2, 2)).isEqualTo(0);
     }
 
     @Test
@@ -126,19 +126,19 @@ class MatrixTest {
         m.setY(0, 2);
         m.setY(2, 7);
 
-        assertThat(m.data(0, 0)).isEqualTo(0);
-        assertThat(m.data(0, 1)).isEqualTo(0);
-        assertThat(m.data(0, 2)).isEqualTo(9.5);
-        assertThat(m.data(0, 3)).isEqualTo(3.5);
+        assertThat(m.get(0, 0)).isEqualTo(0);
+        assertThat(m.get(0, 1)).isEqualTo(0);
+        assertThat(m.get(0, 2)).isEqualTo(9.5);
+        assertThat(m.get(0, 3)).isEqualTo(3.5);
         assertThat(m.x(0)).isEqualTo(0);
         assertThat(m.x(1)).isEqualTo(0);
         assertThat(m.x(2)).isEqualTo(9.5);
         assertThat(m.x(3)).isEqualTo(3.5);
 
-        assertThat(m.data(1, 0)).isEqualTo(2);
-        assertThat(m.data(1, 1)).isEqualTo(0);
-        assertThat(m.data(1, 2)).isEqualTo(7);
-        assertThat(m.data(1, 3)).isEqualTo(0);
+        assertThat(m.get(1, 0)).isEqualTo(2);
+        assertThat(m.get(1, 1)).isEqualTo(0);
+        assertThat(m.get(1, 2)).isEqualTo(7);
+        assertThat(m.get(1, 3)).isEqualTo(0);
         assertThat(m.y(0)).isEqualTo(2);
         assertThat(m.y(1)).isEqualTo(0);
         assertThat(m.y(2)).isEqualTo(7);
@@ -153,7 +153,7 @@ class MatrixTest {
 
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
-                assertThat(m.data(i, j)).isEqualTo(4.5);
+                assertThat(m.get(i, j)).isEqualTo(4.5);
             }
         }
         assertThat(result).isEqualTo(m);

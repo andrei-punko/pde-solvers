@@ -31,7 +31,7 @@ public class Matrix {
     }
 
     public double x(int i) {
-        return data(0, i);
+        return get(0, i);
     }
 
     public void setX(int index, double value) {
@@ -43,11 +43,11 @@ public class Matrix {
     }
 
     public double get(int i) {
-        return data(i, 0);
+        return get(i, 0);
     }
 
     public double y(int i) {
-        return data(1, i);
+        return get(1, i);
     }
 
     public void setY(int index, double value) {
@@ -58,7 +58,7 @@ public class Matrix {
         data[i * n + j] = value;
     }
 
-    public double data(int i, int j) {
+    public double get(int i, int j) {
         assert (i >= 0 && i < m && j >= 0 && j < n);
         return data[i * n + j];
     }

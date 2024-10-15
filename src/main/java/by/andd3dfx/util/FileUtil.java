@@ -45,14 +45,14 @@ public class FileUtil {
         if (originalView) {
             for (int i = 0; i < m.getM(); i++) {
                 for (int j = 0; j < m.getN(); j++) {
-                    file.write(m.data(i, j) + " ");
+                    file.write(m.get(i, j) + " ");
                 }
                 file.write("\n");
             }
         } else {
             for (int j = 0; j < m.getN(); j++) {
                 for (int i = 0; i < m.getM(); i++) {
-                    file.write(m.data(i, j) + " ");
+                    file.write(m.get(i, j) + " ");
                 }
                 file.write("\n");
             }
