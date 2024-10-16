@@ -1,16 +1,26 @@
 package by.andd3dfx.math.pde.equation;
 
-import by.andd3dfx.math.Interval;
 import by.andd3dfx.math.pde.border.BorderConditionType1;
 import by.andd3dfx.util.FileUtil;
 import org.junit.jupiter.api.Test;
 
+/**
+ * <pre>
+ * Solution of diffusion problem:
+ * - plate with thickness d=1 mm
+ * - constant concentration C=1.0 on left border and C=0.0 on right border
+ * - constant diffusion coefficient D
+ * </pre>
+ */
 class ParabolicEquationTest {
 
     private final double C_LEFT = 1.0;
     private final double THICKNESS = 1e-3;  // 1mm
     private final double TIME = 1;          // 1sec
     private final double DIFFUSION_COEFFICIENT = 1e-4;
+
+    // We allow difference between numeric & analytic solution no more than 5% of max concentration value
+    private final double EPSILON = C_LEFT / 20.;
 
     @Test
     void solve() {
@@ -20,10 +30,21 @@ class ParabolicEquationTest {
 
         diffusionEquation.solve(h, tau);
 
-        diffusionEquation.sUt("./build/res-numeric.txt", TIME);
-        FileUtil.saveFunc(new Interval(0, THICKNESS, h),
+        // Save numeric solution to file
+        var numericU = diffusionEquation.gUt(TIME);
+        FileUtil.save(numericU, "./build/res-numeric.txt", true);
+
+        // Save analytic solution to file
+        FileUtil.saveFunc(diffusionEquation.area.x(),
                 (x) -> analyticSolution(x, TIME), "./build/res-analytic.txt");
-        // TODO compare numeric & analytic solutions
+
+        // Compare numeric & analytic solutions
+        for (var i = 0; i < numericU.getN(); i++) {
+            var numericY = numericU.y(i);
+            var analyticY = analyticSolution(numericU.x(i), TIME);
+            // TODO uncomment assert below after addition of analytic solution
+            // assertThat(Math.abs(numericY - analyticY)).isLessThanOrEqualTo(EPSILON);
+        }
     }
 
     private ParabolicEquation buildParabolicEquation() {
@@ -45,6 +66,7 @@ class ParabolicEquationTest {
 
     private double analyticSolution(double x, double t) {
         // TODO add analytic solution
-        return 0;
+        var A = 1.5e+3;
+        return C_LEFT * Math.exp(-A * x);
     }
 }

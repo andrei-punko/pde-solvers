@@ -1,5 +1,8 @@
 package by.andd3dfx.math;
 
+import lombok.ToString;
+
+@ToString
 public class Interval {
 
     private double left;
