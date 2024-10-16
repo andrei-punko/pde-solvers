@@ -86,7 +86,7 @@ public abstract class Equation {
 
         arr = new Matrix(area.t().n() + 1, area.x().n() + 1); // Место для решения уравнения
         for (var i = 0; i <= area.x().n(); i++) {
-            arr.setX(i, gU0(area.x().x(i)));            // задание начального значения
+            arr.set(0, i, gU0(area.x().x(i)));            // задание начального значения
         }
     }
 

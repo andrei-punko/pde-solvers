@@ -35,7 +35,7 @@ public class Matrix {
     }
 
     public void setX(int index, double value) {
-        data[index] = value;
+        set(0, index, value);
     }
 
     public void set(int index, double value) {
@@ -51,7 +51,7 @@ public class Matrix {
     }
 
     public void setY(int index, double value) {
-        data[n + index] = value;
+        set(1, index, value);
     }
 
     public void set(int i, int j, double value) {
