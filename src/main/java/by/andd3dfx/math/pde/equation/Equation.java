@@ -158,12 +158,12 @@ public abstract class Equation {
         int N = arr.getN();
         assert (0 <= it && it < N);
 
-        var m = new Matrix(2, N);
-        for (int i = 0; i <= N; i++) {
-            m.setX(i, area.x().x(i));
-            m.setY(i, arr.get(it, i));
+        var matrix = new Matrix(2, N);
+        for (int i = 0; i < N; i++) {
+            matrix.setX(i, area.x().x(i));
+            matrix.setY(i, arr.get(it, i));
         }
-        return m;
+        return matrix;
     }
 
     /**
@@ -177,12 +177,12 @@ public abstract class Equation {
         int M = arr.getM();
         assert (0 <= ix && ix < M);
 
-        var m = new Matrix(2, M);
+        var matrix = new Matrix(2, M);
         for (int i = 0; i <= M; i++) {
-            m.setX(i, area.t().x(i));
-            m.setY(i, arr.get(i, ix));
+            matrix.setX(i, area.t().x(i));
+            matrix.setY(i, arr.get(i, ix));
         }
-        return m;
+        return matrix;
     }
 
     /**
