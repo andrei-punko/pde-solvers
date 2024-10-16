@@ -40,18 +40,18 @@ public class FileUtil {
     }
 
     @SneakyThrows
-    public static void save(Matrix m, String fileName, boolean originalView) {
+    public static void save(Matrix m, String fileName, boolean rowsToColumns) {
         var file = new FileWriter(fileName);
-        if (originalView) {
-            for (int i = 0; i < m.getM(); i++) {
-                for (int j = 0; j < m.getN(); j++) {
+        if (rowsToColumns) {
+            for (int j = 0; j < m.getN(); j++) {
+                for (int i = 0; i < m.getM(); i++) {
                     file.write(m.get(i, j) + " ");
                 }
                 file.write("\n");
             }
         } else {
-            for (int j = 0; j < m.getN(); j++) {
-                for (int i = 0; i < m.getM(); i++) {
+            for (int i = 0; i < m.getM(); i++) {
+                for (int j = 0; j < m.getN(); j++) {
                     file.write(m.get(i, j) + " ");
                 }
                 file.write("\n");

@@ -61,13 +61,13 @@ class FileUtilTest {
         m.set(1, 0, 9);
         m.set(1, 1, 1);
 
-        FileUtil.save(m, generatedFileName, true);
+        FileUtil.save(m, generatedFileName, false);
 
         checkGeneratedFileContent(generatedFileName, expectedFileName);
     }
 
     @Test
-    void saveMatrixInNotOriginalView() throws IOException {
+    void saveMatrixWithConversionRowsToColumns() throws IOException {
         var generatedFileName = BUILD_PATH + "matrix-not-original.txt";
         var expectedFileName = RESOURCES_PATH + "matrix-not-original.txt";
         var m = new Matrix(2, 2);
@@ -76,7 +76,7 @@ class FileUtilTest {
         m.set(1, 0, 9);
         m.set(1, 1, 1);
 
-        FileUtil.save(m, generatedFileName, false);
+        FileUtil.save(m, generatedFileName, true);
 
         checkGeneratedFileContent(generatedFileName, expectedFileName);
     }
