@@ -38,7 +38,7 @@ public class Interval {
         return n;
     }
 
-    public void reborn(double left, double right, double h) {
+    private void reborn(double left, double right, double h) {
         assert (left < right && h > 0 && h <= right - left);
 
         this.left = left;
@@ -47,7 +47,7 @@ public class Interval {
         this.n = (int) Math.floor((right - left) / h);    // если необходимо, n будет на 1 больше
     }
 
-    public void reborn(double left, double right, int n) {
+    private void reborn(double left, double right, int n) {
         assert (left < right && n > 0);
 
         this.left = left;
@@ -66,5 +66,13 @@ public class Interval {
         assert (left <= x && x <= right);
 
         return (int) ((x - left) / h);
+    }
+
+    public void reborn(double h) {
+        reborn(left, right, h);
+    }
+
+    public void reborn(int n) {
+        reborn(left, right, n);
     }
 }

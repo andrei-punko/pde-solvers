@@ -81,8 +81,8 @@ public abstract class Equation {
 
     protected void prepare(double h, double tau) {
         assert (h > 0 && tau > 0);                      // установка шагов по пространственной и временной координатам
-        area.x().reborn(area.x().left(), area.x().right(), h);
-        area.t().reborn(area.t().left(), area.t().right(), tau);
+        area.x().reborn(h);
+        area.t().reborn(tau);
 
         arr = new Matrix(area.t().n() + 1, area.x().n() + 1); // Место для решения уравнения
         for (var i = 0; i <= area.x().n(); i++) {

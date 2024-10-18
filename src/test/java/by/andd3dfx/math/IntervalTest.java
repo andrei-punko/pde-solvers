@@ -38,9 +38,9 @@ class IntervalTest {
 
     @Test
     void rebornWithN() {
-        var interval = new Interval(2.5, 10.5, 10);
+        var interval = new Interval(5.0, 10.0, 10);
 
-        interval.reborn(5.0, 10.0, 100);
+        interval.reborn(100);
 
         assertThat(interval.left()).isEqualTo(5.0);
         assertThat(interval.right()).isEqualTo(10.0);
@@ -50,9 +50,9 @@ class IntervalTest {
 
     @Test
     void rebornWithH() {
-        var interval = new Interval(2.5, 10.5, 10);
+        var interval = new Interval(5.0, 10.0, 10);
 
-        interval.reborn(5.0, 10.0, 0.2);
+        interval.reborn(0.2);
 
         assertThat(interval.left()).isEqualTo(5.0);
         assertThat(interval.right()).isEqualTo(10.0);
