@@ -1,6 +1,6 @@
 # Solvers of PDE (partial differential equations)
 
-[![Java CI with Gradle](https://github.com/andrei-punko/math-pde/actions/workflows/gradle.yml/badge.svg)](https://github.com/andrei-punko/math-pde/actions/workflows/gradle.yml)
+[![Java CI with Gradle](https://github.com/andrei-punko/math-pde-solvers/actions/workflows/gradle.yml/badge.svg)](https://github.com/andrei-punko/math-pde-solvers/actions/workflows/gradle.yml)
 
 Migration to Java some part of C/C++ code from my [math-library](https://github.com/andrei-punko/math-library) repository
 
