@@ -12,11 +12,13 @@ Gradle isn't required because of embedded Gradle presence in the project
 
 ## Supported PD equation types
 
-- Parabolic equation (described heat/mass transfer)  
-  Check [ParabolicEquation](src/main/java/by/andd3dfx/math/pde/equation/ParabolicEquation.java) class for details
+- Parabolic equation (described heat/mass transfer):  
+  M(x,t,U)*dU_dt = dU(K(x,t,U)*dU_dx)_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)  
+  Check [ParabolicEquation](src/main/java/by/andd3dfx/math/pde/equation/ParabolicEquation.java) for details
 
-- Hyperbolic equation (described oscillation processes)  
-  Check [HyperbolicEquation](src/main/java/by/andd3dfx/math/pde/equation/HyperbolicEquation.java) class for details
+- Hyperbolic equation (described oscillation processes):  
+  M(x,t,U)*d2U_dt2 + L(x,t,U)*dU_dt = dU(K(x,t,U)*dU_dx)_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)  
+  Check [HyperbolicEquation](src/main/java/by/andd3dfx/math/pde/equation/HyperbolicEquation.java) for details
 
 ## Solver
 The finite-difference method was used, in result we get tridiagonal system of linear equations 
