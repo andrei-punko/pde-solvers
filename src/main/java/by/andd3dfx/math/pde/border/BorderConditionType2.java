@@ -1,7 +1,7 @@
 package by.andd3dfx.math.pde.border;
 
 /**
- * Params for border condition type 2 (заданная сила): dU_dx(X,t)
+ * Params for border condition type 2 (definite force): dU_dx(X,t)
  */
 public class BorderConditionType2 implements BorderCondition {
 

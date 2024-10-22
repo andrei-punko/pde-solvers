@@ -41,20 +41,20 @@ public class HyperbolicEquation extends Equation {
         var B = new double[N];
         var C = new double[N];
         var F = new double[N];
-        var U = new double[N + 1];    // Коэффициенты для метода прогонки
+        var U = new double[N + 1];    // Coefficients for tridiagonal matrix algorithm
 
-        double _2h = 2 * h,                        //Для ускорения вычислений
+        double _2h = 2 * h,           // To speed-up calculations
                 h2 = h * h,
                 t_2 = tau / 2.,
                 h_2 = h / 2.,
                 h2_tau = h2 / tau,
                 _2h2_tau2 = 2 * Math.pow(h / tau, 2);
 
-        // Задание граничных значений на первом слое
+        // Set border conditions on layer 1
         arr.set(1, 0, calcFirstLayerValue(tau, arr.get(0, 0), area.x().left()));
         arr.set(1, N, calcFirstLayerValue(tau, arr.get(0, N), area.x().right()));
 
-        // Вычисление значения функции на первом слое для запуска разностной схемы
+        // Calculate U value on layer 1 which needed to start finite-difference algorithm
         //
         for (int i = 1; i < N; i++) {
             double
@@ -67,7 +67,7 @@ public class HyperbolicEquation extends Equation {
                     gK(x, 0, u) / h2 * (_u - 2 * u + u_) + gV(x, 0, u) / _2h * (u_ - _u) + gF(x, 0, u))));
         }
 
-        // Реализация разностной схемы
+        // Finite-difference algorithm implementation
         //
         for (int j = 0; j <= area.t().n() - 2; j++) {
             for (int i = 1; i < N; i++) {

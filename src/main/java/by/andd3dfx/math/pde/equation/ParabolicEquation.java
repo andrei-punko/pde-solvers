@@ -41,11 +41,13 @@ public class ParabolicEquation extends Equation {
         var B = new double[N];
         var C = new double[N];
         var F = new double[N];
-        var U = new double[N + 1];    // Коэффициенты для метода прогонки
+        var U = new double[N + 1];      // Coefficients for tridiagonal matrix algorithm
         double
                 _2h2 = 2 * h * h,
                 _2h2_tau = _2h2 / tau;
 
+        // Finite-difference algorithm implementation
+        //
         for (int j = 0; j < area.t().n(); j++) {
             for (int i = 1; i < N; i++) {
                 double

@@ -8,6 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.function.Function;
 
+/**
+ * Util to serialize data into files
+ */
 public class FileUtil {
 
     public static void serialize(String fileName, StringBuilder sb) {
