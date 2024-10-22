@@ -108,7 +108,7 @@ public abstract class Equation {
      */
     public void sUt(String fileName, double[] t) {
         for (var t_i : t) {
-            assert (area.t().left() <= t_i && t_i <= area.t().right());
+            assert (area.tLeft() <= t_i && t_i <= area.tRight());
         }
 
         var sb = new StringBuilder();
@@ -140,7 +140,7 @@ public abstract class Equation {
      */
     public void sUx(String fileName, double[] x) {
         for (var x_i : x) {
-            assert (area.x().left() <= x_i && x_i <= area.x().right());
+            assert (area.xLeft() <= x_i && x_i <= area.xRight());
         }
 
         var sb = new StringBuilder();

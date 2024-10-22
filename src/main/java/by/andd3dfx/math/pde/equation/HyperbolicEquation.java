@@ -51,8 +51,8 @@ public class HyperbolicEquation extends Equation {
                 _2h2_tau2 = 2 * Math.pow(h / tau, 2);
 
         // Set border conditions on layer 1
-        arr.set(1, 0, calcFirstLayerValue(tau, arr.get(0, 0), area.x().left()));
-        arr.set(1, N, calcFirstLayerValue(tau, arr.get(0, N), area.x().right()));
+        arr.set(1, 0, calcFirstLayerValue(tau, arr.get(0, 0), area.xLeft()));
+        arr.set(1, N, calcFirstLayerValue(tau, arr.get(0, N), area.xRight()));
 
         // Calculate U value on layer 1 which needed to start finite-difference algorithm
         //
@@ -118,9 +118,7 @@ public class HyperbolicEquation extends Equation {
             }
 
             progonka(A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
-            for (int i = 0; i <= N; i++) {
-                arr.set(nj, i, U[i]);
-            }
+            arr.set(nj, U);
         }
     }
 

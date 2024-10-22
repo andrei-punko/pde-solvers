@@ -58,6 +58,10 @@ public class Matrix {
         data[i * n + j] = value;
     }
 
+    public void set(int i, double[] arr) {
+        System.arraycopy(arr, 0, data, i * n, arr.length);
+    }
+
     public double get(int i, int j) {
         assert (i >= 0 && i < m && j >= 0 && j < n);
         return data[i * n + j];

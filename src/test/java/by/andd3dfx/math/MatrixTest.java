@@ -158,4 +158,25 @@ class MatrixTest {
         }
         assertThat(result).isEqualTo(m);
     }
+
+    @Test
+    void copyArrayIntoDefinitePositionOfData() {
+        var m = new Matrix(2, 4);
+        m.fill(3);
+        m.set(0, 0, 5);
+        m.set(0, 2, -5);
+        m.set(1, 0, 9);
+        m.set(1, 3, 1);
+
+        m.set(1, new double[]{9, 8, 7, 6});
+
+        assertThat(m.get(0, 0)).isEqualTo(5);
+        assertThat(m.get(0, 1)).isEqualTo(3);
+        assertThat(m.get(0, 2)).isEqualTo(-5);
+        assertThat(m.get(0, 3)).isEqualTo(3);
+        assertThat(m.get(1, 0)).isEqualTo(9);
+        assertThat(m.get(1, 1)).isEqualTo(8);
+        assertThat(m.get(1, 2)).isEqualTo(7);
+        assertThat(m.get(1, 3)).isEqualTo(6);
+    }
 }

@@ -98,9 +98,7 @@ public class ParabolicEquation extends Equation {
             }
 
             progonka(A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
-            for (int i = 0; i <= N; i++) {
-                arr.set(nj, i, U[i]);
-            }
+            arr.set(nj, U);
         }
     }
 }
