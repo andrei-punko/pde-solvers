@@ -66,6 +66,7 @@ class IntervalTest {
 
         assertThat(interval.x(0)).isEqualTo(2.0);
         assertThat(interval.x(2)).isEqualTo(6.0);
+        assertThat(interval.x(5)).isEqualTo(12.0);
     }
 
     @Test
@@ -75,5 +76,7 @@ class IntervalTest {
         assertThat(interval.i(2.0)).isEqualTo(0);
         assertThat(interval.i(5.9)).isEqualTo(1);
         assertThat(interval.i(6.1)).isEqualTo(2);
+        assertThat(interval.i(11.9)).isEqualTo(4);
+        assertThat(interval.i(12.0)).isEqualTo(4);
     }
 }

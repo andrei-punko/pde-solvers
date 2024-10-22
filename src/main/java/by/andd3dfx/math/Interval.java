@@ -39,12 +39,12 @@ public class Interval {
     }
 
     private void reborn(double left, double right, double h) {
-        assert (left < right && h > 0 && h <= right - left);
+        assert (right - left >= h && h > 0);
 
         this.left = left;
         this.right = right;
         this.h = h;
-        this.n = (int) Math.floor((right - left) / h);    // если необходимо, n будет на 1 больше
+        this.n = (int) ((right - left) / h);
     }
 
     private void reborn(double left, double right, int n) {
@@ -65,7 +65,11 @@ public class Interval {
     public int i(double x) {
         assert (left <= x && x <= right);
 
-        return (int) ((x - left) / h);
+        var res = (int) ((x - left) / h);
+        if (res == n) {
+            return n - 1;
+        }
+        return res;
     }
 
     public void reborn(double h) {
