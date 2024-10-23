@@ -34,10 +34,10 @@ public abstract class Equation {
     }
 
     /**
-     * Initial condition U(x,0) at moment t=0
+     * Initial condition U(x) at moment t=0
      *
      * @param x coordinate
-     * @return U value in asked coordinate
+     * @return U(x) value
      */
     protected double gU0(double x) {
         return 0;
@@ -79,6 +79,12 @@ public abstract class Equation {
      */
     public abstract void solve(double h, double tau);
 
+    /**
+     * Initialization of equation: create space for solution, set initial value
+     *
+     * @param h   space step
+     * @param tau time step
+     */
     protected void prepare(double h, double tau) {
         assert (h > 0 && tau > 0);
         area.x().reborn(h);
@@ -93,7 +99,7 @@ public abstract class Equation {
     }
 
     /**
-     * Save data U(x,t*) for asked time moment t*
+     * Save data U(x) for asked time moment
      *
      * @param fileName file name
      * @param t        time
@@ -103,7 +109,8 @@ public abstract class Equation {
     }
 
     /**
-     * Save data U(x,t_i) for asked time moments [t_i]. So in result we get some set of slices for several time moments
+     * Save data U(x,t_i) for asked time moments [t_i].
+     * So in result we get some set of slices for several time moments
      *
      * @param fileName file name
      * @param t        times array
@@ -125,7 +132,7 @@ public abstract class Equation {
     }
 
     /**
-     * Save data U(x*,t) for asked space coordinate x*
+     * Save data U(t) for definite space coordinate
      *
      * @param fileName file name
      * @param x        space coordinate
@@ -135,7 +142,8 @@ public abstract class Equation {
     }
 
     /**
-     * Save data U(x_i,t) for asked space coordinates [x_i]. So in result we get some set of slices for several space coordinates
+     * Save data U(x_i, t) for asked space coordinates [x_i].
+     * So in result we get some set of slices for several space coordinates
      *
      * @param fileName file name
      * @param x        coordinates array
@@ -156,6 +164,12 @@ public abstract class Equation {
         FileUtil.serialize(fileName, sb);
     }
 
+    /**
+     * Get slice U(x) for definite time which corresponds to layer `it` in solution matrix
+     *
+     * @param it index of time layer in solution matrix
+     * @return U(x) slice
+     */
     protected Matrix gUt(int it) {
         int N = solution.getN();
         assert (0 <= it && it < N);
@@ -169,12 +183,21 @@ public abstract class Equation {
     }
 
     /**
-     * Получение среза U(x, t*) при заданном t*
+     * Get slice U(x) for definite time
+     *
+     * @param t time
+     * @return U(x) slice
      */
     protected Matrix gUt(double t) {
         return gUt(area.t().i(t));
     }
 
+    /**
+     * Get slice U(t) for definite space coordinate which corresponds to column `ix` in solution matrix
+     *
+     * @param ix index of space column in solution matrix
+     * @return U(t) slice
+     */
     protected Matrix gUx(int ix) {
         int M = solution.getM();
         assert (0 <= ix && ix < M);
@@ -188,14 +211,17 @@ public abstract class Equation {
     }
 
     /**
-     * Получение среза U(x*, t) при заданном x*
+     * Get slice U(t) for definite space coordinate
+     *
+     * @param x space coordinate
+     * @return U(t) slice
      */
     protected Matrix gUx(double x) {
         return gUx(area.x().i(x));
     }
 
     /**
-     * Метод прогонки
+     * Tridiagonal matrix algorithm
      */
     protected void progonka(double[] A, double[] B, double[] C, double[] F, double m1, double n1, double m2, double n2, double[] Y) {
         int N = A.length;
