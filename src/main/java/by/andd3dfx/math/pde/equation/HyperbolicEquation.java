@@ -51,19 +51,19 @@ public class HyperbolicEquation extends Equation {
                 _2h2_tau2 = 2 * Math.pow(h / tau, 2);
 
         // Set border conditions on layer 1
-        arr.set(1, 0, calcFirstLayerValue(tau, arr.get(0, 0), area.xLeft()));
-        arr.set(1, N, calcFirstLayerValue(tau, arr.get(0, N), area.xRight()));
+        solution.set(1, 0, calcFirstLayerValue(tau, solution.get(0, 0), area.xLeft()));
+        solution.set(1, N, calcFirstLayerValue(tau, solution.get(0, N), area.xRight()));
 
         // Calculate U value on layer 1 which needed to start finite-difference algorithm
         //
         for (int i = 1; i < N; i++) {
             double
-                    _u = arr.get(0, i - 1),
-                    u = arr.get(0, i),
-                    u_ = arr.get(0, i + 1),
+                    _u = solution.get(0, i - 1),
+                    u = solution.get(0, i),
+                    u_ = solution.get(0, i + 1),
                     x = area.x().x(i);
 
-            arr.set(1, i, u + tau * (gdU_dt(x) + t_2 / gM(x, 0, u) * (
+            solution.set(1, i, u + tau * (gdU_dt(x) + t_2 / gM(x, 0, u) * (
                     gK(x, 0, u) / h2 * (_u - 2 * u + u_) + gV(x, 0, u) / _2h * (u_ - _u) + gF(x, 0, u))));
         }
 
@@ -72,9 +72,9 @@ public class HyperbolicEquation extends Equation {
         for (int j = 0; j <= area.t().n() - 2; j++) {
             for (int i = 1; i < N; i++) {
                 double
-                        _u = arr.get(j, i - 1),
-                        u = arr.get(j, i),
-                        u_ = arr.get(j, i + 1),
+                        _u = solution.get(j, i - 1),
+                        u = solution.get(j, i),
+                        u_ = solution.get(j, i + 1),
 
                         x = area.x().x(i),
                         t = area.t().x(j),
@@ -87,7 +87,7 @@ public class HyperbolicEquation extends Equation {
                 A[i] = Alpha;
                 B[i] = Beta;
                 C[i] = Alpha + Beta - Gamma + Delta;
-                F[i] = _u * Alpha + u_ * Beta - u * (Alpha + Beta + Gamma + Delta) + 2 * (arr.get(j + 1, i) * Delta + gF(x, t, u) * h2);
+                F[i] = _u * Alpha + u_ * Beta - u * (Alpha + Beta + Gamma + Delta) + 2 * (solution.get(j + 1, i) * Delta + gF(x, t, u) * h2);
             }
 
             int nj = j + 2;
@@ -118,7 +118,7 @@ public class HyperbolicEquation extends Equation {
             }
 
             progonka(A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
-            arr.set(nj, U);
+            solution.set(nj, U);
         }
     }
 

@@ -11,10 +11,10 @@ import by.andd3dfx.util.FileUtil;
  */
 public abstract class Equation {
 
-    protected Area area;
-    protected Matrix arr;
+    protected final Area area;
     protected final BorderCondition leftBorderCondition;
     protected final BorderCondition rightBorderCondition;
+    protected Matrix solution;
 
     /**
      * Create equation
@@ -28,7 +28,7 @@ public abstract class Equation {
     public Equation(double x1, double x2, double t2,
                     BorderCondition leftBorderCondition,
                     BorderCondition rightBorderCondition) {
-        area = new Area(new Interval(x1, x2, 1), new Interval(0, t2, 1));
+        this.area = new Area(new Interval(x1, x2, 1), new Interval(0, t2, 1));
         this.leftBorderCondition = leftBorderCondition;
         this.rightBorderCondition = rightBorderCondition;
     }
@@ -80,13 +80,15 @@ public abstract class Equation {
     public abstract void solve(double h, double tau);
 
     protected void prepare(double h, double tau) {
-        assert (h > 0 && tau > 0);                      // установка шагов по пространственной и временной координатам
+        assert (h > 0 && tau > 0);
         area.x().reborn(h);
         area.t().reborn(tau);
 
-        arr = new Matrix(area.t().n() + 1, area.x().n() + 1); // Место для решения уравнения
+        // Create space for equation solution
+        solution = new Matrix(area.t().n() + 1, area.x().n() + 1);
+        // Set initial value
         for (var i = 0; i <= area.x().n(); i++) {
-            arr.set(0, i, gU0(area.x().x(i)));            // задание начального значения
+            solution.set(0, i, gU0(area.x().x(i)));
         }
     }
 
@@ -115,7 +117,7 @@ public abstract class Equation {
         for (var i = 0; i <= area.x().n(); i++) {
             sb.append(area.x().x(i));
             for (var t_i : t) {
-                sb.append(" ").append(arr.get(area.t().i(t_i), i));
+                sb.append(" ").append(solution.get(area.t().i(t_i), i));
             }
             sb.append("\n");
         }
@@ -147,7 +149,7 @@ public abstract class Equation {
         for (int i = 0; i <= area.t().n(); i++) {
             sb.append(area.t().x(i));
             for (var x_i : x) {
-                sb.append(" ").append(arr.get(i, area.x().i(x_i)));
+                sb.append(" ").append(solution.get(i, area.x().i(x_i)));
             }
             sb.append("\n");
         }
@@ -155,13 +157,13 @@ public abstract class Equation {
     }
 
     protected Matrix gUt(int it) {
-        int N = arr.getN();
+        int N = solution.getN();
         assert (0 <= it && it < N);
 
         var matrix = new Matrix(2, N);
         for (int i = 0; i < N; i++) {
             matrix.setX(i, area.x().x(i));
-            matrix.setY(i, arr.get(it, i));
+            matrix.setY(i, solution.get(it, i));
         }
         return matrix;
     }
@@ -174,13 +176,13 @@ public abstract class Equation {
     }
 
     protected Matrix gUx(int ix) {
-        int M = arr.getM();
+        int M = solution.getM();
         assert (0 <= ix && ix < M);
 
         var matrix = new Matrix(2, M);
         for (int i = 0; i <= M; i++) {
             matrix.setX(i, area.t().x(i));
-            matrix.setY(i, arr.get(i, ix));
+            matrix.setY(i, solution.get(i, ix));
         }
         return matrix;
     }

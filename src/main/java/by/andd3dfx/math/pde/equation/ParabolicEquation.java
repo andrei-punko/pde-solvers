@@ -51,9 +51,9 @@ public class ParabolicEquation extends Equation {
         for (int j = 0; j < area.t().n(); j++) {
             for (int i = 1; i < N; i++) {
                 double
-                        _u = arr.get(j, i - 1),
-                        u = arr.get(j, i),
-                        u_ = arr.get(j, i + 1),
+                        _u = solution.get(j, i - 1),
+                        u = solution.get(j, i),
+                        u_ = solution.get(j, i + 1),
 
                         _x = area.x().x(i - 1),
                         x = area.x().x(i),
@@ -98,7 +98,7 @@ public class ParabolicEquation extends Equation {
             }
 
             progonka(A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
-            arr.set(nj, U);
+            solution.set(nj, U);
         }
     }
 }
