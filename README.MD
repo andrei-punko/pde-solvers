@@ -40,4 +40,6 @@ In Russian - algorithm has name "Progonka" (метод прогонки).
 
 ## Usage notes
 
-Check [ParabolicEquationTest](src/test/java/by/andd3dfx/math/pde/equation/ParabolicEquationTest.java)
+Check solved problems in tests:
+- [ParabolicEquationTest](src/test/java/by/andd3dfx/math/pde/equation/ParabolicEquationTest.java)
+- [HyperbolicEquationTest](src/test/java/by/andd3dfx/math/pde/equation/HyperbolicEquationTest.java)
