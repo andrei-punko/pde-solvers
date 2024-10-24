@@ -18,8 +18,8 @@ class MatrixTest {
     void constructorWithOneParam() {
         var m = new Matrix(5);
 
-        assertThat(m.getM()).isEqualTo(5);
-        assertThat(m.getN()).isEqualTo(1);
+        assertThat(m.getM()).isEqualTo(1);
+        assertThat(m.getN()).isEqualTo(5);
     }
 
     @Test

@@ -18,12 +18,12 @@ public class Matrix {
         this(1);
     }
 
-    public Matrix(int m) {
-        this(m, 1);
+    public Matrix(int n) {
+        this(1, n);
     }
 
     public Matrix(int m, int n) {
-        assert (m >= 1 && n >= 0);
+        assert (m > 0 && n > 0);
 
         this.m = m;
         this.n = n;
@@ -43,7 +43,7 @@ public class Matrix {
     }
 
     public double get(int i) {
-        return get(i, 0);
+        return get(0, i);
     }
 
     public double y(int i) {
