@@ -171,9 +171,10 @@ public abstract class Equation {
      * @return U(x) slice
      */
     protected Matrix gUt(int it) {
-        int N = solution.getN();
-        assert (0 <= it && it < N);
+        int M = solution.getM();
+        assert (0 <= it && it < M);
 
+        int N = solution.getN();
         var matrix = new Matrix(2, N);
         for (int i = 0; i < N; i++) {
             matrix.setX(i, area.x().x(i));
@@ -199,9 +200,10 @@ public abstract class Equation {
      * @return U(t) slice
      */
     protected Matrix gUx(int ix) {
-        int M = solution.getM();
-        assert (0 <= ix && ix < M);
+        int N = solution.getN();
+        assert (0 <= ix && ix < N);
 
+        int M = solution.getM();
         var matrix = new Matrix(2, M);
         for (int i = 0; i <= M; i++) {
             matrix.setX(i, area.t().x(i));
