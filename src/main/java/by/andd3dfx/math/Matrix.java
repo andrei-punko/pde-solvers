@@ -34,12 +34,13 @@ public class Matrix {
         return get(0, i);
     }
 
-    public void setX(int index, double value) {
-        set(0, index, value);
+    public void setX(int i, double value) {
+        set(0, i, value);
     }
 
-    public void set(int index, double value) {
-        data[index] = value;
+    public void set(int i, double value) {
+        assert (i >= 0 && i < data.length);
+        data[i] = value;
     }
 
     public double get(int i) {
@@ -50,15 +51,17 @@ public class Matrix {
         return get(1, i);
     }
 
-    public void setY(int index, double value) {
-        set(1, index, value);
+    public void setY(int i, double value) {
+        set(1, i, value);
     }
 
     public void set(int i, int j, double value) {
+        assert (i >= 0 && i < m && j >= 0 && j < n);
         data[i * n + j] = value;
     }
 
     public void set(int i, double[] arr) {
+        assert (i >= 0 && i < m && n == arr.length);
         System.arraycopy(arr, 0, data, i * n, arr.length);
     }
 
@@ -81,17 +84,16 @@ public class Matrix {
     }
 
     public void swapLines(int m1, int m2) {
-        assert (m1 < m && m2 < m && m1 >= 0 && m2 >= 0);
+        assert (0 <= m1 && m1 < m && 0 <= m2 && m2 < m && m1 != m2);
 
-        for (int i = 0; i < n; i++) {
-            var tmp = data[m1 * n + i];
-            data[m1 * n + i] = data[m2 * n + i];
-            data[m2 * n + i] = tmp;
-        }
+        var buff = new double[n];
+        System.arraycopy(data, m1 * n, buff, 0, n);
+        System.arraycopy(data, m2 * n, data, m1 * n, n);
+        System.arraycopy(buff, 0, data, m2 * n, n);
     }
 
     public void swapCols(int n1, int n2) {
-        assert (n1 < n && n2 < n && n1 >= 0 && n2 >= 0);
+        assert (0 <= n1 && n1 < n && 0 <= n2 && n2 < n && n1 != n2);
 
         for (int i = 0; i < n; i++) {
             var tmp = data[i * n + n1];

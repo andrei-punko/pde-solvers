@@ -3,6 +3,7 @@ package by.andd3dfx.math;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class IntervalTest {
 
@@ -70,6 +71,14 @@ class IntervalTest {
     }
 
     @Test
+    void xWithWrongParams() {
+        var interval = new Interval(2.0, 12.0, 20);
+
+        assertThrows(AssertionError.class, () -> interval.x(-1));
+        assertThrows(AssertionError.class, () -> interval.x(21));
+    }
+
+    @Test
     void i() {
         var interval = new Interval(2.0, 12.0, 5);
 
@@ -78,5 +87,13 @@ class IntervalTest {
         assertThat(interval.i(6.1)).isEqualTo(2);
         assertThat(interval.i(11.9)).isEqualTo(4);
         assertThat(interval.i(12.0)).isEqualTo(4);
+    }
+
+    @Test
+    void iWithWrongParams() {
+        var interval = new Interval(2.0, 12.0, 20);
+
+        assertThrows(AssertionError.class, () -> interval.i(1.9));
+        assertThrows(AssertionError.class, () -> interval.i(12.3));
     }
 }
