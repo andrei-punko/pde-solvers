@@ -10,9 +10,14 @@ import static java.lang.Math.sin;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
+ * <pre>
  * Solution of wave equation: Utt = c^2*Uxx
- * <p>
- * Check <a href="https://math.libretexts.org/Bookshelves/Differential_Equations/Differential_Equations_(Chasnov)/09%3A_Partial_Differential_Equations/9.06%3A_Solution_of_the_Wave_Equation">article</a>
+ * - constant displacement U=0 on the left & right borders
+ * - initial displacement with triangle profile (see method getU0(x))
+ * - constant coefficient c
+ * </pre>
+ *
+ * @see <a href="https://math.libretexts.org/Bookshelves/Differential_Equations/Differential_Equations_(Chasnov)/09%3A_Partial_Differential_Equations/9.06%3A_Solution_of_the_Wave_Equation">article</a>
  */
 class HyperbolicEquationTest {
 

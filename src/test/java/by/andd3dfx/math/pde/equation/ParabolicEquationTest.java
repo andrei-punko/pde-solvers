@@ -11,12 +11,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * <pre>
- * Solution of diffusion problem:
- * - plate with thickness L=1 mm
+ * Solution of diffusion equation: Ut = D*Uxx
  * - constant concentration C=0 on the left & right borders
- * - initial concentration with triangle profile: most of mass concentrated in the center (see method getU0(x))
- * - constant diffusion coefficient D=1e-9
+ * - initial concentration with triangle profile: most mass concentrated in the center (see method getU0(x))
+ * - constant diffusion coefficient
  * </pre>
+ *
+ * @see <a href="https://math.libretexts.org/Bookshelves/Differential_Equations/Differential_Equations_(Chasnov)/09%3A_Partial_Differential_Equations/9.05%3A_Solution_of_the_Diffusion_Equation">article</a>
  */
 class ParabolicEquationTest {
 

@@ -28,9 +28,7 @@ Gradle isn't required because of embedded Gradle presence in the project
 
 ## Solver
 The finite-difference method was used, in result we get tridiagonal system of linear equations 
-and solve it with help of tridiagonal matrix algorithm (or Thomas algorithm).
-
-In Russian - algorithm has name "Progonka" (метод прогонки).
+and solve it with help of tridiagonal matrix algorithm (or Thomas algorithm) (or "метод прогонки" in Russian).
 
 ## How to build
 
