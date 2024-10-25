@@ -4,6 +4,9 @@ import by.andd3dfx.math.Area;
 import by.andd3dfx.math.Interval;
 import by.andd3dfx.math.Matrix;
 import by.andd3dfx.math.pde.border.BorderCondition;
+import by.andd3dfx.math.pde.border.BorderConditionType1;
+import by.andd3dfx.math.pde.border.BorderConditionType2;
+import by.andd3dfx.math.pde.border.BorderConditionType3;
 
 /**
  * Base class. Used to avoid code duplication in child classes
@@ -116,6 +119,30 @@ public abstract class Equation {
         Y[N] = (n2 + m2 * Beta[N]) / (1 - m2 * Alpha[N]);
         for (int i = N - 1; i >= 0; i--) {
             Y[i] = Alpha[i + 1] * Y[i + 1] + Beta[i + 1];
+        }
+    }
+
+    protected void useBorderConditions(double h, double[] Nu, double t, double[] Mu) {
+        if (leftBorderCondition instanceof BorderConditionType1 condition) {
+            Nu[1] = condition.gU(t);
+        } else if (leftBorderCondition instanceof BorderConditionType2 condition) {
+            Mu[1] = 1;
+            Nu[1] = -h * condition.gdU_dx(t);
+        } else if (leftBorderCondition instanceof BorderConditionType3 condition) {
+            var lh = condition.gH();
+            Mu[1] = 1 / (1 + h * lh);
+            Nu[1] = h * lh * condition.gTheta(t) / (1 + h * lh);
+        }
+
+        if (rightBorderCondition instanceof BorderConditionType1 condition) {
+            Nu[2] = condition.gU(t);
+        } else if (rightBorderCondition instanceof BorderConditionType2 condition) {
+            Mu[2] = 1;
+            Nu[2] = h * condition.gdU_dx(t);
+        } else if (rightBorderCondition instanceof BorderConditionType3 condition) {
+            var rh = condition.gH();
+            Mu[2] = 1 / (1 - h * rh);
+            Nu[2] = -h * rh * condition.gTheta(t) / (1 - h * rh);
         }
     }
 }

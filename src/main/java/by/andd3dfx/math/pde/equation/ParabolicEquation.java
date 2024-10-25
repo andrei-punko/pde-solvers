@@ -1,9 +1,6 @@
 package by.andd3dfx.math.pde.equation;
 
 import by.andd3dfx.math.pde.border.BorderCondition;
-import by.andd3dfx.math.pde.border.BorderConditionType1;
-import by.andd3dfx.math.pde.border.BorderConditionType2;
-import by.andd3dfx.math.pde.border.BorderConditionType3;
 
 /**
  * Parabolic equation (described heat/mass transfer):
@@ -75,31 +72,12 @@ public class ParabolicEquation extends Equation {
             double[] Nu = new double[3];
             double t = area.t().x(nj);
 
-            if (leftBorderCondition instanceof BorderConditionType1 condition) {
-                Nu[1] = condition.gU(t);
-            } else if (leftBorderCondition instanceof BorderConditionType2 condition) {
-                Mu[1] = 1;
-                Nu[1] = -h * condition.gdU_dx(t);
-            } else if (leftBorderCondition instanceof BorderConditionType3 condition) {
-                var lh = condition.gH();
-                Mu[1] = 1 / (1 + h * lh);
-                Nu[1] = h * lh * condition.gTheta(t) / (1 + h * lh);
-            }
-
-            if (rightBorderCondition instanceof BorderConditionType1 condition) {
-                Nu[2] = condition.gU(t);
-            } else if (rightBorderCondition instanceof BorderConditionType2 condition) {
-                Mu[2] = 1;
-                Nu[2] = h * condition.gdU_dx(t);
-            } else if (rightBorderCondition instanceof BorderConditionType3 condition) {
-                var rh = condition.gH();
-                Mu[2] = 1 / (1 - h * rh);
-                Nu[2] = -h * rh * condition.gTheta(t) / (1 - h * rh);
-            }
+            useBorderConditions(h, Nu, t, Mu);
 
             progonka(A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
             solution.set(nj, U);
         }
         return new Solution(this, solution);
     }
+
 }
