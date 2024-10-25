@@ -33,8 +33,8 @@ public class HyperbolicEquation extends Equation {
      * @param tau time step
      */
     @Override
-    public void solve(double h, double tau) {
-        prepare(h, tau);
+    public Solution solve(double h, double tau) {
+        var solution = prepare(h, tau);
 
         int N = area.x().n();
         var A = new double[N];
@@ -120,6 +120,7 @@ public class HyperbolicEquation extends Equation {
             progonka(A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
             solution.set(nj, U);
         }
+        return new Solution(this, solution);
     }
 
     private double calcFirstLayerValue(double tau, double u, double x) {

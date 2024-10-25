@@ -37,10 +37,10 @@ class HyperbolicEquationTest {
         var waveEquation = buildHyperbolicEquation();
 
         // Solve equation
-        waveEquation.solve(h, tau);
+        var solution = waveEquation.solve(h, tau);
 
         // Save numeric solution to file
-        var numericU = waveEquation.gUt(TIME);
+        var numericU = solution.gUt(TIME);
         FileUtil.save(numericU, "./build/hyperbolic-numeric.txt", true);
 
         // Save analytic solution to file

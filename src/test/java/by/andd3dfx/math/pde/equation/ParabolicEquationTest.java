@@ -37,10 +37,10 @@ class ParabolicEquationTest {
         var diffusionEquation = buildParabolicEquation();
 
         // Solve equation
-        diffusionEquation.solve(h, tau);
+        var solution = diffusionEquation.solve(h, tau);
 
         // Save numeric solution to file
-        var numericU = diffusionEquation.gUt(TIME);
+        var numericU = solution.gUt(TIME);
         FileUtil.save(numericU, "./build/parabolic-numeric.txt", true);
 
         // Save analytic solution to file
