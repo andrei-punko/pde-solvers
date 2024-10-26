@@ -6,9 +6,9 @@ import by.andd3dfx.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class Solution {
+public class Solution<E extends Equation> {
 
-    private final Equation equation;
+    private final E equation;
     private final Matrix solution;
 
     private Area area() {
