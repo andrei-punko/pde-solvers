@@ -2,11 +2,13 @@ package by.andd3dfx.util;
 
 import by.andd3dfx.math.Interval;
 import by.andd3dfx.math.Matrix;
-import lombok.SneakyThrows;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Util to serialize data into files
@@ -42,24 +44,25 @@ public class FileUtil {
         serialize(fileName, sb);
     }
 
-    @SneakyThrows
-    public static void save(Matrix m, String fileName, boolean rowsToColumns) {
-        var file = new FileWriter(fileName);
-        if (rowsToColumns) {
+    public static void save(Matrix m, String fileName, boolean rotate) {
+        var sb = new StringBuilder();
+        if (rotate) {
             for (int j = 0; j < m.getN(); j++) {
+                var list = new ArrayList<Double>();
                 for (int i = 0; i < m.getM(); i++) {
-                    file.write(m.get(i, j) + " ");
+                    list.add(m.get(i, j));
                 }
-                file.write("\n");
+                sb.append(list.stream().map(String::valueOf)
+                        .collect(Collectors.joining(" ")) + "\n");
             }
         } else {
             for (int i = 0; i < m.getM(); i++) {
-                for (int j = 0; j < m.getN(); j++) {
-                    file.write(m.get(i, j) + " ");
-                }
-                file.write("\n");
+                var string = Arrays.stream(m.get(i))
+                        .mapToObj(String::valueOf)
+                        .collect(Collectors.joining(" "));
+                sb.append(string + "\n");
             }
         }
-        file.close();
+        serialize(fileName, sb);
     }
 }
