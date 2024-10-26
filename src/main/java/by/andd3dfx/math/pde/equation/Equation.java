@@ -101,27 +101,6 @@ public abstract class Equation {
         return matrix;
     }
 
-    /**
-     * Tridiagonal matrix algorithm
-     */
-    protected void progonka(double[] A, double[] B, double[] C, double[] F, double m1, double n1, double m2, double n2, double[] Y) {
-        int N = A.length;
-        double[] Alpha = new double[N + 1];
-        double[] Beta = new double[N + 1];
-
-        Alpha[1] = m1;
-        Beta[1] = n1;
-        for (int i = 1; i < N; i++) {
-            Alpha[i + 1] = B[i] / (C[i] - A[i] * Alpha[i]);
-            Beta[i + 1] = (A[i] * Beta[i] + F[i]) / (C[i] - A[i] * Alpha[i]);
-        }
-
-        Y[N] = (n2 + m2 * Beta[N]) / (1 - m2 * Alpha[N]);
-        for (int i = N - 1; i >= 0; i--) {
-            Y[i] = Alpha[i + 1] * Y[i + 1] + Beta[i + 1];
-        }
-    }
-
     // TODO change method name to appropriate
     protected void extracted(double h, int nj, double[] A, double[] B, double[] C, double[] F, double[] U, Matrix solution) {
         double[] Mu = new double[3];
@@ -129,12 +108,11 @@ public abstract class Equation {
         double t = area.t().x(nj);
 
         useBorderConditions(h, Nu, t, Mu);
-
         progonka(A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
         solution.set(nj, U);
     }
 
-    protected void useBorderConditions(double h, double[] Nu, double t, double[] Mu) {
+    private void useBorderConditions(double h, double[] Nu, double t, double[] Mu) {
         if (leftBorderCondition instanceof BorderConditionType1 condition) {
             Nu[1] = condition.gU(t);
         } else if (leftBorderCondition instanceof BorderConditionType2 condition) {
@@ -155,6 +133,27 @@ public abstract class Equation {
             var rh = condition.gH();
             Mu[2] = 1 / (1 - h * rh);
             Nu[2] = -h * rh * condition.gTheta(t) / (1 - h * rh);
+        }
+    }
+
+    /**
+     * Tridiagonal matrix algorithm
+     */
+    private void progonka(double[] A, double[] B, double[] C, double[] F, double m1, double n1, double m2, double n2, double[] Y) {
+        int N = A.length;
+        double[] Alpha = new double[N + 1];
+        double[] Beta = new double[N + 1];
+
+        Alpha[1] = m1;
+        Beta[1] = n1;
+        for (int i = 1; i < N; i++) {
+            Alpha[i + 1] = B[i] / (C[i] - A[i] * Alpha[i]);
+            Beta[i + 1] = (A[i] * Beta[i] + F[i]) / (C[i] - A[i] * Alpha[i]);
+        }
+
+        Y[N] = (n2 + m2 * Beta[N]) / (1 - m2 * Alpha[N]);
+        for (int i = N - 1; i >= 0; i--) {
+            Y[i] = Alpha[i + 1] * Y[i + 1] + Beta[i + 1];
         }
     }
 }
