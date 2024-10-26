@@ -4,16 +4,8 @@ import by.andd3dfx.math.Area;
 import by.andd3dfx.math.Matrix;
 import by.andd3dfx.math.pde.equation.Equation;
 import by.andd3dfx.util.FileUtil;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@Getter
-@RequiredArgsConstructor
-public class Solution<E extends Equation> {
-
-    private final E equation;
-    private final Area area;
-    private final Matrix solution;
+public record Solution<E extends Equation>(E equation, Area area, Matrix solution) {
 
     /**
      * Save data U(x,t_i) for asked time moments [t_i].

@@ -46,7 +46,7 @@ class HyperbolicEquationSolverTest {
         FileUtil.save(numericU, "./build/hyperbolic-numeric.txt", true);
 
         // Save analytic solution to file
-        FileUtil.saveFunc(solution.getArea().x(), (x) -> analyticSolution(x, TIME), "./build/hyperbolic-analytic.txt");
+        FileUtil.saveFunc(solution.area().x(), (x) -> analyticSolution(x, TIME), "./build/hyperbolic-analytic.txt");
 
         // Compare numeric & analytic solutions
         for (var i = 0; i < numericU.getN(); i++) {

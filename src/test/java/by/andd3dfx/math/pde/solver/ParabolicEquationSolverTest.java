@@ -46,7 +46,7 @@ class ParabolicEquationSolverTest {
         FileUtil.save(numericU, "./build/parabolic-numeric.txt", true);
 
         // Save analytic solution to file
-        FileUtil.saveFunc(solution.getArea().x(), (x) -> analyticSolution(x, TIME), "./build/parabolic-analytic.txt");
+        FileUtil.saveFunc(solution.area().x(), (x) -> analyticSolution(x, TIME), "./build/parabolic-analytic.txt");
 
         // Compare numeric & analytic solutions
         for (var i = 0; i < numericU.getN(); i++) {
