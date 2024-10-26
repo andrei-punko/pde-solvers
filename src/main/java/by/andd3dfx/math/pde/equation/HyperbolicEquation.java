@@ -38,9 +38,7 @@ public class HyperbolicEquation extends Equation {
         var B = new double[N];
         var C = new double[N];
         var F = new double[N];
-        var U = new double[N + 1];    // Coefficients for tridiagonal matrix algorithm
-
-        double _2h = 2 * h,           // To speed-up calculations
+        double _2h = 2 * h,           // To speed-up calculations & readability
                 h2 = h * h,
                 t_2 = tau / 2.,
                 h_2 = h / 2.,
@@ -88,7 +86,8 @@ public class HyperbolicEquation extends Equation {
             }
 
             int nj = j + 2;
-            extracted(h, nj, A, B, C, F, U, solution);
+            var U = progonka(h, nj, A, B, C, F);
+            solution.set(nj, U);
         }
         return new Solution(this, solution);
     }

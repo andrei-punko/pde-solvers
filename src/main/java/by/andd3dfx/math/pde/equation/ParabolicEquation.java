@@ -38,8 +38,7 @@ public class ParabolicEquation extends Equation {
         var B = new double[N];
         var C = new double[N];
         var F = new double[N];
-        var U = new double[N + 1];      // Coefficients for tridiagonal matrix algorithm
-        double
+        double                      // To speed-up calculations & readability
                 _2h2 = 2 * h * h,
                 _2h2_tau = _2h2 / tau;
 
@@ -68,7 +67,8 @@ public class ParabolicEquation extends Equation {
             }
 
             int nj = j + 1;
-            extracted(h, nj, A, B, C, F, U, solution);
+            var U = progonka(h, nj, A, B, C, F);
+            solution.set(nj, U);
         }
         return new Solution(this, solution);
     }
