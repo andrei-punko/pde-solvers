@@ -122,6 +122,18 @@ public abstract class Equation {
         }
     }
 
+    // TODO change method name to appropriate
+    protected void extracted(double h, int nj, double[] A, double[] B, double[] C, double[] F, double[] U, Matrix solution) {
+        double[] Mu = new double[3];
+        double[] Nu = new double[3];
+        double t = area.t().x(nj);
+
+        useBorderConditions(h, Nu, t, Mu);
+
+        progonka(A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
+        solution.set(nj, U);
+    }
+
     protected void useBorderConditions(double h, double[] Nu, double t, double[] Mu) {
         if (leftBorderCondition instanceof BorderConditionType1 condition) {
             Nu[1] = condition.gU(t);

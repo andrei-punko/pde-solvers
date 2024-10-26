@@ -68,16 +68,8 @@ public class ParabolicEquation extends Equation {
             }
 
             int nj = j + 1;
-            double[] Mu = new double[3];
-            double[] Nu = new double[3];
-            double t = area.t().x(nj);
-
-            useBorderConditions(h, Nu, t, Mu);
-
-            progonka(A, B, C, F, Mu[1], Nu[1], Mu[2], Nu[2], U);
-            solution.set(nj, U);
+            extracted(h, nj, A, B, C, F, U, solution);
         }
         return new Solution(this, solution);
     }
-
 }
