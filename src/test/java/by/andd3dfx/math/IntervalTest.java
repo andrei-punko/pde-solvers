@@ -28,6 +28,12 @@ class IntervalTest {
     }
 
     @Test
+    void paramsConstructorWithNAndWrongParams() {
+        assertThrows(AssertionError.class, () -> new Interval(10, 2, 10));
+        assertThrows(AssertionError.class, () -> new Interval(2, 10, -2));
+    }
+
+    @Test
     void paramsConstructorWithH() {
         var interval = new Interval(2.5, 10.5, 0.1);
 
@@ -35,6 +41,14 @@ class IntervalTest {
         assertThat(interval.right()).isEqualTo(10.5);
         assertThat(interval.h()).isEqualTo(0.1);
         assertThat(interval.n()).isEqualTo(80);
+    }
+
+    @Test
+    void paramsConstructorWithHAndWrongParams() {
+        assertThrows(AssertionError.class, () -> new Interval(10, 2, 0.1));
+        assertThrows(AssertionError.class, () -> new Interval(10, 2, 8.5));
+        assertThrows(AssertionError.class, () -> new Interval(2, 10, -0.2));
+        assertThrows(AssertionError.class, () -> new Interval(2, 10, 8.5));
     }
 
     @Test
@@ -50,6 +64,13 @@ class IntervalTest {
     }
 
     @Test
+    void rebornWithWrongN() {
+        var interval = new Interval(5.0, 10.0, 10);
+
+        assertThrows(AssertionError.class, () -> interval.reborn(-1));
+    }
+
+    @Test
     void rebornWithH() {
         var interval = new Interval(5.0, 10.0, 10);
 
@@ -59,6 +80,14 @@ class IntervalTest {
         assertThat(interval.right()).isEqualTo(10.0);
         assertThat(interval.h()).isEqualTo(0.2);
         assertThat(interval.n()).isEqualTo(25);
+    }
+
+    @Test
+    void rebornWithWrongH() {
+        var interval = new Interval(5.0, 10.0, 10);
+
+        assertThrows(AssertionError.class, () -> interval.reborn(-0.5));
+        assertThrows(AssertionError.class, () -> interval.reborn(5.5));
     }
 
     @Test

@@ -39,7 +39,7 @@ public class Matrix {
     }
 
     public void set(int i, double value) {
-        assert (i >= 0 && i < data.length);
+        assert (0 <= i && i < data.length);
         data[i] = value;
     }
 
@@ -56,17 +56,17 @@ public class Matrix {
     }
 
     public void set(int i, int j, double value) {
-        assert (i >= 0 && i < m && j >= 0 && j < n);
+        assert (0 <= i && i < m && 0 <= j && j < n);
         data[i * n + j] = value;
     }
 
     public void set(int i, double[] arr) {
-        assert (i >= 0 && i < m && n == arr.length);
+        assert (0 <= i && i < m && arr.length == n);
         System.arraycopy(arr, 0, data, i * n, arr.length);
     }
 
     public double get(int i, int j) {
-        assert (i >= 0 && i < m && j >= 0 && j < n);
+        assert (0 <= i && i < m && 0 <= j && j < n);
         return data[i * n + j];
     }
 
