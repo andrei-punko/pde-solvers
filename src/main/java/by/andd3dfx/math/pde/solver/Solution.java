@@ -1,20 +1,20 @@
-package by.andd3dfx.math.pde.equation;
+package by.andd3dfx.math.pde.solver;
 
 import by.andd3dfx.math.Area;
 import by.andd3dfx.math.Matrix;
+import by.andd3dfx.math.pde.equation.Equation;
 import by.andd3dfx.util.FileUtil;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public class Solution<E extends Equation> {
 
     private final E equation;
+    private final Area area;
     private final Matrix solution;
 
-    private Area area() {
-        return equation.area;
-    }
-    
     /**
      * Save data U(x,t_i) for asked time moments [t_i].
      * So in result we get some set of slices for several time moments
@@ -24,14 +24,14 @@ public class Solution<E extends Equation> {
      */
     public void sUt(String fileName, double[] t) {
         for (var t_i : t) {
-            assert (area().tLeft() <= t_i && t_i <= area().tRight());
+            assert (area.tLeft() <= t_i && t_i <= area.tRight());
         }
 
         var sb = new StringBuilder();
-        for (var i = 0; i <= area().x().n(); i++) {
-            sb.append(area().x().x(i));
+        for (var i = 0; i <= area.x().n(); i++) {
+            sb.append(area.x().x(i));
             for (var t_i : t) {
-                sb.append(" ").append(solution.get(area().t().i(t_i), i));
+                sb.append(" ").append(solution.get(area.t().i(t_i), i));
             }
             sb.append("\n");
         }
@@ -57,14 +57,14 @@ public class Solution<E extends Equation> {
      */
     public void sUx(String fileName, double[] x) {
         for (var x_i : x) {
-            assert (area().xLeft() <= x_i && x_i <= area().xRight());
+            assert (area.xLeft() <= x_i && x_i <= area.xRight());
         }
 
         var sb = new StringBuilder();
-        for (int i = 0; i <= area().t().n(); i++) {
-            sb.append(area().t().x(i));
+        for (int i = 0; i <= area.t().n(); i++) {
+            sb.append(area.t().x(i));
             for (var x_i : x) {
-                sb.append(" ").append(solution.get(i, area().x().i(x_i)));
+                sb.append(" ").append(solution.get(i, area.x().i(x_i)));
             }
             sb.append("\n");
         }
@@ -87,8 +87,8 @@ public class Solution<E extends Equation> {
      * @param t time
      * @return U(x) slice
      */
-    protected Matrix gUt(double t) {
-        return gUt(area().t().i(t));
+    public Matrix gUt(double t) {
+        return gUt(area.t().i(t));
     }
 
     /**
@@ -97,14 +97,14 @@ public class Solution<E extends Equation> {
      * @param it index of time layer in solution matrix
      * @return U(x) slice
      */
-    protected Matrix gUt(int it) {
+    public Matrix gUt(int it) {
         int M = solution.getM();
         assert (0 <= it && it < M);
 
         int N = solution.getN();
         var matrix = new Matrix(2, N);
         for (int i = 0; i < N; i++) {
-            matrix.setX(i, area().x().x(i));
+            matrix.setX(i, area.x().x(i));
             matrix.setY(i, solution.get(it, i));
         }
         return matrix;
@@ -116,8 +116,8 @@ public class Solution<E extends Equation> {
      * @param x space coordinate
      * @return U(t) slice
      */
-    protected Matrix gUx(double x) {
-        return gUx(area().x().i(x));
+    public Matrix gUx(double x) {
+        return gUx(area.x().i(x));
     }
 
     /**
@@ -126,14 +126,14 @@ public class Solution<E extends Equation> {
      * @param ix index of space column in solution matrix
      * @return U(t) slice
      */
-    protected Matrix gUx(int ix) {
+    public Matrix gUx(int ix) {
         int N = solution.getN();
         assert (0 <= ix && ix < N);
 
         int M = solution.getM();
         var matrix = new Matrix(2, M);
         for (int i = 0; i <= M; i++) {
-            matrix.setX(i, area().t().x(i));
+            matrix.setX(i, area.t().x(i));
             matrix.setY(i, solution.get(i, ix));
         }
         return matrix;

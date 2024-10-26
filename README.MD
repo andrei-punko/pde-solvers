@@ -39,5 +39,5 @@ and solve it with help of tridiagonal matrix algorithm (or Thomas algorithm) (or
 ## Usage notes
 
 Check solved problems in tests:
-- [ParabolicEquationTest](src/test/java/by/andd3dfx/math/pde/equation/ParabolicEquationTest.java)
-- [HyperbolicEquationTest](src/test/java/by/andd3dfx/math/pde/equation/HyperbolicEquationTest.java)
+- [ParabolicEquationSolverTest](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolverTest.java)
+- [HyperbolicEquationSolverTest](src/test/java/by/andd3dfx/math/pde/solver/HyperbolicEquationSolverTest.java)

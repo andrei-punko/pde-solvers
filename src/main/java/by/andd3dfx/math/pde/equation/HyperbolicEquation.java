@@ -24,89 +24,16 @@ public class HyperbolicEquation extends Equation {
     }
 
     /**
-     * Solve equation using provided space & time steps
-     *
-     * @param h   space step
-     * @param tau time step
-     */
-    @Override
-    public Solution solve(double h, double tau) {
-        var solution = prepare(h, tau);
-
-        int N = area.x().n();
-        var A = new double[N];
-        var B = new double[N];
-        var C = new double[N];
-        var F = new double[N];
-        double _2h = 2 * h,           // To speed-up calculations & readability
-                h2 = h * h,
-                t_2 = tau / 2.,
-                h_2 = h / 2.,
-                h2_tau = h2 / tau,
-                _2h2_tau2 = 2 * Math.pow(h / tau, 2);
-
-        // Set border conditions on layer 1
-        solution.set(1, 0, calcFirstLayerValue(tau, solution.get(0, 0), area.xLeft()));
-        solution.set(1, N, calcFirstLayerValue(tau, solution.get(0, N), area.xRight()));
-
-        // Calculate U value on layer 1 which needed to start finite-difference algorithm
-        //
-        for (int i = 1; i < N; i++) {
-            double
-                    _u = solution.get(0, i - 1),
-                    u = solution.get(0, i),
-                    u_ = solution.get(0, i + 1),
-                    x = area.x().x(i);
-
-            solution.set(1, i, u + tau * (gdU_dt(x) + t_2 / gM(x, 0, u) * (
-                    gK(x, 0, u) / h2 * (_u - 2 * u + u_) + gV(x, 0, u) / _2h * (u_ - _u) + gF(x, 0, u))));
-        }
-
-        // Finite-difference algorithm implementation
-        //
-        for (int j = 0; j <= area.t().n() - 2; j++) {
-            for (int i = 1; i < N; i++) {
-                double
-                        _u = solution.get(j, i - 1),
-                        u = solution.get(j, i),
-                        u_ = solution.get(j, i + 1),
-
-                        x = area.x().x(i),
-                        t = area.t().x(j),
-
-                        Alpha = gK(x, t, u) - gV(x, t, u) * h_2,
-                        Beta = gK(x, t, u) + gV(x, t, u) * h_2,
-                        Gamma = h2_tau * gL(x, t, u),
-                        Delta = _2h2_tau2 * gM(x, t, u);
-
-                A[i] = Alpha;
-                B[i] = Beta;
-                C[i] = Alpha + Beta - Gamma + Delta;
-                F[i] = _u * Alpha + u_ * Beta - u * (Alpha + Beta + Gamma + Delta) + 2 * (solution.get(j + 1, i) * Delta + gF(x, t, u) * h2);
-            }
-
-            int nj = j + 2;
-            var U = progonka(h, nj, A, B, C, F);
-            solution.set(nj, U);
-        }
-        return new Solution(this, solution);
-    }
-
-    private double calcFirstLayerValue(double tau, double u, double x) {
-        return u + tau * (gdU_dt(x) + tau / 2. / gM(x, 0, u) * gF(x, 0, u));
-    }
-
-    /**
      * Initial condition dU_dt(x,0) at moment t=0
      */
-    protected double gdU_dt(double x) {
+    public double gdU_dt(double x) {
         return 0;
     }
 
     /**
      * Coefficient L(x,t,U) of equation for 1st-order time derivative
      */
-    protected double gL(double x, double t, double U) {
+    public double gL(double x, double t, double U) {
         return 0;
     }
 }
