@@ -20,7 +20,7 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
         }
 
         var sb = new StringBuilder();
-        for (var i = 0; i <= area.x().n(); i++) {
+        for (var i = 0; i < area.x().n(); i++) {
             sb.append(area.x().x(i));
             for (var t_i : t) {
                 sb.append(" ").append(solution.get(area.t().i(t_i), i));
@@ -53,7 +53,7 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
         }
 
         var sb = new StringBuilder();
-        for (int i = 0; i <= area.t().n(); i++) {
+        for (int i = 0; i < area.t().n(); i++) {
             sb.append(area.t().x(i));
             for (var x_i : x) {
                 sb.append(" ").append(solution.get(i, area.x().i(x_i)));
@@ -124,7 +124,7 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
 
         int M = solution.getM();
         var matrix = new Matrix(2, M);
-        for (int i = 0; i <= M; i++) {
+        for (int i = 0; i < M; i++) {
             matrix.setX(i, area.t().x(i));
             matrix.setY(i, solution.get(i, ix));
         }
