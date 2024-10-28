@@ -5,95 +5,69 @@ import by.andd3dfx.math.Matrix;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static by.andd3dfx.util.FileComparisonHelper.BUILD_PATH;
+import static by.andd3dfx.util.FileComparisonHelper.checkGeneratedFileContent;
 
 class FileUtilTest {
 
-    private final String BUILD_PATH = "./build/";
-    private final String RESOURCES_PATH = "./src/test/resources/";
-
     @Test
     void serialize() throws IOException {
-        var generatedFileName = BUILD_PATH + "serialize.txt";
-        var expectedFileName = RESOURCES_PATH + "serialize.txt";
+        final var fileName = "serialize.txt";
         StringBuilder sb = new StringBuilder();
         sb.append("one two\n");
         sb.append("three four\n");
 
-        FileUtil.serialize(generatedFileName, sb);
+        FileUtil.serialize(BUILD_PATH + fileName, sb);
 
-        checkGeneratedFileContent(generatedFileName, expectedFileName);
+        checkGeneratedFileContent(fileName);
     }
 
     @Test
     void saveFuncSimple() throws IOException {
-        var generatedFileName = BUILD_PATH + "saveFuncSimple.txt";
-        var expectedFileName = RESOURCES_PATH + "saveFuncSimple.txt";
+        final var fileName = "saveFuncSimple.txt";
         var interval = new Interval(-1, 9, 10);
 
-        FileUtil.saveFunc(interval, (x) -> x * x, generatedFileName);
+        FileUtil.saveFunc(interval, (x) -> x * x, BUILD_PATH + fileName);
 
-        checkGeneratedFileContent(generatedFileName, expectedFileName);
+        checkGeneratedFileContent(fileName);
     }
 
     @Test
     void saveFuncForParameterizedXAndY() throws IOException {
-        var generatedFileName = BUILD_PATH + "saveFuncForParameterizedXAndY.txt";
-        var expectedFileName = RESOURCES_PATH + "saveFuncForParameterizedXAndY.txt";
+        final var fileName = "saveFuncForParameterizedXAndY.txt";
         var interval = new Interval(-1, 9, 10);
 
-        FileUtil.saveFunc(interval, (t) -> t * 10, (t) -> 2 * t + 1, generatedFileName);
+        FileUtil.saveFunc(interval, (t) -> t * 10, (t) -> 2 * t + 1, BUILD_PATH + fileName);
 
-        checkGeneratedFileContent(generatedFileName, expectedFileName);
+        checkGeneratedFileContent(fileName);
     }
 
     @Test
     void saveMatrixInOriginalView() throws IOException {
-        var generatedFileName = BUILD_PATH + "matrix-original.txt";
-        var expectedFileName = RESOURCES_PATH + "matrix-original.txt";
+        final var fileName = "matrix-original.txt";
         var m = new Matrix(2, 2);
         m.set(0, 0, 5);
         m.set(0, 1, 6);
         m.set(1, 0, 9);
         m.set(1, 1, 1);
 
-        FileUtil.save(m, generatedFileName, false);
+        FileUtil.save(m, BUILD_PATH + fileName, false);
 
-        checkGeneratedFileContent(generatedFileName, expectedFileName);
+        checkGeneratedFileContent(fileName);
     }
 
     @Test
     void saveMatrixWithConversionRowsToColumns() throws IOException {
-        var generatedFileName = BUILD_PATH + "matrix-not-original.txt";
-        var expectedFileName = RESOURCES_PATH + "matrix-not-original.txt";
+        final var fileName = "matrix-not-original.txt";
         var m = new Matrix(2, 2);
         m.set(0, 0, 5);
         m.set(0, 1, 6);
         m.set(1, 0, 9);
         m.set(1, 1, 1);
 
-        FileUtil.save(m, generatedFileName, true);
+        FileUtil.save(m, BUILD_PATH + fileName, true);
 
-        checkGeneratedFileContent(generatedFileName, expectedFileName);
-    }
-
-    private void checkGeneratedFileContent(String generatedFileName, String expectedOutputFileName) throws IOException {
-        Path generatedFilePath = Path.of(generatedFileName);
-        String[] generatedFileLines = Files.readString(generatedFilePath).split("\n");
-
-        Path expectedFilePath = Path.of(expectedOutputFileName);
-        String[] expectedFileLines = Files.readString(expectedFilePath).split("\n");
-
-        assertThat("Unexpected amount of lines in file " + generatedFilePath,
-                generatedFileLines.length, is(expectedFileLines.length));
-
-        for (int i = 0; i < generatedFileLines.length; i++) {
-            assertThat("Wrong file content for file " + generatedFilePath,
-                    generatedFileLines[i], is(expectedFileLines[i]));
-        }
+        checkGeneratedFileContent(fileName);
     }
 }
