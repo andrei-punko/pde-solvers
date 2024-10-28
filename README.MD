@@ -39,5 +39,5 @@ and solve it with help of tridiagonal matrix algorithm (or Thomas algorithm) (or
 ## Usage notes
 
 Check solved problems in tests:
-- [ParabolicEquationSolverTest](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolverTest.java)
-- [HyperbolicEquationSolverTest](src/test/java/by/andd3dfx/math/pde/solver/HyperbolicEquationSolverTest.java)
+- [Diffusion problem with type 1 of both condition types](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolver11Test.java)
+- [Wave equation (plucked string) with type 1 of both condition types](src/test/java/by/andd3dfx/math/pde/solver/HyperbolicEquationSolver11Test.java)

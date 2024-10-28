@@ -12,6 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * <pre>
+ * Test for ParabolicEquationSolver with type 1 of border conditions on both sides.
+ *
  * Solution of diffusion equation: Ut = D*Uxx
  * - constant concentration C=0 on the left & right borders
  * - initial concentration with triangle profile: most mass concentrated in the center (see method getU0(x))
@@ -20,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @see <a href="https://math.libretexts.org/Bookshelves/Differential_Equations/Differential_Equations_(Chasnov)/09%3A_Partial_Differential_Equations/9.05%3A_Solution_of_the_Diffusion_Equation">article</a>
  */
-class ParabolicEquationSolverTest {
+class ParabolicEquationSolver11Test {
 
     private final double C_MAX = 100.0;
     private final double L = 0.001;         // Thickness of plate, m
@@ -43,10 +45,10 @@ class ParabolicEquationSolverTest {
 
         // Save numeric solution to file
         var numericU = solution.gUt(TIME);
-        FileUtil.save(numericU, "./build/parabolic-numeric.txt", true);
+        FileUtil.save(numericU, "./build/parabolic11-numeric.txt", true);
 
         // Save analytic solution to file
-        FileUtil.saveFunc(solution.area().x(), (x) -> analyticSolution(x, TIME), "./build/parabolic-analytic.txt");
+        FileUtil.saveFunc(solution.area().x(), (x) -> analyticSolution(x, TIME), "./build/parabolic11-analytic.txt");
 
         // Compare numeric & analytic solutions
         for (var i = 0; i < numericU.getN(); i++) {
@@ -106,7 +108,7 @@ class ParabolicEquationSolverTest {
     private double analyticSolution(double x, double t) {
         var result = 0d;
         for (int n = 1; n <= 100; n++) {
-            result += b(n) * sin(n * PI * x / L) * exp(-n * n * PI * PI * D * t / (L * L));
+            result += b_n(n) * sin(n * PI * x / L) * exp(-Math.pow(n * PI / L, 2.) * D * t);
         }
         return result;
     }
@@ -117,7 +119,7 @@ class ParabolicEquationSolverTest {
      * @param n number of coefficient
      * @return b_n value
      */
-    private double b(int n) {
+    private double b_n(int n) {
         var integral = 0d;
         var N = 100d;
         var dx = L / N;

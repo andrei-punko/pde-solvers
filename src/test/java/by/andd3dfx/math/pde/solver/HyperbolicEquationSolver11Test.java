@@ -12,6 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * <pre>
+ * Test for HyperbolicEquationSolver with type 1 of border conditions on both sides.
+ *
  * Solution of wave equation: Utt = c^2*Uxx
  * - constant displacement U=0 on the left & right borders
  * - initial displacement with triangle profile (see method getU0(x))
@@ -20,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @see <a href="https://math.libretexts.org/Bookshelves/Differential_Equations/Differential_Equations_(Chasnov)/09%3A_Partial_Differential_Equations/9.06%3A_Solution_of_the_Wave_Equation">article</a>
  */
-class HyperbolicEquationSolverTest {
+class HyperbolicEquationSolver11Test {
 
     private final double U_MAX = 0.005;     // Max displacement, m
     private final double L = 0.100;         // Length of string, m
@@ -43,10 +45,10 @@ class HyperbolicEquationSolverTest {
 
         // Save numeric solution to file
         var numericU = solution.gUt(TIME);
-        FileUtil.save(numericU, "./build/hyperbolic-numeric.txt", true);
+        FileUtil.save(numericU, "./build/hyperbolic11-numeric.txt", true);
 
         // Save analytic solution to file
-        FileUtil.saveFunc(solution.area().x(), (x) -> analyticSolution(x, TIME), "./build/hyperbolic-analytic.txt");
+        FileUtil.saveFunc(solution.area().x(), (x) -> analyticSolution(x, TIME), "./build/hyperbolic11-analytic.txt");
 
         // Compare numeric & analytic solutions
         for (var i = 0; i < numericU.getN(); i++) {
@@ -103,7 +105,7 @@ class HyperbolicEquationSolverTest {
     private double analyticSolution(double x, double t) {
         var result = 0d;
         for (int n = 1; n <= 100; n++) {
-            result += b(n) * sin(n * PI * x / L) * cos(n * PI * C_coeff * t / L);
+            result += b_n(n) * sin(n * PI * x / L) * cos(n * PI * C_coeff * t / L);
         }
         return result;
     }
@@ -114,7 +116,7 @@ class HyperbolicEquationSolverTest {
      * @param n number of coefficient
      * @return b_n value
      */
-    private double b(int n) {
+    private double b_n(int n) {
         var integral = 0d;
         var N = 100d;
         var dx = L / N;
