@@ -43,10 +43,6 @@ public class Matrix {
         data[i] = value;
     }
 
-    public double get(int i) {
-        return get(0, i);
-    }
-
     public double y(int i) {
         return get(1, i);
     }
@@ -63,6 +59,11 @@ public class Matrix {
     public void set(int i, double[] arr) {
         assert (0 <= i && i < m && arr.length == n);
         System.arraycopy(arr, 0, data, i * n, arr.length);
+    }
+
+    public double[] get(int i) {
+        assert (0 <= i && i < m);
+        return Arrays.copyOfRange(data, i * n, (i + 1) * n);
     }
 
     public double get(int i, int j) {

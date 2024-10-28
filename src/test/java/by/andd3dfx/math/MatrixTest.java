@@ -46,15 +46,14 @@ class MatrixTest {
 
     @Test
     void setNGet() {
-        var m = new Matrix(3);
-
+        var m = new Matrix(2, 3);
         m.set(0, 7);
         m.set(1, 3);
         m.set(2, -3);
+        m.set(1, new double[]{78, 79, 90});
 
-        assertThat(m.get(2)).isEqualTo(-3);
-        assertThat(m.get(1)).isEqualTo(3);
-        assertThat(m.get(0)).isEqualTo(7);
+        assertThat(m.get(0)).isEqualTo(new double[]{7, 3, -3});
+        assertThat(m.get(1)).isEqualTo(new double[]{78, 79, 90});
     }
 
     @Test
