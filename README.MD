@@ -40,4 +40,5 @@ and solve it with help of tridiagonal matrix algorithm (or Thomas algorithm) (or
 
 Check solved problems in tests:
 - [Diffusion problem with type 1 of both condition types](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolver11Test.java)
+- [Diffusion problem with type 2 of both condition types](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolver22Test.java)
 - [Wave equation (plucked string) with type 1 of both condition types](src/test/java/by/andd3dfx/math/pde/solver/HyperbolicEquationSolver11Test.java)
