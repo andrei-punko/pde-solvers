@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id("maven-publish")
 }
 
 group = 'by.andd3dfx'
@@ -56,5 +57,23 @@ jacocoTestReport {
                     '**/dto/**',
             ])
         }))
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/andrei-punko/pde-solvers")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
     }
 }
