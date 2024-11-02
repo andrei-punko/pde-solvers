@@ -9,7 +9,7 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
         var area = buildArea(eqn, h, tau);
         var solution = prepare(eqn, area);
 
-        int N = area.x().n();
+        int N = area.xn();
         var A = new double[N];
         var B = new double[N];
         var C = new double[N];
@@ -32,7 +32,7 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
                     _u = solution.get(0, i - 1),
                     u = solution.get(0, i),
                     u_ = solution.get(0, i + 1),
-                    x = area.x().x(i);
+                    x = area.xx(i);
 
             solution.set(1, i, u + tau * (eqn.gdU_dt(x) + t_2 / eqn.gM(x, 0, u) * (
                     eqn.gK(x, 0, u) / h2 * (_u - 2 * u + u_) + eqn.gV(x, 0, u) / _2h * (u_ - _u) + eqn.gF(x, 0, u))));
@@ -40,15 +40,15 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
 
         // Finite-difference algorithm implementation
         //
-        for (int j = 0; j <= area.t().n() - 2; j++) {
+        for (int j = 0; j <= area.tn() - 2; j++) {
             for (int i = 1; i < N; i++) {
                 double
                         _u = solution.get(j, i - 1),
                         u = solution.get(j, i),
                         u_ = solution.get(j, i + 1),
 
-                        x = area.x().x(i),
-                        t = area.t().x(j),
+                        x = area.xx(i),
+                        t = area.tx(j),
 
                         Alpha = eqn.gK(x, t, u) - eqn.gV(x, t, u) * h_2,
                         Beta = eqn.gK(x, t, u) + eqn.gV(x, t, u) * h_2,
@@ -63,7 +63,7 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
             }
 
             int nj = j + 2;
-            var time = area.t().x(nj);
+            var time = area.tx(nj);
             var U = progonka(eqn, h, time, A, B, C, F);
             solution.set(nj, U);
         }

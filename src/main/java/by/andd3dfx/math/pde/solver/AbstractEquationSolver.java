@@ -35,10 +35,10 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
      */
     protected Matrix prepare(Equation eqn, Area area) {
         // Create space for equation solution
-        var matrix = new Matrix(area.t().n() + 1, area.x().n() + 1);
+        var matrix = new Matrix(area.tn() + 1, area.xn() + 1);
         // Set initial value
-        for (var i = 0; i <= area.x().n(); i++) {
-            matrix.set(0, i, eqn.gU0(area.x().x(i)));
+        for (var i = 0; i <= area.xn(); i++) {
+            matrix.set(0, i, eqn.gU0(area.xx(i)));
         }
         return matrix;
     }

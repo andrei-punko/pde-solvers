@@ -20,10 +20,10 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
         }
 
         var sb = new StringBuilder();
-        for (var i = 0; i < area.x().n(); i++) {
-            sb.append(area.x().x(i));
+        for (var i = 0; i < area.xn(); i++) {
+            sb.append(area.xx(i));
             for (var t_i : t) {
-                sb.append(" ").append(solution.get(area.t().i(t_i), i));
+                sb.append(" ").append(solution.get(area.ti(t_i), i));
             }
             sb.append("\n");
         }
@@ -53,10 +53,10 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
         }
 
         var sb = new StringBuilder();
-        for (int i = 0; i < area.t().n(); i++) {
-            sb.append(area.t().x(i));
+        for (int i = 0; i < area.tn(); i++) {
+            sb.append(area.tx(i));
             for (var x_i : x) {
-                sb.append(" ").append(solution.get(i, area.x().i(x_i)));
+                sb.append(" ").append(solution.get(i, area.xi(x_i)));
             }
             sb.append("\n");
         }
@@ -80,7 +80,7 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
      * @return U(x) slice
      */
     public Matrix gUt(double t) {
-        return gUt(area.t().i(t));
+        return gUt(area.ti(t));
     }
 
     /**
@@ -96,7 +96,7 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
         int N = solution.getN();
         var matrix = new Matrix(2, N);
         for (int i = 0; i < N; i++) {
-            matrix.setX(i, area.x().x(i));
+            matrix.setX(i, area.xx(i));
             matrix.setY(i, solution.get(it, i));
         }
         return matrix;
@@ -109,7 +109,7 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
      * @return U(t) slice
      */
     public Matrix gUx(double x) {
-        return gUx(area.x().i(x));
+        return gUx(area.xi(x));
     }
 
     /**
@@ -125,7 +125,7 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
         int M = solution.getM();
         var matrix = new Matrix(2, M);
         for (int i = 0; i < M; i++) {
-            matrix.setX(i, area.t().x(i));
+            matrix.setX(i, area.tx(i));
             matrix.setY(i, solution.get(i, ix));
         }
         return matrix;

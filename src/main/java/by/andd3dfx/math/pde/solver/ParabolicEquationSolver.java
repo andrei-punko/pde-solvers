@@ -14,7 +14,7 @@ public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEqu
         );
         var solution = prepare(eqn, area);
 
-        int N = area.x().n();
+        int N = area.xn();
         var A = new double[N];
         var B = new double[N];
         var C = new double[N];
@@ -25,17 +25,17 @@ public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEqu
 
         // Finite-difference algorithm implementation
         //
-        for (int j = 0; j < area.t().n(); j++) {
+        for (int j = 0; j < area.tn(); j++) {
             for (int i = 1; i < N; i++) {
                 double
                         _u = solution.get(j, i - 1),
                         u = solution.get(j, i),
                         u_ = solution.get(j, i + 1),
 
-                        _x = area.x().x(i - 1),
-                        x = area.x().x(i),
-                        x_ = area.x().x(i + 1),
-                        t = area.t().x(j),
+                        _x = area.xx(i - 1),
+                        x = area.xx(i),
+                        x_ = area.xx(i + 1),
+                        t = area.tx(j),
 
                         Alpha = (eqn.gK(x, t, u) + eqn.gK(x_, t, u_) + eqn.gV(x, t, u) * h) / 2.,
                         Beta = (eqn.gK(x, t, u) + eqn.gK(_x, t, _u) - eqn.gV(x, t, u) * h) / 2.,
@@ -48,7 +48,7 @@ public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEqu
             }
 
             int nj = j + 1;
-            var time = area.t().x(nj);
+            var time = area.tx(nj);
             var U = progonka(eqn, h, time, A, B, C, F);
             solution.set(nj, U);
         }
