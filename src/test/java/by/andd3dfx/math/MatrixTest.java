@@ -140,11 +140,10 @@ class MatrixTest {
     void swapLinesWithInvalidParams() {
         var m = new Matrix(2, 3);
 
+        assertThrows(AssertionError.class, () -> m.swapLines(-1, 0));
+        assertThrows(AssertionError.class, () -> m.swapLines(2, 0));
         assertThrows(AssertionError.class, () -> m.swapLines(0, -1));
         assertThrows(AssertionError.class, () -> m.swapLines(0, 2));
-        assertThrows(AssertionError.class, () -> m.swapLines(-1, -2));
-        assertThrows(AssertionError.class, () -> m.swapLines(-1, 0));
-        assertThrows(AssertionError.class, () -> m.swapLines(-1, 2));
         assertThrows(AssertionError.class, () -> m.swapLines(1, 1));
     }
 
@@ -178,11 +177,10 @@ class MatrixTest {
     void swapColsWithInvalidParams() {
         var m = new Matrix(3, 2);
 
+        assertThrows(AssertionError.class, () -> m.swapCols(-1, 0));
+        assertThrows(AssertionError.class, () -> m.swapCols(2, 0));
         assertThrows(AssertionError.class, () -> m.swapCols(0, -1));
         assertThrows(AssertionError.class, () -> m.swapCols(0, 2));
-        assertThrows(AssertionError.class, () -> m.swapCols(-1, -2));
-        assertThrows(AssertionError.class, () -> m.swapCols(-1, 0));
-        assertThrows(AssertionError.class, () -> m.swapCols(-1, 2));
         assertThrows(AssertionError.class, () -> m.swapCols(1, 1));
     }
 
