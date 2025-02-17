@@ -2,8 +2,19 @@ package by.andd3dfx.math.pde.solver;
 
 import by.andd3dfx.math.pde.equation.HyperbolicEquation;
 
+/**
+ * Hyperbolic equation solver
+ */
 public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicEquation> {
 
+    /**
+     * Solve hyperbolic equation using provided space & time steps
+     *
+     * @param eqn partial difference equation
+     * @param h   space step
+     * @param tau time step
+     * @return equation solution
+     */
     @Override
     public Solution<HyperbolicEquation> solve(HyperbolicEquation eqn, double h, double tau) {
         var area = buildArea(eqn, h, tau);
@@ -67,7 +78,7 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
             var U = progonka(eqn, h, time, A, B, C, F);
             solution.set(nj, U);
         }
-        return new Solution(eqn, area, solution);
+        return new Solution<>(eqn, area, solution);
     }
 
     private double calcFirstLayerValue(HyperbolicEquation eqn, double tau, double u, double x) {

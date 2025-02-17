@@ -4,7 +4,8 @@ import by.andd3dfx.math.pde.border.BorderCondition;
 
 /**
  * Parabolic equation (described heat/mass transfer):
- * M(x,t,U)*dU_dt = dU(K(x,t,U)*dU_dx)_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)
+ * <p>
+ * M(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)
  */
 public class ParabolicEquation extends Equation {
 

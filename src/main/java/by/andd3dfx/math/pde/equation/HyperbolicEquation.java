@@ -4,7 +4,8 @@ import by.andd3dfx.math.pde.border.BorderCondition;
 
 /**
  * Hyperbolic equation (described oscillation processes):
- * M(x,t,U)*d2U_dt2 + L(x,t,U)*dU_dt = dU(K(x,t,U)*dU_dx)_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)
+ * <p>
+ * M(x,t,U)*d2U_dt2 + L(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)
  */
 public class HyperbolicEquation extends Equation {
 

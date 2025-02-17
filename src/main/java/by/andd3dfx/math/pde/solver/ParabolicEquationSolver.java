@@ -4,8 +4,19 @@ import by.andd3dfx.math.Area;
 import by.andd3dfx.math.Interval;
 import by.andd3dfx.math.pde.equation.ParabolicEquation;
 
+/**
+ * Parabolic equation solver
+ */
 public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEquation> {
 
+    /**
+     * Solve parabolic equation using provided space & time steps
+     *
+     * @param eqn partial difference equation
+     * @param h   space step
+     * @param tau time step
+     * @return equation solution
+     */
     @Override
     public Solution<ParabolicEquation> solve(ParabolicEquation eqn, double h, double tau) {
         var area = new Area(
@@ -52,6 +63,6 @@ public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEqu
             var U = progonka(eqn, h, time, A, B, C, F);
             solution.set(nj, U);
         }
-        return new Solution(eqn, area, solution);
+        return new Solution<>(eqn, area, solution);
     }
 }

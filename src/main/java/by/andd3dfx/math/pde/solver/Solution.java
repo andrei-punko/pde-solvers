@@ -5,6 +5,14 @@ import by.andd3dfx.math.Matrix;
 import by.andd3dfx.math.pde.equation.Equation;
 import by.andd3dfx.util.FileUtil;
 
+/**
+ * Solution record class, which represents solution of equation on definite space-time area
+ *
+ * @param equation equation to solve
+ * @param area     space-time area
+ * @param solution equation solution
+ * @param <E>      particular equation type
+ */
 public record Solution<E extends Equation>(E equation, Area area, Matrix solution) {
 
     /**

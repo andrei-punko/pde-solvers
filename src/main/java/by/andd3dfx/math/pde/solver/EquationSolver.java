@@ -2,6 +2,11 @@ package by.andd3dfx.math.pde.solver;
 
 import by.andd3dfx.math.pde.equation.Equation;
 
+/**
+ * Equation solver interface. All solvers should implement it
+ *
+ * @param <E> particular equation type
+ */
 public interface EquationSolver<E extends Equation> {
 
     /**

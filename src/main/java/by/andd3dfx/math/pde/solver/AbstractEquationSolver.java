@@ -9,6 +9,9 @@ import by.andd3dfx.math.pde.border.BorderConditionType3;
 import by.andd3dfx.math.pde.equation.Equation;
 import by.andd3dfx.math.pde.equation.HyperbolicEquation;
 
+/**
+ * Base class. Used to avoid code duplication in child classes
+ */
 public abstract class AbstractEquationSolver<E extends Equation> implements EquationSolver<E> {
 
     /**
