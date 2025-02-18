@@ -58,15 +58,15 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
         double[] Alpha = new double[N + 1];
         double[] Beta = new double[N + 1];
 
-        Alpha[1] = mn1.m();
-        Beta[1] = mn1.n();
+        Alpha[1] = mn1.m;
+        Beta[1] = mn1.n;
         for (int i = 1; i < N; i++) {
             Alpha[i + 1] = B[i] / (C[i] - A[i] * Alpha[i]);
             Beta[i + 1] = (A[i] * Beta[i] + F[i]) / (C[i] - A[i] * Alpha[i]);
         }
 
         var Y = new double[N + 1];
-        Y[N] = (mn2.n() + mn2.m() * Beta[N]) / (1 - mn2.m() * Alpha[N]);
+        Y[N] = (mn2.n + mn2.m * Beta[N]) / (1 - mn2.m * Alpha[N]);
         for (int i = N - 1; i >= 0; i--) {
             Y[i] = Alpha[i + 1] * Y[i + 1] + Beta[i + 1];
         }

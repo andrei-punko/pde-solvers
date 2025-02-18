@@ -12,21 +12,21 @@ public record Area(Interval x, Interval t) {
      * Left border of time interval
      */
     public double tLeft() {
-        return t().left();
+        return t.left();
     }
 
     /**
      * Right border of time interval
      */
     public double tRight() {
-        return t().right();
+        return t.right();
     }
 
     /**
      * Steps amount of time interval
      */
     public int tn() {
-        return t().n();
+        return t.n();
     }
 
     /**
@@ -36,7 +36,7 @@ public record Area(Interval x, Interval t) {
      * @return time
      */
     public double tx(int i) {
-        return t().x(i);
+        return t.x(i);
     }
 
     /**
@@ -46,28 +46,28 @@ public record Area(Interval x, Interval t) {
      * @return index of time interval
      */
     public int ti(double time) {
-        return t().i(time);
+        return t.i(time);
     }
 
     /**
      * Left border of space interval
      */
     public double xLeft() {
-        return x().left();
+        return x.left();
     }
 
     /**
      * Right border of space interval
      */
     public double xRight() {
-        return x().right();
+        return x.right();
     }
 
     /**
      * Steps amount of space interval
      */
     public int xn() {
-        return x().n();
+        return x.n();
     }
 
     /**
@@ -77,7 +77,7 @@ public record Area(Interval x, Interval t) {
      * @return space coordinate
      */
     public double xx(int i) {
-        return x().x(i);
+        return x.x(i);
     }
 
     /**
@@ -87,6 +87,6 @@ public record Area(Interval x, Interval t) {
      * @return index of space interval
      */
     public int xi(double x) {
-        return x().i(x);
+        return this.x.i(x);
     }
 }
