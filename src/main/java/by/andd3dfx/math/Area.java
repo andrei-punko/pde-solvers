@@ -23,7 +23,7 @@ public record Area(Interval x, Interval t) {
     }
 
     /**
-     * Amount of time interval steps
+     * Steps amount of time interval
      */
     public int tn() {
         return t().n();
@@ -64,7 +64,7 @@ public record Area(Interval x, Interval t) {
     }
 
     /**
-     * Amount of space interval steps
+     * Steps amount of space interval
      */
     public int xn() {
         return x().n();

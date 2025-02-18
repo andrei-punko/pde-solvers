@@ -35,7 +35,7 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
             }
             sb.append("\n");
         }
-        FileUtil.serialize(fileName, sb);
+        FileUtil.serialize(sb, fileName);
     }
 
     /**
@@ -68,7 +68,7 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
             }
             sb.append("\n");
         }
-        FileUtil.serialize(fileName, sb);
+        FileUtil.serialize(sb, fileName);
     }
 
     /**

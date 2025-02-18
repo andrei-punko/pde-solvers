@@ -18,7 +18,7 @@ class FileUtilTest {
         sb.append("one two\n");
         sb.append("three four\n");
 
-        FileUtil.serialize(BUILD_PATH + fileName, sb);
+        FileUtil.serialize(sb, BUILD_PATH + fileName);
 
         checkGeneratedFileContent(fileName);
     }
