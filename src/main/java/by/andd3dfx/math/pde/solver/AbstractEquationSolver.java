@@ -3,6 +3,7 @@ package by.andd3dfx.math.pde.solver;
 import by.andd3dfx.math.Area;
 import by.andd3dfx.math.Interval;
 import by.andd3dfx.math.Matrix;
+import by.andd3dfx.math.pde.border.BorderCondition;
 import by.andd3dfx.math.pde.border.BorderConditionType1;
 import by.andd3dfx.math.pde.border.BorderConditionType2;
 import by.andd3dfx.math.pde.border.BorderConditionType3;
@@ -50,46 +51,43 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
      * Tri-diagonal matrix algorithm
      */
     protected double[] progonka(Equation eqn, double h, double time, double[] A, double[] B, double[] C, double[] F) {
-        double m1 = 0, m2 = 0, n1 = 0, n2 = 0;
-
-        if (eqn.getLeftBorderCondition() instanceof BorderConditionType1 condition) {
-            n1 = condition.gU(time);
-        } else if (eqn.getLeftBorderCondition() instanceof BorderConditionType2 condition) {
-            m1 = 1;
-            n1 = -h * condition.gdU_dx(time);
-        } else if (eqn.getLeftBorderCondition() instanceof BorderConditionType3 condition) {
-            var lh = condition.gH();
-            m1 = 1 / (1 + h * lh);
-            n1 = h * lh * condition.gTheta(time) / (1 + h * lh);
-        }
-
-        if (eqn.getRightBorderCondition() instanceof BorderConditionType1 condition) {
-            n2 = condition.gU(time);
-        } else if (eqn.getRightBorderCondition() instanceof BorderConditionType2 condition) {
-            m2 = 1;
-            n2 = h * condition.gdU_dx(time);
-        } else if (eqn.getRightBorderCondition() instanceof BorderConditionType3 condition) {
-            var rh = condition.gH();
-            m2 = 1 / (1 - h * rh);
-            n2 = -h * rh * condition.gTheta(time) / (1 - h * rh);
-        }
+        var mn1 = calcMN(eqn.getLeftBorderCondition(), h, time);
+        var mn2 = calcMN(eqn.getRightBorderCondition(), h, time);
 
         int N = A.length;
         double[] Alpha = new double[N + 1];
         double[] Beta = new double[N + 1];
 
-        Alpha[1] = m1;
-        Beta[1] = n1;
+        Alpha[1] = mn1.m();
+        Beta[1] = mn1.n();
         for (int i = 1; i < N; i++) {
             Alpha[i + 1] = B[i] / (C[i] - A[i] * Alpha[i]);
             Beta[i + 1] = (A[i] * Beta[i] + F[i]) / (C[i] - A[i] * Alpha[i]);
         }
 
         var Y = new double[N + 1];
-        Y[N] = (n2 + m2 * Beta[N]) / (1 - m2 * Alpha[N]);
+        Y[N] = (mn2.n() + mn2.m() * Beta[N]) / (1 - mn2.m() * Alpha[N]);
         for (int i = N - 1; i >= 0; i--) {
             Y[i] = Alpha[i + 1] * Y[i + 1] + Beta[i + 1];
         }
         return Y;
+    }
+
+    private MN calcMN(BorderCondition borderCondition, double h, double time) {
+        double m = 0, n = 0;
+        if (borderCondition instanceof BorderConditionType1 condition) {
+            n = condition.gU(time);
+        } else if (borderCondition instanceof BorderConditionType2 condition) {
+            m = 1;
+            n = -h * condition.gdU_dx(time);
+        } else if (borderCondition instanceof BorderConditionType3 condition) {
+            var lh = condition.gH();
+            m = 1 / (1 + h * lh);
+            n = h * lh * condition.gTheta(time) / (1 + h * lh);
+        }
+        return new MN(m, n);
+    }
+
+    private record MN(double m, double n) {
     }
 }
