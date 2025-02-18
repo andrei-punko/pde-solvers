@@ -70,7 +70,7 @@ public class FileUtil {
      *
      * @param m        matrix to save
      * @param fileName name of file
-     * @param rotate   flag - rotate or not matrix before saving
+     * @param rotate   flag - rotate matrix or not before saving
      */
     public static void save(Matrix m, String fileName, boolean rotate) {
         var sb = new StringBuilder();

@@ -74,18 +74,16 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
     }
 
     private MN calcMN(BorderCondition borderCondition, double h, double time) {
-        double m = 0, n = 0;
-        if (borderCondition instanceof BorderConditionType1 condition) {
-            n = condition.gU(time);
-        } else if (borderCondition instanceof BorderConditionType2 condition) {
-            m = 1;
-            n = -h * condition.gdU_dx(time);
-        } else if (borderCondition instanceof BorderConditionType3 condition) {
-            var lh = condition.gH();
-            m = 1 / (1 + h * lh);
-            n = h * lh * condition.gTheta(time) / (1 + h * lh);
-        }
-        return new MN(m, n);
+        return switch (borderCondition) {
+            case BorderConditionType1 condType1 -> new MN(0, condType1.gU(time));
+            case BorderConditionType2 condType2 -> new MN(1, -h * condType2.gdU_dx(time));
+            case BorderConditionType3 condType3 -> {
+                var lh = condType3.gH();
+                var m = 1 / (1 + h * lh);
+                yield new MN(m, h * lh * m * condType3.gTheta(time));
+            }
+            default -> throw new IllegalStateException("Unexpected border condition type: " + borderCondition);
+        };
     }
 
     private record MN(double m, double n) {
