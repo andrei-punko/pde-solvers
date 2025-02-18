@@ -45,7 +45,7 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
                     u_ = solution.get(0, i + 1),
                     x = area.xx(i);
 
-            solution.set(1, i, u + tau * (eqn.gdU_dt(x) + t_2 / eqn.gM(x, 0, u) * (
+            solution.set(1, i, u + tau * (eqn.gdU_dt0(x) + t_2 / eqn.gM(x, 0, u) * (
                     eqn.gK(x, 0, u) / h2 * (_u - 2 * u + u_) + eqn.gV(x, 0, u) / _2h * (u_ - _u) + eqn.gF(x, 0, u))));
         }
 
@@ -82,6 +82,6 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
     }
 
     private double calcFirstLayerValue(HyperbolicEquation eqn, double tau, double u, double x) {
-        return u + tau * (eqn.gdU_dt(x) + tau / 2. / eqn.gM(x, 0, u) * eqn.gF(x, 0, u));
+        return u + tau * (eqn.gdU_dt0(x) + tau / 2. / eqn.gM(x, 0, u) * eqn.gF(x, 0, u));
     }
 }

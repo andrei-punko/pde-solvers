@@ -27,7 +27,7 @@ public class HyperbolicEquation extends Equation {
     /**
      * Initial condition dU_dt(x,0) at moment t=0
      */
-    public double gdU_dt(double x) {
+    public double gdU_dt0(double x) {
         return 0;
     }
 
