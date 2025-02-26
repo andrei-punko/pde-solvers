@@ -48,44 +48,51 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
     }
 
     /**
-     * Tri-diagonal matrix algorithm
+     * Solution of tridiagonal system of algebraic equations:
+     * A[i]*y[i-1] - C[i]*y[i] + B[i]*y[i+1] = -F[i], 0<i<N
+     * using tridiagonal matrix algorithm (also known as the Thomas algorithm).
+     * <p>
+     * Variable notations - according to "Тихонов, Самарский - Уравнения математической физики", p.590-592
      */
-    protected double[] progonka(Equation eqn, double h, double time, double[] A, double[] B, double[] C, double[] F) {
-        var mn1 = calcMN(eqn.getLeftBorderCondition(), h, time);
-        var mn2 = calcMN(eqn.getRightBorderCondition(), h, time);
-
+    public static double[] solve3DiagonalEquationsSystem(double[] A, double[] B, double[] C, double[] F, KappaNu leftCond, KappaNu rightCond) {
         int N = A.length;
         double[] Alpha = new double[N + 1];
         double[] Beta = new double[N + 1];
 
-        Alpha[1] = mn1.m;
-        Beta[1] = mn1.n;
+        // Forward phase:
+        // - calculate Alpha[1], Beta[1] from left border condition
+        // - calculate Alpha[i], Beta[i] for i=1,2,...,N using recurrent formula
+        Alpha[1] = leftCond.kappa;
+        Beta[1] = leftCond.nu;
         for (int i = 1; i < N; i++) {
             Alpha[i + 1] = B[i] / (C[i] - A[i] * Alpha[i]);
             Beta[i + 1] = (A[i] * Beta[i] + F[i]) / (C[i] - A[i] * Alpha[i]);
         }
 
+        // Backward phase:
+        // - calculate Y[N] from border condition
+        // - calculate Y[i] for i=N-1,N-2,...,1,0 using recurrent formula
         var Y = new double[N + 1];
-        Y[N] = (mn2.n + mn2.m * Beta[N]) / (1 - mn2.m * Alpha[N]);
+        Y[N] = (rightCond.nu + rightCond.kappa * Beta[N]) / (1 - rightCond.kappa * Alpha[N]);
         for (int i = N - 1; i >= 0; i--) {
             Y[i] = Alpha[i + 1] * Y[i + 1] + Beta[i + 1];
         }
         return Y;
     }
 
-    private MN calcMN(BorderCondition borderCondition, double h, double time) {
+    protected KappaNu calcKappaNu(BorderCondition borderCondition, double h, double time) {
         return switch (borderCondition) {
-            case BorderConditionType1 condType1 -> new MN(0, condType1.gU(time));
-            case BorderConditionType2 condType2 -> new MN(1, -h * condType2.gdU_dx(time));
+            case BorderConditionType1 condType1 -> new KappaNu(0, condType1.gU(time));
+            case BorderConditionType2 condType2 -> new KappaNu(1, -h * condType2.gdU_dx(time));
             case BorderConditionType3 condType3 -> {
                 var lh = condType3.gH();
-                var m = 1 / (1 + h * lh);
-                yield new MN(m, h * lh * m * condType3.gTheta(time));
+                var kappa = 1 / (1 + h * lh);
+                yield new KappaNu(kappa, h * lh * kappa * condType3.gTheta(time));
             }
             default -> throw new IllegalStateException("Unexpected border condition type: " + borderCondition);
         };
     }
 
-    private record MN(double m, double n) {
+    public record KappaNu(double kappa, double nu) {
     }
 }
