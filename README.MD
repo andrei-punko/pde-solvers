@@ -46,4 +46,5 @@ Check solved problems in tests:
 
 - [Diffusion problem with type 1 of both border conditions](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolver11Test.java)
 - [Diffusion problem with type 2 of both border conditions](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolver22Test.java)
+- [Heat transfer problem with border conditions of type 1 and 3](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolver13Test.java)
 - [Wave equation (plucked string) with type 1 of both border conditions](src/test/java/by/andd3dfx/math/pde/solver/HyperbolicEquationSolver11Test.java)
