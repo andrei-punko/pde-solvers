@@ -96,7 +96,7 @@ class ParabolicEquationSolver22Test {
     /**
      * <pre>
      * Analytic solution:
-     * U(x,t) = a_0/2 + Sum(a_n*u_n(x,t)) = a_0/2 + Sum(a_n*cos(n*PI*x/L))*exp(-(n*PI/L)^2 * D*t)
+     * U(x,t) = a_0/2 + Sum( a_n*u_n(x,t) ) = a_0/2 + Sum( a_n*cos(n*PI*x/L))*exp(-(n*PI/L)^2 * D*t )
      *
      * According to <a href="https://math.libretexts.org/Bookshelves/Differential_Equations/Differential_Equations_(Chasnov)/09%3A_Partial_Differential_Equations/9.05%3A_Solution_of_the_Diffusion_Equation">article</a>
      * </pre>

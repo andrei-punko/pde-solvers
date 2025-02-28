@@ -93,7 +93,7 @@ class HyperbolicEquationSolver11Test {
     /**
      * <pre>
      * Analytic solution:
-     * U(x,t) = Sum(b_n*u_n(x,t)) = Sum(b_n*sin(n*PI*x/L)*cos(n*PI*C*t/L))
+     * U(x,t) = Sum( b_n*u_n(x,t) ) = Sum( b_n*sin(n*PI*x/L)*cos(n*PI*C*t/L) )
      *
      * According to <a href="https://math.libretexts.org/Bookshelves/Differential_Equations/Differential_Equations_(Chasnov)/09%3A_Partial_Differential_Equations/9.06%3A_Solution_of_the_Wave_Equation">article</a>
      * </pre>
