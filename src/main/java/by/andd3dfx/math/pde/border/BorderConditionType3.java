@@ -6,21 +6,21 @@ package by.andd3dfx.math.pde.border;
 public class BorderConditionType3 implements BorderCondition {
 
     /**
+     * h coefficient value on this border
+     *
+     * @return h value
+     */
+    public double gH() {
+        return 0;
+    }
+
+    /**
      * Theta(t) value in asked time moment on this border
      *
      * @param t time
      * @return Theta value
      */
     public double gTheta(double t) {
-        return 0;
-    }
-
-    /**
-     * h coefficient value on this border
-     *
-     * @return h value
-     */
-    public double gH() {
         return 0;
     }
 }
