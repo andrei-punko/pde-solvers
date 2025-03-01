@@ -4,7 +4,13 @@ import by.andd3dfx.math.pde.border.BorderCondition;
 import lombok.Getter;
 
 /**
- * Base class. Used to avoid code duplication in child classes
+ * Base class representing 2nd-order PD equation:
+ * <p>
+ * M(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)
+ * <p>
+ * It's defined on space-time area [x1,x2]*[0,t2] with border conditions on left & right sides
+ * <p>
+ * Used to avoid code duplication in child classes
  */
 @Getter
 public abstract class Equation {

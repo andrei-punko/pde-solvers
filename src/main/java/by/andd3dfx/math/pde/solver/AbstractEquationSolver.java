@@ -11,7 +11,7 @@ import by.andd3dfx.math.pde.equation.Equation;
 import by.andd3dfx.math.pde.equation.HyperbolicEquation;
 
 /**
- * Base class. Used to avoid code duplication in child classes
+ * Base class of equation solvers. Used to avoid code duplication in child classes
  */
 public abstract class AbstractEquationSolver<E extends Equation> implements EquationSolver<E> {
 
@@ -93,6 +93,9 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
         };
     }
 
+    /**
+     * Just record to store border condition params
+     */
     public record KappaNu(double kappa, double nu) {
     }
 }

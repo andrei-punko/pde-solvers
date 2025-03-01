@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
 
+/**
+ * Two-dimensional matrix
+ */
 @RequiredArgsConstructor
 public class Matrix {
 
