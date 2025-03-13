@@ -10,7 +10,7 @@ import by.andd3dfx.math.pde.equation.ParabolicEquation;
 public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEquation> {
 
     /**
-     * Solve parabolic equation using provided space & time steps
+     * Solve parabolic equation using provided space and time steps
      *
      * @param eqn partial difference equation
      * @param h   space step

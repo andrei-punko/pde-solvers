@@ -9,14 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class MatrixTest {
 
     @Test
-    void constructorWithoutParams() {
-        var m = new Matrix();
-
-        assertThat(m.getM()).isEqualTo(1);
-        assertThat(m.getN()).isEqualTo(1);
-    }
-
-    @Test
     void constructorWithOneParam() {
         var m = new Matrix(5);
 

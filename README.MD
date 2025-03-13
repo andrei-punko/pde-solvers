@@ -19,6 +19,13 @@ Gradle isn't required because of embedded Gradle presence in the project
 ./gradlew clean build
 ```
 
+## How to generate javadocs
+
+```shell
+./gradlew javadoc
+```
+Check `build/doc/javadoc` folder
+
 ## Supported PD equation types
 
 - Parabolic equation (described heat/mass transfer process):  
@@ -38,7 +45,7 @@ Gradle isn't required because of embedded Gradle presence in the project
 ## Solver
 
 The finite-difference method was used, in result we get tridiagonal system of linear equations
-and solve it with help of tridiagonal matrix algorithm (or Thomas algorithm) (or "метод прогонки" in Russian).
+and solve it with help of tridiagonal matrix algorithm (or Thomas algorithm).
 
 ## Usage notes
 

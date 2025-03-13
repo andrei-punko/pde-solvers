@@ -17,10 +17,6 @@ public class Matrix {
     private final int n;
     private final double[] data;
 
-    public Matrix() {
-        this(1);
-    }
-
     public Matrix(int n) {
         this(1, n);
     }

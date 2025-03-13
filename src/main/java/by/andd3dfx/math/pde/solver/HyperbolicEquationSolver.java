@@ -8,7 +8,7 @@ import by.andd3dfx.math.pde.equation.HyperbolicEquation;
 public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicEquation> {
 
     /**
-     * Solve hyperbolic equation using provided space & time steps
+     * Solve hyperbolic equation using provided space and time steps
      *
      * @param eqn partial difference equation
      * @param h   space step

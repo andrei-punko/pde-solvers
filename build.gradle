@@ -60,6 +60,10 @@ jacocoTestReport {
     }
 }
 
+javadoc {
+    source = sourceSets.main.allJava
+}
+
 publishing {
     repositories {
         maven {

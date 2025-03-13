@@ -8,9 +8,12 @@ import lombok.Getter;
  * <p>
  * M(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)
  * <p>
- * It's defined on space-time area [x1,x2]*[0,t2] with border conditions on left & right sides
+ * It's defined on space-time area [x1,x2]*[0,t2] with border conditions on left and right sides
  * <p>
  * Used to avoid code duplication in child classes
+ *
+ * @see BorderCondition
+ * @see by.andd3dfx.math.pde.solver.EquationSolver
  */
 @Getter
 public abstract class Equation {

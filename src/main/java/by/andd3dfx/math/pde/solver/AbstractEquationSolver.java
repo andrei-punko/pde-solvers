@@ -49,7 +49,7 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
 
     /**
      * Solution of tridiagonal system of algebraic equations:
-     * A[i]*y[i-1] - C[i]*y[i] + B[i]*y[i+1] = -F[i], 0<i<N
+     * A[i]*y[i-1] - C[i]*y[i] + B[i]*y[i+1] = -F[i], 0&lt;i&lt;N
      * using tridiagonal matrix algorithm (also known as the Thomas algorithm).
      * <p>
      * Variable notations - according to "Тихонов, Самарский - Уравнения математической физики", p.590-592
@@ -80,6 +80,15 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
         return Y;
     }
 
+    /**
+     * Calculate Kappa and Nu params corresponding to provided border condition.
+     * These params used by tri-diagonal algorithm.
+     *
+     * @param borderCondition border condition
+     * @param h               space step
+     * @param time            time
+     * @return record with Kappa and Nu values
+     */
     protected KappaNu calcKappaNu(BorderCondition borderCondition, double h, double time) {
         return switch (borderCondition) {
             case BorderConditionType1 condType1 -> new KappaNu(0, condType1.gU(time));

@@ -10,7 +10,7 @@ import by.andd3dfx.math.pde.equation.Equation;
 public interface EquationSolver<E extends Equation> {
 
     /**
-     * Solve equation using provided space & time steps
+     * Solve equation using provided space and time steps
      *
      * @param eqn partial difference equation
      * @param h   space step
