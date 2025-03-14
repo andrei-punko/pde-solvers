@@ -12,9 +12,9 @@ public class ParabolicEquation extends Equation {
     /**
      * Create parabolic equation
      *
-     * @param x1                   left space coordinate
-     * @param x2                   right space coordinate
-     * @param t2                   right time coordinate
+     * @param x1                   left border of space interval
+     * @param x2                   right border of space interval
+     * @param t2                   right border of time interval
      * @param leftBorderCondition  left border condition
      * @param rightBorderCondition right border condition
      */

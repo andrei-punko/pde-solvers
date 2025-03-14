@@ -53,7 +53,7 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
      * So in result we get some set of slices for several space coordinates
      *
      * @param fileName file name
-     * @param x        coordinates array
+     * @param x        space coordinates array
      */
     public void sUx(String fileName, double[] x) {
         for (var x_i : x) {

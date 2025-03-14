@@ -17,10 +17,21 @@ public class Matrix {
     private final int n;
     private final double[] data;
 
+    /**
+     * Create 1d matrix (array) with definite size
+     *
+     * @param n items amount
+     */
     public Matrix(int n) {
         this(1, n);
     }
 
+    /**
+     * Create 2d matrix with definite size
+     *
+     * @param m rows amount
+     * @param n columns amount
+     */
     public Matrix(int m, int n) {
         assert (m > 0 && n > 0);
 
@@ -29,10 +40,22 @@ public class Matrix {
         data = new double[m * n];
     }
 
+    /**
+     * Get X value by index
+     *
+     * @param i index
+     * @return X value
+     */
     public double x(int i) {
         return get(0, i);
     }
 
+    /**
+     * Set X value for definite index
+     *
+     * @param i     index
+     * @param value X value
+     */
     public void setX(int i, double value) {
         set(0, i, value);
     }
@@ -42,14 +65,33 @@ public class Matrix {
         data[i] = value;
     }
 
+    /**
+     * Get Y value by index
+     *
+     * @param i index
+     * @return Y value
+     */
     public double y(int i) {
         return get(1, i);
     }
 
+    /**
+     * Set Y value for definite index
+     *
+     * @param i     index
+     * @param value Y value
+     */
     public void setY(int i, double value) {
         set(1, i, value);
     }
 
+    /**
+     * Set number into matrix cell
+     *
+     * @param i     row number
+     * @param j     column number
+     * @param value number value
+     */
     public void set(int i, int j, double value) {
         assert (0 <= i && i < m && 0 <= j && j < n);
         data[i * n + j] = value;
@@ -65,25 +107,54 @@ public class Matrix {
         return Arrays.copyOfRange(data, i * n, (i + 1) * n);
     }
 
+    /**
+     * Get number stored in matrix cell
+     *
+     * @param i row number
+     * @param j column number
+     * @return number value
+     */
     public double get(int i, int j) {
         assert (0 <= i && i < m && 0 <= j && j < n);
         return data[i * n + j];
     }
 
+    /**
+     * Get min value of stored numbers
+     *
+     * @return min value
+     */
     public double min() {
         return Arrays.stream(data).min().getAsDouble();
     }
 
+    /**
+     * Get max value of stored numbers
+     *
+     * @return max value
+     */
     public double max() {
         return Arrays.stream(data).max().getAsDouble();
     }
 
+    /**
+     * Fill matrix with numbers of same value
+     *
+     * @param d number value
+     * @return filled matrix
+     */
     public Matrix fill(double d) {
         Arrays.fill(data, d);
         return this;
     }
 
-    public void swapLines(int m1, int m2) {
+    /**
+     * Swap matrix rows
+     *
+     * @param m1 one row number
+     * @param m2 another row number
+     */
+    public void swapRows(int m1, int m2) {
         assert (0 <= m1 && m1 < m && 0 <= m2 && m2 < m && m1 != m2);
 
         var buff = new double[n];
@@ -92,6 +163,12 @@ public class Matrix {
         System.arraycopy(buff, 0, data, m2 * n, n);
     }
 
+    /**
+     * Swap matrix columns
+     *
+     * @param n1 one column number
+     * @param n2 another column number
+     */
     public void swapCols(int n1, int n2) {
         assert (0 <= n1 && n1 < n && 0 <= n2 && n2 < n && n1 != n2);
 

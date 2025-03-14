@@ -11,7 +11,9 @@ import by.andd3dfx.math.pde.equation.Equation;
 import by.andd3dfx.math.pde.equation.HyperbolicEquation;
 
 /**
- * Base class of equation solvers. Used to avoid code duplication in child classes
+ * Base class of PD equation solvers. Used to avoid code duplication in child classes
+ *
+ * @param <E> equation class
  */
 public abstract class AbstractEquationSolver<E extends Equation> implements EquationSolver<E> {
 
@@ -48,13 +50,22 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
     }
 
     /**
-     * Solution of tridiagonal system of algebraic equations:
+     * Solve tridiagonal system of algebraic equations:
      * A[i]*y[i-1] - C[i]*y[i] + B[i]*y[i+1] = -F[i], 0&lt;i&lt;N
      * using tridiagonal matrix algorithm (also known as the Thomas algorithm).
      * <p>
      * Variable notations - according to "Тихонов, Самарский - Уравнения математической физики", p.590-592
+     *
+     * @param A         array of equation coefficients A
+     * @param B         array of equation coefficients B
+     * @param C         array of equation coefficients C
+     * @param F         array of equation coefficients F
+     * @param leftCond  params record of left border condition
+     * @param rightCond params record of right border condition
+     * @return solution
      */
-    public static double[] solve3DiagonalEquationsSystem(double[] A, double[] B, double[] C, double[] F, KappaNu leftCond, KappaNu rightCond) {
+    public static double[] solve3DiagonalEquationsSystem(double[] A, double[] B, double[] C, double[] F,
+                                                         KappaNu leftCond, KappaNu rightCond) {
         int N = A.length;
         double[] Alpha = new double[N + 1];
         double[] Beta = new double[N + 1];
@@ -104,6 +115,9 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
 
     /**
      * Just record to store border condition params
+     *
+     * @param kappa
+     * @param nu
      */
     public record KappaNu(double kappa, double nu) {
     }

@@ -12,9 +12,9 @@ public class HyperbolicEquation extends Equation {
     /**
      * Create hyperbolic equation
      *
-     * @param x1                   left space coordinate
-     * @param x2                   right space coordinate
-     * @param t2                   right time coordinate
+     * @param x1                   left border of space interval
+     * @param x2                   right border of space interval
+     * @param t2                   right border of time interval
      * @param leftBorderCondition  left border condition
      * @param rightBorderCondition right border condition
      */
@@ -25,7 +25,10 @@ public class HyperbolicEquation extends Equation {
     }
 
     /**
-     * Initial condition dU_dt(x,0) at moment t=0
+     * Initial condition dU_dt(x,0) at the moment t=0
+     *
+     * @param x space coordinate
+     * @return dU_dt value
      */
     public double gdU_dt0(double x) {
         return 0;
@@ -33,6 +36,11 @@ public class HyperbolicEquation extends Equation {
 
     /**
      * Coefficient L(x,t,U) of equation for 1st-order time derivative
+     *
+     * @param x space coordinate
+     * @param t time
+     * @param U U value
+     * @return L value
      */
     public double gL(double x, double t, double U) {
         return 0;

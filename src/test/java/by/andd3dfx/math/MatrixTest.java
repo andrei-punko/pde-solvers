@@ -103,7 +103,7 @@ class MatrixTest {
     }
 
     @Test
-    void swapLines() {
+    void swapRows() {
         var m = new Matrix(3, 3);
         m.set(0, 0, 5);
         m.set(0, 1, 6);
@@ -115,7 +115,7 @@ class MatrixTest {
         m.set(2, 1, 0);
         m.set(2, 2, -5);
 
-        m.swapLines(0, 2);
+        m.swapRows(0, 2);
 
         assertThat(m.get(0, 0)).isEqualTo(7);
         assertThat(m.get(0, 1)).isEqualTo(0);
@@ -129,14 +129,14 @@ class MatrixTest {
     }
 
     @Test
-    void swapLinesWithInvalidParams() {
+    void swapRowsWithInvalidParams() {
         var m = new Matrix(2, 3);
 
-        assertThrows(AssertionError.class, () -> m.swapLines(-1, 0));
-        assertThrows(AssertionError.class, () -> m.swapLines(2, 0));
-        assertThrows(AssertionError.class, () -> m.swapLines(0, -1));
-        assertThrows(AssertionError.class, () -> m.swapLines(0, 2));
-        assertThrows(AssertionError.class, () -> m.swapLines(1, 1));
+        assertThrows(AssertionError.class, () -> m.swapRows(-1, 0));
+        assertThrows(AssertionError.class, () -> m.swapRows(2, 0));
+        assertThrows(AssertionError.class, () -> m.swapRows(0, -1));
+        assertThrows(AssertionError.class, () -> m.swapRows(0, 2));
+        assertThrows(AssertionError.class, () -> m.swapRows(1, 1));
     }
 
     @Test

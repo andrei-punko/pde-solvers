@@ -27,9 +27,9 @@ public abstract class Equation {
     /**
      * Create equation
      *
-     * @param x1                   left space coordinate
-     * @param x2                   right space coordinate
-     * @param t2                   right time coordinate
+     * @param x1                   left border of space interval
+     * @param x2                   right border of space interval
+     * @param t2                   right border of time interval
      * @param leftBorderCondition  left border condition
      * @param rightBorderCondition right border condition
      */
@@ -46,7 +46,7 @@ public abstract class Equation {
     /**
      * Initial condition U(x) at moment t=0
      *
-     * @param x coordinate
+     * @param x space coordinate
      * @return U(x) value
      */
     public double gU0(double x) {
@@ -55,6 +55,11 @@ public abstract class Equation {
 
     /**
      * Coefficient M(x,t,U) of equation for 2nd-order time derivative
+     *
+     * @param x space coordinate
+     * @param t time
+     * @param U U value
+     * @return M(x,t,U) value
      */
     public double gM(double x, double t, double U) {
         return 1;
@@ -62,6 +67,11 @@ public abstract class Equation {
 
     /**
      * Coefficient K(x,t,U) of equation for 2nd-order space derivative
+     *
+     * @param x space coordinate
+     * @param t time
+     * @param U U value
+     * @return K(x,t,U) value
      */
     public double gK(double x, double t, double U) {
         return 1;
@@ -69,6 +79,11 @@ public abstract class Equation {
 
     /**
      * Coefficient V(x,t,U) of equation for 1st-order space derivative
+     *
+     * @param x space coordinate
+     * @param t time
+     * @param U U value
+     * @return V(x,t,U) value
      */
     public double gV(double x, double t, double U) {
         return 0;
@@ -76,6 +91,11 @@ public abstract class Equation {
 
     /**
      * Free addendum F(x,t,U) of equation
+     *
+     * @param x space coordinate
+     * @param t time
+     * @param U U value
+     * @return F(x,t,U) value
      */
     public double gF(double x, double t, double U) {
         return 0;

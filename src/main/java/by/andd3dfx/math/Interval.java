@@ -23,8 +23,8 @@ public class Interval {
     /**
      * Create interval [left; right] with provided step size
      *
-     * @param left  left coordinate
-     * @param right right coordinate
+     * @param left  left border value
+     * @param right right border value
      * @param h     step size
      */
     public Interval(double left, double right, double h) {
@@ -34,8 +34,8 @@ public class Interval {
     /**
      * Create interval [left; right] with provided steps amount
      *
-     * @param left  left coordinate
-     * @param right right coordinate
+     * @param left  left border value
+     * @param right right border value
      * @param n     steps amount
      */
     public Interval(double left, double right, int n) {
@@ -43,18 +43,18 @@ public class Interval {
     }
 
     /**
-     * Get left coordinate
+     * Get left border
      *
-     * @return left coordinate
+     * @return left border value
      */
     public double left() {
         return left;
     }
 
     /**
-     * Get right coordinate
+     * Get right border
      *
-     * @return right coordinate
+     * @return right border value
      */
     public double right() {
         return right;
