@@ -1,7 +1,9 @@
-package by.andd3dfx.math;
+package by.andd3dfx.math.matrix;
 
 /**
  * XY matrix
+ * <p>
+ * Has 2 x N size, corresponding to N pairs of (x, y)
  */
 public class MatrixXY extends Matrix2D {
 

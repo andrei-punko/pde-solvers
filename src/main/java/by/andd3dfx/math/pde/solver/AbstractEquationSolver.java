@@ -1,14 +1,13 @@
 package by.andd3dfx.math.pde.solver;
 
-import by.andd3dfx.math.Area;
-import by.andd3dfx.math.Interval;
-import by.andd3dfx.math.Matrix2D;
+import by.andd3dfx.math.matrix.Matrix2D;
 import by.andd3dfx.math.pde.border.BorderCondition;
 import by.andd3dfx.math.pde.border.BorderConditionType1;
 import by.andd3dfx.math.pde.border.BorderConditionType2;
 import by.andd3dfx.math.pde.border.BorderConditionType3;
 import by.andd3dfx.math.pde.equation.Equation;
-import by.andd3dfx.math.pde.equation.HyperbolicEquation;
+import by.andd3dfx.math.space.Area;
+import by.andd3dfx.math.space.Interval;
 
 /**
  * Base class of PD equation solvers. Used to avoid code duplication in child classes
@@ -26,7 +25,7 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
      * @param tau time step
      * @return built area
      */
-    protected Area buildArea(HyperbolicEquation eqn, double h, double tau) {
+    protected Area buildArea(Equation eqn, double h, double tau) {
         return new Area(
                 new Interval(eqn.getX1(), eqn.getX2(), h),
                 new Interval(0, eqn.getT2(), tau)

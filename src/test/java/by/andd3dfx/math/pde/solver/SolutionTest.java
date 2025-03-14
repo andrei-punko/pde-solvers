@@ -1,9 +1,9 @@
 package by.andd3dfx.math.pde.solver;
 
-import by.andd3dfx.math.Area;
-import by.andd3dfx.math.Interval;
-import by.andd3dfx.math.Matrix2D;
-import by.andd3dfx.math.MatrixXY;
+import by.andd3dfx.math.space.Area;
+import by.andd3dfx.math.space.Interval;
+import by.andd3dfx.math.matrix.Matrix2D;
+import by.andd3dfx.math.matrix.MatrixXY;
 import by.andd3dfx.math.pde.equation.Equation;
 import org.junit.jupiter.api.Test;
 

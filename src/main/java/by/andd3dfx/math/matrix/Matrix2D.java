@@ -1,4 +1,4 @@
-package by.andd3dfx.math;
+package by.andd3dfx.math.matrix;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.Arrays;
 
 /**
- * Two-dimensional matrix
+ * 2D matrix
  */
 @RequiredArgsConstructor
 public class Matrix2D {
@@ -31,13 +31,19 @@ public class Matrix2D {
         data = new double[m * n];
     }
 
+    /**
+     * Put number into definite position of underlying array
+     *
+     * @param i     index
+     * @param value number value
+     */
     public void set(int i, double value) {
         assert (0 <= i && i < data.length);
         data[i] = value;
     }
 
     /**
-     * Set number into matrix cell
+     * Put number into definite position of matrix cell
      *
      * @param i     row number
      * @param j     column number
@@ -48,11 +54,23 @@ public class Matrix2D {
         data[i * n + j] = value;
     }
 
+    /**
+     * Replace n items starting from definite index of underlying array with numbers from provided array
+     *
+     * @param i   index
+     * @param arr array with length n
+     */
     public void set(int i, double[] arr) {
         assert (0 <= i && i < m && arr.length == n);
         System.arraycopy(arr, 0, data, i * n, arr.length);
     }
 
+    /**
+     * Get array with n items starting from definite index of underlying array
+     *
+     * @param i index
+     * @return array with length n
+     */
     public double[] get(int i) {
         assert (0 <= i && i < m);
         return Arrays.copyOfRange(data, i * n, (i + 1) * n);

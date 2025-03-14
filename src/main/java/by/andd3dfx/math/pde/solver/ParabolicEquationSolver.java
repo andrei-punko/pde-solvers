@@ -1,7 +1,5 @@
 package by.andd3dfx.math.pde.solver;
 
-import by.andd3dfx.math.Area;
-import by.andd3dfx.math.Interval;
 import by.andd3dfx.math.pde.equation.ParabolicEquation;
 
 /**
@@ -14,17 +12,14 @@ public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEqu
     /**
      * Solve parabolic equation using provided space and time steps
      *
-     * @param eqn partial difference equation
+     * @param eqn partial difference parabolic equation
      * @param h   space step
      * @param tau time step
      * @return equation solution
      */
     @Override
     public Solution<ParabolicEquation> solve(ParabolicEquation eqn, double h, double tau) {
-        var area = new Area(
-                new Interval(eqn.getX1(), eqn.getX2(), h),
-                new Interval(0, eqn.getT2(), tau)
-        );
+        var area = buildArea(eqn, h, tau);
         var solution = prepare(eqn, area);
 
         int N = area.xn();

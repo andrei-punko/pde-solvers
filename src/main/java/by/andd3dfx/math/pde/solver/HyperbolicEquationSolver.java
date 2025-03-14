@@ -12,7 +12,7 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
     /**
      * Solve hyperbolic equation using provided space and time steps
      *
-     * @param eqn partial difference equation
+     * @param eqn partial difference hyperbolic equation
      * @param h   space step
      * @param tau time step
      * @return equation solution

@@ -1,7 +1,7 @@
 package by.andd3dfx.util;
 
-import by.andd3dfx.math.Interval;
-import by.andd3dfx.math.Matrix2D;
+import by.andd3dfx.math.space.Interval;
+import by.andd3dfx.math.matrix.Matrix2D;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
