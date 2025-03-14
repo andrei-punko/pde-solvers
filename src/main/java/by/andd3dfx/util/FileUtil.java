@@ -1,7 +1,7 @@
 package by.andd3dfx.util;
 
 import by.andd3dfx.math.Interval;
-import by.andd3dfx.math.Matrix;
+import by.andd3dfx.math.Matrix2D;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -72,7 +72,7 @@ public class FileUtil {
      * @param fileName name of file
      * @param rotate   flag - rotate matrix or not before saving
      */
-    public static void save(Matrix m, String fileName, boolean rotate) {
+    public static void save(Matrix2D m, String fileName, boolean rotate) {
         var sb = new StringBuilder();
         if (rotate) {
             for (int j = 0; j < m.getN(); j++) {

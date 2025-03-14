@@ -2,7 +2,8 @@ package by.andd3dfx.math.pde.solver;
 
 import by.andd3dfx.math.Area;
 import by.andd3dfx.math.Interval;
-import by.andd3dfx.math.Matrix;
+import by.andd3dfx.math.Matrix2D;
+import by.andd3dfx.math.MatrixXY;
 import by.andd3dfx.math.pde.equation.Equation;
 import org.junit.jupiter.api.Test;
 
@@ -158,7 +159,7 @@ class SolutionTest {
         var spaceSteps = 4;
         var timeSteps = 3;
 
-        var solutionMatrix = new Matrix(timeSteps, spaceSteps);
+        var solutionMatrix = new Matrix2D(timeSteps, spaceSteps);
         solutionMatrix.set(0, new double[]{50, 80, 90, 99});
         solutionMatrix.set(1, new double[]{30, 70, 120, 125});
         solutionMatrix.set(2, new double[]{45, 56, 78, 786});
@@ -169,7 +170,7 @@ class SolutionTest {
         ), solutionMatrix);
     }
 
-    private static void checkUtAssertions(Matrix result) {
+    private static void checkUtAssertions(MatrixXY result) {
         assertThat(result.getM()).isEqualTo(2);
         assertThat(result.getN()).isEqualTo(4);
         assertThat(result.x(0)).isEqualTo(10);
@@ -182,7 +183,7 @@ class SolutionTest {
         assertThat(result.y(3)).isEqualTo(786);
     }
 
-    private static void checkUxAssertions(Matrix result) {
+    private static void checkUxAssertions(MatrixXY result) {
         assertThat(result.getM()).isEqualTo(2);
         assertThat(result.getN()).isEqualTo(3);
         assertThat(result.x(0)).isEqualTo(2);

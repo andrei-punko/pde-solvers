@@ -9,7 +9,7 @@ import java.util.Arrays;
  * Two-dimensional matrix
  */
 @RequiredArgsConstructor
-public class Matrix {
+public class Matrix2D {
 
     @Getter
     private final int m;
@@ -18,21 +18,12 @@ public class Matrix {
     private final double[] data;
 
     /**
-     * Create 1d matrix (array) with definite size
-     *
-     * @param n items amount
-     */
-    public Matrix(int n) {
-        this(1, n);
-    }
-
-    /**
      * Create 2d matrix with definite size
      *
      * @param m rows amount
      * @param n columns amount
      */
-    public Matrix(int m, int n) {
+    public Matrix2D(int m, int n) {
         assert (m > 0 && n > 0);
 
         this.m = m;
@@ -40,49 +31,9 @@ public class Matrix {
         data = new double[m * n];
     }
 
-    /**
-     * Get X value by index
-     *
-     * @param i index
-     * @return X value
-     */
-    public double x(int i) {
-        return get(0, i);
-    }
-
-    /**
-     * Set X value for definite index
-     *
-     * @param i     index
-     * @param value X value
-     */
-    public void setX(int i, double value) {
-        set(0, i, value);
-    }
-
     public void set(int i, double value) {
         assert (0 <= i && i < data.length);
         data[i] = value;
-    }
-
-    /**
-     * Get Y value by index
-     *
-     * @param i index
-     * @return Y value
-     */
-    public double y(int i) {
-        return get(1, i);
-    }
-
-    /**
-     * Set Y value for definite index
-     *
-     * @param i     index
-     * @param value Y value
-     */
-    public void setY(int i, double value) {
-        set(1, i, value);
     }
 
     /**
@@ -143,7 +94,7 @@ public class Matrix {
      * @param d number value
      * @return filled matrix
      */
-    public Matrix fill(double d) {
+    public Matrix2D fill(double d) {
         Arrays.fill(data, d);
         return this;
     }

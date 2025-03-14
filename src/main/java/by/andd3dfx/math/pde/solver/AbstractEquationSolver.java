@@ -2,7 +2,7 @@ package by.andd3dfx.math.pde.solver;
 
 import by.andd3dfx.math.Area;
 import by.andd3dfx.math.Interval;
-import by.andd3dfx.math.Matrix;
+import by.andd3dfx.math.Matrix2D;
 import by.andd3dfx.math.pde.border.BorderCondition;
 import by.andd3dfx.math.pde.border.BorderConditionType1;
 import by.andd3dfx.math.pde.border.BorderConditionType2;
@@ -40,9 +40,9 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
      * @param area space-time area on which we want to find solution
      * @return initialized matrix
      */
-    protected Matrix prepare(Equation eqn, Area area) {
+    protected Matrix2D prepare(Equation eqn, Area area) {
         // Create space for equation solution
-        var matrix = new Matrix(area.tn() + 1, area.xn() + 1);
+        var matrix = new Matrix2D(area.tn() + 1, area.xn() + 1);
         // Set initial value
         for (var i = 0; i <= area.xn(); i++) {
             matrix.set(0, i, eqn.gU0(area.xx(i)));

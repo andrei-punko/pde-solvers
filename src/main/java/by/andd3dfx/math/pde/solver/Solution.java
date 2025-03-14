@@ -1,7 +1,8 @@
 package by.andd3dfx.math.pde.solver;
 
 import by.andd3dfx.math.Area;
-import by.andd3dfx.math.Matrix;
+import by.andd3dfx.math.Matrix2D;
+import by.andd3dfx.math.MatrixXY;
 import by.andd3dfx.math.pde.equation.Equation;
 import by.andd3dfx.util.FileUtil;
 
@@ -14,7 +15,7 @@ import by.andd3dfx.util.FileUtil;
  * @param <E>      particular equation type
  * @see EquationSolver
  */
-public record Solution<E extends Equation>(E equation, Area area, Matrix solution) {
+public record Solution<E extends Equation>(E equation, Area area, Matrix2D solution) {
 
     /**
      * Save data U(x,t_i) for asked time moments [t_i].
@@ -88,7 +89,7 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
      * @param t time
      * @return U(x) slice
      */
-    public Matrix gUt(double t) {
+    public MatrixXY gUt(double t) {
         return gUt(area.ti(t));
     }
 
@@ -98,12 +99,12 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
      * @param it index of time layer in solution matrix
      * @return U(x) slice
      */
-    public Matrix gUt(int it) {
+    public MatrixXY gUt(int it) {
         int M = solution.getM();
         assert (0 <= it && it < M);
 
         int N = solution.getN();
-        var matrix = new Matrix(2, N);
+        var matrix = new MatrixXY(N);
         for (int i = 0; i < N; i++) {
             matrix.setX(i, area.xx(i));
             matrix.setY(i, solution.get(it, i));
@@ -117,7 +118,7 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
      * @param x space coordinate
      * @return U(t) slice
      */
-    public Matrix gUx(double x) {
+    public MatrixXY gUx(double x) {
         return gUx(area.xi(x));
     }
 
@@ -127,12 +128,12 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix solutio
      * @param ix index of space column in solution matrix
      * @return U(t) slice
      */
-    public Matrix gUx(int ix) {
+    public MatrixXY gUx(int ix) {
         int N = solution.getN();
         assert (0 <= ix && ix < N);
 
         int M = solution.getM();
-        var matrix = new Matrix(2, M);
+        var matrix = new MatrixXY(M);
         for (int i = 0; i < M; i++) {
             matrix.setX(i, area.tx(i));
             matrix.setY(i, solution.get(i, ix));

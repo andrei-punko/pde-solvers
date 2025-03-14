@@ -6,19 +6,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class MatrixTest {
-
-    @Test
-    void constructorWithOneParam() {
-        var m = new Matrix(5);
-
-        assertThat(m.getM()).isEqualTo(1);
-        assertThat(m.getN()).isEqualTo(5);
-    }
+class Matrix2DTest {
 
     @Test
     void constructorWithTwoParams() {
-        var m = new Matrix(5, 7);
+        var m = new Matrix2D(5, 7);
 
         assertThat(m.getM()).isEqualTo(5);
         assertThat(m.getN()).isEqualTo(7);
@@ -26,19 +18,17 @@ class MatrixTest {
 
     @Test
     void constructorWithInvalidParams() {
-        assertThrows(AssertionError.class, () -> new Matrix(0));
-        assertThrows(AssertionError.class, () -> new Matrix(-1));
-        assertThrows(AssertionError.class, () -> new Matrix(0, 0));
-        assertThrows(AssertionError.class, () -> new Matrix(0, 5));
-        assertThrows(AssertionError.class, () -> new Matrix(-1, 5));
-        assertThrows(AssertionError.class, () -> new Matrix(5, 0));
-        assertThrows(AssertionError.class, () -> new Matrix(5, -1));
-        assertThrows(AssertionError.class, () -> new Matrix(-1, -1));
+        assertThrows(AssertionError.class, () -> new Matrix2D(0, 0));
+        assertThrows(AssertionError.class, () -> new Matrix2D(0, 5));
+        assertThrows(AssertionError.class, () -> new Matrix2D(-1, 5));
+        assertThrows(AssertionError.class, () -> new Matrix2D(5, 0));
+        assertThrows(AssertionError.class, () -> new Matrix2D(5, -1));
+        assertThrows(AssertionError.class, () -> new Matrix2D(-1, -1));
     }
 
     @Test
     void setNGet() {
-        var m = new Matrix(2, 3);
+        var m = new Matrix2D(2, 3);
         m.set(0, 7);
         m.set(1, 3);
         m.set(2, -3);
@@ -50,7 +40,7 @@ class MatrixTest {
 
     @Test
     void getWithInvalidParams() {
-        var m = new Matrix(2, 3);
+        var m = new Matrix2D(2, 3);
 
         assertThrows(AssertionError.class, () -> m.get(-1));
         assertThrows(AssertionError.class, () -> m.get(2 * 3));
@@ -66,7 +56,7 @@ class MatrixTest {
 
     @Test
     void setWithInvalidParams() {
-        var m = new Matrix(2, 3);
+        var m = new Matrix2D(2, 3);
 
         assertThrows(AssertionError.class, () -> m.set(-1, 21));
         assertThrows(AssertionError.class, () -> m.set(2 * 3, 21));
@@ -82,7 +72,7 @@ class MatrixTest {
 
     @Test
     void min() {
-        var m = new Matrix(2, 2);
+        var m = new Matrix2D(2, 2);
         m.set(0, 0, 5);
         m.set(0, 1, 6);
         m.set(1, 0, 9);
@@ -93,7 +83,7 @@ class MatrixTest {
 
     @Test
     void max() {
-        var m = new Matrix(2, 2);
+        var m = new Matrix2D(2, 2);
         m.set(0, 0, 5);
         m.set(0, 1, 6);
         m.set(1, 0, 9);
@@ -104,7 +94,7 @@ class MatrixTest {
 
     @Test
     void swapRows() {
-        var m = new Matrix(3, 3);
+        var m = new Matrix2D(3, 3);
         m.set(0, 0, 5);
         m.set(0, 1, 6);
         m.set(0, 2, 7);
@@ -130,7 +120,7 @@ class MatrixTest {
 
     @Test
     void swapRowsWithInvalidParams() {
-        var m = new Matrix(2, 3);
+        var m = new Matrix2D(2, 3);
 
         assertThrows(AssertionError.class, () -> m.swapRows(-1, 0));
         assertThrows(AssertionError.class, () -> m.swapRows(2, 0));
@@ -141,7 +131,7 @@ class MatrixTest {
 
     @Test
     void swapCols() {
-        var m = new Matrix(3, 3);
+        var m = new Matrix2D(3, 3);
         m.set(0, 0, 5);
         m.set(1, 0, 9);
         m.set(2, 0, 7);
@@ -167,7 +157,7 @@ class MatrixTest {
 
     @Test
     void swapColsWithInvalidParams() {
-        var m = new Matrix(3, 2);
+        var m = new Matrix2D(3, 2);
 
         assertThrows(AssertionError.class, () -> m.swapCols(-1, 0));
         assertThrows(AssertionError.class, () -> m.swapCols(2, 0));
@@ -177,36 +167,8 @@ class MatrixTest {
     }
 
     @Test
-    void setXSetY() {
-        var m = new Matrix(2, 4);
-
-        m.setX(2, 9.5);
-        m.setX(3, 3.5);
-        m.setY(0, 2);
-        m.setY(2, 7);
-
-        assertThat(m.get(0, 0)).isEqualTo(0);
-        assertThat(m.get(0, 1)).isEqualTo(0);
-        assertThat(m.get(0, 2)).isEqualTo(9.5);
-        assertThat(m.get(0, 3)).isEqualTo(3.5);
-        assertThat(m.x(0)).isEqualTo(0);
-        assertThat(m.x(1)).isEqualTo(0);
-        assertThat(m.x(2)).isEqualTo(9.5);
-        assertThat(m.x(3)).isEqualTo(3.5);
-
-        assertThat(m.get(1, 0)).isEqualTo(2);
-        assertThat(m.get(1, 1)).isEqualTo(0);
-        assertThat(m.get(1, 2)).isEqualTo(7);
-        assertThat(m.get(1, 3)).isEqualTo(0);
-        assertThat(m.y(0)).isEqualTo(2);
-        assertThat(m.y(1)).isEqualTo(0);
-        assertThat(m.y(2)).isEqualTo(7);
-        assertThat(m.y(3)).isEqualTo(0);
-    }
-
-    @Test
     void fill() {
-        var m = new Matrix(2, 3);
+        var m = new Matrix2D(2, 3);
 
         var result = m.fill(4.5);
 
@@ -220,7 +182,7 @@ class MatrixTest {
 
     @Test
     void setArrayIntoDefinitePositionOfDataArray() {
-        var m = new Matrix(2, 4);
+        var m = new Matrix2D(2, 4);
         m.fill(3);
         m.set(0, 0, 5);
         m.set(0, 2, -5);
@@ -241,7 +203,7 @@ class MatrixTest {
 
     @Test
     void setArrayWithWrongParams() {
-        var m = new Matrix(2, 3);
+        var m = new Matrix2D(2, 3);
 
         assertThrows(AssertionError.class, () -> m.set(-1, new double[7])); // wrong index (too small), wrong array size
         assertThrows(AssertionError.class, () -> m.set(-1, new double[3])); // wrong index (too small)
