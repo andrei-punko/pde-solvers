@@ -25,23 +25,24 @@ Gradle isn't required because of embedded Gradle presence in the project
 ```shell
 ./gradlew javadoc
 ```
-Check `build/doc/javadoc` folder
+Check `build/doc/javadoc` folder  
+In the web javadoc available [here](https://andrei-punko.github.io/pde-solvers/)
 
 ## Supported PD equation types
 
 - Parabolic equation (described heat/mass transfer process):  
-  M(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)  
+  `M(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)`  
   Check [ParabolicEquation](src/main/java/by/andd3dfx/math/pde/equation/ParabolicEquation.java) for details
 
 - Hyperbolic equation (described oscillation process):  
-  M(x,t,U)*d2U_dt2 + L(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)  
+  `M(x,t,U)*d2U_dt2 + L(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)`  
   Check [HyperbolicEquation](src/main/java/by/andd3dfx/math/pde/equation/HyperbolicEquation.java) for details
 
 ## Supported border conditions types
 
-- Border condition type 1 (definite mode): U(X,t)
-- Border condition type 2 (definite force): dU_dx(X,t)
-- Border condition type 3 (elastic fixing): dU_dx(X,t) = h*(U(X,t) - Theta(t))
+- Border condition type 1 (definite mode): `U(X,t)`
+- Border condition type 2 (definite force): `dU_dx(X,t)`
+- Border condition type 3 (elastic fixing): `dU_dx(X,t) = h*(U(X,t) - Theta(t))`
 
 ## Solver
 
