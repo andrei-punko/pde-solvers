@@ -12,6 +12,7 @@ import by.andd3dfx.util.FileUtil;
  * @param area     space-time area
  * @param solution equation solution
  * @param <E>      particular equation type
+ * @see EquationSolver
  */
 public record Solution<E extends Equation>(E equation, Area area, Matrix solution) {
 

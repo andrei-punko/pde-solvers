@@ -4,6 +4,8 @@ import by.andd3dfx.math.pde.equation.HyperbolicEquation;
 
 /**
  * Hyperbolic equation solver
+ *
+ * @see HyperbolicEquation
  */
 public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicEquation> {
 

@@ -1,6 +1,7 @@
 package by.andd3dfx.math.pde.equation;
 
 import by.andd3dfx.math.pde.border.BorderCondition;
+import by.andd3dfx.math.pde.solver.EquationSolver;
 import lombok.Getter;
 
 /**
@@ -13,7 +14,7 @@ import lombok.Getter;
  * Used to avoid code duplication in child classes
  *
  * @see BorderCondition
- * @see by.andd3dfx.math.pde.solver.EquationSolver
+ * @see EquationSolver
  */
 @Getter
 public abstract class Equation {
@@ -44,7 +45,7 @@ public abstract class Equation {
     }
 
     /**
-     * Initial condition U(x) at moment t=0
+     * Initial condition U(x) at the moment t=0
      *
      * @param x space coordinate
      * @return U(x) value

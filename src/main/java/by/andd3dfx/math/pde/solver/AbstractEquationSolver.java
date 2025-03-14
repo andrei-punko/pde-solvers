@@ -14,6 +14,7 @@ import by.andd3dfx.math.pde.equation.HyperbolicEquation;
  * Base class of PD equation solvers. Used to avoid code duplication in child classes
  *
  * @param <E> equation class
+ * @see Equation
  */
 public abstract class AbstractEquationSolver<E extends Equation> implements EquationSolver<E> {
 

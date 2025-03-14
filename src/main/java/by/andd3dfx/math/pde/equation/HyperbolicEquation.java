@@ -1,11 +1,14 @@
 package by.andd3dfx.math.pde.equation;
 
 import by.andd3dfx.math.pde.border.BorderCondition;
+import by.andd3dfx.math.pde.solver.HyperbolicEquationSolver;
 
 /**
  * Hyperbolic equation (described oscillation processes):
  * <p>
  * M(x,t,U)*d2U_dt2 + L(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)
+ *
+ * @see HyperbolicEquationSolver
  */
 public class HyperbolicEquation extends Equation {
 

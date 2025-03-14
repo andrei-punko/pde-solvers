@@ -6,6 +6,8 @@ import by.andd3dfx.math.pde.equation.ParabolicEquation;
 
 /**
  * Parabolic equation solver
+ *
+ * @see ParabolicEquation
  */
 public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEquation> {
 
