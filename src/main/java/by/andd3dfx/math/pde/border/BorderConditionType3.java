@@ -1,7 +1,7 @@
 package by.andd3dfx.math.pde.border;
 
 /**
- * Params for border condition type 3 (elastic fixing): dU_dx(X,t) = h*( U(X,t) - Theta(t) )
+ * Params for border condition type 3 (elastic fixing): ∂U/∂x(X,t) = h*( U(X,t) - Theta(t) )
  */
 public class BorderConditionType3 implements BorderCondition {
 

@@ -47,7 +47,7 @@ public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEqu
 
                         Alpha = (eqn.gK(x, t, u) + eqn.gK(x_, t, u_) + eqn.gV(x, t, u) * h) / 2.,
                         Beta = (eqn.gK(x, t, u) + eqn.gK(_x, t, _u) - eqn.gV(x, t, u) * h) / 2.,
-                        Gamma = _2h2_tau * eqn.gM(x, t, u);
+                        Gamma = _2h2_tau * eqn.gL(x, t, u);
 
                 A[i] = Beta;
                 B[i] = Alpha;

@@ -6,7 +6,7 @@ import by.andd3dfx.math.pde.solver.ParabolicEquationSolver;
 /**
  * Parabolic equation (described heat/mass transfer):
  * <p>
- * M(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)
+ * L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U) where U = U(x,t)
  *
  * @see ParabolicEquationSolver
  */
@@ -25,5 +25,10 @@ public class ParabolicEquation extends Equation {
                              BorderCondition leftBorderCondition,
                              BorderCondition rightBorderCondition) {
         super(x1, x2, t2, leftBorderCondition, rightBorderCondition);
+    }
+
+    @Override
+    public double gL(double x, double t, double U) {
+        return 1;
     }
 }

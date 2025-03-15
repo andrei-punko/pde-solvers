@@ -6,7 +6,7 @@ import by.andd3dfx.math.pde.solver.HyperbolicEquationSolver;
 /**
  * Hyperbolic equation (described oscillation processes):
  * <p>
- * M(x,t,U)*d2U_dt2 + L(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)
+ * M(x,t,U)*∂²U/∂t² + L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U) where U = U(x,t)
  *
  * @see HyperbolicEquationSolver
  */
@@ -27,25 +27,18 @@ public class HyperbolicEquation extends Equation {
         super(x1, x2, t2, leftBorderCondition, rightBorderCondition);
     }
 
-    /**
-     * Initial condition dU_dt(x,0) at the moment t=0
-     *
-     * @param x space coordinate
-     * @return dU_dt value
-     */
-    public double gdU_dt0(double x) {
-        return 0;
+    @Override
+    public double gM(double x, double t, double U) {
+        return 1;
     }
 
     /**
-     * Coefficient L(x,t,U) of equation for 1st-order time derivative
+     * Initial condition ∂U/∂t(x,0) at the moment t=0
      *
      * @param x space coordinate
-     * @param t time
-     * @param U U value
-     * @return L value
+     * @return ∂U/∂t value
      */
-    public double gL(double x, double t, double U) {
+    public double gdU_dt0(double x) {
         return 0;
     }
 }

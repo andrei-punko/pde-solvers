@@ -30,19 +30,19 @@ In the web javadoc available [here](https://andrei-punko.github.io/pde-solvers/)
 
 ## Supported PD equation types
 
-- Parabolic equation (described heat/mass transfer process):  
-  `M(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)`  
+- Parabolic equation (described for example heat/mass transfer process):  
+  `L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U) where U = U(x,t)`  
   Check [ParabolicEquation](src/main/java/by/andd3dfx/math/pde/equation/ParabolicEquation.java) for details
 
-- Hyperbolic equation (described oscillation process):  
-  `M(x,t,U)*d2U_dt2 + L(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)`  
+- Hyperbolic equation (described for example oscillation process):  
+  `M(x,t,U)*∂²U/∂t² + L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U) where U = U(x,t)`  
   Check [HyperbolicEquation](src/main/java/by/andd3dfx/math/pde/equation/HyperbolicEquation.java) for details
 
 ## Supported border conditions types
 
 - Border condition type 1 (definite mode): `U(X,t)`
-- Border condition type 2 (definite force): `dU_dx(X,t)`
-- Border condition type 3 (elastic fixing): `dU_dx(X,t) = h*(U(X,t) - Theta(t))`
+- Border condition type 2 (definite force): `∂U/∂x(X,t)`
+- Border condition type 3 (elastic fixing): `∂U/∂x(X,t) = h*(U(X,t) - Theta(t))`
 
 ## Solver
 

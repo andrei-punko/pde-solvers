@@ -7,7 +7,7 @@ import lombok.Getter;
 /**
  * Base class representing 2nd-order PD equation:
  * <p>
- * M(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)
+ * M(x,t,U)*∂²U/∂t² + L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U) where U = U(x,t)
  * <p>
  * It's defined on space-time area [x1,x2]*[0,t2] with border conditions on left and right sides
  * <p>
@@ -63,7 +63,19 @@ public abstract class Equation {
      * @return M(x,t,U) value
      */
     public double gM(double x, double t, double U) {
-        return 1;
+        return 0;
+    }
+
+    /**
+     * Coefficient L(x,t,U) of equation for 1st-order time derivative
+     *
+     * @param x space coordinate
+     * @param t time
+     * @param U U value
+     * @return L value
+     */
+    public double gL(double x, double t, double U) {
+        return 0;
     }
 
     /**
