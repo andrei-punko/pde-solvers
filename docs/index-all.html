@@ -89,13 +89,13 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="by/andd3dfx/math/pde/border/BorderConditionType2.html" class="type-name-link" title="class in by.andd3dfx.math.pde.border">BorderConditionType2</a> - Class in <a href="by/andd3dfx/math/pde/border/package-summary.html">by.andd3dfx.math.pde.border</a></dt>
 <dd>
-<div class="block">Params for border condition type 2 (definite force): dU_dx(X,t) = dU_dx(t)</div>
+<div class="block">Params for border condition type 2 (definite force): ∂U/∂x(X,t) = ∂U/∂x(t)</div>
 </dd>
 <dt><a href="by/andd3dfx/math/pde/border/BorderConditionType2.html#%3Cinit%3E()" class="member-name-link">BorderConditionType2()</a> - Constructor for class by.andd3dfx.math.pde.border.<a href="by/andd3dfx/math/pde/border/BorderConditionType2.html" title="class in by.andd3dfx.math.pde.border">BorderConditionType2</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="by/andd3dfx/math/pde/border/BorderConditionType3.html" class="type-name-link" title="class in by.andd3dfx.math.pde.border">BorderConditionType3</a> - Class in <a href="by/andd3dfx/math/pde/border/package-summary.html">by.andd3dfx.math.pde.border</a></dt>
 <dd>
-<div class="block">Params for border condition type 3 (elastic fixing): dU_dx(X,t) = h*( U(X,t) - Theta(t) )</div>
+<div class="block">Params for border condition type 3 (elastic fixing): ∂U/∂x(X,t) = h*( U(X,t) - Theta(t) )</div>
 </dd>
 <dt><a href="by/andd3dfx/math/pde/border/BorderConditionType3.html#%3Cinit%3E()" class="member-name-link">BorderConditionType3()</a> - Constructor for class by.andd3dfx.math.pde.border.<a href="by/andd3dfx/math/pde/border/BorderConditionType3.html" title="class in by.andd3dfx.math.pde.border">BorderConditionType3</a></dt>
 <dd>&nbsp;</dd>
@@ -171,11 +171,11 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="by/andd3dfx/math/pde/equation/HyperbolicEquation.html#gdU_dt0(double)" class="member-name-link">gdU_dt0(double)</a> - Method in class by.andd3dfx.math.pde.equation.<a href="by/andd3dfx/math/pde/equation/HyperbolicEquation.html" title="class in by.andd3dfx.math.pde.equation">HyperbolicEquation</a></dt>
 <dd>
-<div class="block">Initial condition dU_dt(x,0) at the moment t=0</div>
+<div class="block">Initial condition ∂U/∂t(x,0) at the moment t=0</div>
 </dd>
 <dt><a href="by/andd3dfx/math/pde/border/BorderConditionType2.html#gdU_dx(double)" class="member-name-link">gdU_dx(double)</a> - Method in class by.andd3dfx.math.pde.border.<a href="by/andd3dfx/math/pde/border/BorderConditionType2.html" title="class in by.andd3dfx.math.pde.border">BorderConditionType2</a></dt>
 <dd>
-<div class="block">dU_dx(X,t) in asked time moment on this border</div>
+<div class="block">∂U/∂x(X,t) in asked time moment on this border</div>
 </dd>
 <dt><a href="by/andd3dfx/math/matrix/Matrix2D.html#get(int)" class="member-name-link">get(int)</a> - Method in class by.andd3dfx.math.matrix.<a href="by/andd3dfx/math/matrix/Matrix2D.html" title="class in by.andd3dfx.math.matrix">Matrix2D</a></dt>
 <dd>
@@ -197,14 +197,18 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Coefficient K(x,t,U) of equation for 2nd-order space derivative</div>
 </dd>
-<dt><a href="by/andd3dfx/math/pde/equation/HyperbolicEquation.html#gL(double,double,double)" class="member-name-link">gL(double, double, double)</a> - Method in class by.andd3dfx.math.pde.equation.<a href="by/andd3dfx/math/pde/equation/HyperbolicEquation.html" title="class in by.andd3dfx.math.pde.equation">HyperbolicEquation</a></dt>
+<dt><a href="by/andd3dfx/math/pde/equation/Equation.html#gL(double,double,double)" class="member-name-link">gL(double, double, double)</a> - Method in class by.andd3dfx.math.pde.equation.<a href="by/andd3dfx/math/pde/equation/Equation.html" title="class in by.andd3dfx.math.pde.equation">Equation</a></dt>
 <dd>
 <div class="block">Coefficient L(x,t,U) of equation for 1st-order time derivative</div>
 </dd>
+<dt><a href="by/andd3dfx/math/pde/equation/ParabolicEquation.html#gL(double,double,double)" class="member-name-link">gL(double, double, double)</a> - Method in class by.andd3dfx.math.pde.equation.<a href="by/andd3dfx/math/pde/equation/ParabolicEquation.html" title="class in by.andd3dfx.math.pde.equation">ParabolicEquation</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="by/andd3dfx/math/pde/equation/Equation.html#gM(double,double,double)" class="member-name-link">gM(double, double, double)</a> - Method in class by.andd3dfx.math.pde.equation.<a href="by/andd3dfx/math/pde/equation/Equation.html" title="class in by.andd3dfx.math.pde.equation">Equation</a></dt>
 <dd>
 <div class="block">Coefficient M(x,t,U) of equation for 2nd-order time derivative</div>
 </dd>
+<dt><a href="by/andd3dfx/math/pde/equation/HyperbolicEquation.html#gM(double,double,double)" class="member-name-link">gM(double, double, double)</a> - Method in class by.andd3dfx.math.pde.equation.<a href="by/andd3dfx/math/pde/equation/HyperbolicEquation.html" title="class in by.andd3dfx.math.pde.equation">HyperbolicEquation</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="by/andd3dfx/math/pde/border/BorderConditionType3.html#gTheta(double)" class="member-name-link">gTheta(double)</a> - Method in class by.andd3dfx.math.pde.border.<a href="by/andd3dfx/math/pde/border/BorderConditionType3.html" title="class in by.andd3dfx.math.pde.border">BorderConditionType3</a></dt>
 <dd>
 <div class="block">Theta(t) value in asked time moment on this border</div>

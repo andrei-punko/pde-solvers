@@ -97,7 +97,7 @@ loadScripts(document, 'script');</script>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Base class representing 2nd-order PD equation:
  <p>
- M(x,t,U)*dU_dt = dU( K(x,t,U)*dU_dx )_dx + V(x,t,U)*dU_dx + F(x,t,U) where U = U(x,t)
+ M(x,t,U)*∂²U/∂t² + L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U) where U = U(x,t)
  <p>
  It's defined on space-time area [x1,x2]*[0,t2] with border conditions on left and right sides
  <p>
@@ -159,22 +159,29 @@ loadScripts(document, 'script');</script>
 <div class="block">Coefficient K(x,t,U) of equation for 2nd-order space derivative</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gM(double,double,double)" class="member-name-link">gM</a><wbr>(double&nbsp;x,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gL(double,double,double)" class="member-name-link">gL</a><wbr>(double&nbsp;x,
  double&nbsp;t,
  double&nbsp;U)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Coefficient M(x,t,U) of equation for 2nd-order time derivative</div>
+<div class="block">Coefficient L(x,t,U) of equation for 1st-order time derivative</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gU0(double)" class="member-name-link">gU0</a><wbr>(double&nbsp;x)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Initial condition U(x) at the moment t=0</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gV(double,double,double)" class="member-name-link">gV</a><wbr>(double&nbsp;x,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gM(double,double,double)" class="member-name-link">gM</a><wbr>(double&nbsp;x,
  double&nbsp;t,
  double&nbsp;U)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Coefficient M(x,t,U) of equation for 2nd-order time derivative</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gU0(double)" class="member-name-link">gU0</a><wbr>(double&nbsp;x)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Initial condition U(x) at the moment t=0</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gV(double,double,double)" class="member-name-link">gV</a><wbr>(double&nbsp;x,
+ double&nbsp;t,
+ double&nbsp;U)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Coefficient V(x,t,U) of equation for 1st-order space derivative</div>
 </div>
 </div>
@@ -248,6 +255,23 @@ loadScripts(document, 'script');</script>
 <dd><code>U</code> - U value</dd>
 <dt>Returns:</dt>
 <dd>M(x,t,U) value</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="gL(double,double,double)">
+<h3>gL</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">gL</span><wbr><span class="parameters">(double&nbsp;x,
+ double&nbsp;t,
+ double&nbsp;U)</span></div>
+<div class="block">Coefficient L(x,t,U) of equation for 1st-order time derivative</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - space coordinate</dd>
+<dd><code>t</code> - time</dd>
+<dd><code>U</code> - U value</dd>
+<dt>Returns:</dt>
+<dd>L value</dd>
 </dl>
 </section>
 </li>
