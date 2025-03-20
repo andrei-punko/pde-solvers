@@ -90,7 +90,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><code>E</code> - equation class</dd>
+<dd><code>E</code> - the type of equation this solver handles</dd>
 </dl>
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
@@ -104,12 +104,15 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">AbstractEquationSolver&lt;E extends <a href="../equation/Equation.html" title="class in by.andd3dfx.math.pde.equation">Equation</a>&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="EquationSolver.html" title="interface in by.andd3dfx.math.pde.solver">EquationSolver</a>&lt;E&gt;</span></div>
-<div class="block">Base class of PD equation solvers. Used to avoid code duplication in child classes</div>
+<div class="block">Abstract base class for partial differential equation solvers.
+ Provides common functionality and utility methods used by specific equation solvers.
+ Implements the core numerical methods and algorithms shared across different types of PDE solvers.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="tag-list">
 <li><a href="../equation/Equation.html" title="class in by.andd3dfx.math.pde.equation"><code>Equation</code></a></li>
+<li><a href="EquationSolver.html" title="interface in by.andd3dfx.math.pde.solver"><code>EquationSolver</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -128,7 +131,7 @@ implements <a href="EquationSolver.html" title="interface in by.andd3dfx.math.pd
 <div class="col-first even-row-color"><code>static final record&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="AbstractEquationSolver.KappaNu.html" class="type-name-link" title="class in by.andd3dfx.math.pde.solver">AbstractEquationSolver.KappaNu</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Just record to store border condition params</div>
+<div class="block">Record class to store boundary condition parameters for the tridiagonal algorithm.</div>
 </div>
 </div>
 </section>
@@ -162,20 +165,20 @@ implements <a href="EquationSolver.html" title="interface in by.andd3dfx.math.pd
  double&nbsp;h,
  double&nbsp;tau)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Build space-time area where equation will be solved</div>
+<div class="block">Builds a space-time computational domain for the equation solution.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="AbstractEquationSolver.KappaNu.html" title="class in by.andd3dfx.math.pde.solver">AbstractEquationSolver.KappaNu</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calcKappaNu(by.andd3dfx.math.pde.border.BorderCondition,double,double)" class="member-name-link">calcKappaNu</a><wbr>(<a href="../border/BorderCondition.html" title="interface in by.andd3dfx.math.pde.border">BorderCondition</a>&nbsp;borderCondition,
  double&nbsp;h,
  double&nbsp;time)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Calculate Kappa and Nu params corresponding to provided border condition.</div>
+<div class="block">Calculates Kappa and Nu parameters for the tridiagonal algorithm based on boundary conditions.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../../matrix/Matrix2D.html" title="class in by.andd3dfx.math.matrix">Matrix2D</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#prepare(by.andd3dfx.math.pde.equation.Equation,by.andd3dfx.math.space.Area)" class="member-name-link">prepare</a><wbr>(<a href="../equation/Equation.html" title="class in by.andd3dfx.math.pde.equation">Equation</a>&nbsp;eqn,
  <a href="../../space/Area.html" title="class in by.andd3dfx.math.space">Area</a>&nbsp;area)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Initialization: create space for solution, set initial value</div>
+<div class="block">Initializes the solution matrix with initial conditions.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double[]</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#solve3DiagonalEquationsSystem(double%5B%5D,double%5B%5D,double%5B%5D,double%5B%5D,by.andd3dfx.math.pde.solver.AbstractEquationSolver.KappaNu,by.andd3dfx.math.pde.solver.AbstractEquationSolver.KappaNu)" class="member-name-link">solve3DiagonalEquationsSystem</a><wbr>(double[]&nbsp;A,
@@ -185,9 +188,7 @@ implements <a href="EquationSolver.html" title="interface in by.andd3dfx.math.pd
  <a href="AbstractEquationSolver.KappaNu.html" title="class in by.andd3dfx.math.pde.solver">AbstractEquationSolver.KappaNu</a>&nbsp;leftCond,
  <a href="AbstractEquationSolver.KappaNu.html" title="class in by.andd3dfx.math.pde.solver">AbstractEquationSolver.KappaNu</a>&nbsp;rightCond)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Solve tridiagonal system of algebraic equations:
- A[i]*y[i-1] - C[i]*y[i] + B[i]*y[i+1] = -F[i], 0&lt;i&lt;N
- using tridiagonal matrix algorithm (also known as the Thomas algorithm).</div>
+<div class="block">Solves a tridiagonal system of linear algebraic equations using the Thomas algorithm.</div>
 </div>
 </div>
 </div>
@@ -229,14 +230,17 @@ implements <a href="EquationSolver.html" title="interface in by.andd3dfx.math.pd
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../../space/Area.html" title="class in by.andd3dfx.math.space">Area</a></span>&nbsp;<span class="element-name">buildArea</span><wbr><span class="parameters">(<a href="../equation/Equation.html" title="class in by.andd3dfx.math.pde.equation">Equation</a>&nbsp;eqn,
  double&nbsp;h,
  double&nbsp;tau)</span></div>
-<div class="block">Build space-time area where equation will be solved</div>
+<div class="block">Builds a space-time computational domain for the equation solution.
+ Creates a grid with specified spatial and temporal step sizes.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>eqn</code> - equation</dd>
-<dd><code>h</code> - space step</dd>
-<dd><code>tau</code> - time step</dd>
+<dd><code>eqn</code> - the equation to solve</dd>
+<dd><code>h</code> - spatial step size (must be positive)</dd>
+<dd><code>tau</code> - temporal step size (must be positive)</dd>
 <dt>Returns:</dt>
-<dd>built area</dd>
+<dd>the computational domain with defined grid points</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if parameters h or tau are non-positive</dd>
 </dl>
 </section>
 </li>
@@ -245,13 +249,15 @@ implements <a href="EquationSolver.html" title="interface in by.andd3dfx.math.pd
 <h3>prepare</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../../matrix/Matrix2D.html" title="class in by.andd3dfx.math.matrix">Matrix2D</a></span>&nbsp;<span class="element-name">prepare</span><wbr><span class="parameters">(<a href="../equation/Equation.html" title="class in by.andd3dfx.math.pde.equation">Equation</a>&nbsp;eqn,
  <a href="../../space/Area.html" title="class in by.andd3dfx.math.space">Area</a>&nbsp;area)</span></div>
-<div class="block">Initialization: create space for solution, set initial value</div>
+<div class="block">Initializes the solution matrix with initial conditions.
+ Creates a matrix to store the solution and sets the initial values
+ based on the equation's initial condition.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>eqn</code> - equation</dd>
-<dd><code>area</code> - space-time area on which we want to find solution</dd>
+<dd><code>eqn</code> - the equation to solve</dd>
+<dd><code>area</code> - the computational domain where solution will be found</dd>
 <dt>Returns:</dt>
-<dd>initialized matrix</dd>
+<dd>initialized matrix with initial conditions</dd>
 </dl>
 </section>
 </li>
@@ -264,21 +270,28 @@ implements <a href="EquationSolver.html" title="interface in by.andd3dfx.math.pd
  double[]&nbsp;F,
  <a href="AbstractEquationSolver.KappaNu.html" title="class in by.andd3dfx.math.pde.solver">AbstractEquationSolver.KappaNu</a>&nbsp;leftCond,
  <a href="AbstractEquationSolver.KappaNu.html" title="class in by.andd3dfx.math.pde.solver">AbstractEquationSolver.KappaNu</a>&nbsp;rightCond)</span></div>
-<div class="block">Solve tridiagonal system of algebraic equations:
- A[i]*y[i-1] - C[i]*y[i] + B[i]*y[i+1] = -F[i], 0&lt;i&lt;N
- using tridiagonal matrix algorithm (also known as the Thomas algorithm).
+<div class="block">Solves a tridiagonal system of linear algebraic equations using the Thomas algorithm.
+ The system has the form: A[i]*y[i-1] - C[i]*y[i] + B[i]*y[i+1] = -F[i], 0&lt;i&lt;N
  <p>
- Variable notations - according to "Тихонов, Самарский - Уравнения математической физики", p.590-592</div>
+ The algorithm consists of two phases:
+ <ol>
+   <li>Forward phase: computes coefficients Alpha[i] and Beta[i]</li>
+   <li>Backward phase: computes the solution Y[i]</li>
+ </ol>
+ <p>
+ Variable notations follow "Tikhonov, Samarskii - Equations of Mathematical Physics", p.590-592</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>A</code> - array of equation coefficients A</dd>
-<dd><code>B</code> - array of equation coefficients B</dd>
-<dd><code>C</code> - array of equation coefficients C</dd>
-<dd><code>F</code> - array of equation coefficients F</dd>
-<dd><code>leftCond</code> - params record of left border condition</dd>
-<dd><code>rightCond</code> - params record of right border condition</dd>
+<dd><code>A</code> - coefficients for y[i-1] terms</dd>
+<dd><code>B</code> - coefficients for y[i+1] terms</dd>
+<dd><code>C</code> - coefficients for y[i] terms</dd>
+<dd><code>F</code> - right-hand side terms</dd>
+<dd><code>leftCond</code> - left boundary condition parameters</dd>
+<dd><code>rightCond</code> - right boundary condition parameters</dd>
 <dt>Returns:</dt>
-<dd>solution</dd>
+<dd>solution vector Y[i]</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if arrays have different lengths or invalid coefficients</dd>
 </dl>
 </section>
 </li>
@@ -288,15 +301,17 @@ implements <a href="EquationSolver.html" title="interface in by.andd3dfx.math.pd
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="AbstractEquationSolver.KappaNu.html" title="class in by.andd3dfx.math.pde.solver">AbstractEquationSolver.KappaNu</a></span>&nbsp;<span class="element-name">calcKappaNu</span><wbr><span class="parameters">(<a href="../border/BorderCondition.html" title="interface in by.andd3dfx.math.pde.border">BorderCondition</a>&nbsp;borderCondition,
  double&nbsp;h,
  double&nbsp;time)</span></div>
-<div class="block">Calculate Kappa and Nu params corresponding to provided border condition.
- These params used by tri-diagonal algorithm.</div>
+<div class="block">Calculates Kappa and Nu parameters for the tridiagonal algorithm based on boundary conditions.
+ These parameters are used to incorporate different types of boundary conditions into the solution.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>borderCondition</code> - border condition</dd>
-<dd><code>h</code> - space step</dd>
-<dd><code>time</code> - time</dd>
+<dd><code>borderCondition</code> - the boundary condition to process</dd>
+<dd><code>h</code> - spatial step size</dd>
+<dd><code>time</code> - current time point</dd>
 <dt>Returns:</dt>
-<dd>record with Kappa and Nu values</dd>
+<dd>KappaNu record containing calculated parameters</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - if an unsupported boundary condition type is encountered</dd>
 </dl>
 </section>
 </li>

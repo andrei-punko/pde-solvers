@@ -93,9 +93,19 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">MatrixXY</span>
 <span class="extends-implements">extends <a href="Matrix2D.html" title="class in by.andd3dfx.math.matrix">Matrix2D</a></span></div>
-<div class="block">XY matrix
- <p>
- Has 2 x N size, corresponding to N pairs of (x, y)</div>
+<div class="block">A specialized matrix for storing pairs of (x,y) coordinates.
+ This class extends Matrix2D to provide a convenient interface for working
+ with coordinate pairs, where the first row stores x-coordinates and the
+ second row stores y-coordinates. The matrix has dimensions 2&times;N, where N
+ is the number of coordinate pairs.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="Matrix2D.html" title="class in by.andd3dfx.math.matrix"><code>Matrix2D</code></a></li>
+</ul>
+</dd>
+</dl>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -109,7 +119,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">MatrixXY</a><wbr>(int&nbsp;n)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Create XY matrix</div>
+<div class="block">Creates a new matrix for storing N coordinate pairs.</div>
 </div>
 </div>
 </section>
@@ -129,23 +139,23 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setX(int,double)" class="member-name-link">setX</a><wbr>(int&nbsp;i,
  double&nbsp;value)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Set X value for definite index</div>
+<div class="block">Sets the x-coordinate at the specified index.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setY(int,double)" class="member-name-link">setY</a><wbr>(int&nbsp;i,
  double&nbsp;value)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Set Y value for definite index</div>
+<div class="block">Sets the y-coordinate at the specified index.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#x(int)" class="member-name-link">x</a><wbr>(int&nbsp;i)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get X value by index</div>
+<div class="block">Returns the x-coordinate at the specified index.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#y(int)" class="member-name-link">y</a><wbr>(int&nbsp;i)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get Y value by index</div>
+<div class="block">Returns the y-coordinate at the specified index.</div>
 </div>
 </div>
 </div>
@@ -171,10 +181,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>MatrixXY</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">MatrixXY</span><wbr><span class="parameters">(int&nbsp;n)</span></div>
-<div class="block">Create XY matrix</div>
+<div class="block">Creates a new matrix for storing N coordinate pairs.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>n</code> - matrix size</dd>
+<dd><code>n</code> - number of coordinate pairs (must be positive)</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if n &lt;= 0</dd>
 </dl>
 </section>
 </li>
@@ -191,11 +203,13 @@ loadScripts(document, 'script');</script>
 <h3>setX</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setX</span><wbr><span class="parameters">(int&nbsp;i,
  double&nbsp;value)</span></div>
-<div class="block">Set X value for definite index</div>
+<div class="block">Sets the x-coordinate at the specified index.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - index</dd>
-<dd><code>value</code> - X value</dd>
+<dd><code>i</code> - index of the coordinate pair (0 &lt;= i &lt; n)</dd>
+<dd><code>value</code> - x-coordinate value</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt;= n</dd>
 </dl>
 </section>
 </li>
@@ -203,12 +217,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="x(int)">
 <h3>x</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">x</span><wbr><span class="parameters">(int&nbsp;i)</span></div>
-<div class="block">Get X value by index</div>
+<div class="block">Returns the x-coordinate at the specified index.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - index</dd>
+<dd><code>i</code> - index of the coordinate pair (0 &lt;= i &lt; n)</dd>
 <dt>Returns:</dt>
-<dd>X value</dd>
+<dd>x-coordinate value</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt;= n</dd>
 </dl>
 </section>
 </li>
@@ -217,11 +233,13 @@ loadScripts(document, 'script');</script>
 <h3>setY</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setY</span><wbr><span class="parameters">(int&nbsp;i,
  double&nbsp;value)</span></div>
-<div class="block">Set Y value for definite index</div>
+<div class="block">Sets the y-coordinate at the specified index.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - index</dd>
-<dd><code>value</code> - Y value</dd>
+<dd><code>i</code> - index of the coordinate pair (0 &lt;= i &lt; n)</dd>
+<dd><code>value</code> - y-coordinate value</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt;= n</dd>
 </dl>
 </section>
 </li>
@@ -229,12 +247,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="y(int)">
 <h3>y</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">y</span><wbr><span class="parameters">(int&nbsp;i)</span></div>
-<div class="block">Get Y value by index</div>
+<div class="block">Returns the y-coordinate at the specified index.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - index</dd>
+<dd><code>i</code> - index of the coordinate pair (0 &lt;= i &lt; n)</dd>
 <dt>Returns:</dt>
-<dd>Y value</dd>
+<dd>y-coordinate value</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt;= n</dd>
 </dl>
 </section>
 </li>

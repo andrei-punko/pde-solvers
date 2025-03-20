@@ -96,7 +96,23 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BorderConditionType3</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="BorderCondition.html" title="interface in by.andd3dfx.math.pde.border">BorderCondition</a></span></div>
-<div class="block">Params for border condition type 3 (elastic fixing): ∂U/∂x(X,t) = h*( U(X,t) - Theta(t) )</div>
+<div class="block">Represents a Robin boundary condition (Type 3) for partial differential equations.
+ This condition specifies a linear combination of the solution and its derivative
+ at the boundary:
+ <p>
+ ∂U/∂x(x,t) = h * (U(x,t) - Θ(t)) at x = x₁ or x = x₂
+ <p>
+ where h is a constant coefficient and Θ(t) is a prescribed function of time.
+ This type of boundary condition is commonly used to model convective heat transfer
+ or elastic support at the boundary.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="BorderCondition.html" title="interface in by.andd3dfx.math.pde.border"><code>BorderCondition</code></a></li>
+</ul>
+</dd>
+</dl>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -127,12 +143,12 @@ implements <a href="BorderCondition.html" title="interface in by.andd3dfx.math.p
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gH()" class="member-name-link">gH</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">h coefficient value on this border</div>
+<div class="block">Returns the coefficient h in the Robin boundary condition.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gTheta(double)" class="member-name-link">gTheta</a><wbr>(double&nbsp;t)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Theta(t) value in asked time moment on this border</div>
+<div class="block">Returns the prescribed reference value Θ(t) at time t.</div>
 </div>
 </div>
 </div>
@@ -169,10 +185,12 @@ implements <a href="BorderCondition.html" title="interface in by.andd3dfx.math.p
 <section class="detail" id="gH()">
 <h3>gH</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">gH</span>()</div>
-<div class="block">h coefficient value on this border</div>
+<div class="block">Returns the coefficient h in the Robin boundary condition.
+ This coefficient represents the heat transfer coefficient in heat conduction
+ problems or the spring constant in mechanical problems.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>h value</dd>
+<dd>coefficient h in the boundary condition</dd>
 </dl>
 </section>
 </li>
@@ -180,12 +198,14 @@ implements <a href="BorderCondition.html" title="interface in by.andd3dfx.math.p
 <section class="detail" id="gTheta(double)">
 <h3>gTheta</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">gTheta</span><wbr><span class="parameters">(double&nbsp;t)</span></div>
-<div class="block">Theta(t) value in asked time moment on this border</div>
+<div class="block">Returns the prescribed reference value Θ(t) at time t.
+ This value represents the ambient temperature in heat conduction problems
+ or the equilibrium position in mechanical problems.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>t</code> - time</dd>
+<dd><code>t</code> - time coordinate</dd>
 <dt>Returns:</dt>
-<dd>Theta value</dd>
+<dd>prescribed reference value Θ(t)</dd>
 </dl>
 </section>
 </li>

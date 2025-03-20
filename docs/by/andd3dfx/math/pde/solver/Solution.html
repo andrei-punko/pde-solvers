@@ -92,21 +92,25 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><code>E</code> - particular equation type</dd>
+<dd><code>E</code> - the type of equation that was solved</dd>
 <dt>Record Components:</dt>
-<dd><code><span id="param-equation">equation</span></code> - equation to solve</dd>
-<dd><code><span id="param-area">area</span></code> - space-time area</dd>
-<dd><code><span id="param-solution">solution</span></code> - equation solution</dd>
+<dd><code><span id="param-equation">equation</span></code> - the partial differential equation that was solved</dd>
+<dd><code><span id="param-area">area</span></code> - the space-time domain where the solution was found</dd>
+<dd><code><span id="param-solution">solution</span></code> - the numerical solution stored as a 2D matrix</dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Solution&lt;E extends <a href="../equation/Equation.html" title="class in by.andd3dfx.math.pde.equation">Equation</a>&gt;</span>(<a href="Solution.html" title="type parameter in Solution">E</a> extends <a href="../equation/Equation.html" title="class in by.andd3dfx.math.pde.equation">Equation</a>&nbsp;equation, <a href="../../space/Area.html" title="class in by.andd3dfx.math.space">Area</a>&nbsp;area, <a href="../../matrix/Matrix2D.html" title="class in by.andd3dfx.math.matrix">Matrix2D</a>&nbsp;solution)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
-<div class="block">Solution record class, which represents solution of equation on definite space-time area</div>
+<div class="block">Record class representing a numerical solution of a partial differential equation
+ on a defined space-time domain. The solution is stored as a 2D matrix where rows
+ represent time layers and columns represent spatial points.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="tag-list">
 <li><a href="EquationSolver.html" title="interface in by.andd3dfx.math.pde.solver"><code>EquationSolver</code></a></li>
+<li><a href="../../matrix/Matrix2D.html" title="class in by.andd3dfx.math.matrix"><code>Matrix2D</code></a></li>
+<li><a href="../../space/Area.html" title="class in by.andd3dfx.math.space"><code>Area</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -159,22 +163,22 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../matrix/MatrixXY.html" title="class in by.andd3dfx.math.matrix">MatrixXY</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gUt(double)" class="member-name-link">gUt</a><wbr>(double&nbsp;t)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get slice U(x) for definite time</div>
+<div class="block">Retrieves a spatial slice of the solution at a specified time moment.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../matrix/MatrixXY.html" title="class in by.andd3dfx.math.matrix">MatrixXY</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gUt(int)" class="member-name-link">gUt</a><wbr>(int&nbsp;it)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get slice U(x) for definite time which corresponds to layer `it` in solution matrix</div>
+<div class="block">Retrieves a spatial slice of the solution at a specified time layer index.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../matrix/MatrixXY.html" title="class in by.andd3dfx.math.matrix">MatrixXY</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gUx(double)" class="member-name-link">gUx</a><wbr>(double&nbsp;x)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get slice U(t) for definite space coordinate</div>
+<div class="block">Retrieves a temporal slice of the solution at a specified spatial coordinate.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../matrix/MatrixXY.html" title="class in by.andd3dfx.math.matrix">MatrixXY</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gUx(int)" class="member-name-link">gUx</a><wbr>(int&nbsp;ix)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get slice U(t) for definite space coordinate which corresponds to column `ix` in solution matrix</div>
+<div class="block">Retrieves a temporal slice of the solution at a specified spatial column index.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
@@ -190,25 +194,25 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sUt(java.lang.String,double)" class="member-name-link">sUt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
  double&nbsp;t)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Save data U(x) for asked time moment</div>
+<div class="block">Saves solution data U(x) for a single time moment to a file.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sUt(java.lang.String,double%5B%5D)" class="member-name-link">sUt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
  double[]&nbsp;t)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Save data U(x,t_i) for asked time moments [t_i].</div>
+<div class="block">Saves solution data U(x,t) for specified time moments to a file.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sUx(java.lang.String,double)" class="member-name-link">sUx</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
  double&nbsp;x)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Save data U(t) for definite space coordinate</div>
+<div class="block">Saves solution data U(t) for a single spatial coordinate to a file.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sUx(java.lang.String,double%5B%5D)" class="member-name-link">sUx</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
  double[]&nbsp;x)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Save data U(x_i, t) for asked space coordinates [x_i].</div>
+<div class="block">Saves solution data U(x,t) for specified spatial coordinates to a file.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -260,12 +264,16 @@ loadScripts(document, 'script');</script>
 <h3>sUt</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sUt</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
  double[]&nbsp;t)</span></div>
-<div class="block">Save data U(x,t_i) for asked time moments [t_i].
- So in result we get some set of slices for several time moments</div>
+<div class="block">Saves solution data U(x,t) for specified time moments to a file.
+ Creates a set of spatial slices of the solution at different time points.
+ Each line in the output file contains spatial coordinates followed by
+ solution values at different time moments.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>fileName</code> - file name</dd>
-<dd><code>t</code> - times array</dd>
+<dd><code>fileName</code> - name of the file to save the data</dd>
+<dd><code>t</code> - array of time moments to save</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if any time moment is outside the solution domain</dd>
 </dl>
 </section>
 </li>
@@ -274,11 +282,14 @@ loadScripts(document, 'script');</script>
 <h3>sUt</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sUt</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
  double&nbsp;t)</span></div>
-<div class="block">Save data U(x) for asked time moment</div>
+<div class="block">Saves solution data U(x) for a single time moment to a file.
+ Creates a spatial slice of the solution at the specified time.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>fileName</code> - file name</dd>
-<dd><code>t</code> - time</dd>
+<dd><code>fileName</code> - name of the file to save the data</dd>
+<dd><code>t</code> - time moment to save</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the time moment is outside the solution domain</dd>
 </dl>
 </section>
 </li>
@@ -287,12 +298,16 @@ loadScripts(document, 'script');</script>
 <h3>sUx</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sUx</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
  double[]&nbsp;x)</span></div>
-<div class="block">Save data U(x_i, t) for asked space coordinates [x_i].
- So in result we get some set of slices for several space coordinates</div>
+<div class="block">Saves solution data U(x,t) for specified spatial coordinates to a file.
+ Creates a set of temporal slices of the solution at different spatial points.
+ Each line in the output file contains time coordinates followed by
+ solution values at different spatial points.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>fileName</code> - file name</dd>
-<dd><code>x</code> - space coordinates array</dd>
+<dd><code>fileName</code> - name of the file to save the data</dd>
+<dd><code>x</code> - array of spatial coordinates to save</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if any spatial coordinate is outside the solution domain</dd>
 </dl>
 </section>
 </li>
@@ -301,11 +316,14 @@ loadScripts(document, 'script');</script>
 <h3>sUx</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sUx</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
  double&nbsp;x)</span></div>
-<div class="block">Save data U(t) for definite space coordinate</div>
+<div class="block">Saves solution data U(t) for a single spatial coordinate to a file.
+ Creates a temporal slice of the solution at the specified spatial point.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>fileName</code> - file name</dd>
-<dd><code>x</code> - space coordinate</dd>
+<dd><code>fileName</code> - name of the file to save the data</dd>
+<dd><code>x</code> - spatial coordinate to save</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the spatial coordinate is outside the solution domain</dd>
 </dl>
 </section>
 </li>
@@ -313,12 +331,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="gUt(double)">
 <h3>gUt</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../matrix/MatrixXY.html" title="class in by.andd3dfx.math.matrix">MatrixXY</a></span>&nbsp;<span class="element-name">gUt</span><wbr><span class="parameters">(double&nbsp;t)</span></div>
-<div class="block">Get slice U(x) for definite time</div>
+<div class="block">Retrieves a spatial slice of the solution at a specified time moment.
+ Returns a matrix containing spatial coordinates and corresponding solution values.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>t</code> - time</dd>
+<dd><code>t</code> - time moment to get the slice for</dd>
 <dt>Returns:</dt>
-<dd>U(x) slice</dd>
+<dd>MatrixXY containing the spatial slice of the solution</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the time moment is outside the solution domain</dd>
 </dl>
 </section>
 </li>
@@ -326,12 +347,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="gUt(int)">
 <h3>gUt</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../matrix/MatrixXY.html" title="class in by.andd3dfx.math.matrix">MatrixXY</a></span>&nbsp;<span class="element-name">gUt</span><wbr><span class="parameters">(int&nbsp;it)</span></div>
-<div class="block">Get slice U(x) for definite time which corresponds to layer `it` in solution matrix</div>
+<div class="block">Retrieves a spatial slice of the solution at a specified time layer index.
+ Returns a matrix containing spatial coordinates and corresponding solution values.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>it</code> - index of time layer in solution matrix</dd>
+<dd><code>it</code> - index of the time layer in the solution matrix (0 &lt;= it &lt; M)</dd>
 <dt>Returns:</dt>
-<dd>U(x) slice</dd>
+<dd>MatrixXY containing the spatial slice of the solution</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the time layer index is out of bounds</dd>
 </dl>
 </section>
 </li>
@@ -339,12 +363,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="gUx(double)">
 <h3>gUx</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../matrix/MatrixXY.html" title="class in by.andd3dfx.math.matrix">MatrixXY</a></span>&nbsp;<span class="element-name">gUx</span><wbr><span class="parameters">(double&nbsp;x)</span></div>
-<div class="block">Get slice U(t) for definite space coordinate</div>
+<div class="block">Retrieves a temporal slice of the solution at a specified spatial coordinate.
+ Returns a matrix containing time coordinates and corresponding solution values.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x</code> - space coordinate</dd>
+<dd><code>x</code> - spatial coordinate to get the slice for</dd>
 <dt>Returns:</dt>
-<dd>U(t) slice</dd>
+<dd>MatrixXY containing the temporal slice of the solution</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the spatial coordinate is outside the solution domain</dd>
 </dl>
 </section>
 </li>
@@ -352,12 +379,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="gUx(int)">
 <h3>gUx</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../matrix/MatrixXY.html" title="class in by.andd3dfx.math.matrix">MatrixXY</a></span>&nbsp;<span class="element-name">gUx</span><wbr><span class="parameters">(int&nbsp;ix)</span></div>
-<div class="block">Get slice U(t) for definite space coordinate which corresponds to column `ix` in solution matrix</div>
+<div class="block">Retrieves a temporal slice of the solution at a specified spatial column index.
+ Returns a matrix containing time coordinates and corresponding solution values.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>ix</code> - index of space column in solution matrix</dd>
+<dd><code>ix</code> - index of the spatial column in the solution matrix (0 &lt;= ix &lt; N)</dd>
 <dt>Returns:</dt>
-<dd>U(t) slice</dd>
+<dd>MatrixXY containing the temporal slice of the solution</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the spatial column index is out of bounds</dd>
 </dl>
 </section>
 </li>

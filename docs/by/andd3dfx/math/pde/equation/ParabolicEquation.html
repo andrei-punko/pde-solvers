@@ -93,14 +93,22 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ParabolicEquation</span>
 <span class="extends-implements">extends <a href="Equation.html" title="class in by.andd3dfx.math.pde.equation">Equation</a></span></div>
-<div class="block">Parabolic equation (described heat/mass transfer):
+<div class="block">Represents a parabolic partial differential equation, which typically describes
+ heat conduction or mass diffusion processes. The equation has the form:
  <p>
- L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U) where U = U(x,t)</div>
+ L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U)
+ <p>
+ where U = U(x,t) is the unknown function (temperature or concentration).
+ <p>
+ This is a special case of the general second-order PDE where the coefficient
+ of the second-order time derivative (M) is zero, and the coefficient of the
+ first-order time derivative (L) is one.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="tag-list">
 <li><a href="../solver/ParabolicEquationSolver.html" title="class in by.andd3dfx.math.pde.solver"><code>ParabolicEquationSolver</code></a></li>
+<li><a href="Equation.html" title="class in by.andd3dfx.math.pde.equation"><code>Equation</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -121,7 +129,8 @@ loadScripts(document, 'script');</script>
  <a href="../border/BorderCondition.html" title="interface in by.andd3dfx.math.pde.border">BorderCondition</a>&nbsp;leftBorderCondition,
  <a href="../border/BorderCondition.html" title="interface in by.andd3dfx.math.pde.border">BorderCondition</a>&nbsp;rightBorderCondition)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Create parabolic equation</div>
+<div class="block">Creates a new parabolic partial differential equation with specified domain
+ and boundary conditions.</div>
 </div>
 </div>
 </section>
@@ -142,7 +151,7 @@ loadScripts(document, 'script');</script>
  double&nbsp;t,
  double&nbsp;U)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Coefficient L(x,t,U) of equation for 1st-order time derivative</div>
+<div class="block">Returns the coefficient L(x,t,U) of the first-order time derivative term.</div>
 </div>
 </div>
 </div>
@@ -172,14 +181,17 @@ loadScripts(document, 'script');</script>
  double&nbsp;t2,
  <a href="../border/BorderCondition.html" title="interface in by.andd3dfx.math.pde.border">BorderCondition</a>&nbsp;leftBorderCondition,
  <a href="../border/BorderCondition.html" title="interface in by.andd3dfx.math.pde.border">BorderCondition</a>&nbsp;rightBorderCondition)</span></div>
-<div class="block">Create parabolic equation</div>
+<div class="block">Creates a new parabolic partial differential equation with specified domain
+ and boundary conditions.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x1</code> - left border of space interval</dd>
-<dd><code>x2</code> - right border of space interval</dd>
-<dd><code>t2</code> - right border of time interval</dd>
-<dd><code>leftBorderCondition</code> - left border condition</dd>
-<dd><code>rightBorderCondition</code> - right border condition</dd>
+<dd><code>x1</code> - left boundary of the spatial domain</dd>
+<dd><code>x2</code> - right boundary of the spatial domain</dd>
+<dd><code>t2</code> - right boundary of the temporal domain</dd>
+<dd><code>leftBorderCondition</code> - boundary condition at x = x1</dd>
+<dd><code>rightBorderCondition</code> - boundary condition at x = x2</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if x1 &gt;= x2 or t2 &lt;= 0</dd>
 </dl>
 </section>
 </li>
@@ -197,17 +209,18 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">gL</span><wbr><span class="parameters">(double&nbsp;x,
  double&nbsp;t,
  double&nbsp;U)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="Equation.html#gL(double,double,double)">Equation</a></code></span></div>
-<div class="block">Coefficient L(x,t,U) of equation for 1st-order time derivative</div>
+<div class="block">Returns the coefficient L(x,t,U) of the first-order time derivative term.
+ For parabolic equations, this coefficient is always 1, representing the
+ standard form of heat/mass transfer equations.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="Equation.html#gL(double,double,double)">gL</a></code>&nbsp;in class&nbsp;<code><a href="Equation.html" title="class in by.andd3dfx.math.pde.equation">Equation</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>x</code> - space coordinate</dd>
-<dd><code>t</code> - time</dd>
-<dd><code>U</code> - U value</dd>
+<dd><code>x</code> - spatial coordinate</dd>
+<dd><code>t</code> - time coordinate</dd>
+<dd><code>U</code> - value of the solution at (x,t)</dd>
 <dt>Returns:</dt>
-<dd>L value</dd>
+<dd>coefficient L(x,t,U) = 1</dd>
 </dl>
 </section>
 </li>

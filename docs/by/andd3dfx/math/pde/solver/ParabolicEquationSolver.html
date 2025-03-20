@@ -97,12 +97,16 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ParabolicEquationSolver</span>
 <span class="extends-implements">extends <a href="AbstractEquationSolver.html" title="class in by.andd3dfx.math.pde.solver">AbstractEquationSolver</a>&lt;<a href="../equation/ParabolicEquation.html" title="class in by.andd3dfx.math.pde.equation">ParabolicEquation</a>&gt;</span></div>
-<div class="block">Parabolic equation solver</div>
+<div class="block">Solver for parabolic partial differential equations.
+ Implements numerical method for solving parabolic equations using
+ implicit finite difference scheme. The algorithm is based on the Thomas algorithm
+ for solving tridiagonal systems of linear equations.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="tag-list">
 <li><a href="../equation/ParabolicEquation.html" title="class in by.andd3dfx.math.pde.equation"><code>ParabolicEquation</code></a></li>
+<li><a href="AbstractEquationSolver.html" title="class in by.andd3dfx.math.pde.solver"><code>AbstractEquationSolver</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -147,7 +151,7 @@ loadScripts(document, 'script');</script>
  double&nbsp;h,
  double&nbsp;tau)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Solve parabolic equation using provided space and time steps</div>
+<div class="block">Solves parabolic partial differential equation using numerical method.</div>
 </div>
 </div>
 </div>
@@ -189,14 +193,18 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Solution.html" title="class in by.andd3dfx.math.pde.solver">Solution</a>&lt;<a href="../equation/ParabolicEquation.html" title="class in by.andd3dfx.math.pde.equation">ParabolicEquation</a>&gt;</span>&nbsp;<span class="element-name">solve</span><wbr><span class="parameters">(<a href="../equation/ParabolicEquation.html" title="class in by.andd3dfx.math.pde.equation">ParabolicEquation</a>&nbsp;eqn,
  double&nbsp;h,
  double&nbsp;tau)</span></div>
-<div class="block">Solve parabolic equation using provided space and time steps</div>
+<div class="block">Solves parabolic partial differential equation using numerical method.
+ Uses implicit finite difference scheme with weights for derivative approximation.
+ Solution is found using the Thomas algorithm on each time step.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>eqn</code> - partial difference parabolic equation</dd>
-<dd><code>h</code> - space step</dd>
-<dd><code>tau</code> - time step</dd>
+<dd><code>eqn</code> - parabolic partial differential equation to solve</dd>
+<dd><code>h</code> - spatial step size (must be positive)</dd>
+<dd><code>tau</code> - time step size (must be positive)</dd>
 <dt>Returns:</dt>
-<dd>equation solution</dd>
+<dd>equation solution containing function values at all grid points</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if parameters h or tau are non-positive</dd>
 </dl>
 </section>
 </li>

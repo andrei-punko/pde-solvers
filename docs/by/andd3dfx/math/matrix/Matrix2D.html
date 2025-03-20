@@ -95,7 +95,14 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Matrix2D</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">2D matrix</div>
+<div class="block">Represents a two-dimensional matrix of real numbers with fixed dimensions.
+ This class provides efficient storage and manipulation of matrix data using
+ a single-dimensional array for better memory locality. It supports basic
+ matrix operations such as element access, row/column swapping, and finding
+ minimum/maximum values.
+
+ The matrix is stored internally as a single-dimensional array in row-major order,
+ where the element at position (i,j) is stored at index i*n + j in the data array.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -110,7 +117,7 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">Matrix2D</a><wbr>(int&nbsp;m,
  int&nbsp;n)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Create 2d matrix with definite size</div>
+<div class="block">Creates a new matrix with specified dimensions, initialized with zeros.</div>
 </div>
 </div>
 </section>
@@ -129,59 +136,59 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix2D.html" title="class in by.andd3dfx.math.matrix">Matrix2D</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fill(double)" class="member-name-link">fill</a><wbr>(double&nbsp;d)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Fill matrix with numbers of same value</div>
+<div class="block">Fills all elements of the matrix with the specified value.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double[]</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(int)" class="member-name-link">get</a><wbr>(int&nbsp;i)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get array with n items starting from definite index of underlying array</div>
+<div class="block">Returns a copy of the specified row as an array.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(int,int)" class="member-name-link">get</a><wbr>(int&nbsp;i,
  int&nbsp;j)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get number stored in matrix cell</div>
+<div class="block">Returns the value at the specified matrix position (i,j).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#max()" class="member-name-link">max</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get max value of stored numbers</div>
+<div class="block">Returns the maximum value stored in the matrix.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#min()" class="member-name-link">min</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get min value of stored numbers</div>
+<div class="block">Returns the minimum value stored in the matrix.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(int,double)" class="member-name-link">set</a><wbr>(int&nbsp;i,
  double&nbsp;value)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Put number into definite position of underlying array</div>
+<div class="block">Sets a value at the specified position in the underlying array.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(int,double%5B%5D)" class="member-name-link">set</a><wbr>(int&nbsp;i,
  double[]&nbsp;arr)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Replace n items starting from definite index of underlying array with numbers from provided array</div>
+<div class="block">Sets an entire row of the matrix using the provided array.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(int,int,double)" class="member-name-link">set</a><wbr>(int&nbsp;i,
  int&nbsp;j,
  double&nbsp;value)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Put number into definite position of matrix cell</div>
+<div class="block">Sets a value at the specified matrix position (i,j).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#swapCols(int,int)" class="member-name-link">swapCols</a><wbr>(int&nbsp;n1,
  int&nbsp;n2)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Swap matrix columns</div>
+<div class="block">Swaps two columns of the matrix.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#swapRows(int,int)" class="member-name-link">swapRows</a><wbr>(int&nbsp;m1,
  int&nbsp;m2)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Swap matrix rows</div>
+<div class="block">Swaps two rows of the matrix.</div>
 </div>
 </div>
 </div>
@@ -205,11 +212,13 @@ loadScripts(document, 'script');</script>
 <h3>Matrix2D</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Matrix2D</span><wbr><span class="parameters">(int&nbsp;m,
  int&nbsp;n)</span></div>
-<div class="block">Create 2d matrix with definite size</div>
+<div class="block">Creates a new matrix with specified dimensions, initialized with zeros.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>m</code> - rows amount</dd>
-<dd><code>n</code> - columns amount</dd>
+<dd><code>m</code> - number of rows (must be positive)</dd>
+<dd><code>n</code> - number of columns (must be positive)</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if m &lt;= 0 or n &lt;= 0</dd>
 </dl>
 </section>
 </li>
@@ -226,11 +235,14 @@ loadScripts(document, 'script');</script>
 <h3>set</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(int&nbsp;i,
  double&nbsp;value)</span></div>
-<div class="block">Put number into definite position of underlying array</div>
+<div class="block">Sets a value at the specified position in the underlying array.
+ This method is primarily used for sequential access to matrix elements.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - index</dd>
-<dd><code>value</code> - number value</dd>
+<dd><code>i</code> - index in the underlying array (0 &lt;= i &lt; m*n)</dd>
+<dd><code>value</code> - value to set</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt;= m*n</dd>
 </dl>
 </section>
 </li>
@@ -240,12 +252,14 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(int&nbsp;i,
  int&nbsp;j,
  double&nbsp;value)</span></div>
-<div class="block">Put number into definite position of matrix cell</div>
+<div class="block">Sets a value at the specified matrix position (i,j).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - row number</dd>
-<dd><code>j</code> - column number</dd>
-<dd><code>value</code> - number value</dd>
+<dd><code>i</code> - row index (0 &lt;= i &lt; m)</dd>
+<dd><code>j</code> - column index (0 &lt;= j &lt; n)</dd>
+<dd><code>value</code> - value to set</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt;= m or j &lt; 0 or j &gt;= n</dd>
 </dl>
 </section>
 </li>
@@ -254,11 +268,13 @@ loadScripts(document, 'script');</script>
 <h3>set</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(int&nbsp;i,
  double[]&nbsp;arr)</span></div>
-<div class="block">Replace n items starting from definite index of underlying array with numbers from provided array</div>
+<div class="block">Sets an entire row of the matrix using the provided array.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - index</dd>
-<dd><code>arr</code> - array with length n</dd>
+<dd><code>i</code> - row index (0 &lt;= i &lt; m)</dd>
+<dd><code>arr</code> - array of n values to set in the row</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt;= m or arr.length != n</dd>
 </dl>
 </section>
 </li>
@@ -266,12 +282,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="get(int)">
 <h3>get</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double[]</span>&nbsp;<span class="element-name">get</span><wbr><span class="parameters">(int&nbsp;i)</span></div>
-<div class="block">Get array with n items starting from definite index of underlying array</div>
+<div class="block">Returns a copy of the specified row as an array.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - index</dd>
+<dd><code>i</code> - row index (0 &lt;= i &lt; m)</dd>
 <dt>Returns:</dt>
-<dd>array with length n</dd>
+<dd>array containing the row elements</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt;= m</dd>
 </dl>
 </section>
 </li>
@@ -280,13 +298,15 @@ loadScripts(document, 'script');</script>
 <h3>get</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">get</span><wbr><span class="parameters">(int&nbsp;i,
  int&nbsp;j)</span></div>
-<div class="block">Get number stored in matrix cell</div>
+<div class="block">Returns the value at the specified matrix position (i,j).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - row number</dd>
-<dd><code>j</code> - column number</dd>
+<dd><code>i</code> - row index (0 &lt;= i &lt; m)</dd>
+<dd><code>j</code> - column index (0 &lt;= j &lt; n)</dd>
 <dt>Returns:</dt>
-<dd>number value</dd>
+<dd>value at position (i,j)</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt;= m or j &lt; 0 or j &gt;= n</dd>
 </dl>
 </section>
 </li>
@@ -294,10 +314,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="min()">
 <h3>min</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">min</span>()</div>
-<div class="block">Get min value of stored numbers</div>
+<div class="block">Returns the minimum value stored in the matrix.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>min value</dd>
+<dd>minimum value</dd>
 </dl>
 </section>
 </li>
@@ -305,10 +325,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="max()">
 <h3>max</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">max</span>()</div>
-<div class="block">Get max value of stored numbers</div>
+<div class="block">Returns the maximum value stored in the matrix.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>max value</dd>
+<dd>maximum value</dd>
 </dl>
 </section>
 </li>
@@ -316,12 +336,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="fill(double)">
 <h3>fill</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Matrix2D.html" title="class in by.andd3dfx.math.matrix">Matrix2D</a></span>&nbsp;<span class="element-name">fill</span><wbr><span class="parameters">(double&nbsp;d)</span></div>
-<div class="block">Fill matrix with numbers of same value</div>
+<div class="block">Fills all elements of the matrix with the specified value.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>d</code> - number value</dd>
+<dd><code>d</code> - value to fill the matrix with</dd>
 <dt>Returns:</dt>
-<dd>filled matrix</dd>
+<dd>this matrix (for method chaining)</dd>
 </dl>
 </section>
 </li>
@@ -330,11 +350,13 @@ loadScripts(document, 'script');</script>
 <h3>swapRows</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">swapRows</span><wbr><span class="parameters">(int&nbsp;m1,
  int&nbsp;m2)</span></div>
-<div class="block">Swap matrix rows</div>
+<div class="block">Swaps two rows of the matrix.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>m1</code> - one row number</dd>
-<dd><code>m2</code> - another row number</dd>
+<dd><code>m1</code> - index of the first row (0 &lt;= m1 &lt; m)</dd>
+<dd><code>m2</code> - index of the second row (0 &lt;= m2 &lt; m)</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if m1 &lt; 0 or m1 &gt;= m or m2 &lt; 0 or m2 &gt;= m or m1 = m2</dd>
 </dl>
 </section>
 </li>
@@ -343,11 +365,13 @@ loadScripts(document, 'script');</script>
 <h3>swapCols</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">swapCols</span><wbr><span class="parameters">(int&nbsp;n1,
  int&nbsp;n2)</span></div>
-<div class="block">Swap matrix columns</div>
+<div class="block">Swaps two columns of the matrix.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>n1</code> - one column number</dd>
-<dd><code>n2</code> - another column number</dd>
+<dd><code>n1</code> - index of the first column (0 &lt;= n1 &lt; n)</dd>
+<dd><code>n2</code> - index of the second column (0 &lt;= n2 &lt; n)</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if n1 &lt; 0 or n1 &gt;= n or n2 &lt; 0 or n2 &gt;= n or n1 = n2</dd>
 </dl>
 </section>
 </li>

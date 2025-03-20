@@ -92,8 +92,8 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Record Components:</dt>
-<dd><code><span id="param-kappa">kappa</span></code> - </dd>
-<dd><code><span id="param-nu">nu</span></code> - </dd>
+<dd><code><span id="param-kappa">kappa</span></code> - coefficient for the boundary condition</dd>
+<dd><code><span id="param-nu">nu</span></code> - right-hand side term for the boundary condition</dd>
 </dl>
 <dl class="notes">
 <dt>Enclosing class:</dt>
@@ -102,7 +102,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public static record </span><span class="element-name type-name-label">AbstractEquationSolver.KappaNu</span>(double&nbsp;kappa, double&nbsp;nu)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
-<div class="block">Just record to store border condition params</div>
+<div class="block">Record class to store boundary condition parameters for the tridiagonal algorithm.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">

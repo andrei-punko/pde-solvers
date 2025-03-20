@@ -87,7 +87,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><code>E</code> - particular equation type</dd>
+<dd><code>E</code> - the type of partial differential equation this solver handles</dd>
 </dl>
 <dl class="notes">
 <dt>All Known Implementing Classes:</dt>
@@ -95,12 +95,15 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">EquationSolver&lt;E extends <a href="../equation/Equation.html" title="class in by.andd3dfx.math.pde.equation">Equation</a>&gt;</span></div>
-<div class="block">Equation solver interface. All solvers should implement it</div>
+<div class="block">Interface for numerical solvers of partial differential equations.
+ Defines the contract that all PDE solvers must implement to provide
+ numerical solutions for different types of partial differential equations.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="tag-list">
 <li><a href="../equation/Equation.html" title="class in by.andd3dfx.math.pde.equation"><code>Equation</code></a></li>
+<li><a href="Solution.html" title="class in by.andd3dfx.math.pde.solver"><code>Solution</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -123,7 +126,7 @@ loadScripts(document, 'script');</script>
  double&nbsp;h,
  double&nbsp;tau)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Solve equation using provided space and time steps</div>
+<div class="block">Solves a partial differential equation using numerical methods.</div>
 </div>
 </div>
 </div>
@@ -145,14 +148,17 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="return-type"><a href="Solution.html" title="class in by.andd3dfx.math.pde.solver">Solution</a>&lt;<a href="EquationSolver.html" title="type parameter in EquationSolver">E</a>&gt;</span>&nbsp;<span class="element-name">solve</span><wbr><span class="parameters">(<a href="EquationSolver.html" title="type parameter in EquationSolver">E</a>&nbsp;eqn,
  double&nbsp;h,
  double&nbsp;tau)</span></div>
-<div class="block">Solve equation using provided space and time steps</div>
+<div class="block">Solves a partial differential equation using numerical methods.
+ The solution is found on a space-time grid defined by the spatial and temporal step sizes.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>eqn</code> - partial difference equation</dd>
-<dd><code>h</code> - space step</dd>
-<dd><code>tau</code> - time step</dd>
+<dd><code>eqn</code> - the partial differential equation to solve</dd>
+<dd><code>h</code> - spatial step size (must be positive)</dd>
+<dd><code>tau</code> - temporal step size (must be positive)</dd>
 <dt>Returns:</dt>
-<dd>equation solution</dd>
+<dd>Solution containing the numerical solution on the space-time grid</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if parameters h or tau are non-positive</dd>
 </dl>
 </section>
 </li>

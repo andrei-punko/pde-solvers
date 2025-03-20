@@ -95,13 +95,16 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">Equation</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Base class representing 2nd-order PD equation:
+<div class="block">Abstract base class representing a second-order partial differential equation.
+ The equation has the general form:
  <p>
- M(x,t,U)*∂²U/∂t² + L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U) where U = U(x,t)
+ M(x,t,U)*∂²U/∂t² + L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U)
  <p>
- It's defined on space-time area [x1,x2]*[0,t2] with border conditions on left and right sides
+ where U = U(x,t) is the unknown function.
  <p>
- Used to avoid code duplication in child classes</div>
+ The equation is defined on a space-time domain [x1,x2]&times;[0,t2] with boundary conditions
+ specified on the left and right boundaries. This class provides default implementations
+ for the coefficient functions that can be overridden by specific equation types.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -128,7 +131,7 @@ loadScripts(document, 'script');</script>
  <a href="../border/BorderCondition.html" title="interface in by.andd3dfx.math.pde.border">BorderCondition</a>&nbsp;leftBorderCondition,
  <a href="../border/BorderCondition.html" title="interface in by.andd3dfx.math.pde.border">BorderCondition</a>&nbsp;rightBorderCondition)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Create equation</div>
+<div class="block">Creates a new partial differential equation with specified domain and boundary conditions.</div>
 </div>
 </div>
 </section>
@@ -149,40 +152,40 @@ loadScripts(document, 'script');</script>
  double&nbsp;t,
  double&nbsp;U)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Free addendum F(x,t,U) of equation</div>
+<div class="block">Returns the source term F(x,t,U) of the equation.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gK(double,double,double)" class="member-name-link">gK</a><wbr>(double&nbsp;x,
  double&nbsp;t,
  double&nbsp;U)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Coefficient K(x,t,U) of equation for 2nd-order space derivative</div>
+<div class="block">Returns the coefficient K(x,t,U) of the second-order space derivative term.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gL(double,double,double)" class="member-name-link">gL</a><wbr>(double&nbsp;x,
  double&nbsp;t,
  double&nbsp;U)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Coefficient L(x,t,U) of equation for 1st-order time derivative</div>
+<div class="block">Returns the coefficient L(x,t,U) of the first-order time derivative term.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gM(double,double,double)" class="member-name-link">gM</a><wbr>(double&nbsp;x,
  double&nbsp;t,
  double&nbsp;U)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Coefficient M(x,t,U) of equation for 2nd-order time derivative</div>
+<div class="block">Returns the coefficient M(x,t,U) of the second-order time derivative term.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gU0(double)" class="member-name-link">gU0</a><wbr>(double&nbsp;x)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Initial condition U(x) at the moment t=0</div>
+<div class="block">Returns the initial condition U(x) at time t = 0.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gV(double,double,double)" class="member-name-link">gV</a><wbr>(double&nbsp;x,
  double&nbsp;t,
  double&nbsp;U)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Coefficient V(x,t,U) of equation for 1st-order space derivative</div>
+<div class="block">Returns the coefficient V(x,t,U) of the first-order space derivative term.</div>
 </div>
 </div>
 </div>
@@ -209,14 +212,16 @@ loadScripts(document, 'script');</script>
  double&nbsp;t2,
  <a href="../border/BorderCondition.html" title="interface in by.andd3dfx.math.pde.border">BorderCondition</a>&nbsp;leftBorderCondition,
  <a href="../border/BorderCondition.html" title="interface in by.andd3dfx.math.pde.border">BorderCondition</a>&nbsp;rightBorderCondition)</span></div>
-<div class="block">Create equation</div>
+<div class="block">Creates a new partial differential equation with specified domain and boundary conditions.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x1</code> - left border of space interval</dd>
-<dd><code>x2</code> - right border of space interval</dd>
-<dd><code>t2</code> - right border of time interval</dd>
-<dd><code>leftBorderCondition</code> - left border condition</dd>
-<dd><code>rightBorderCondition</code> - right border condition</dd>
+<dd><code>x1</code> - left boundary of the spatial domain</dd>
+<dd><code>x2</code> - right boundary of the spatial domain</dd>
+<dd><code>t2</code> - right boundary of the temporal domain</dd>
+<dd><code>leftBorderCondition</code> - boundary condition at x = x1</dd>
+<dd><code>rightBorderCondition</code> - boundary condition at x = x2</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if x1 &gt;= x2 or t2 &lt;= 0</dd>
 </dl>
 </section>
 </li>
@@ -232,12 +237,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="gU0(double)">
 <h3>gU0</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">gU0</span><wbr><span class="parameters">(double&nbsp;x)</span></div>
-<div class="block">Initial condition U(x) at the moment t=0</div>
+<div class="block">Returns the initial condition U(x) at time t = 0.
+ This method should be overridden by specific equation types to provide
+ the actual initial condition.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x</code> - space coordinate</dd>
+<dd><code>x</code> - spatial coordinate</dd>
 <dt>Returns:</dt>
-<dd>U(x) value</dd>
+<dd>initial value U(x,0)</dd>
 </dl>
 </section>
 </li>
@@ -247,14 +254,17 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">gM</span><wbr><span class="parameters">(double&nbsp;x,
  double&nbsp;t,
  double&nbsp;U)</span></div>
-<div class="block">Coefficient M(x,t,U) of equation for 2nd-order time derivative</div>
+<div class="block">Returns the coefficient M(x,t,U) of the second-order time derivative term.
+ This coefficient represents the mass or inertia term in the equation.
+ The default implementation returns 0, which should be overridden for equations
+ containing second-order time derivatives.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x</code> - space coordinate</dd>
-<dd><code>t</code> - time</dd>
-<dd><code>U</code> - U value</dd>
+<dd><code>x</code> - spatial coordinate</dd>
+<dd><code>t</code> - time coordinate</dd>
+<dd><code>U</code> - value of the solution at (x,t)</dd>
 <dt>Returns:</dt>
-<dd>M(x,t,U) value</dd>
+<dd>coefficient M(x,t,U)</dd>
 </dl>
 </section>
 </li>
@@ -264,14 +274,17 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">gL</span><wbr><span class="parameters">(double&nbsp;x,
  double&nbsp;t,
  double&nbsp;U)</span></div>
-<div class="block">Coefficient L(x,t,U) of equation for 1st-order time derivative</div>
+<div class="block">Returns the coefficient L(x,t,U) of the first-order time derivative term.
+ This coefficient represents damping or dissipation in the equation.
+ The default implementation returns 0, which should be overridden for equations
+ containing first-order time derivatives.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x</code> - space coordinate</dd>
-<dd><code>t</code> - time</dd>
-<dd><code>U</code> - U value</dd>
+<dd><code>x</code> - spatial coordinate</dd>
+<dd><code>t</code> - time coordinate</dd>
+<dd><code>U</code> - value of the solution at (x,t)</dd>
 <dt>Returns:</dt>
-<dd>L value</dd>
+<dd>coefficient L(x,t,U)</dd>
 </dl>
 </section>
 </li>
@@ -281,14 +294,17 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">gK</span><wbr><span class="parameters">(double&nbsp;x,
  double&nbsp;t,
  double&nbsp;U)</span></div>
-<div class="block">Coefficient K(x,t,U) of equation for 2nd-order space derivative</div>
+<div class="block">Returns the coefficient K(x,t,U) of the second-order space derivative term.
+ This coefficient represents diffusion or conductivity in the equation.
+ The default implementation returns 1, which should be overridden for equations
+ with variable diffusion coefficients.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x</code> - space coordinate</dd>
-<dd><code>t</code> - time</dd>
-<dd><code>U</code> - U value</dd>
+<dd><code>x</code> - spatial coordinate</dd>
+<dd><code>t</code> - time coordinate</dd>
+<dd><code>U</code> - value of the solution at (x,t)</dd>
 <dt>Returns:</dt>
-<dd>K(x,t,U) value</dd>
+<dd>coefficient K(x,t,U)</dd>
 </dl>
 </section>
 </li>
@@ -298,14 +314,17 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">gV</span><wbr><span class="parameters">(double&nbsp;x,
  double&nbsp;t,
  double&nbsp;U)</span></div>
-<div class="block">Coefficient V(x,t,U) of equation for 1st-order space derivative</div>
+<div class="block">Returns the coefficient V(x,t,U) of the first-order space derivative term.
+ This coefficient represents convection or advection in the equation.
+ The default implementation returns 0, which should be overridden for equations
+ containing convective terms.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x</code> - space coordinate</dd>
-<dd><code>t</code> - time</dd>
-<dd><code>U</code> - U value</dd>
+<dd><code>x</code> - spatial coordinate</dd>
+<dd><code>t</code> - time coordinate</dd>
+<dd><code>U</code> - value of the solution at (x,t)</dd>
 <dt>Returns:</dt>
-<dd>V(x,t,U) value</dd>
+<dd>coefficient V(x,t,U)</dd>
 </dl>
 </section>
 </li>
@@ -315,14 +334,17 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">gF</span><wbr><span class="parameters">(double&nbsp;x,
  double&nbsp;t,
  double&nbsp;U)</span></div>
-<div class="block">Free addendum F(x,t,U) of equation</div>
+<div class="block">Returns the source term F(x,t,U) of the equation.
+ This term represents external forces or sources in the equation.
+ The default implementation returns 0, which should be overridden for equations
+ containing source terms.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x</code> - space coordinate</dd>
-<dd><code>t</code> - time</dd>
-<dd><code>U</code> - U value</dd>
+<dd><code>x</code> - spatial coordinate</dd>
+<dd><code>t</code> - time coordinate</dd>
+<dd><code>U</code> - value of the solution at (x,t)</dd>
 <dt>Returns:</dt>
-<dd>F(x,t,U) value</dd>
+<dd>source term F(x,t,U)</dd>
 </dl>
 </section>
 </li>

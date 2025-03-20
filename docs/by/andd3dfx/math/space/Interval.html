@@ -91,7 +91,18 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Interval</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Representation of interval (space/time/etc)</div>
+<div class="block">Represents a one-dimensional interval with uniform discretization.
+ This class is used to define spatial or temporal domains with a fixed step size
+ or a specified number of points. It provides methods for coordinate-to-index
+ and index-to-coordinate conversions.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="Area.html" title="class in by.andd3dfx.math.space"><code>Area</code></a></li>
+</ul>
+</dd>
+</dl>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,19 +116,19 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Interval</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Create interval [0; 1] which contains only one part</div>
+<div class="block">Creates a default interval [0,1] with a single step.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(double,double,double)" class="member-name-link">Interval</a><wbr>(double&nbsp;left,
  double&nbsp;right,
  double&nbsp;h)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Create interval [left; right] with provided step size</div>
+<div class="block">Creates an interval [left,right] with a specified step size.</div>
 </div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(double,double,int)" class="member-name-link">Interval</a><wbr>(double&nbsp;left,
  double&nbsp;right,
  int&nbsp;n)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Create interval [left; right] with provided steps amount</div>
+<div class="block">Creates an interval [left,right] with a specified number of points.</div>
 </div>
 </div>
 </section>
@@ -136,42 +147,44 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#h()" class="member-name-link">h</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get step size</div>
+<div class="block">Returns the step size between points in the interval.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#i(double)" class="member-name-link">i</a><wbr>(double&nbsp;x)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get index by coordinate</div>
+<div class="block">Returns the index of the point closest to the specified coordinate.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#left()" class="member-name-link">left</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get left border</div>
+<div class="block">Returns the left boundary of the interval.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#n()" class="member-name-link">n</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get steps amount</div>
+<div class="block">Returns the number of points in the interval.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reborn(double)" class="member-name-link">reborn</a><wbr>(double&nbsp;h)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Recreate interval with new step size</div>
+<div class="block">Recreates the interval with a new step size while maintaining
+ the same boundaries.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reborn(int)" class="member-name-link">reborn</a><wbr>(int&nbsp;n)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Recreate interval with new steps amount</div>
+<div class="block">Recreates the interval with a new number of points while maintaining
+ the same boundaries.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#right()" class="member-name-link">right</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get right border</div>
+<div class="block">Returns the right boundary of the interval.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#x(int)" class="member-name-link">x</a><wbr>(int&nbsp;i)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Get coordinate by index</div>
+<div class="block">Returns the coordinate value at the specified index.</div>
 </div>
 </div>
 </div>
@@ -194,7 +207,9 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>Interval</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Interval</span>()</div>
-<div class="block">Create interval [0; 1] which contains only one part</div>
+<div class="block">Creates a default interval [0,1] with a single step.
+ This constructor is provided for convenience and creates the simplest
+ possible interval.</div>
 </section>
 </li>
 <li>
@@ -203,12 +218,14 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Interval</span><wbr><span class="parameters">(double&nbsp;left,
  double&nbsp;right,
  double&nbsp;h)</span></div>
-<div class="block">Create interval [left; right] with provided step size</div>
+<div class="block">Creates an interval [left,right] with a specified step size.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>left</code> - left border value</dd>
-<dd><code>right</code> - right border value</dd>
-<dd><code>h</code> - step size</dd>
+<dd><code>left</code> - left boundary of the interval</dd>
+<dd><code>right</code> - right boundary of the interval</dd>
+<dd><code>h</code> - step size between points</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if right &lt;= left or h &lt;= 0</dd>
 </dl>
 </section>
 </li>
@@ -218,12 +235,15 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Interval</span><wbr><span class="parameters">(double&nbsp;left,
  double&nbsp;right,
  int&nbsp;n)</span></div>
-<div class="block">Create interval [left; right] with provided steps amount</div>
+<div class="block">Creates an interval [left,right] with a specified number of points.
+ The step size is automatically calculated as (right - left) / n.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>left</code> - left border value</dd>
-<dd><code>right</code> - right border value</dd>
-<dd><code>n</code> - steps amount</dd>
+<dd><code>left</code> - left boundary of the interval</dd>
+<dd><code>right</code> - right boundary of the interval</dd>
+<dd><code>n</code> - number of points in the interval</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if right &lt;= left or n &lt;= 0</dd>
 </dl>
 </section>
 </li>
@@ -239,10 +259,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="left()">
 <h3>left</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">left</span>()</div>
-<div class="block">Get left border</div>
+<div class="block">Returns the left boundary of the interval.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>left border value</dd>
+<dd>left boundary value</dd>
 </dl>
 </section>
 </li>
@@ -250,10 +270,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="right()">
 <h3>right</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">right</span>()</div>
-<div class="block">Get right border</div>
+<div class="block">Returns the right boundary of the interval.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>right border value</dd>
+<dd>right boundary value</dd>
 </dl>
 </section>
 </li>
@@ -261,10 +281,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="h()">
 <h3>h</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">h</span>()</div>
-<div class="block">Get step size</div>
+<div class="block">Returns the step size between points in the interval.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>step size</dd>
+<dd>step size h</dd>
 </dl>
 </section>
 </li>
@@ -272,10 +292,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="n()">
 <h3>n</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">n</span>()</div>
-<div class="block">Get steps amount</div>
+<div class="block">Returns the number of points in the interval.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>steps amount</dd>
+<dd>number of points n</dd>
 </dl>
 </section>
 </li>
@@ -283,10 +303,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="reborn(double)">
 <h3>reborn</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reborn</span><wbr><span class="parameters">(double&nbsp;h)</span></div>
-<div class="block">Recreate interval with new step size</div>
+<div class="block">Recreates the interval with a new step size while maintaining
+ the same boundaries. The number of points is automatically adjusted.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>h</code> - step size</dd>
+<dd><code>h</code> - new step size</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if h &lt;= 0</dd>
 </dl>
 </section>
 </li>
@@ -294,10 +317,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="reborn(int)">
 <h3>reborn</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reborn</span><wbr><span class="parameters">(int&nbsp;n)</span></div>
-<div class="block">Recreate interval with new steps amount</div>
+<div class="block">Recreates the interval with a new number of points while maintaining
+ the same boundaries. The step size is automatically adjusted.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>n</code> - steps amount</dd>
+<dd><code>n</code> - new number of points</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if n &lt;= 0</dd>
 </dl>
 </section>
 </li>
@@ -305,12 +331,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="x(int)">
 <h3>x</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">x</span><wbr><span class="parameters">(int&nbsp;i)</span></div>
-<div class="block">Get coordinate by index</div>
+<div class="block">Returns the coordinate value at the specified index.
+ The coordinate is calculated as left + i * h.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - index</dd>
+<dd><code>i</code> - index of the point (0 &lt;= i &lt;= n)</dd>
 <dt>Returns:</dt>
-<dd>coordinate</dd>
+<dd>coordinate value at index i</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt; n</dd>
 </dl>
 </section>
 </li>
@@ -318,12 +347,17 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="i(double)">
 <h3>i</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">i</span><wbr><span class="parameters">(double&nbsp;x)</span></div>
-<div class="block">Get index by coordinate</div>
+<div class="block">Returns the index of the point closest to the specified coordinate.
+ If the coordinate is exactly at a grid point, returns its index.
+ If the coordinate is between grid points, returns the index of the
+ leftmost grid point.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x</code> - coordinate</dd>
+<dd><code>x</code> - coordinate value (left &lt;= x &lt;= right)</dd>
 <dt>Returns:</dt>
-<dd>index</dd>
+<dd>index of the closest grid point</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if x &lt; left or x &gt; right</dd>
 </dl>
 </section>
 </li>

@@ -92,13 +92,24 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Record Components:</dt>
-<dd><code><span id="param-x">x</span></code> - space interval</dd>
-<dd><code><span id="param-t">t</span></code> - time interval</dd>
+<dd><code><span id="param-x">x</span></code> - spatial interval defining the domain boundaries and discretization</dd>
+<dd><code><span id="param-t">t</span></code> - temporal interval defining the time range and discretization</dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Area</span>(<a href="Interval.html" title="class in by.andd3dfx.math.space">Interval</a>&nbsp;x, <a href="Interval.html" title="class in by.andd3dfx.math.space">Interval</a>&nbsp;t)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
-<div class="block">Space-time area</div>
+<div class="block">Represents a two-dimensional space-time domain for partial differential equations.
+ This record combines spatial and temporal intervals to define the computational
+ domain where the PDE is solved. It provides methods for coordinate-to-index
+ and index-to-coordinate conversions in both spatial and temporal dimensions.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="Interval.html" title="class in by.andd3dfx.math.space"><code>Interval</code></a></li>
+</ul>
+</dd>
+</dl>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -147,17 +158,17 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#ti(double)" class="member-name-link">ti</a><wbr>(double&nbsp;time)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Index that corresponds to the specified time</div>
+<div class="block">Returns the temporal index closest to the specified time value.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#tLeft()" class="member-name-link">tLeft</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Left border of time interval</div>
+<div class="block">Returns the left boundary of the temporal domain.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#tn()" class="member-name-link">tn</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Steps amount of time interval</div>
+<div class="block">Returns the number of points in the temporal domain.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -167,12 +178,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#tRight()" class="member-name-link">tRight</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Right border of time interval</div>
+<div class="block">Returns the right boundary of the temporal domain.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#tx(int)" class="member-name-link">tx</a><wbr>(int&nbsp;i)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Time that corresponds to the specified index</div>
+<div class="block">Returns the time value at the specified temporal index.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Interval.html" title="class in by.andd3dfx.math.space">Interval</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#x()" class="member-name-link">x</a>()</code></div>
@@ -182,27 +193,27 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#xi(double)" class="member-name-link">xi</a><wbr>(double&nbsp;x)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Index that corresponds to the specified coordinate</div>
+<div class="block">Returns the spatial index closest to the specified coordinate.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#xLeft()" class="member-name-link">xLeft</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Left border of space interval</div>
+<div class="block">Returns the left boundary of the spatial domain.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#xn()" class="member-name-link">xn</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Steps amount of space interval</div>
+<div class="block">Returns the number of points in the spatial domain.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#xRight()" class="member-name-link">xRight</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Right border of space interval</div>
+<div class="block">Returns the right boundary of the spatial domain.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#xx(int)" class="member-name-link">xx</a><wbr>(int&nbsp;i)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Coordinate that corresponds to the specified index</div>
+<div class="block">Returns the spatial coordinate at the specified spatial index.</div>
 </div>
 </div>
 </div>
@@ -246,10 +257,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="tLeft()">
 <h3>tLeft</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">tLeft</span>()</div>
-<div class="block">Left border of time interval</div>
+<div class="block">Returns the left boundary of the temporal domain.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>left border value</dd>
+<dd>left boundary of the time interval</dd>
 </dl>
 </section>
 </li>
@@ -257,10 +268,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="tRight()">
 <h3>tRight</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">tRight</span>()</div>
-<div class="block">Right border of time interval</div>
+<div class="block">Returns the right boundary of the temporal domain.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>right border value</dd>
+<dd>right boundary of the time interval</dd>
 </dl>
 </section>
 </li>
@@ -268,10 +279,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="tn()">
 <h3>tn</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">tn</span>()</div>
-<div class="block">Steps amount of time interval</div>
+<div class="block">Returns the number of points in the temporal domain.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>time steps amount</dd>
+<dd>number of time points</dd>
 </dl>
 </section>
 </li>
@@ -279,12 +290,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="tx(int)">
 <h3>tx</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">tx</span><wbr><span class="parameters">(int&nbsp;i)</span></div>
-<div class="block">Time that corresponds to the specified index</div>
+<div class="block">Returns the time value at the specified temporal index.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - index of time interval</dd>
+<dd><code>i</code> - temporal index (0 &lt;= i &lt;= tn)</dd>
 <dt>Returns:</dt>
-<dd>time</dd>
+<dd>time value at index i</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt; tn</dd>
 </dl>
 </section>
 </li>
@@ -292,12 +305,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="ti(double)">
 <h3>ti</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">ti</span><wbr><span class="parameters">(double&nbsp;time)</span></div>
-<div class="block">Index that corresponds to the specified time</div>
+<div class="block">Returns the temporal index closest to the specified time value.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>time</code> - time value</dd>
+<dd><code>time</code> - time value (tLeft &lt;= time &lt;= tRight)</dd>
 <dt>Returns:</dt>
-<dd>index of time interval</dd>
+<dd>index of the closest time point</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if time &lt; tLeft or time &gt; tRight</dd>
 </dl>
 </section>
 </li>
@@ -305,10 +320,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="xLeft()">
 <h3>xLeft</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">xLeft</span>()</div>
-<div class="block">Left border of space interval</div>
+<div class="block">Returns the left boundary of the spatial domain.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>left border value</dd>
+<dd>left boundary of the spatial interval</dd>
 </dl>
 </section>
 </li>
@@ -316,10 +331,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="xRight()">
 <h3>xRight</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">xRight</span>()</div>
-<div class="block">Right border of space interval</div>
+<div class="block">Returns the right boundary of the spatial domain.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>right border value</dd>
+<dd>right boundary of the spatial interval</dd>
 </dl>
 </section>
 </li>
@@ -327,10 +342,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="xn()">
 <h3>xn</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">xn</span>()</div>
-<div class="block">Steps amount of space interval</div>
+<div class="block">Returns the number of points in the spatial domain.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>space steps amount</dd>
+<dd>number of spatial points</dd>
 </dl>
 </section>
 </li>
@@ -338,12 +353,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="xx(int)">
 <h3>xx</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">xx</span><wbr><span class="parameters">(int&nbsp;i)</span></div>
-<div class="block">Coordinate that corresponds to the specified index</div>
+<div class="block">Returns the spatial coordinate at the specified spatial index.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - index of space interval</dd>
+<dd><code>i</code> - spatial index (0 &lt;= i &lt;= xn)</dd>
 <dt>Returns:</dt>
-<dd>space coordinate</dd>
+<dd>spatial coordinate at index i</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt; xn</dd>
 </dl>
 </section>
 </li>
@@ -351,12 +368,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="xi(double)">
 <h3>xi</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">xi</span><wbr><span class="parameters">(double&nbsp;x)</span></div>
-<div class="block">Index that corresponds to the specified coordinate</div>
+<div class="block">Returns the spatial index closest to the specified coordinate.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>x</code> - space coordinate</dd>
+<dd><code>x</code> - spatial coordinate (xLeft &lt;= x &lt;= xRight)</dd>
 <dt>Returns:</dt>
-<dd>index of space interval</dd>
+<dd>index of the closest spatial point</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if x &lt; xLeft or x &gt; xRight</dd>
 </dl>
 </section>
 </li>

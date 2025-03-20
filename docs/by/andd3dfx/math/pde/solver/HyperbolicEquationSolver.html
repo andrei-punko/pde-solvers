@@ -97,12 +97,16 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">HyperbolicEquationSolver</span>
 <span class="extends-implements">extends <a href="AbstractEquationSolver.html" title="class in by.andd3dfx.math.pde.solver">AbstractEquationSolver</a>&lt;<a href="../equation/HyperbolicEquation.html" title="class in by.andd3dfx.math.pde.equation">HyperbolicEquation</a>&gt;</span></div>
-<div class="block">Hyperbolic equation solver</div>
+<div class="block">Solver for hyperbolic partial differential equations.
+ Implements numerical method for solving hyperbolic equations using
+ an implicit finite difference scheme. The algorithm is based on
+ the three-layer scheme with weights for time discretization.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="tag-list">
 <li><a href="../equation/HyperbolicEquation.html" title="class in by.andd3dfx.math.pde.equation"><code>HyperbolicEquation</code></a></li>
+<li><a href="AbstractEquationSolver.html" title="class in by.andd3dfx.math.pde.solver"><code>AbstractEquationSolver</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -147,7 +151,7 @@ loadScripts(document, 'script');</script>
  double&nbsp;h,
  double&nbsp;tau)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Solve hyperbolic equation using provided space and time steps</div>
+<div class="block">Solves hyperbolic partial differential equation using numerical method.</div>
 </div>
 </div>
 </div>
@@ -189,14 +193,22 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Solution.html" title="class in by.andd3dfx.math.pde.solver">Solution</a>&lt;<a href="../equation/HyperbolicEquation.html" title="class in by.andd3dfx.math.pde.equation">HyperbolicEquation</a>&gt;</span>&nbsp;<span class="element-name">solve</span><wbr><span class="parameters">(<a href="../equation/HyperbolicEquation.html" title="class in by.andd3dfx.math.pde.equation">HyperbolicEquation</a>&nbsp;eqn,
  double&nbsp;h,
  double&nbsp;tau)</span></div>
-<div class="block">Solve hyperbolic equation using provided space and time steps</div>
+<div class="block">Solves hyperbolic partial differential equation using numerical method.
+ The solution is found using a three-layer implicit finite difference scheme.
+ The algorithm consists of two main steps:
+ <ol>
+   <li>Calculation of the first time layer using initial conditions and their derivatives</li>
+   <li>Solution of the three-layer implicit scheme for subsequent time layers</li>
+ </ol></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>eqn</code> - partial difference hyperbolic equation</dd>
-<dd><code>h</code> - space step</dd>
-<dd><code>tau</code> - time step</dd>
+<dd><code>eqn</code> - hyperbolic partial differential equation to solve</dd>
+<dd><code>h</code> - spatial step size (must be positive)</dd>
+<dd><code>tau</code> - temporal step size (must be positive)</dd>
 <dt>Returns:</dt>
-<dd>equation solution</dd>
+<dd>solution containing function values at all grid points</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if parameters h or tau are non-positive</dd>
 </dl>
 </section>
 </li>

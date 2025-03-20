@@ -57,39 +57,39 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/math/pde/solver/AbstractEquationSolver.html" title="class in by.andd3dfx.math.pde.solver">AbstractEquationSolver&lt;E&gt;</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Base class of PD equation solvers.</div>
+<div class="block">Abstract base class for partial differential equation solvers.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab4"><a href="by/andd3dfx/math/pde/solver/AbstractEquationSolver.KappaNu.html" title="class in by.andd3dfx.math.pde.solver">AbstractEquationSolver.KappaNu</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab4">
-<div class="block">Just record to store border condition params</div>
+<div class="block">Record class to store boundary condition parameters for the tridiagonal algorithm.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab4"><a href="by/andd3dfx/math/space/Area.html" title="class in by.andd3dfx.math.space">Area</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab4">
-<div class="block">Space-time area</div>
+<div class="block">Represents a two-dimensional space-time domain for partial differential equations.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="by/andd3dfx/math/pde/border/BorderCondition.html" title="interface in by.andd3dfx.math.pde.border">BorderCondition</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Parent interface for border condition params</div>
+<div class="block">Base interface for boundary conditions in partial differential equations.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/math/pde/border/BorderConditionType1.html" title="class in by.andd3dfx.math.pde.border">BorderConditionType1</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Params for border condition type 1 (definite mode): U(X,t) = U(t)</div>
+<div class="block">Represents a Dirichlet boundary condition (Type 1) for partial differential equations.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/math/pde/border/BorderConditionType2.html" title="class in by.andd3dfx.math.pde.border">BorderConditionType2</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Params for border condition type 2 (definite force): ∂U/∂x(X,t) = ∂U/∂x(t)</div>
+<div class="block">Represents a Neumann boundary condition (Type 2) for partial differential equations.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/math/pde/border/BorderConditionType3.html" title="class in by.andd3dfx.math.pde.border">BorderConditionType3</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Params for border condition type 3 (elastic fixing): ∂U/∂x(X,t) = h*( U(X,t) - Theta(t) )</div>
+<div class="block">Represents a Robin boundary condition (Type 3) for partial differential equations.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/math/pde/equation/Equation.html" title="class in by.andd3dfx.math.pde.equation">Equation</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Base class representing 2nd-order PD equation:</div>
+<div class="block">Abstract base class representing a second-order partial differential equation.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="by/andd3dfx/math/pde/solver/EquationSolver.html" title="interface in by.andd3dfx.math.pde.solver">EquationSolver&lt;E&gt;</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab1">
-<div class="block">Equation solver interface.</div>
+<div class="block">Interface for numerical solvers of partial differential equations.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/util/FileUtil.html" title="class in by.andd3dfx.util">FileUtil</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
@@ -97,35 +97,38 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/math/pde/equation/HyperbolicEquation.html" title="class in by.andd3dfx.math.pde.equation">HyperbolicEquation</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Hyperbolic equation (described oscillation processes):</div>
+<div class="block">Represents a hyperbolic partial differential equation, which typically describes
+ wave propagation and oscillation processes.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/math/pde/solver/HyperbolicEquationSolver.html" title="class in by.andd3dfx.math.pde.solver">HyperbolicEquationSolver</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Hyperbolic equation solver</div>
+<div class="block">Solver for hyperbolic partial differential equations.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/math/space/Interval.html" title="class in by.andd3dfx.math.space">Interval</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Representation of interval (space/time/etc)</div>
+<div class="block">Represents a one-dimensional interval with uniform discretization.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/math/matrix/Matrix2D.html" title="class in by.andd3dfx.math.matrix">Matrix2D</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">2D matrix</div>
+<div class="block">Represents a two-dimensional matrix of real numbers with fixed dimensions.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/math/matrix/MatrixXY.html" title="class in by.andd3dfx.math.matrix">MatrixXY</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">XY matrix</div>
+<div class="block">A specialized matrix for storing pairs of (x,y) coordinates.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/math/pde/equation/ParabolicEquation.html" title="class in by.andd3dfx.math.pde.equation">ParabolicEquation</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Parabolic equation (described heat/mass transfer):</div>
+<div class="block">Represents a parabolic partial differential equation, which typically describes
+ heat conduction or mass diffusion processes.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="by/andd3dfx/math/pde/solver/ParabolicEquationSolver.html" title="class in by.andd3dfx.math.pde.solver">ParabolicEquationSolver</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Parabolic equation solver</div>
+<div class="block">Solver for parabolic partial differential equations.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab4"><a href="by/andd3dfx/math/pde/solver/Solution.html" title="class in by.andd3dfx.math.pde.solver">Solution&lt;E&gt;</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab4">
-<div class="block">Solution record class, which represents solution of equation on definite space-time area</div>
+<div class="block">Record class representing a numerical solution of a partial differential equation
+ on a defined space-time domain.</div>
 </div>
 </div>
 </div>
