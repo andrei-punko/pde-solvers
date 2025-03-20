@@ -3,19 +3,26 @@ package by.andd3dfx.math.pde.solver;
 import by.andd3dfx.math.pde.equation.ParabolicEquation;
 
 /**
- * Parabolic equation solver
+ * Solver for parabolic partial differential equations.
+ * Implements numerical method for solving parabolic equations using
+ * implicit finite difference scheme. The algorithm is based on the Thomas algorithm
+ * for solving tridiagonal systems of linear equations.
  *
  * @see ParabolicEquation
+ * @see AbstractEquationSolver
  */
 public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEquation> {
 
     /**
-     * Solve parabolic equation using provided space and time steps
+     * Solves parabolic partial differential equation using numerical method.
+     * Uses implicit finite difference scheme with weights for derivative approximation.
+     * Solution is found using the Thomas algorithm on each time step.
      *
-     * @param eqn partial difference parabolic equation
-     * @param h   space step
-     * @param tau time step
-     * @return equation solution
+     * @param eqn parabolic partial differential equation to solve
+     * @param h   spatial step size (must be positive)
+     * @param tau time step size (must be positive)
+     * @return equation solution containing function values at all grid points
+     * @throws IllegalArgumentException if parameters h or tau are non-positive
      */
     @Override
     public Solution<ParabolicEquation> solve(ParabolicEquation eqn, double h, double tau) {

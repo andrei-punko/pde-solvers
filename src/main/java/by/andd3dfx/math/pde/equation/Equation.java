@@ -5,13 +5,16 @@ import by.andd3dfx.math.pde.solver.EquationSolver;
 import lombok.Getter;
 
 /**
- * Base class representing 2nd-order PD equation:
+ * Abstract base class representing a second-order partial differential equation.
+ * The equation has the general form:
  * <p>
- * M(x,t,U)*∂²U/∂t² + L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U) where U = U(x,t)
+ * M(x,t,U)*∂²U/∂t² + L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U)
  * <p>
- * It's defined on space-time area [x1,x2]*[0,t2] with border conditions on left and right sides
+ * where U = U(x,t) is the unknown function.
  * <p>
- * Used to avoid code duplication in child classes
+ * The equation is defined on a space-time domain [x1,x2]&times;[0,t2] with boundary conditions
+ * specified on the left and right boundaries. This class provides default implementations
+ * for the coefficient functions that can be overridden by specific equation types.
  *
  * @see BorderCondition
  * @see EquationSolver
@@ -26,13 +29,14 @@ public abstract class Equation {
     private final BorderCondition rightBorderCondition;
 
     /**
-     * Create equation
+     * Creates a new partial differential equation with specified domain and boundary conditions.
      *
-     * @param x1                   left border of space interval
-     * @param x2                   right border of space interval
-     * @param t2                   right border of time interval
-     * @param leftBorderCondition  left border condition
-     * @param rightBorderCondition right border condition
+     * @param x1                   left boundary of the spatial domain
+     * @param x2                   right boundary of the spatial domain
+     * @param t2                   right boundary of the temporal domain
+     * @param leftBorderCondition  boundary condition at x = x1
+     * @param rightBorderCondition boundary condition at x = x2
+     * @throws IllegalArgumentException if x1 &gt;= x2 or t2 &lt;= 0
      */
     public Equation(double x1, double x2, double t2,
                     BorderCondition leftBorderCondition,
@@ -45,70 +49,87 @@ public abstract class Equation {
     }
 
     /**
-     * Initial condition U(x) at the moment t=0
+     * Returns the initial condition U(x) at time t = 0.
+     * This method should be overridden by specific equation types to provide
+     * the actual initial condition.
      *
-     * @param x space coordinate
-     * @return U(x) value
+     * @param x spatial coordinate
+     * @return initial value U(x,0)
      */
     public double gU0(double x) {
         return 0;
     }
 
     /**
-     * Coefficient M(x,t,U) of equation for 2nd-order time derivative
+     * Returns the coefficient M(x,t,U) of the second-order time derivative term.
+     * This coefficient represents the mass or inertia term in the equation.
+     * The default implementation returns 0, which should be overridden for equations
+     * containing second-order time derivatives.
      *
-     * @param x space coordinate
-     * @param t time
-     * @param U U value
-     * @return M(x,t,U) value
+     * @param x spatial coordinate
+     * @param t time coordinate
+     * @param U value of the solution at (x,t)
+     * @return coefficient M(x,t,U)
      */
     public double gM(double x, double t, double U) {
         return 0;
     }
 
     /**
-     * Coefficient L(x,t,U) of equation for 1st-order time derivative
+     * Returns the coefficient L(x,t,U) of the first-order time derivative term.
+     * This coefficient represents damping or dissipation in the equation.
+     * The default implementation returns 0, which should be overridden for equations
+     * containing first-order time derivatives.
      *
-     * @param x space coordinate
-     * @param t time
-     * @param U U value
-     * @return L value
+     * @param x spatial coordinate
+     * @param t time coordinate
+     * @param U value of the solution at (x,t)
+     * @return coefficient L(x,t,U)
      */
     public double gL(double x, double t, double U) {
         return 0;
     }
 
     /**
-     * Coefficient K(x,t,U) of equation for 2nd-order space derivative
+     * Returns the coefficient K(x,t,U) of the second-order space derivative term.
+     * This coefficient represents diffusion or conductivity in the equation.
+     * The default implementation returns 1, which should be overridden for equations
+     * with variable diffusion coefficients.
      *
-     * @param x space coordinate
-     * @param t time
-     * @param U U value
-     * @return K(x,t,U) value
+     * @param x spatial coordinate
+     * @param t time coordinate
+     * @param U value of the solution at (x,t)
+     * @return coefficient K(x,t,U)
      */
     public double gK(double x, double t, double U) {
         return 1;
     }
 
     /**
-     * Coefficient V(x,t,U) of equation for 1st-order space derivative
+     * Returns the coefficient V(x,t,U) of the first-order space derivative term.
+     * This coefficient represents convection or advection in the equation.
+     * The default implementation returns 0, which should be overridden for equations
+     * containing convective terms.
      *
-     * @param x space coordinate
-     * @param t time
-     * @param U U value
-     * @return V(x,t,U) value
+     * @param x spatial coordinate
+     * @param t time coordinate
+     * @param U value of the solution at (x,t)
+     * @return coefficient V(x,t,U)
      */
     public double gV(double x, double t, double U) {
         return 0;
     }
 
     /**
-     * Free addendum F(x,t,U) of equation
+     * Returns the source term F(x,t,U) of the equation.
+     * This term represents external forces or sources in the equation.
+     * The default implementation returns 0, which should be overridden for equations
+     * containing source terms.
      *
-     * @param x space coordinate
-     * @param t time
-     * @param U U value
-     * @return F(x,t,U) value
+     * @param x spatial coordinate
+     * @param t time coordinate
+     * @param U value of the solution at (x,t)
+     * @return source term F(x,t,U)
      */
     public double gF(double x, double t, double U) {
         return 0;

@@ -10,20 +10,25 @@ import by.andd3dfx.math.space.Area;
 import by.andd3dfx.math.space.Interval;
 
 /**
- * Base class of PD equation solvers. Used to avoid code duplication in child classes
+ * Abstract base class for partial differential equation solvers.
+ * Provides common functionality and utility methods used by specific equation solvers.
+ * Implements the core numerical methods and algorithms shared across different types of PDE solvers.
  *
- * @param <E> equation class
+ * @param <E> the type of equation this solver handles
  * @see Equation
+ * @see EquationSolver
  */
 public abstract class AbstractEquationSolver<E extends Equation> implements EquationSolver<E> {
 
     /**
-     * Build space-time area where equation will be solved
+     * Builds a space-time computational domain for the equation solution.
+     * Creates a grid with specified spatial and temporal step sizes.
      *
-     * @param eqn equation
-     * @param h   space step
-     * @param tau time step
-     * @return built area
+     * @param eqn the equation to solve
+     * @param h   spatial step size (must be positive)
+     * @param tau temporal step size (must be positive)
+     * @return the computational domain with defined grid points
+     * @throws IllegalArgumentException if parameters h or tau are non-positive
      */
     protected Area buildArea(Equation eqn, double h, double tau) {
         return new Area(
@@ -33,11 +38,13 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
     }
 
     /**
-     * Initialization: create space for solution, set initial value
+     * Initializes the solution matrix with initial conditions.
+     * Creates a matrix to store the solution and sets the initial values
+     * based on the equation's initial condition.
      *
-     * @param eqn  equation
-     * @param area space-time area on which we want to find solution
-     * @return initialized matrix
+     * @param eqn  the equation to solve
+     * @param area the computational domain where solution will be found
+     * @return initialized matrix with initial conditions
      */
     protected Matrix2D prepare(Equation eqn, Area area) {
         // Create space for equation solution
@@ -50,19 +57,25 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
     }
 
     /**
-     * Solve tridiagonal system of algebraic equations:
-     * A[i]*y[i-1] - C[i]*y[i] + B[i]*y[i+1] = -F[i], 0&lt;i&lt;N
-     * using tridiagonal matrix algorithm (also known as the Thomas algorithm).
+     * Solves a tridiagonal system of linear algebraic equations using the Thomas algorithm.
+     * The system has the form: A[i]*y[i-1] - C[i]*y[i] + B[i]*y[i+1] = -F[i], 0&lt;i&lt;N
      * <p>
-     * Variable notations - according to "Тихонов, Самарский - Уравнения математической физики", p.590-592
+     * The algorithm consists of two phases:
+     * <ol>
+     *   <li>Forward phase: computes coefficients Alpha[i] and Beta[i]</li>
+     *   <li>Backward phase: computes the solution Y[i]</li>
+     * </ol>
+     * <p>
+     * Variable notations follow "Tikhonov, Samarskii - Equations of Mathematical Physics", p.590-592
      *
-     * @param A         array of equation coefficients A
-     * @param B         array of equation coefficients B
-     * @param C         array of equation coefficients C
-     * @param F         array of equation coefficients F
-     * @param leftCond  params record of left border condition
-     * @param rightCond params record of right border condition
-     * @return solution
+     * @param A         coefficients for y[i-1] terms
+     * @param B         coefficients for y[i+1] terms
+     * @param C         coefficients for y[i] terms
+     * @param F         right-hand side terms
+     * @param leftCond  left boundary condition parameters
+     * @param rightCond right boundary condition parameters
+     * @return solution vector Y[i]
+     * @throws IllegalArgumentException if arrays have different lengths or invalid coefficients
      */
     public static double[] solve3DiagonalEquationsSystem(double[] A, double[] B, double[] C, double[] F,
                                                          KappaNu leftCond, KappaNu rightCond) {
@@ -92,13 +105,14 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
     }
 
     /**
-     * Calculate Kappa and Nu params corresponding to provided border condition.
-     * These params used by tri-diagonal algorithm.
+     * Calculates Kappa and Nu parameters for the tridiagonal algorithm based on boundary conditions.
+     * These parameters are used to incorporate different types of boundary conditions into the solution.
      *
-     * @param borderCondition border condition
-     * @param h               space step
-     * @param time            time
-     * @return record with Kappa and Nu values
+     * @param borderCondition the boundary condition to process
+     * @param h              spatial step size
+     * @param time           current time point
+     * @return KappaNu record containing calculated parameters
+     * @throws IllegalStateException if an unsupported boundary condition type is encountered
      */
     protected KappaNu calcKappaNu(BorderCondition borderCondition, double h, double time) {
         return switch (borderCondition) {
@@ -114,10 +128,10 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
     }
 
     /**
-     * Just record to store border condition params
+     * Record class to store boundary condition parameters for the tridiagonal algorithm.
      *
-     * @param kappa
-     * @param nu
+     * @param kappa coefficient for the boundary condition
+     * @param nu    right-hand side term for the boundary condition
      */
     public record KappaNu(double kappa, double nu) {
     }

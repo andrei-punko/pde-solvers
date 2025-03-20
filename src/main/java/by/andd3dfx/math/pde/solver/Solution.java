@@ -7,22 +7,36 @@ import by.andd3dfx.math.pde.equation.Equation;
 import by.andd3dfx.util.FileUtil;
 
 /**
- * Solution record class, which represents solution of equation on definite space-time area
+ * Record class representing a numerical solution of a partial differential equation
+ * on a defined space-time domain. The solution is stored as a 2D matrix where rows
+ * represent time layers and columns represent spatial points.
  *
- * @param equation equation to solve
- * @param area     space-time area
- * @param solution equation solution
- * @param <E>      particular equation type
+ * @param equation the partial differential equation that was solved
+ * @param area the space-time domain where the solution was found
+ * @param solution the numerical solution stored as a 2D matrix
+ * @param <E> the type of equation that was solved
  * @see EquationSolver
+ * @see Matrix2D
+ * @see Area
  */
-public record Solution<E extends Equation>(E equation, Area area, Matrix2D solution) {
+public record Solution<E extends Equation>(
+    /** The partial differential equation that was solved */
+    E equation,
+    /** The space-time domain where the solution was found */
+    Area area,
+    /** The numerical solution stored as a 2D matrix */
+    Matrix2D solution
+) {
 
     /**
-     * Save data U(x,t_i) for asked time moments [t_i].
-     * So in result we get some set of slices for several time moments
+     * Saves solution data U(x,t) for specified time moments to a file.
+     * Creates a set of spatial slices of the solution at different time points.
+     * Each line in the output file contains spatial coordinates followed by
+     * solution values at different time moments.
      *
-     * @param fileName file name
-     * @param t        times array
+     * @param fileName name of the file to save the data
+     * @param t        array of time moments to save
+     * @throws IllegalArgumentException if any time moment is outside the solution domain
      */
     public void sUt(String fileName, double[] t) {
         for (var t_i : t) {
@@ -41,21 +55,26 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix2D solut
     }
 
     /**
-     * Save data U(x) for asked time moment
+     * Saves solution data U(x) for a single time moment to a file.
+     * Creates a spatial slice of the solution at the specified time.
      *
-     * @param fileName file name
-     * @param t        time
+     * @param fileName name of the file to save the data
+     * @param t        time moment to save
+     * @throws IllegalArgumentException if the time moment is outside the solution domain
      */
     public void sUt(String fileName, double t) {
         sUt(fileName, new double[]{t});
     }
 
     /**
-     * Save data U(x_i, t) for asked space coordinates [x_i].
-     * So in result we get some set of slices for several space coordinates
+     * Saves solution data U(x,t) for specified spatial coordinates to a file.
+     * Creates a set of temporal slices of the solution at different spatial points.
+     * Each line in the output file contains time coordinates followed by
+     * solution values at different spatial points.
      *
-     * @param fileName file name
-     * @param x        space coordinates array
+     * @param fileName name of the file to save the data
+     * @param x        array of spatial coordinates to save
+     * @throws IllegalArgumentException if any spatial coordinate is outside the solution domain
      */
     public void sUx(String fileName, double[] x) {
         for (var x_i : x) {
@@ -74,30 +93,36 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix2D solut
     }
 
     /**
-     * Save data U(t) for definite space coordinate
+     * Saves solution data U(t) for a single spatial coordinate to a file.
+     * Creates a temporal slice of the solution at the specified spatial point.
      *
-     * @param fileName file name
-     * @param x        space coordinate
+     * @param fileName name of the file to save the data
+     * @param x        spatial coordinate to save
+     * @throws IllegalArgumentException if the spatial coordinate is outside the solution domain
      */
     public void sUx(String fileName, double x) {
         sUx(fileName, new double[]{x});
     }
 
     /**
-     * Get slice U(x) for definite time
+     * Retrieves a spatial slice of the solution at a specified time moment.
+     * Returns a matrix containing spatial coordinates and corresponding solution values.
      *
-     * @param t time
-     * @return U(x) slice
+     * @param t time moment to get the slice for
+     * @return MatrixXY containing the spatial slice of the solution
+     * @throws IllegalArgumentException if the time moment is outside the solution domain
      */
     public MatrixXY gUt(double t) {
         return gUt(area.ti(t));
     }
 
     /**
-     * Get slice U(x) for definite time which corresponds to layer `it` in solution matrix
+     * Retrieves a spatial slice of the solution at a specified time layer index.
+     * Returns a matrix containing spatial coordinates and corresponding solution values.
      *
-     * @param it index of time layer in solution matrix
-     * @return U(x) slice
+     * @param it index of the time layer in the solution matrix (0 &lt;= it &lt; M)
+     * @return MatrixXY containing the spatial slice of the solution
+     * @throws IllegalArgumentException if the time layer index is out of bounds
      */
     public MatrixXY gUt(int it) {
         int M = solution.getM();
@@ -113,20 +138,24 @@ public record Solution<E extends Equation>(E equation, Area area, Matrix2D solut
     }
 
     /**
-     * Get slice U(t) for definite space coordinate
+     * Retrieves a temporal slice of the solution at a specified spatial coordinate.
+     * Returns a matrix containing time coordinates and corresponding solution values.
      *
-     * @param x space coordinate
-     * @return U(t) slice
+     * @param x spatial coordinate to get the slice for
+     * @return MatrixXY containing the temporal slice of the solution
+     * @throws IllegalArgumentException if the spatial coordinate is outside the solution domain
      */
     public MatrixXY gUx(double x) {
         return gUx(area.xi(x));
     }
 
     /**
-     * Get slice U(t) for definite space coordinate which corresponds to column `ix` in solution matrix
+     * Retrieves a temporal slice of the solution at a specified spatial column index.
+     * Returns a matrix containing time coordinates and corresponding solution values.
      *
-     * @param ix index of space column in solution matrix
-     * @return U(t) slice
+     * @param ix index of the spatial column in the solution matrix (0 &lt;= ix &lt; N)
+     * @return MatrixXY containing the temporal slice of the solution
+     * @throws IllegalArgumentException if the spatial column index is out of bounds
      */
     public MatrixXY gUx(int ix) {
         int N = solution.getN();

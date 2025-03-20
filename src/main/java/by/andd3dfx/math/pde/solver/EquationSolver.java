@@ -3,20 +3,25 @@ package by.andd3dfx.math.pde.solver;
 import by.andd3dfx.math.pde.equation.Equation;
 
 /**
- * Equation solver interface. All solvers should implement it
+ * Interface for numerical solvers of partial differential equations.
+ * Defines the contract that all PDE solvers must implement to provide
+ * numerical solutions for different types of partial differential equations.
  *
- * @param <E> particular equation type
+ * @param <E> the type of partial differential equation this solver handles
  * @see Equation
+ * @see Solution
  */
 public interface EquationSolver<E extends Equation> {
 
     /**
-     * Solve equation using provided space and time steps
+     * Solves a partial differential equation using numerical methods.
+     * The solution is found on a space-time grid defined by the spatial and temporal step sizes.
      *
-     * @param eqn partial difference equation
-     * @param h   space step
-     * @param tau time step
-     * @return equation solution
+     * @param eqn the partial differential equation to solve
+     * @param h   spatial step size (must be positive)
+     * @param tau temporal step size (must be positive)
+     * @return Solution containing the numerical solution on the space-time grid
+     * @throws IllegalArgumentException if parameters h or tau are non-positive
      */
     Solution<E> solve(E eqn, double h, double tau);
 }

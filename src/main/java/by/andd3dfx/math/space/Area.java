@@ -1,102 +1,110 @@
 package by.andd3dfx.math.space;
 
 /**
- * Space-time area
+ * Represents a two-dimensional space-time domain for partial differential equations.
+ * This record combines spatial and temporal intervals to define the computational
+ * domain where the PDE is solved. It provides methods for coordinate-to-index
+ * and index-to-coordinate conversions in both spatial and temporal dimensions.
  *
- * @param x space interval
- * @param t time interval
+ * @param x spatial interval defining the domain boundaries and discretization
+ * @param t temporal interval defining the time range and discretization
+ * @see Interval
  */
 public record Area(Interval x, Interval t) {
 
     /**
-     * Left border of time interval
+     * Returns the left boundary of the temporal domain.
      *
-     * @return left border value
+     * @return left boundary of the time interval
      */
     public double tLeft() {
         return t.left();
     }
 
     /**
-     * Right border of time interval
+     * Returns the right boundary of the temporal domain.
      *
-     * @return right border value
+     * @return right boundary of the time interval
      */
     public double tRight() {
         return t.right();
     }
 
     /**
-     * Steps amount of time interval
+     * Returns the number of points in the temporal domain.
      *
-     * @return time steps amount
+     * @return number of time points
      */
     public int tn() {
         return t.n();
     }
 
     /**
-     * Time that corresponds to the specified index
+     * Returns the time value at the specified temporal index.
      *
-     * @param i index of time interval
-     * @return time
+     * @param i temporal index (0 &lt;= i &lt;= tn)
+     * @return time value at index i
+     * @throws IllegalArgumentException if i &lt; 0 or i &gt; tn
      */
     public double tx(int i) {
         return t.x(i);
     }
 
     /**
-     * Index that corresponds to the specified time
+     * Returns the temporal index closest to the specified time value.
      *
-     * @param time time value
-     * @return index of time interval
+     * @param time time value (tLeft &lt;= time &lt;= tRight)
+     * @return index of the closest time point
+     * @throws IllegalArgumentException if time &lt; tLeft or time &gt; tRight
      */
     public int ti(double time) {
         return t.i(time);
     }
 
     /**
-     * Left border of space interval
+     * Returns the left boundary of the spatial domain.
      *
-     * @return left border value
+     * @return left boundary of the spatial interval
      */
     public double xLeft() {
         return x.left();
     }
 
     /**
-     * Right border of space interval
+     * Returns the right boundary of the spatial domain.
      *
-     * @return right border value
+     * @return right boundary of the spatial interval
      */
     public double xRight() {
         return x.right();
     }
 
     /**
-     * Steps amount of space interval
+     * Returns the number of points in the spatial domain.
      *
-     * @return space steps amount
+     * @return number of spatial points
      */
     public int xn() {
         return x.n();
     }
 
     /**
-     * Coordinate that corresponds to the specified index
+     * Returns the spatial coordinate at the specified spatial index.
      *
-     * @param i index of space interval
-     * @return space coordinate
+     * @param i spatial index (0 &lt;= i &lt;= xn)
+     * @return spatial coordinate at index i
+     * @throws IllegalArgumentException if i &lt; 0 or i &gt; xn
      */
     public double xx(int i) {
         return x.x(i);
     }
 
     /**
-     * Index that corresponds to the specified coordinate
+     * Returns the spatial index closest to the specified coordinate.
      *
-     * @param x space coordinate
-     * @return index of space interval
+     * @param x spatial coordinate (xLeft &lt;= x &lt;= xRight)
+     * @return index of the closest spatial point
+     * @throws IllegalArgumentException if x &lt; xLeft or x &gt; xRight
      */
     public int xi(double x) {
         return this.x.i(x);

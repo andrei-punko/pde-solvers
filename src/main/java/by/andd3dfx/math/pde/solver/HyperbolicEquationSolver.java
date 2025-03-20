@@ -3,19 +3,30 @@ package by.andd3dfx.math.pde.solver;
 import by.andd3dfx.math.pde.equation.HyperbolicEquation;
 
 /**
- * Hyperbolic equation solver
+ * Solver for hyperbolic partial differential equations.
+ * Implements numerical method for solving hyperbolic equations using
+ * an implicit finite difference scheme. The algorithm is based on
+ * the three-layer scheme with weights for time discretization.
  *
  * @see HyperbolicEquation
+ * @see AbstractEquationSolver
  */
 public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicEquation> {
 
     /**
-     * Solve hyperbolic equation using provided space and time steps
+     * Solves hyperbolic partial differential equation using numerical method.
+     * The solution is found using a three-layer implicit finite difference scheme.
+     * The algorithm consists of two main steps:
+     * <ol>
+     *   <li>Calculation of the first time layer using initial conditions and their derivatives</li>
+     *   <li>Solution of the three-layer implicit scheme for subsequent time layers</li>
+     * </ol>
      *
-     * @param eqn partial difference hyperbolic equation
-     * @param h   space step
-     * @param tau time step
-     * @return equation solution
+     * @param eqn hyperbolic partial differential equation to solve
+     * @param h   spatial step size (must be positive)
+     * @param tau temporal step size (must be positive)
+     * @return solution containing function values at all grid points
+     * @throws IllegalArgumentException if parameters h or tau are non-positive
      */
     @Override
     public Solution<HyperbolicEquation> solve(HyperbolicEquation eqn, double h, double tau) {
@@ -85,6 +96,17 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
         return new Solution<>(eqn, area, solution);
     }
 
+    /**
+     * Calculates the solution value at the first time layer for a given spatial point.
+     * This calculation uses the initial conditions and their derivatives to approximate
+     * the solution at time t = tau.
+     *
+     * @param eqn hyperbolic equation to solve
+     * @param tau temporal step size
+     * @param u   initial value at the point
+     * @param x   spatial coordinate
+     * @return approximated solution value at the first time layer
+     */
     private double calcFirstLayerValue(HyperbolicEquation eqn, double tau, double u, double x) {
         return u + tau * (eqn.gdU_dt0(x) + tau / 2. / eqn.gM(x, 0, u) * eqn.gF(x, 0, u));
     }

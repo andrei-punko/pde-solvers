@@ -1,15 +1,24 @@
 package by.andd3dfx.math.pde.border;
 
 /**
- * Params for border condition type 1 (definite mode): U(X,t) = U(t)
+ * Represents a Dirichlet boundary condition (Type 1) for partial differential equations.
+ * This condition specifies the value of the solution at the boundary:
+ * <p>
+ * U(x,t) = U(t) at x = x₁ or x = x₂
+ * <p>
+ * where U(t) is a prescribed function of time. This is the simplest type of boundary
+ * condition, commonly used when the boundary value is known or controlled.
+ *
+ * @see BorderCondition
  */
 public class BorderConditionType1 implements BorderCondition {
 
     /**
-     * U(t) value in asked time moment on this border
+     * Returns the prescribed value of the solution at the boundary at time t.
+     * This method should be overridden to provide the actual boundary value function.
      *
-     * @param t time
-     * @return U value
+     * @param t time coordinate
+     * @return prescribed value U(t) at the boundary
      */
     public double gU(double t) {
         return 0;
