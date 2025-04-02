@@ -103,6 +103,9 @@ Online documentation is available [here](https://andrei-punko.github.io/pde-solv
 ### Solution Utilities
 - [Solution data saving and loading](src/test/java/by/andd3dfx/math/pde/solver/SolutionTest.java)
 
+## Making new release
+See [instruction](.github/how-to-make-GH-release.md)
+
 ## License
 
 MIT License
