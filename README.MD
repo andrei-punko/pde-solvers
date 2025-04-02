@@ -6,7 +6,6 @@
 [![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://andrei-punko.github.io/pde-solvers/)
 
 A library for numerical solution of partial differential equations (PDE). 
-This is a port from C++ code from my [math-library](https://github.com/andrei-punko/math-library) repository.
 
 ## Features
 
