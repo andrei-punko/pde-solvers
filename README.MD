@@ -9,24 +9,24 @@ A library for numerical solution of partial differential equations (PDE).
 
 ## Features
 
-- Solution of parabolic equations of the form:
+### Solution of parabolic equations of the form:
   ```
   L(x,t,U)*∂U/∂t = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U)
   ```
   where U = U(x,t) is the unknown function (temperature, concentration, etc.)
 
-- Solution of hyperbolic equations of the form:
+### Solution of hyperbolic equations of the form:
   ```
   M(x,t,U)*∂²U/∂t² = ∂U( K(x,t,U)*∂U/∂x )/∂x + V(x,t,U)*∂U/∂x + F(x,t,U)
   ```
   where U = U(x,t) is the unknown function (displacement of string, etc.)
 
-- Support for various boundary conditions:
+### Support for various boundary conditions:
   - Dirichlet (function value at the boundary)
   - Neumann (derivative value at the boundary)
   - Robin (linear combination of function value and its derivative)
 
-- Efficient numerical methods:
+### Efficient numerical methods:
   - Finite difference method for derivative approximation
   - Thomas algorithm for solving tridiagonal systems of linear equations
 
@@ -103,7 +103,7 @@ Online documentation is available [here](https://andrei-punko.github.io/pde-solv
 ### Solution Utilities
 - [Solution data saving and loading](src/test/java/by/andd3dfx/math/pde/solver/SolutionTest.java)
 
-## Making new release
+## Making new release on GitHub
 See [instruction](.github/how-to-make-GH-release.md)
 
 ## License
