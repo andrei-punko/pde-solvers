@@ -11,7 +11,7 @@ import java.util.Arrays;
  * a single-dimensional array for better memory locality. It supports basic
  * matrix operations such as element access, row/column swapping, and finding
  * minimum/maximum values.
- *
+ * <p>
  * The matrix is stored internally as a single-dimensional array in row-major order,
  * where the element at position (i,j) is stored at index i*n + j in the data array.
  */
@@ -40,19 +40,6 @@ public class Matrix2D {
     }
 
     /**
-     * Sets a value at the specified position in the underlying array.
-     * This method is primarily used for sequential access to matrix elements.
-     *
-     * @param i index in the underlying array (0 &lt;= i &lt; m*n)
-     * @param value value to set
-     * @throws IllegalArgumentException if i &lt; 0 or i &gt;= m*n
-     */
-    public void set(int i, double value) {
-        assert (0 <= i && i < data.length);
-        data[i] = value;
-    }
-
-    /**
      * Sets a value at the specified matrix position (i,j).
      *
      * @param i row index (0 &lt;= i &lt; m)
@@ -72,7 +59,7 @@ public class Matrix2D {
      * @param arr array of n values to set in the row
      * @throws IllegalArgumentException if i &lt; 0 or i &gt;= m or arr.length != n
      */
-    public void set(int i, double[] arr) {
+    public void setRow(int i, double[] arr) {
         assert (0 <= i && i < m && arr.length == n);
         System.arraycopy(arr, 0, data, i * n, arr.length);
     }
@@ -84,7 +71,7 @@ public class Matrix2D {
      * @return array containing the row elements
      * @throws IllegalArgumentException if i &lt; 0 or i &gt;= m
      */
-    public double[] get(int i) {
+    public double[] getRow(int i) {
         assert (0 <= i && i < m);
         return Arrays.copyOfRange(data, i * n, (i + 1) * n);
     }
@@ -124,11 +111,9 @@ public class Matrix2D {
      * Fills all elements of the matrix with the specified value.
      *
      * @param d value to fill the matrix with
-     * @return this matrix (for method chaining)
      */
-    public Matrix2D fill(double d) {
+    public void fill(double d) {
         Arrays.fill(data, d);
-        return this;
     }
 
     /**

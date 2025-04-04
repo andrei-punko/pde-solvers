@@ -86,7 +86,7 @@ public class FileUtil {
             }
         } else {
             for (int i = 0; i < m.getM(); i++) {
-                var string = Arrays.stream(m.get(i))
+                var string = Arrays.stream(m.getRow(i))
                         .mapToObj(String::valueOf)
                         .collect(Collectors.joining(" "));
                 sb.append(string).append("\n");

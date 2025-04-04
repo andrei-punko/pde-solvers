@@ -27,23 +27,19 @@ class Matrix2DTest {
     }
 
     @Test
-    void setNGet() {
+    void setRowNGetRow() {
         var m = new Matrix2D(2, 3);
-        m.set(0, 7);
-        m.set(1, 3);
-        m.set(2, -3);
-        m.set(1, new double[]{78, 79, 90});
+        m.setRow(0, new double[]{7, 3, -3});
+        m.setRow(1, new double[]{78, 79, 90});
 
-        assertThat(m.get(0)).isEqualTo(new double[]{7, 3, -3});
-        assertThat(m.get(1)).isEqualTo(new double[]{78, 79, 90});
+        assertThat(m.getRow(0)).isEqualTo(new double[]{7, 3, -3});
+        assertThat(m.getRow(1)).isEqualTo(new double[]{78, 79, 90});
     }
 
     @Test
     void getWithInvalidParams() {
         var m = new Matrix2D(2, 3);
 
-        assertThrows(AssertionError.class, () -> m.get(-1));
-        assertThrows(AssertionError.class, () -> m.get(2 * 3));
         assertThrows(AssertionError.class, () -> m.get(-1, -1));
         assertThrows(AssertionError.class, () -> m.get(-1, 0));
         assertThrows(AssertionError.class, () -> m.get(-1, 3));
@@ -55,11 +51,17 @@ class Matrix2DTest {
     }
 
     @Test
+    void getRowWithInvalidParams() {
+        var m = new Matrix2D(2, 3);
+
+        assertThrows(AssertionError.class, () -> m.getRow(-1));
+        assertThrows(AssertionError.class, () -> m.getRow(2 * 3));
+    }
+
+    @Test
     void setWithInvalidParams() {
         var m = new Matrix2D(2, 3);
 
-        assertThrows(AssertionError.class, () -> m.set(-1, 21));
-        assertThrows(AssertionError.class, () -> m.set(2 * 3, 21));
         assertThrows(AssertionError.class, () -> m.set(-1, -1, 21));
         assertThrows(AssertionError.class, () -> m.set(-1, 0, 21));
         assertThrows(AssertionError.class, () -> m.set(-1, 3, 21));
@@ -68,6 +70,14 @@ class Matrix2DTest {
         assertThrows(AssertionError.class, () -> m.set(2, -1, 21));
         assertThrows(AssertionError.class, () -> m.set(2, 0, 21));
         assertThrows(AssertionError.class, () -> m.set(2, 3, 21));
+    }
+
+    @Test
+    void setRowWithInvalidParams() {
+        var m = new Matrix2D(2, 3);
+
+        assertThrows(AssertionError.class, () -> m.setRow(-1, new double[]{21}));
+        assertThrows(AssertionError.class, () -> m.setRow(2 * 3, new double[]{21}));
     }
 
     @Test
@@ -170,18 +180,17 @@ class Matrix2DTest {
     void fill() {
         var m = new Matrix2D(2, 3);
 
-        var result = m.fill(4.5);
+        m.fill(4.5);
 
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
                 assertThat(m.get(i, j)).isEqualTo(4.5);
             }
         }
-        assertThat(result).isEqualTo(m);
     }
 
     @Test
-    void setArrayIntoDefinitePositionOfDataArray() {
+    void setNSetRow() {
         var m = new Matrix2D(2, 4);
         m.fill(3);
         m.set(0, 0, 5);
@@ -189,7 +198,7 @@ class Matrix2DTest {
         m.set(1, 0, 9);
         m.set(1, 3, 1);
 
-        m.set(1, new double[]{9, 8, 7, 6});
+        m.setRow(1, new double[]{9, 8, 7, 6});
 
         assertThat(m.get(0, 0)).isEqualTo(5);
         assertThat(m.get(0, 1)).isEqualTo(3);
@@ -202,15 +211,15 @@ class Matrix2DTest {
     }
 
     @Test
-    void setArrayWithWrongParams() {
+    void setRowWithWrongParams() {
         var m = new Matrix2D(2, 3);
 
-        assertThrows(AssertionError.class, () -> m.set(-1, new double[7])); // wrong index (too small), wrong array size
-        assertThrows(AssertionError.class, () -> m.set(-1, new double[3])); // wrong index (too small)
-        assertThrows(AssertionError.class, () -> m.set(0, new double[7]));  // wrong array size
-        assertDoesNotThrow(() -> m.set(0, new double[3]));
-        assertDoesNotThrow(() -> m.set(1, new double[3]));
-        assertThrows(AssertionError.class, () -> m.set(2, new double[3]));  // wrong index (too big)
-        assertThrows(AssertionError.class, () -> m.set(2, new double[2]));  // wrong index (too big), wrong array size
+        assertThrows(AssertionError.class, () -> m.setRow(-1, new double[7])); // wrong index (too small), wrong array size
+        assertThrows(AssertionError.class, () -> m.setRow(-1, new double[3])); // wrong index (too small)
+        assertThrows(AssertionError.class, () -> m.setRow(0, new double[7]));  // wrong array size
+        assertDoesNotThrow(() -> m.setRow(0, new double[3]));
+        assertDoesNotThrow(() -> m.setRow(1, new double[3]));
+        assertThrows(AssertionError.class, () -> m.setRow(2, new double[3]));  // wrong index (too big)
+        assertThrows(AssertionError.class, () -> m.setRow(2, new double[2]));  // wrong index (too big), wrong array size
     }
 }

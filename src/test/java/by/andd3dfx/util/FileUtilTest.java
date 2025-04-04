@@ -47,8 +47,8 @@ class FileUtilTest {
     void saveMatrixInOriginalView() throws IOException {
         final var fileName = "matrix-original.txt";
         var m = new Matrix2D(2, 3);
-        m.set(0, new double[]{50, 51, 52});
-        m.set(1, new double[]{65, 66, 67});
+        m.setRow(0, new double[]{50, 51, 52});
+        m.setRow(1, new double[]{65, 66, 67});
 
         FileUtil.save(m, BUILD_PATH + fileName, false);
 
@@ -59,8 +59,8 @@ class FileUtilTest {
     void saveMatrixWithConversionRowsToColumns() throws IOException {
         final var fileName = "matrix-not-original.txt";
         var m = new Matrix2D(2, 3);
-        m.set(0, new double[]{50, 51, 52});
-        m.set(1, new double[]{65, 66, 67});
+        m.setRow(0, new double[]{50, 51, 52});
+        m.setRow(1, new double[]{65, 66, 67});
 
         FileUtil.save(m, BUILD_PATH + fileName, true);
 
