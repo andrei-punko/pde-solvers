@@ -100,7 +100,7 @@ loadScripts(document, 'script');</script>
  a single-dimensional array for better memory locality. It supports basic
  matrix operations such as element access, row/column swapping, and finding
  minimum/maximum values.
-
+ <p>
  The matrix is stored internally as a single-dimensional array in row-major order,
  where the element at position (i,j) is stored at index i*n + j in the data array.</div>
 </section>
@@ -133,21 +133,21 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix2D.html" title="class in by.andd3dfx.math.matrix">Matrix2D</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fill(double)" class="member-name-link">fill</a><wbr>(double&nbsp;d)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Fills all elements of the matrix with the specified value.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(int)" class="member-name-link">get</a><wbr>(int&nbsp;i)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns a copy of the specified row as an array.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(int,int)" class="member-name-link">get</a><wbr>(int&nbsp;i,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(int,int)" class="member-name-link">get</a><wbr>(int&nbsp;i,
  int&nbsp;j)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value at the specified matrix position (i,j).</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double[]</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRow(int)" class="member-name-link">getRow</a><wbr>(int&nbsp;i)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a copy of the specified row as an array.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#max()" class="member-name-link">max</a>()</code></div>
@@ -160,18 +160,6 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the minimum value stored in the matrix.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(int,double)" class="member-name-link">set</a><wbr>(int&nbsp;i,
- double&nbsp;value)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sets a value at the specified position in the underlying array.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(int,double%5B%5D)" class="member-name-link">set</a><wbr>(int&nbsp;i,
- double[]&nbsp;arr)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sets an entire row of the matrix using the provided array.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(int,int,double)" class="member-name-link">set</a><wbr>(int&nbsp;i,
  int&nbsp;j,
  double&nbsp;value)</code></div>
@@ -179,15 +167,21 @@ loadScripts(document, 'script');</script>
 <div class="block">Sets a value at the specified matrix position (i,j).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#swapCols(int,int)" class="member-name-link">swapCols</a><wbr>(int&nbsp;n1,
- int&nbsp;n2)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRow(int,double%5B%5D)" class="member-name-link">setRow</a><wbr>(int&nbsp;i,
+ double[]&nbsp;arr)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Swaps two columns of the matrix.</div>
+<div class="block">Sets an entire row of the matrix using the provided array.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#swapRows(int,int)" class="member-name-link">swapRows</a><wbr>(int&nbsp;m1,
- int&nbsp;m2)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#swapCols(int,int)" class="member-name-link">swapCols</a><wbr>(int&nbsp;n1,
+ int&nbsp;n2)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Swaps two columns of the matrix.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#swapRows(int,int)" class="member-name-link">swapRows</a><wbr>(int&nbsp;m1,
+ int&nbsp;m2)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Swaps two rows of the matrix.</div>
 </div>
 </div>
@@ -231,22 +225,6 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="set(int,double)">
-<h3>set</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(int&nbsp;i,
- double&nbsp;value)</span></div>
-<div class="block">Sets a value at the specified position in the underlying array.
- This method is primarily used for sequential access to matrix elements.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>i</code> - index in the underlying array (0 &lt;= i &lt; m*n)</dd>
-<dd><code>value</code> - value to set</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if i &lt; 0 or i &gt;= m*n</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="set(int,int,double)">
 <h3>set</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(int&nbsp;i,
@@ -264,9 +242,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="set(int,double[])">
-<h3>set</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(int&nbsp;i,
+<section class="detail" id="setRow(int,double[])">
+<h3>setRow</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRow</span><wbr><span class="parameters">(int&nbsp;i,
  double[]&nbsp;arr)</span></div>
 <div class="block">Sets an entire row of the matrix using the provided array.</div>
 <dl class="notes">
@@ -279,9 +257,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="get(int)">
-<h3>get</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double[]</span>&nbsp;<span class="element-name">get</span><wbr><span class="parameters">(int&nbsp;i)</span></div>
+<section class="detail" id="getRow(int)">
+<h3>getRow</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double[]</span>&nbsp;<span class="element-name">getRow</span><wbr><span class="parameters">(int&nbsp;i)</span></div>
 <div class="block">Returns a copy of the specified row as an array.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -335,13 +313,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="fill(double)">
 <h3>fill</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Matrix2D.html" title="class in by.andd3dfx.math.matrix">Matrix2D</a></span>&nbsp;<span class="element-name">fill</span><wbr><span class="parameters">(double&nbsp;d)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">fill</span><wbr><span class="parameters">(double&nbsp;d)</span></div>
 <div class="block">Fills all elements of the matrix with the specified value.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>d</code> - value to fill the matrix with</dd>
-<dt>Returns:</dt>
-<dd>this matrix (for method chaining)</dd>
 </dl>
 </section>
 </li>
