@@ -1,4 +1,4 @@
-# Partial Differential Equations (PDE) Solvers
+# Partial Differential Equations (PDE) solvers library
 
 [![Java CI with Gradle](https://github.com/andrei-punko/pde-solvers/actions/workflows/gradle.yml/badge.svg)](https://github.com/andrei-punko/pde-solvers/actions/workflows/gradle.yml)
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/andrei-punko/pde-solvers/actions/workflows/gradle.yml)
@@ -35,13 +35,13 @@ A library for numerical solution of partial differential equations (PDE)
 - JDK 21
 - Gradle (embedded in the project)
 
-## Building the Project
+## Building the project
 
 ```bash
 ./gradlew clean build
 ```
 
-## Generating Documentation
+## Generating documentation
 
 ```bash
 ./gradlew clean javadoc
@@ -49,21 +49,21 @@ A library for numerical solution of partial differential equations (PDE)
 Check `build/doc/javadoc` folder  
 Online documentation is available [here](https://andrei-punko.github.io/pde-solvers/)
 
-## Supported Equation Types
+## Supported equation types
 
-### Parabolic Equations
+### Parabolic equations
 [ParabolicEquation.java](src/main/java/by/andd3dfx/math/pde/equation/ParabolicEquation.java)
 - Describes diffusion, heat conduction, and other dissipative processes
 - Characterized by the presence of only first-order time derivative
 - Solution is defined on the space-time domain `[x1,x2]×[0,t2]`
 
-### Hyperbolic Equations
+### Hyperbolic equations
 [HyperbolicEquation.java](src/main/java/by/andd3dfx/math/pde/equation/HyperbolicEquation.java)
 - Describes wave processes and oscillations
 - Characterized by the presence of second-order time derivative
 - Solution is defined on the space-time domain `[x1,x2]×[0,t2]`
 
-## Boundary Conditions
+## Boundary conditions
 
 ### Dirichlet (definite mode)
 [BorderCondition1.java](src/main/java/by/andd3dfx/math/pde/border/BorderConditionType1.java)
@@ -79,28 +79,28 @@ Online documentation is available [here](https://andrei-punko.github.io/pde-solv
   `∂U/∂x(x1,t) = h*(U(x1,t) - Theta(t))` or
   `∂U/∂x(x2,t) = h*(U(x2,t) - Theta(t))`
 
-## Solution Methods
+## Solution methods
 
-### Finite Difference Method
+### Finite difference method
 - Approximates derivatives using finite differences
 - Transforms PDE into a system of linear equations
 - Uses the Thomas algorithm to solve the resulting system
 
-### Thomas Algorithm
+### Thomas algorithm
 - Efficient algorithm for solving tridiagonal systems of linear equations
 - Time complexity O(n), where n is the system size
 
-## Usage Examples
+## Library usage examples
 
-### Parabolic Equations
+### Parabolic equations
 - [Diffusion problem with Dirichlet boundary conditions](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolver11Test.java)
 - [Diffusion problem with Neumann boundary conditions](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolver22Test.java)
 - [Heat transfer problem with mixed boundary conditions](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolver13Test.java)
 
-### Hyperbolic Equations
+### Hyperbolic equations
 - [Wave equation (plucked string) with Dirichlet boundary conditions](src/test/java/by/andd3dfx/math/pde/solver/HyperbolicEquationSolver11Test.java)
 
-### Solution Utilities
+### Solution utilities
 - [Solution data saving and loading](src/test/java/by/andd3dfx/math/pde/solver/SolutionTest.java)
 
 ## Making new release on GitHub
