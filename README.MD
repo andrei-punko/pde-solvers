@@ -1,11 +1,11 @@
-# Partial Differential Equations (PDE) solvers library
+# Partial differential equations solvers library
 
 [![Java CI with Gradle](https://github.com/andrei-punko/pde-solvers/actions/workflows/gradle.yml/badge.svg)](https://github.com/andrei-punko/pde-solvers/actions/workflows/gradle.yml)
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/andrei-punko/pde-solvers/actions/workflows/gradle.yml)
 [![Branches](.github/badges/branches.svg)](https://github.com/andrei-punko/pde-solvers/actions/workflows/gradle.yml)
 [![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://andrei-punko.github.io/pde-solvers/)
 
-A library for numerical solution of partial differential equations (PDE)
+A library for numerical solution of partial differential equations (PDE) using finite difference method and Thomas algorithm
 
 ## Features
 
