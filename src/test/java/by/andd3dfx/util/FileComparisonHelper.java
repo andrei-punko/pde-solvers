@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FileComparisonHelper {
 
@@ -21,12 +20,14 @@ public class FileComparisonHelper {
         Path expectedFilePath = Path.of(expectedOutputFileName);
         String[] expectedFileLines = Files.readString(expectedFilePath).split("\n");
 
-        assertThat("Unexpected amount of lines in file " + generatedFilePath,
-                generatedFileLines.length, is(expectedFileLines.length));
+        assertThat(generatedFileLines.length)
+                .as("Unexpected amount of lines in file " + generatedFilePath)
+                .isEqualTo(expectedFileLines.length);
 
         for (int i = 0; i < generatedFileLines.length; i++) {
-            assertThat("Wrong file content for file " + generatedFilePath,
-                    generatedFileLines[i], is(expectedFileLines[i]));
+            assertThat(generatedFileLines[i])
+                    .as("Wrong file content for file " + generatedFilePath)
+                    .isEqualTo(expectedFileLines[i]);
         }
     }
 }
