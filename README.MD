@@ -103,8 +103,12 @@ Online documentation is available [here](https://andrei-punko.github.io/pde-solv
 ### Solution utilities
 - [Solution data saving and loading](src/test/java/by/andd3dfx/math/pde/solver/SolutionTest.java)
 
-## Making new release on GitHub
+## Making new library release on GitHub
 See [instruction](.github/how-to-make-GH-release.md)
+
+## Video with description of the project
+
+[![YouTube link](https://markdown-videos-api.jorgenkh.no/url?url=https%3A%2F%2Fyoutu.be%2FAmPgu9vksTU)](https://youtu.be/AmPgu9vksTU)
 
 ## License
 
