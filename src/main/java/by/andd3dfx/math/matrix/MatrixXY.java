@@ -24,7 +24,7 @@ public class MatrixXY extends Matrix2D {
     /**
      * Sets the x-coordinate at the specified index.
      *
-     * @param i index of the coordinate pair (0 &lt;= i &lt; n)
+     * @param i     index of the coordinate pair (0 &lt;= i &lt; n)
      * @param value x-coordinate value
      * @throws IllegalArgumentException if i &lt; 0 or i &gt;= n
      */
@@ -46,7 +46,7 @@ public class MatrixXY extends Matrix2D {
     /**
      * Sets the y-coordinate at the specified index.
      *
-     * @param i index of the coordinate pair (0 &lt;= i &lt; n)
+     * @param i     index of the coordinate pair (0 &lt;= i &lt; n)
      * @param value y-coordinate value
      * @throws IllegalArgumentException if i &lt; 0 or i &gt;= n
      */

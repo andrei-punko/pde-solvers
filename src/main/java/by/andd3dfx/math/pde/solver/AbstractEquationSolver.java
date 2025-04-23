@@ -109,8 +109,8 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
      * These parameters are used to incorporate different types of boundary conditions into the solution.
      *
      * @param borderCondition the boundary condition to process
-     * @param h              spatial step size
-     * @param time           current time point
+     * @param h               spatial step size
+     * @param time            current time point
      * @return KappaNu record containing calculated parameters
      * @throws IllegalStateException if an unsupported boundary condition type is encountered
      */

@@ -1,9 +1,9 @@
 package by.andd3dfx.math.pde.solver;
 
-import by.andd3dfx.math.space.Area;
 import by.andd3dfx.math.matrix.Matrix2D;
 import by.andd3dfx.math.matrix.MatrixXY;
 import by.andd3dfx.math.pde.equation.Equation;
+import by.andd3dfx.math.space.Area;
 import by.andd3dfx.util.FileUtil;
 
 /**
@@ -12,20 +12,17 @@ import by.andd3dfx.util.FileUtil;
  * represent time layers and columns represent spatial points.
  *
  * @param equation the partial differential equation that was solved
- * @param area the space-time domain where the solution was found
+ * @param area     the space-time domain where the solution was found
  * @param solution the numerical solution stored as a 2D matrix
- * @param <E> the type of equation that was solved
+ * @param <E>      the type of equation that was solved
  * @see EquationSolver
  * @see Matrix2D
  * @see Area
  */
 public record Solution<E extends Equation>(
-    /** The partial differential equation that was solved */
-    E equation,
-    /** The space-time domain where the solution was found */
-    Area area,
-    /** The numerical solution stored as a 2D matrix */
-    Matrix2D solution
+        E equation,
+        Area area,
+        Matrix2D solution
 ) {
 
     /**

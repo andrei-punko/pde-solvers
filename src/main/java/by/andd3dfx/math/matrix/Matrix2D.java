@@ -42,8 +42,8 @@ public class Matrix2D {
     /**
      * Sets a value at the specified matrix position (i,j).
      *
-     * @param i row index (0 &lt;= i &lt; m)
-     * @param j column index (0 &lt;= j &lt; n)
+     * @param i     row index (0 &lt;= i &lt; m)
+     * @param j     column index (0 &lt;= j &lt; n)
      * @param value value to set
      * @throws IllegalArgumentException if i &lt; 0 or i &gt;= m or j &lt; 0 or j &gt;= n
      */
@@ -55,7 +55,7 @@ public class Matrix2D {
     /**
      * Sets an entire row of the matrix using the provided array.
      *
-     * @param i row index (0 &lt;= i &lt; m)
+     * @param i   row index (0 &lt;= i &lt; m)
      * @param arr array of n values to set in the row
      * @throws IllegalArgumentException if i &lt; 0 or i &gt;= m or arr.length != n
      */

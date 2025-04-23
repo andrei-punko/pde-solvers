@@ -1,7 +1,7 @@
 package by.andd3dfx.util;
 
-import by.andd3dfx.math.space.Interval;
 import by.andd3dfx.math.matrix.Matrix2D;
+import by.andd3dfx.math.space.Interval;
 
 import java.io.FileWriter;
 import java.io.IOException;
