@@ -1,7 +1,7 @@
 package by.andd3dfx.math.pde.border;
 
 /**
- * Represents a Dirichlet boundary condition (Type 1) for partial differential equations.
+ * Represents a Dirichlet boundary condition for partial differential equations.
  * This condition specifies the value of the solution at the boundary:
  * <p>
  * U(x,t) = U(t) at x = x₁ or x = x₂
@@ -11,7 +11,7 @@ package by.andd3dfx.math.pde.border;
  *
  * @see BorderCondition
  */
-public class BorderConditionType1 implements BorderCondition {
+public class DirichletBorderCondition implements BorderCondition {
 
     /**
      * Returns the prescribed value of the solution at the boundary at time t.

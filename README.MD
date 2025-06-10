@@ -1,4 +1,4 @@
-# Partial differential equations solvers library
+# Partial differential equations (PDE) solvers library
 
 [![Java CI with Gradle](https://github.com/andrei-punko/pde-solvers/actions/workflows/gradle.yml/badge.svg)](https://github.com/andrei-punko/pde-solvers/actions/workflows/gradle.yml)
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/andrei-punko/pde-solvers/actions/workflows/gradle.yml)
@@ -66,15 +66,15 @@ Online documentation is available [here](https://andrei-punko.github.io/pde-solv
 ## Boundary conditions
 
 ### Dirichlet (definite mode)
-[BorderCondition1.java](src/main/java/by/andd3dfx/math/pde/border/BorderConditionType1.java)
+[DirichletBorderCondition.java](src/main/java/by/andd3dfx/math/pde/border/DirichletBorderCondition.java)
 - Specifies function value at the boundary: `U(x1,t) = g1(t)` or `U(x2,t) = g2(t)`
 
 ### Neumann (definite force)
-[BorderCondition2.java](src/main/java/by/andd3dfx/math/pde/border/BorderConditionType2.java)
+[NeumannBorderCondition.java](src/main/java/by/andd3dfx/math/pde/border/NeumannBorderCondition.java)
 - Specifies derivative value at the boundary: `∂U/∂x(x1,t) = g1(t)` or `∂U/∂x(x2,t) = g2(t)`
 
 ### Robin (elastic fixing)
-[BorderCondition3.java](src/main/java/by/andd3dfx/math/pde/border/BorderConditionType3.java)
+[RobinBorderCondition.java](src/main/java/by/andd3dfx/math/pde/border/RobinBorderCondition.java)
 - Specifies linear combination of function value and its derivative:
   `∂U/∂x(x1,t) = h*(U(x1,t) - Theta(t))` or
   `∂U/∂x(x2,t) = h*(U(x2,t) - Theta(t))`
@@ -93,12 +93,12 @@ Online documentation is available [here](https://andrei-punko.github.io/pde-solv
 ## Library usage examples
 
 ### Parabolic equations
-- [Diffusion problem with Dirichlet boundary conditions](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolver11Test.java)
-- [Diffusion problem with Neumann boundary conditions](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolver22Test.java)
-- [Heat transfer problem with mixed boundary conditions](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolver13Test.java)
+- [Diffusion problem with Dirichlet boundary conditions](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolverDDTest.java)
+- [Diffusion problem with Neumann boundary conditions](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolverNNTest.java)
+- [Heat transfer problem with mixed Dirichlet+Robin boundary conditions](src/test/java/by/andd3dfx/math/pde/solver/ParabolicEquationSolverDRTest.java)
 
 ### Hyperbolic equations
-- [Wave equation (plucked string) with Dirichlet boundary conditions](src/test/java/by/andd3dfx/math/pde/solver/HyperbolicEquationSolver11Test.java)
+- [Wave equation (plucked string) with Dirichlet boundary conditions](src/test/java/by/andd3dfx/math/pde/solver/HyperbolicEquationSolverDDTest.java)
 
 ### Solution utilities
 - [Solution data saving and loading](src/test/java/by/andd3dfx/math/pde/solver/SolutionTest.java)
@@ -109,7 +109,3 @@ See [instruction](.github/how-to-make-GH-release.md)
 ## Video with description of the project
 
 [![YouTube link](https://markdown-videos-api.jorgenkh.no/url?url=https%3A%2F%2Fyoutu.be%2FAmPgu9vksTU)](https://youtu.be/AmPgu9vksTU)
-
-## License
-
-MIT License

@@ -2,9 +2,9 @@ package by.andd3dfx.math.pde.solver;
 
 import by.andd3dfx.math.matrix.Matrix2D;
 import by.andd3dfx.math.pde.border.BorderCondition;
-import by.andd3dfx.math.pde.border.BorderConditionType1;
-import by.andd3dfx.math.pde.border.BorderConditionType2;
-import by.andd3dfx.math.pde.border.BorderConditionType3;
+import by.andd3dfx.math.pde.border.DirichletBorderCondition;
+import by.andd3dfx.math.pde.border.NeumannBorderCondition;
+import by.andd3dfx.math.pde.border.RobinBorderCondition;
 import by.andd3dfx.math.pde.equation.Equation;
 import by.andd3dfx.math.space.Area;
 import by.andd3dfx.math.space.Interval;
@@ -116,13 +116,16 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
      */
     protected KappaNu calcKappaNu(BorderCondition borderCondition, double h, double time) {
         return switch (borderCondition) {
-            case BorderConditionType1 condType1 -> new KappaNu(0, condType1.gU(time));
-            case BorderConditionType2 condType2 -> new KappaNu(1, -h * condType2.gdU_dx(time));
-            case BorderConditionType3 condType3 -> {
-                var lh = condType3.gH();
+            case DirichletBorderCondition condition -> new KappaNu(0, condition.gU(time));
+
+            case NeumannBorderCondition condition -> new KappaNu(1, -h * condition.gdU_dx(time));
+
+            case RobinBorderCondition condition -> {
+                var lh = condition.gH();
                 var kappa = 1 / (1 + h * lh);
-                yield new KappaNu(kappa, h * lh * kappa * condType3.gTheta(time));
+                yield new KappaNu(kappa, h * lh * kappa * condition.gTheta(time));
             }
+
             default -> throw new IllegalStateException("Unexpected border condition type: " + borderCondition);
         };
     }

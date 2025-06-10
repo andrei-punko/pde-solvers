@@ -9,14 +9,14 @@ import by.andd3dfx.math.pde.equation.Equation;
  * <p>
  * Three types of boundary conditions are supported:
  * <ul>
- *   <li>Type 1: Dirichlet boundary condition (prescribed function value)</li>
- *   <li>Type 2: Neumann boundary condition (prescribed derivative value)</li>
- *   <li>Type 3: Robin boundary condition (mixed condition)</li>
+ *   <li>Dirichlet boundary condition (prescribed function value)</li>
+ *   <li>Neumann boundary condition (prescribed derivative value)</li>
+ *   <li>Robin boundary condition (mixed condition)</li>
  * </ul>
  *
- * @see BorderConditionType1
- * @see BorderConditionType2
- * @see BorderConditionType3
+ * @see DirichletBorderCondition
+ * @see NeumannBorderCondition
+ * @see RobinBorderCondition
  * @see Equation
  */
 public interface BorderCondition {

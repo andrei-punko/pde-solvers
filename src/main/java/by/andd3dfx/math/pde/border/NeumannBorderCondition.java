@@ -1,7 +1,7 @@
 package by.andd3dfx.math.pde.border;
 
 /**
- * Represents a Neumann boundary condition (Type 2) for partial differential equations.
+ * Represents a Neumann boundary condition for partial differential equations.
  * This condition specifies the value of the spatial derivative at the boundary:
  * <p>
  * ∂U/∂x(x,t) = ∂U/∂x(t) at x = x₁ or x = x₂
@@ -11,7 +11,7 @@ package by.andd3dfx.math.pde.border;
  *
  * @see BorderCondition
  */
-public class BorderConditionType2 implements BorderCondition {
+public class NeumannBorderCondition implements BorderCondition {
 
     /**
      * Returns the prescribed value of the spatial derivative at the boundary at time t.

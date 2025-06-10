@@ -1,7 +1,7 @@
 package by.andd3dfx.math.pde.solver;
 
-import by.andd3dfx.math.pde.border.BorderConditionType1;
-import by.andd3dfx.math.pde.border.BorderConditionType3;
+import by.andd3dfx.math.pde.border.DirichletBorderCondition;
+import by.andd3dfx.math.pde.border.RobinBorderCondition;
 import by.andd3dfx.math.pde.equation.ParabolicEquation;
 import by.andd3dfx.util.FileUtil;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * <pre>
- * Test for ParabolicEquationSolver border conditions types 1 and 3.
+ * Test for ParabolicEquationSolver with Dirichlet & Robin border conditions.
  *
  * Solution of heat transfer equation: Ut = ALPHA*Uxx for rod with length L
  * - constant thermal diffusivity coefficient ALPHA
@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * - initial temperature with triangle profile: most heat concentrated in the center, with T_MAX max value (see method getU0(x))
  * </pre>
  */
-class ParabolicEquationSolver13Test {
+class ParabolicEquationSolverDRTest {
 
     private final double K = 401;           // Heat transfer rate of Cu
     private final double ALPHA = 1.11e-4;   // Thermal diffusivity coefficient of Cu
@@ -69,8 +69,8 @@ class ParabolicEquationSolver13Test {
     }
 
     private ParabolicEquation buildParabolicEquation() {
-        var leftBorderCondition = new BorderConditionType1();
-        var rightBorderCondition = new BorderConditionType3() {
+        var leftBorderCondition = new DirichletBorderCondition();
+        var rightBorderCondition = new RobinBorderCondition() {
             @Override
             public double gH() {
                 return -H_CONV / K;

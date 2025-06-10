@@ -1,7 +1,7 @@
 package by.andd3dfx.math.pde.border;
 
 /**
- * Represents a Robin boundary condition (Type 3) for partial differential equations.
+ * Represents a Robin boundary condition for partial differential equations.
  * This condition specifies a linear combination of the solution and its derivative
  * at the boundary:
  * <p>
@@ -13,7 +13,7 @@ package by.andd3dfx.math.pde.border;
  *
  * @see BorderCondition
  */
-public class BorderConditionType3 implements BorderCondition {
+public class RobinBorderCondition implements BorderCondition {
 
     /**
      * Returns the coefficient h in the Robin boundary condition.

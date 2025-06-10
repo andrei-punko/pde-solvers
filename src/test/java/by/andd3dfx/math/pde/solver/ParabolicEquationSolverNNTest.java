@@ -1,28 +1,28 @@
 package by.andd3dfx.math.pde.solver;
 
-import by.andd3dfx.math.pde.border.BorderConditionType1;
+import by.andd3dfx.math.pde.border.NeumannBorderCondition;
 import by.andd3dfx.math.pde.equation.ParabolicEquation;
 import by.andd3dfx.util.FileUtil;
 import org.junit.jupiter.api.Test;
 
 import static java.lang.Math.PI;
+import static java.lang.Math.cos;
 import static java.lang.Math.exp;
-import static java.lang.Math.sin;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * <pre>
- * Test for ParabolicEquationSolver with type 1 of border conditions on both sides.
+ * Test for ParabolicEquationSolver with Neumann border conditions on both sides.
  *
  * Solution of diffusion equation: Ut = D*Uxx
- * - constant concentration C=0 on the left & right borders
+ * - sealed pipe ends, so no diffusion through the ends
  * - initial concentration with triangle profile: most mass concentrated in the center (see method getU0(x))
  * - constant diffusion coefficient
  * </pre>
  *
  * @see <a href="https://math.libretexts.org/Bookshelves/Differential_Equations/Differential_Equations_(Chasnov)/09%3A_Partial_Differential_Equations/9.05%3A_Solution_of_the_Diffusion_Equation">article</a>
  */
-class ParabolicEquationSolver11Test {
+class ParabolicEquationSolverNNTest {
 
     private final double C_MAX = 100.0;
     private final double L = 0.001;         // Thickness of plate, m
@@ -45,10 +45,10 @@ class ParabolicEquationSolver11Test {
 
         // Save numeric solution to file
         var numericU = solution.gUt(TIME);
-        FileUtil.save(numericU, "./build/parabolic11-numeric.txt", true);
+        FileUtil.save(numericU, "./build/parabolic22-numeric.txt", true);
 
         // Save analytic solution to file
-        FileUtil.saveFunc(solution.area().x(), (x) -> analyticSolution(x, TIME), "./build/parabolic11-analytic.txt");
+        FileUtil.saveFunc(solution.area().x(), (x) -> analyticSolution(x, TIME), "./build/parabolic22-analytic.txt");
 
         // Compare numeric & analytic solutions
         for (var i = 0; i < numericU.getN(); i++) {
@@ -60,8 +60,8 @@ class ParabolicEquationSolver11Test {
     }
 
     private ParabolicEquation buildParabolicEquation() {
-        var leftBorderCondition = new BorderConditionType1();
-        var rightBorderCondition = new BorderConditionType1();
+        var leftBorderCondition = new NeumannBorderCondition();
+        var rightBorderCondition = new NeumannBorderCondition();
 
         return new ParabolicEquation(0, L, TIME, leftBorderCondition, rightBorderCondition) {
             @Override
@@ -96,7 +96,7 @@ class ParabolicEquationSolver11Test {
     /**
      * <pre>
      * Analytic solution:
-     * U(x,t) = Sum( b_n*u_n(x,t) ) = Sum( b_n*sin(n*PI*x/L)*exp(-(n*PI/L)^2 * D*t) )
+     * U(x,t) = a_0/2 + Sum( a_n*u_n(x,t) ) = a_0/2 + Sum( a_n*cos(n*PI*x/L))*exp(-(n*PI/L)^2 * D*t )
      *
      * According to <a href="https://math.libretexts.org/Bookshelves/Differential_Equations/Differential_Equations_(Chasnov)/09%3A_Partial_Differential_Equations/9.05%3A_Solution_of_the_Diffusion_Equation">article</a>
      * </pre>
@@ -108,24 +108,24 @@ class ParabolicEquationSolver11Test {
     private double analyticSolution(double x, double t) {
         var result = 0d;
         for (int n = 1; n <= 100; n++) {
-            result += b_n(n) * sin(n * PI * x / L) * exp(-Math.pow(n * PI / L, 2.) * D * t);
+            result += a_n(n) * cos(n * PI * x / L) * exp(-Math.pow(n * PI / L, 2.) * D * t);
         }
-        return result;
+        return a_n(0) / 2. + result;
     }
 
     /**
-     * Coefficient b_n of a Fourier sine series
+     * Coefficient a_n of a Fourier sine series
      *
      * @param n number of coefficient
      * @return b_n value
      */
-    private double b_n(int n) {
+    private double a_n(int n) {
         var integral = 0d;
         var N = 100d;
         var dx = L / N;
         for (int i = 0; i < N; i++) {
             var x = dx * (i + 0.5);
-            integral += getU0(x) * sin(n * PI * x / L) * dx;
+            integral += getU0(x) * cos(n * PI * x / L) * dx;
         }
         return 2. / L * integral;
     }

@@ -1,6 +1,6 @@
 package by.andd3dfx.math.pde.solver;
 
-import by.andd3dfx.math.pde.border.BorderConditionType1;
+import by.andd3dfx.math.pde.border.DirichletBorderCondition;
 import by.andd3dfx.math.pde.equation.HyperbolicEquation;
 import by.andd3dfx.util.FileUtil;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * <pre>
- * Test for HyperbolicEquationSolver with type 1 of border conditions on both sides.
+ * Test for HyperbolicEquationSolver with Dirichlet border conditions on both sides.
  *
  * Solution of wave equation: Utt = c^2*Uxx
  * - constant displacement U=0 on the left & right borders
@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @see <a href="https://math.libretexts.org/Bookshelves/Differential_Equations/Differential_Equations_(Chasnov)/09%3A_Partial_Differential_Equations/9.06%3A_Solution_of_the_Wave_Equation">article</a>
  */
-class HyperbolicEquationSolver11Test {
+class HyperbolicEquationSolverDDTest {
 
     private final double U_MAX = 0.005;     // Max displacement, m
     private final double L = 0.100;         // Length of string, m
@@ -60,8 +60,8 @@ class HyperbolicEquationSolver11Test {
     }
 
     private HyperbolicEquation buildHyperbolicEquation() {
-        var leftBorderCondition = new BorderConditionType1();
-        var rightBorderCondition = new BorderConditionType1();
+        var leftBorderCondition = new DirichletBorderCondition();
+        var rightBorderCondition = new DirichletBorderCondition();
 
         return new HyperbolicEquation(0, L, TIME, leftBorderCondition, rightBorderCondition) {
             @Override
