@@ -1,7 +1,8 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id("maven-publish")
+    id 'maven-publish'
+    id 'signing'
 }
 
 group = 'io.github.andrei-punko'
@@ -63,13 +64,22 @@ javadoc {
     source = sourceSets.main.allJava
 }
 
-// Enable JavaDoc JAR generation
+// Enable JavaDoc and Sources JAR generation
 java {
     withJavadocJar()
+    withSourcesJar()
 }
 
 publishing {
     repositories {
+        maven {
+            name = "OSSRH"
+            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = project.findProperty("ossrhUsername")
+                password = project.findProperty("ossrhPassword")
+            }
+        }
         maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/andrei-punko/pde-solvers")
@@ -80,8 +90,46 @@ publishing {
         }
     }
     publications {
+        mavenJava(MavenPublication) {
+            from(components.java)
+
+            groupId = project.group
+            artifactId = project.name
+            version = project.version
+
+            pom {
+                name = 'PDE Solvers'
+                description = 'A Java library for solving partial differential equations using finite difference methods'
+                url = 'https://github.com/andrei-punko/pde-solvers'
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://rem.mit-license.org/license.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'andrei-punko'
+                        name = 'Andrei Punko'
+                        email = 'andrei.punko@gmail.com'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:git://github.com/andrei-punko/pde-solvers.git'
+                    developerConnection = 'scm:git:ssh://github.com:andrei-punko/pde-solvers.git'
+                    url = 'https://github.com/andrei-punko/pde-solvers'
+                }
+            }
+        }
         gpr(MavenPublication) {
             from(components.java)
         }
     }
+}
+
+signing {
+    sign publishing.publications.mavenJava
 }
