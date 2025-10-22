@@ -4,7 +4,7 @@ plugins {
     id("maven-publish")
 }
 
-group = 'by.andd3dfx'
+group = 'io.github.andrei-punko'
 version = '1.0.2-SNAPSHOT'
 
 repositories {
