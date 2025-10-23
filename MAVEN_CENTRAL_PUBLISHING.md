@@ -24,40 +24,78 @@ signing.secretKeyRingFile=C:\\Users\\YourUsername\\.gnupg\\secring.gpg
 
 ### 3. Настройка GPG
 1. Сгенерируйте GPG ключ для подписи артефактов (при генерации использовать passphrase)
-   1. В Linux / Mac - при помощи консоли: `gpg --generate-key`
-   2. В Windows - можно использовать `Kleopatra`, входящую в состав `gpg4win`
+
+- В Linux / Mac - при помощи консоли: `gpg --generate-key`
+- В Windows - можно использовать `Kleopatra`, входящую в состав `gpg4win`
+
 2. Убедитесь, что ваш GPG ключ экспортирован в файл
 3. Укажите правильный путь к файлу секретного ключа
 4. `signing.keyId` - последние 8 символов вашего GPG ключа
 
-## Публикация версий
+Проверка PGP ключа -
+по [ссылке](https://keyserver.ubuntu.com/pks/lookup?search=82D90366AA81E56F4B3FFA06030AC339FCA11168&fingerprint=on&op=index)
 
-### Публикация версии v.1.0.2
-```bash
-# Переключиться на тег
-git checkout v.1.0.2
+## Публикация версий (на примере v.1.0.2)
 
-# Опубликовать в локальный Maven репозиторий
-./gradlew publishToMavenLocal
-
-# Проверить артефакт в ~/.m2/repository/io/github/andrei-punko/pde-solvers
-
-# Опубликовать в Maven Central
-./gradlew publishMavenJavaPublicationToOSSRHRepository
-
-# Проверить статус на https://central.sonatype.com/ в профиле → View Deployments
+### 1. Переключиться на тег
 ```
+git checkout v.1.0.2
+```
+
+### 2. Опубликовать в локальный Maven репозиторий
+```
+./gradlew publishToMavenLocal
+```
+
+Проверить артефакт в ~/.m2/repository/io/github/andrei-punko/pde-solvers
+
+### 3. Опубликовать в Maven Central
+```
+./gradlew publishMavenJavaPublicationToOSSRHRepository
+```
+
+У меня не сработало, поэтому - использовал `Publishing By Uploading a Bundle` по
+[инструкции](https://central.sonatype.org/publish/publish-portal-upload)
+
+### 4. Подготовил структуру папок вида
+`io/github/andrei-punko/pde-solvers/1.0.2`, куда переписал из локального Maven репозитория файлы
+
+### 5. Удалил файл `maven-metadata-local.xml`
+
+### 6. Перешел в папку:
+```
+cd io/github/andrei-punko/pde-solvers/1.0.2
+```
+
+### 7. Сгенерировал чек-суммы для всех файлов, используя Powershell console:
+```
+Get-ChildItem -File | Where-Object { $_.Extension -ne '.md5' -and $_.Extension -ne '.sha1' } | ForEach-Object {
+    # MD5
+    $md5 = (Get-FileHash -Path $_.FullName -Algorithm MD5).Hash.ToLower()
+    $md5 | Out-File -FilePath ($_.FullName + ".md5") -NoNewline -Encoding ASCII
+
+    # SHA1
+    $sha1 = (Get-FileHash -Path $_.FullName -Algorithm SHA1).Hash.ToLower()
+    $sha1 | Out-File -FilePath ($_.FullName + ".sha1") -NoNewline -Encoding ASCII
+}
+```
+
+### 8. Запаковал папку `io` с содержимым в zip-архив
+
+### 9. Загрузил его в Sonatype [deployments](https://central.sonatype.com/publishing/deployments)
 
 ## Проверка публикации
 
 1. После публикации зайдите на https://central.sonatype.com/
-2. Можно попробовать найти артефакт в поиске по artifactId `pde-solvers`
+2. Проверить статус в [deployments](https://central.sonatype.com/publishing/deployments)
+3. Можно попробовать найти артефакт в поиске по artifactId `pde-solvers`
 
 ## Использование в проектах
 
 После публикации артефакт можно использовать в других проектах:
 
 ```xml
+
 <dependency>
   <groupId>io.github.andrei-punko</groupId>
   <artifactId>pde-solvers</artifactId>
