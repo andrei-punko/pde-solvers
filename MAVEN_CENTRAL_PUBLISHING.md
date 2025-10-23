@@ -68,7 +68,7 @@ git checkout v.1.0.2
 Или в Gradle:
 
 ```gradle
-implementation 'io.github.andreipunko:pde-solvers:1.0.2'
+implementation 'io.github.andrei-punko:pde-solvers:1.0.2'
 ```
 
 ## Важные замечания

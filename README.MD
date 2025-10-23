@@ -119,7 +119,7 @@ Online documentation is available [here](https://andrei-punko.github.io/pde-solv
 ### Gradle
 
 ```gradle
-implementation 'io.github.andreipunko:pde-solvers:1.0.2'
+implementation 'io.github.andrei-punko:pde-solvers:1.0.2'
 ```
 
 ## Appendix
