@@ -5,20 +5,20 @@
 ## Сначала нужно обновить версию в build.gradle на не-SNAPSHOT:
 `1.0.1-SNAPSHOT -> 1.0.1`
 
-## Собрать артифакт с генерацией документации:
+## Собрать артефакт с генерацией документации:
 
 ```
 ./gradlew clean build javadoc
 ```
 
-## Создать тег для релиза и пушнуть его:
+## Создать тег для релиза и отправить его в репозиторий:
 
 ```
 git tag -a v1.0.1 -m "Release version 1.0.1"
 git push origin v1.0.1
 ```
 
-## В .env в корне проекта добавить свои креденшлы для доступа в GitHub:
+## В .env в корне проекта добавьте свои credentials для доступа в GitHub:
 
 - Как их получить? Для получения Personal Access Token (PAT) на GitHub:
   - Перейдите в `Settings -> Developer settings -> Personal access tokens -> Tokens (classic)`
@@ -54,10 +54,10 @@ git push origin v1.0.1
 - build/libs/pde-solvers-1.0.1-javadoc.jar
 - Нажмите `Publish release`
 
-## После релиза верните версию в build.gradle обратно к SNAPSHOT:
+## После релиза верните версию в build.gradle обратно к SNAPSHOT (следующей версии):
 `version = '1.0.2-SNAPSHOT'`
 
-## И пушните изменения в master
+## Отправьте изменения в репозиторий:
 
 ```
 git push origin master

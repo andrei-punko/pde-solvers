@@ -104,12 +104,31 @@ Online documentation is available [here](https://andrei-punko.github.io/pde-solv
 ### Solution utilities
 - [Solution data saving and loading](src/test/java/io/github/andreipunko/math/pde/solver/SolutionTest.java)
 
-## Making new library release on GitHub
-See [instruction](.github/how-to-make-GH-release.md)
+## How to use library in your project
 
-## Video with description of the project
+### Maven
 
+```xml
+<dependency>
+  <groupId>io.github.andrei-punko</groupId>
+  <artifactId>pde-solvers</artifactId>
+  <version>1.0.2</version>
+</dependency>
+```
+
+### Gradle
+
+```gradle
+implementation 'io.github.andreipunko:pde-solvers:1.0.2'
+```
+
+## Appendix
+
+### Video with project description
 [![YouTube link](https://markdown-videos-api.jorgenkh.no/url?url=https%3A%2F%2Fyoutu.be%2FAmPgu9vksTU)](https://youtu.be/AmPgu9vksTU)
 
-## Instruction of how to publish artifact to Maven Central
+### How to make new library release on GitHub
+See [instruction](.github/how-to-make-GH-release.md)
+
+### How to publish artifact to Maven Central
 See [instruction](MAVEN_CENTRAL_PUBLISHING.md)
