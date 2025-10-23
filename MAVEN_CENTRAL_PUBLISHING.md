@@ -17,63 +17,51 @@ signing.secretKeyRingFile=C:\\Users\\YourUsername\\.gnupg\\secring.gpg
 ```
 
 ### 2. Получение учетных данных Sonatype
-1. Зайдите на https://s01.oss.sonatype.org/
+1. Зайдите на https://central.sonatype.com/
 2. Войдите в систему
-3. Перейдите в профиль → User Token Access
+3. Перейдите в профиль → View User Tokens
 4. Создайте токен для публикации
 
 ### 3. Настройка GPG
-1. Убедитесь, что ваш GPG ключ экспортирован в файл
-2. Укажите правильный путь к файлу секретного ключа
-3. `signing.keyId` - последние 8 символов вашего GPG ключа
+1. Сгенерируйте GPG ключ для подписи артефактов
+2. Убедитесь, что ваш GPG ключ экспортирован в файл
+3. Укажите правильный путь к файлу секретного ключа
+4. `signing.keyId` - последние 8 символов вашего GPG ключа
 
 ## Публикация версий
 
-### Публикация версии v.1.0.0
+### Публикация версии v.1.0.2
 ```bash
 # Переключиться на тег
-git checkout v.1.0.0
+git checkout v.1.0.2
 
 # Опубликовать в Maven Central
 ./gradlew publishMavenJavaPublicationToOSSRHRepository
 
-# Проверить статус на https://s01.oss.sonatype.org/
-```
-
-### Публикация версии v.1.0.1
-```bash
-# Переключиться на тег
-git checkout v.1.0.1
-
-# Опубликовать в Maven Central
-./gradlew publishMavenJavaPublicationToOSSRHRepository
-
-# Проверить статус на https://s01.oss.sonatype.org/
+# Проверить статус на https://central.sonatype.com/ в профиле → View Deployments
 ```
 
 ## Проверка публикации
 
-1. После публикации зайдите на https://s01.oss.sonatype.org/
-2. Найдите ваш артефакт в разделе "Staging Repositories"
-3. Закройте и освободите репозиторий
-4. Через несколько часов артефакт появится в Maven Central
+1. После публикации зайдите на https://central.sonatype.com/
+2. Можно попробовать найти артефакт в поиске по artifactId `pde-solvers`
 
 ## Использование в проектах
 
-После публикации артефакт можно будет использовать в других проектах:
+После публикации артефакт можно использовать в других проектах:
 
 ```xml
 <dependency>
-    <groupId>io.github.andreipunko</groupId>
-    <artifactId>pde-solvers</artifactId>
-    <version>1.0.0</version>
+  <groupId>io.github.andrei-punko</groupId>
+  <artifactId>pde-solvers</artifactId>
+  <version>1.0.2</version>
 </dependency>
 ```
 
 Или в Gradle:
 
 ```gradle
-implementation 'io.github.andreipunko:pde-solvers:1.0.0'
+implementation 'io.github.andreipunko:pde-solvers:1.0.2'
 ```
 
 ## Важные замечания
@@ -86,7 +74,7 @@ implementation 'io.github.andreipunko:pde-solvers:1.0.0'
 ## Структура артефактов
 
 После публикации будут доступны следующие артефакты:
-- `pde-solvers-1.0.0.jar` - основной JAR
-- `pde-solvers-1.0.0-sources.jar` - исходный код
-- `pde-solvers-1.0.0-javadoc.jar` - JavaDoc документация
-- `pde-solvers-1.0.0.pom` - метаданные Maven
+- `pde-solvers-1.0.2.jar` - основной JAR
+- `pde-solvers-1.0.2-sources.jar` - исходный код
+- `pde-solvers-1.0.2-javadoc.jar` - JavaDoc документация
+- `pde-solvers-1.0.2.pom` - метаданные Maven
