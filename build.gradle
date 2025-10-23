@@ -100,7 +100,7 @@ publishing {
             pom {
                 name = 'PDE Solvers'
                 description = 'A Java library for solving partial differential equations using finite difference methods'
-                url = 'https://github.com/andrei-punko/pde-solvers'
+                url = 'https://andrei-punko.github.io/pde-solvers'
 
                 licenses {
                     license {
