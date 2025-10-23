@@ -23,7 +23,9 @@ signing.secretKeyRingFile=C:\\Users\\YourUsername\\.gnupg\\secring.gpg
 4. Создайте токен для публикации
 
 ### 3. Настройка GPG
-1. Сгенерируйте GPG ключ для подписи артефактов
+1. Сгенерируйте GPG ключ для подписи артефактов (при генерации использовать passphrase)
+   1. В Linux / Mac - при помощи консоли: `gpg --generate-key`
+   2. В Windows - можно использовать `Kleopatra`, входящую в состав `gpg4win`
 2. Убедитесь, что ваш GPG ключ экспортирован в файл
 3. Укажите правильный путь к файлу секретного ключа
 4. `signing.keyId` - последние 8 символов вашего GPG ключа
@@ -34,6 +36,11 @@ signing.secretKeyRingFile=C:\\Users\\YourUsername\\.gnupg\\secring.gpg
 ```bash
 # Переключиться на тег
 git checkout v.1.0.2
+
+# Опубликовать в локальный Maven репозиторий
+./gradlew publishToMavenLocal
+
+# Проверить артефакт в ~/.m2/repository/io/github/andrei-punko/pde-solvers
 
 # Опубликовать в Maven Central
 ./gradlew publishMavenJavaPublicationToOSSRHRepository
