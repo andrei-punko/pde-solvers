@@ -24,13 +24,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class ParabolicEquationSolverDDTest {
 
-    private final double C_MAX = 100.0;
+    private final double C_MAX = 100.0;     // Max concentration
     private final double L = 0.001;         // Thickness of plate, m
     private final double TIME = 1;          // Investigated time, sec
     private final double D = 1e-9;          // Diffusion coefficient
 
-    private final double h = L / 100.0;
-    private final double tau = TIME / 100.0;
+    private final double h = L / 100.0;         // Space step
+    private final double tau = TIME / 100.0;    // Time step
 
     // We allow difference between numeric & analytic solution no more than 1% of max concentration value
     private final double EPSILON = C_MAX / 100.;

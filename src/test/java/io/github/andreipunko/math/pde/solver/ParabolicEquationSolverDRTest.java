@@ -38,8 +38,8 @@ class ParabolicEquationSolverDRTest {
     private final double L = 0.1;           // Length of rod, m
     private final double TIME = 60;         // Investigated time, sec
 
-    private final double h = L / 100.0;
-    private final double tau = TIME / 100.0;
+    private final double h = L / 100.0;         // Space step
+    private final double tau = TIME / 100.0;    // Time step
 
     // We allow difference between numeric & analytic solution no more than 1% of T_MAX value
     private final double EPSILON = T_MAX / 100.;

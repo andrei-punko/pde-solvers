@@ -29,8 +29,8 @@ class HyperbolicEquationSolverDDTest {
     private final double TIME = 25;         // Investigated time, sec
     private final double C_coeff = 1e-2;    // c^2 = T/Ro
 
-    private final double h = L / 2000.0;
-    private final double tau = TIME / 1000.0;
+    private final double h = L / 2000.0;        // Space step
+    private final double tau = TIME / 1000.0;   // Time step
 
     // We allow difference between numeric & analytic solution no more than 3% of max displacement value
     private final double EPSILON = U_MAX / 33.;
