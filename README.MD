@@ -112,14 +112,77 @@ Online documentation is available [here](https://andrei-punko.github.io/pde-solv
 <dependency>
   <groupId>io.github.andrei-punko</groupId>
   <artifactId>pde-solvers</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```gradle
-implementation 'io.github.andrei-punko:pde-solvers:1.0.2'
+implementation 'io.github.andrei-punko:pde-solvers:1.0.3'
+```
+
+### Code example
+
+```java
+import io.github.andreipunko.math.pde.border.DirichletBorderCondition;
+import io.github.andreipunko.math.pde.equation.ParabolicEquation;
+import io.github.andreipunko.util.FileUtil;
+
+class ParabolicEquationSolution {
+
+    private final double C_MAX = 100.0;     // Max concentration
+    private final double L = 0.001;         // Thickness of plate, m
+    private final double TIME = 1;          // Investigated time, sec
+    private final double D = 1e-9;          // Diffusion coefficient
+
+    private final double h = L / 100.0;         // Space step
+    private final double tau = TIME / 100.0;    // Time step
+
+    public void solve() {
+        var diffusionEquation = buildParabolicEquation();
+
+        var solution = new ParabolicEquationSolver()
+                .solve(diffusionEquation, h, tau);
+
+        var numericU = solution.gUt(TIME);
+        FileUtil.save(numericU, "./build/parabolic1-eqn-solution.txt", true);
+    }
+
+    /**
+     * Parabolic equation definition
+     */
+    private ParabolicEquation buildParabolicEquation() {
+        var leftBorderCondition = new DirichletBorderCondition();
+        var rightBorderCondition = new DirichletBorderCondition();
+
+        return new ParabolicEquation(0, L, TIME, leftBorderCondition, rightBorderCondition) {
+            @Override
+            public double gK(double x, double t, double U) {
+                return D;
+            }
+
+            @Override
+            public double gU0(double x) {
+                return getC0(x);
+            }
+        };
+    }
+
+    /**
+     * Initial concentration profile
+     */
+    private double getC0(double x) {
+        x /= L;
+        if (0.4 <= x && x <= 0.5) {
+            return C_MAX * (10 * x - 4);
+        }
+        if (0.5 <= x && x <= 0.6) {
+            return C_MAX * (-10 * x + 6);
+        }
+        return 0;
+    }
+}
 ```
 
 ## Appendix
