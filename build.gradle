@@ -12,6 +12,13 @@ repositories {
     mavenCentral()
 }
 
+// Конфигурация для всех подпроектов
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
 dependencies {
     implementation "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")

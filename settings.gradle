@@ -1,1 +1,4 @@
 rootProject.name = 'pde-solvers'
+
+include 'web-ui:backend'
+project(':web-ui:backend').projectDir = file('web-ui/backend')
