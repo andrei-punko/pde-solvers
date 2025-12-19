@@ -185,10 +185,6 @@ class ParabolicEquationSolution {
 }
 ```
 
-## Web UI with library demo
-
-Check [README](web-ui/README.md)
-
 ## Appendix
 
 ### Video with project description
