@@ -12,7 +12,6 @@ repositories {
     mavenCentral()
 }
 
-// Конфигурация для всех подпроектов
 subprojects {
     repositories {
         mavenCentral()
