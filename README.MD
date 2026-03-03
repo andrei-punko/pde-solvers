@@ -5,6 +5,7 @@
 [![Branches](.github/badges/branches.svg)](https://github.com/andrei-punko/pde-solvers/actions/workflows/gradle.yml)
 [![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://andrei-punko.github.io/pde-solvers/)
 [![MvnRepository](https://badges.mvnrepository.com/badge/io.github.andrei-punko/pde-solvers/badge.svg?label=MvnRepository)](https://mvnrepository.com/artifact/io.github.andrei-punko/pde-solvers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A library for numerical solution of partial differential equations (PDE) using finite difference method and Thomas
 algorithm
@@ -196,4 +197,5 @@ See [instruction](.github/how-to-make-GH-release.md)
 
 ### How to publish artifact to Maven Central
 See [instruction](MAVEN_CENTRAL_PUBLISHING.md)
+
 
