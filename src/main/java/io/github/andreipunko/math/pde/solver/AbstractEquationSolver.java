@@ -144,7 +144,8 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
      * Divides {@code numerator} by {@code denominator} for the Thomas algorithm, rejecting non-finite values and
      * near-zero denominators relative to the magnitude of the operands.
      */
-    private static double divideThomas(double numerator, double denominator, String stage) {
+    /** Package-private for tests in the same package; not part of the public API. */
+    static double divideThomas(double numerator, double denominator, String stage) {
         if (!Double.isFinite(denominator)) {
             throw new IllegalArgumentException("Tridiagonal solver (" + stage + "): denominator is not finite: " + denominator);
         }

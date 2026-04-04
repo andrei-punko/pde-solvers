@@ -211,6 +211,13 @@ class Matrix2DTest {
     }
 
     @Test
+    void setRowWithNullArray() {
+        var m = new Matrix2D(2, 3);
+
+        assertThrows(IllegalArgumentException.class, () -> m.setRow(0, null));
+    }
+
+    @Test
     void setRowWithWrongParams() {
         var m = new Matrix2D(2, 3);
 

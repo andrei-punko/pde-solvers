@@ -56,7 +56,19 @@ class InputValidationTest {
                 new ParabolicEquation(Double.NaN, 1, 1,
                         new DirichletBorderCondition(), new DirichletBorderCondition()));
         assertThrows(IllegalArgumentException.class, () ->
+                new ParabolicEquation(0, Double.NaN, 1,
+                        new DirichletBorderCondition(), new DirichletBorderCondition()));
+        assertThrows(IllegalArgumentException.class, () ->
+                new ParabolicEquation(0, Double.POSITIVE_INFINITY, 1,
+                        new DirichletBorderCondition(), new DirichletBorderCondition()));
+        assertThrows(IllegalArgumentException.class, () ->
+                new ParabolicEquation(Double.POSITIVE_INFINITY, 1, 1,
+                        new DirichletBorderCondition(), new DirichletBorderCondition()));
+        assertThrows(IllegalArgumentException.class, () ->
                 new ParabolicEquation(0, 1, Double.POSITIVE_INFINITY,
+                        new DirichletBorderCondition(), new DirichletBorderCondition()));
+        assertThrows(IllegalArgumentException.class, () ->
+                new ParabolicEquation(0, 1, Double.NaN,
                         new DirichletBorderCondition(), new DirichletBorderCondition()));
     }
 
@@ -143,6 +155,15 @@ class InputValidationTest {
                 FileUtil.saveFunc(new Interval(0, 1, 1), (x) -> x, null));
         assertThrows(IllegalArgumentException.class, () ->
                 FileUtil.saveFunc(null, (t) -> t, (t) -> t, "f.txt"));
+        assertThrows(IllegalArgumentException.class, () ->
+                FileUtil.saveFunc(new Interval(0, 1, 1), null, (t) -> t, "f.txt"));
+        assertThrows(IllegalArgumentException.class, () ->
+                FileUtil.saveFunc(new Interval(0, 1, 1), (t) -> t, null, "f.txt"));
+        assertThrows(IllegalArgumentException.class, () ->
+                FileUtil.saveFunc(new Interval(0, 1, 1), (t) -> t, (t) -> t, null));
         assertThrows(IllegalArgumentException.class, () -> FileUtil.save(null, "f.txt", false));
+        var m = new Matrix2D(1, 1);
+        assertThrows(IllegalArgumentException.class, () -> FileUtil.save(m, null, false));
+        assertThrows(IllegalArgumentException.class, () -> FileUtil.save(m, null, true));
     }
 }

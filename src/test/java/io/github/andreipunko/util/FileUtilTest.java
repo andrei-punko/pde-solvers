@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import static io.github.andreipunko.util.FileComparisonHelper.BUILD_PATH;
 import static io.github.andreipunko.util.FileComparisonHelper.checkGeneratedFileContent;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileUtilTest {
 
@@ -32,6 +33,26 @@ class FileUtilTest {
         var target = temp.resolve("a/b/c/out.txt");
         FileUtil.serialize(new StringBuilder("content"), target.toString());
         assertThat(Files.readString(target)).isEqualTo("content");
+    }
+
+    /** {@link Path#getParent()} is {@code null} for a single path segment — skip {@code createDirectories}. */
+    @Test
+    void serialize_acceptsFileNameWithoutParentSegment() throws IOException {
+        var name = "fileutil_bare_" + System.nanoTime() + ".txt";
+        var path = Path.of(name);
+        try {
+            FileUtil.serialize(new StringBuilder("bare"), name);
+            assertThat(Files.readString(path)).isEqualTo("bare");
+        } finally {
+            Files.deleteIfExists(path);
+        }
+    }
+
+    @Test
+    void serialize_throwsIOExceptionWhenPathIsExistingDirectory(@TempDir Path temp) throws IOException {
+        var dir = temp.resolve("existing_dir");
+        Files.createDirectory(dir);
+        assertThrows(IOException.class, () -> FileUtil.serialize(new StringBuilder("x"), dir.toString()));
     }
 
     @Test
@@ -76,5 +97,19 @@ class FileUtilTest {
         FileUtil.save(m, BUILD_PATH + fileName, true);
 
         checkGeneratedFileContent(fileName);
+    }
+
+    @Test
+    void saveMatrixRotated_singleCell() throws IOException {
+        var m = new Matrix2D(1, 1);
+        m.set(0, 0, 42);
+        var out = Path.of(BUILD_PATH + "matrix-1x1-rotated.txt");
+        Files.createDirectories(out.getParent());
+        try {
+            FileUtil.save(m, out.toString(), true);
+            assertThat(Files.readString(out).trim()).isEqualTo("42.0");
+        } finally {
+            Files.deleteIfExists(out);
+        }
     }
 }
