@@ -49,6 +49,9 @@ public record Solution<E extends Equation>(
      * Each line in the output file contains spatial coordinates followed by
      * solution values at different time moments. All spatial columns of the solution matrix are written
      * (same extent as {@link #gUt(int)} for a fixed time layer).
+     * <p>
+     * Each {@code t} is mapped to a time-layer index via {@link Area#ti(double)} (see {@link io.github.andreipunko.math.space.Interval#i(double)}):
+     * values are read from the <em>nearest grid time level at or to the left</em> of {@code t}, with no interpolation.
      *
      * @param fileName name of the file to save the data
      * @param t        array of time moments to save
@@ -83,6 +86,7 @@ public record Solution<E extends Equation>(
     /**
      * Saves solution data U(x) for a single time moment to a file.
      * Creates a spatial slice of the solution at the specified time.
+     * Time is resolved on the grid like {@link #sUt(String, double[])} (via {@link Area#ti(double)}).
      *
      * @param fileName name of the file to save the data
      * @param t        time moment to save
@@ -102,6 +106,9 @@ public record Solution<E extends Equation>(
      * Each line in the output file contains time coordinates followed by
      * solution values at different spatial points. All time rows of the solution matrix are written
      * (same extent as {@link #gUx(int)} for a fixed spatial column).
+     * <p>
+     * Each {@code x} is mapped to a spatial column index via {@link Area#xi(double)} (see {@link io.github.andreipunko.math.space.Interval#i(double)}):
+     * values are read from the <em>nearest grid point at or to the left</em> of {@code x}, with no interpolation.
      *
      * @param fileName name of the file to save the data
      * @param x        array of spatial coordinates to save
@@ -136,6 +143,7 @@ public record Solution<E extends Equation>(
     /**
      * Saves solution data U(t) for a single spatial coordinate to a file.
      * Creates a temporal slice of the solution at the specified spatial point.
+     * Position is resolved on the grid like {@link #sUx(String, double[])} (via {@link Area#xi(double)}).
      *
      * @param fileName name of the file to save the data
      * @param x        spatial coordinate to save
@@ -152,6 +160,7 @@ public record Solution<E extends Equation>(
     /**
      * Retrieves a spatial slice of the solution at a specified time moment.
      * Returns a matrix containing spatial coordinates and corresponding solution values.
+     * Uses {@link Area#ti(double)} to pick the time layer (nearest grid time at or to the left of {@code t}), no interpolation.
      *
      * @param t time moment to get the slice for
      * @return MatrixXY containing the spatial slice of the solution
@@ -188,6 +197,7 @@ public record Solution<E extends Equation>(
     /**
      * Retrieves a temporal slice of the solution at a specified spatial coordinate.
      * Returns a matrix containing time coordinates and corresponding solution values.
+     * Uses {@link Area#xi(double)} to pick the spatial column (nearest grid point at or to the left of {@code x}), no interpolation.
      *
      * @param x spatial coordinate to get the slice for
      * @return MatrixXY containing the temporal slice of the solution
