@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -126,13 +125,13 @@ public class FileUtil {
         var sb = new StringBuilder();
         if (rotate) {
             for (int j = 0; j < m.getN(); j++) {
-                var list = new ArrayList<Double>();
                 for (int i = 0; i < m.getM(); i++) {
-                    list.add(m.get(i, j));
+                    if (i > 0) {
+                        sb.append(' ');
+                    }
+                    sb.append(m.get(i, j));
                 }
-                sb.append(list.stream()
-                        .map(String::valueOf)
-                        .collect(Collectors.joining(" "))).append("\n");
+                sb.append('\n');
             }
         } else {
             for (int i = 0; i < m.getM(); i++) {
