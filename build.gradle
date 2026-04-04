@@ -126,7 +126,7 @@ publishing {
 
                 scm {
                     connection = 'scm:git:git://github.com/andrei-punko/pde-solvers.git'
-                    developerConnection = 'scm:git:ssh://github.com:andrei-punko/pde-solvers.git'
+                    developerConnection = 'scm:git:ssh://git@github.com/andrei-punko/pde-solvers.git'
                     url = 'https://github.com/andrei-punko/pde-solvers'
                 }
             }
