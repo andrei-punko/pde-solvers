@@ -30,9 +30,9 @@ class SolutionTest {
     void sUtForArrayWithWrongParam() {
         var solution = buildSolution();
 
-        assertThrows(AssertionError.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 solution.sUt(BUILD_PATH + "sUt-arr.txt", new double[]{1.0, 2.5}));
-        assertThrows(AssertionError.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 solution.sUt(BUILD_PATH + "sUt-arr.txt", new double[]{2.5, 2.6, 6.5}));
     }
 
@@ -50,8 +50,8 @@ class SolutionTest {
     void sUtWithWrongParam() {
         var solution = buildSolution();
 
-        assertThrows(AssertionError.class, () -> solution.sUt(BUILD_PATH + "sUt.txt", 1.0));
-        assertThrows(AssertionError.class, () -> solution.sUt(BUILD_PATH + "sUt.txt", 6.5));
+        assertThrows(IllegalArgumentException.class, () -> solution.sUt(BUILD_PATH + "sUt.txt", 1.0));
+        assertThrows(IllegalArgumentException.class, () -> solution.sUt(BUILD_PATH + "sUt.txt", 6.5));
     }
 
     @Test
@@ -68,9 +68,9 @@ class SolutionTest {
     void sUxForArrayWithWrongParam() {
         var solution = buildSolution();
 
-        assertThrows(AssertionError.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 solution.sUx(BUILD_PATH + "sUx-arr.txt", new double[]{9.0, 11.0}));
-        assertThrows(AssertionError.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 solution.sUx(BUILD_PATH + "sUx-arr.txt", new double[]{10.0, 12.5, 13.5}));
     }
 
@@ -88,8 +88,8 @@ class SolutionTest {
     void sUxWithWrongParam() {
         var solution = buildSolution();
 
-        assertThrows(AssertionError.class, () -> solution.sUx(BUILD_PATH + "sUx.txt", 9.0));
-        assertThrows(AssertionError.class, () -> solution.sUx(BUILD_PATH + "sUx.txt", 13.5));
+        assertThrows(IllegalArgumentException.class, () -> solution.sUx(BUILD_PATH + "sUx.txt", 9.0));
+        assertThrows(IllegalArgumentException.class, () -> solution.sUx(BUILD_PATH + "sUx.txt", 13.5));
     }
 
     @Test
@@ -114,8 +114,8 @@ class SolutionTest {
     void gUtForIntWithWrongParam() {
         var solution = buildSolution();
 
-        assertThrows(AssertionError.class, () -> solution.gUt(-1));
-        assertThrows(AssertionError.class, () -> solution.gUt(solution.solution().getM()));
+        assertThrows(IllegalArgumentException.class, () -> solution.gUt(-1));
+        assertThrows(IllegalArgumentException.class, () -> solution.gUt(solution.solution().getM()));
     }
 
     @Test
@@ -140,8 +140,8 @@ class SolutionTest {
     void gUxForIntWithWrongParam() {
         var solution = buildSolution();
 
-        assertThrows(AssertionError.class, () -> solution.gUx(-1));
-        assertThrows(AssertionError.class, () -> solution.gUx(solution.solution().getN()));
+        assertThrows(IllegalArgumentException.class, () -> solution.gUx(-1));
+        assertThrows(IllegalArgumentException.class, () -> solution.gUx(solution.solution().getN()));
     }
 
     /**

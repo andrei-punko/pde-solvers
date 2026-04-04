@@ -37,7 +37,10 @@ public record Solution<E extends Equation>(
      */
     public void sUt(String fileName, double[] t) {
         for (var t_i : t) {
-            assert (area.tLeft() <= t_i && t_i <= area.tRight());
+            if (t_i < area.tLeft() || t_i > area.tRight()) {
+                throw new IllegalArgumentException(
+                        "time t out of domain [" + area.tLeft() + ", " + area.tRight() + "]: " + t_i);
+            }
         }
 
         var sb = new StringBuilder();
@@ -75,7 +78,10 @@ public record Solution<E extends Equation>(
      */
     public void sUx(String fileName, double[] x) {
         for (var x_i : x) {
-            assert (area.xLeft() <= x_i && x_i <= area.xRight());
+            if (x_i < area.xLeft() || x_i > area.xRight()) {
+                throw new IllegalArgumentException(
+                        "x out of domain [" + area.xLeft() + ", " + area.xRight() + "]: " + x_i);
+            }
         }
 
         var sb = new StringBuilder();
@@ -123,7 +129,10 @@ public record Solution<E extends Equation>(
      */
     public MatrixXY gUt(int it) {
         int M = solution.getM();
-        assert (0 <= it && it < M);
+        if (it < 0 || it >= M) {
+            throw new IllegalArgumentException(
+                    "time layer index it out of bounds: " + it + ", valid [0, " + (M - 1) + "]");
+        }
 
         int N = solution.getN();
         var matrix = new MatrixXY(N);
@@ -156,7 +165,10 @@ public record Solution<E extends Equation>(
      */
     public MatrixXY gUx(int ix) {
         int N = solution.getN();
-        assert (0 <= ix && ix < N);
+        if (ix < 0 || ix >= N) {
+            throw new IllegalArgumentException(
+                    "spatial column index ix out of bounds: " + ix + ", valid [0, " + (N - 1) + "]");
+        }
 
         int M = solution.getM();
         var matrix = new MatrixXY(M);

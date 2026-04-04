@@ -33,7 +33,7 @@ public class Interval {
      * @param left  left boundary of the interval
      * @param right right boundary of the interval
      * @param h     step size between points
-     * @throws IllegalArgumentException if right &lt;= left or h &lt;= 0
+     * @throws IllegalArgumentException if h &lt;= 0, if (right - left) &lt; h, or if left &gt;= right
      */
     public Interval(double left, double right, double h) {
         reborn(left, right, h);
@@ -46,7 +46,7 @@ public class Interval {
      * @param left  left boundary of the interval
      * @param right right boundary of the interval
      * @param n     number of points in the interval
-     * @throws IllegalArgumentException if right &lt;= left or n &lt;= 0
+     * @throws IllegalArgumentException if left &gt;= right or n &lt;= 0
      */
     public Interval(double left, double right, int n) {
         reborn(left, right, n);
@@ -93,14 +93,20 @@ public class Interval {
      * the same boundaries. The number of points is automatically adjusted.
      *
      * @param h new step size
-     * @throws IllegalArgumentException if h &lt;= 0
+     * @throws IllegalArgumentException if h &lt;= 0 or if (right - left) &lt; h
      */
     public void reborn(double h) {
         reborn(left, right, h);
     }
 
     private void reborn(double left, double right, double h) {
-        assert (right - left >= h && h > 0);
+        if (h <= 0) {
+            throw new IllegalArgumentException("step h must be positive, got: " + h);
+        }
+        if (right - left < h) {
+            throw new IllegalArgumentException(
+                    "interval length (right - left) must be >= h: left=" + left + ", right=" + right + ", h=" + h);
+        }
 
         this.left = left;
         this.right = right;
@@ -120,7 +126,12 @@ public class Interval {
     }
 
     private void reborn(double left, double right, int n) {
-        assert (left < right && n > 0);
+        if (left >= right) {
+            throw new IllegalArgumentException("left must be < right: left=" + left + ", right=" + right);
+        }
+        if (n <= 0) {
+            throw new IllegalArgumentException("number of points n must be positive, got: " + n);
+        }
 
         this.left = left;
         this.right = right;
@@ -137,7 +148,9 @@ public class Interval {
      * @throws IllegalArgumentException if i &lt; 0 or i &gt; n
      */
     public double x(int i) {
-        assert (0 <= i && i <= n);
+        if (i < 0 || i > n) {
+            throw new IllegalArgumentException("index i out of bounds: " + i + ", valid range [0, " + n + "]");
+        }
 
         return left + i * h;
     }
@@ -153,7 +166,9 @@ public class Interval {
      * @throws IllegalArgumentException if x &lt; left or x &gt; right
      */
     public int i(double x) {
-        assert (left <= x && x <= right);
+        if (x < left || x > right) {
+            throw new IllegalArgumentException("x out of interval [" + left + ", " + right + "]: " + x);
+        }
 
         var res = (int) ((x - left) / h);
         if (res == n) {

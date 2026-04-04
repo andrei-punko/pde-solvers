@@ -29,8 +29,8 @@ class IntervalTest {
 
     @Test
     void paramsConstructorWithNAndWrongParams() {
-        assertThrows(AssertionError.class, () -> new Interval(10, 2, 10));
-        assertThrows(AssertionError.class, () -> new Interval(2, 10, -2));
+        assertThrows(IllegalArgumentException.class, () -> new Interval(10, 2, 10));
+        assertThrows(IllegalArgumentException.class, () -> new Interval(2, 10, -2));
     }
 
     @Test
@@ -45,10 +45,10 @@ class IntervalTest {
 
     @Test
     void paramsConstructorWithHAndWrongParams() {
-        assertThrows(AssertionError.class, () -> new Interval(10, 2, 0.1));
-        assertThrows(AssertionError.class, () -> new Interval(10, 2, 8.5));
-        assertThrows(AssertionError.class, () -> new Interval(2, 10, -0.2));
-        assertThrows(AssertionError.class, () -> new Interval(2, 10, 8.5));
+        assertThrows(IllegalArgumentException.class, () -> new Interval(10, 2, 0.1));
+        assertThrows(IllegalArgumentException.class, () -> new Interval(10, 2, 8.5));
+        assertThrows(IllegalArgumentException.class, () -> new Interval(2, 10, -0.2));
+        assertThrows(IllegalArgumentException.class, () -> new Interval(2, 10, 8.5));
     }
 
     @Test
@@ -67,7 +67,7 @@ class IntervalTest {
     void rebornWithWrongN() {
         var interval = new Interval(5.0, 10.0, 10);
 
-        assertThrows(AssertionError.class, () -> interval.reborn(-1));
+        assertThrows(IllegalArgumentException.class, () -> interval.reborn(-1));
     }
 
     @Test
@@ -86,8 +86,8 @@ class IntervalTest {
     void rebornWithWrongH() {
         var interval = new Interval(5.0, 10.0, 10);
 
-        assertThrows(AssertionError.class, () -> interval.reborn(-0.5));
-        assertThrows(AssertionError.class, () -> interval.reborn(5.5));
+        assertThrows(IllegalArgumentException.class, () -> interval.reborn(-0.5));
+        assertThrows(IllegalArgumentException.class, () -> interval.reborn(5.5));
     }
 
     @Test
@@ -103,8 +103,8 @@ class IntervalTest {
     void xWithWrongParams() {
         var interval = new Interval(2.0, 12.0, 20);
 
-        assertThrows(AssertionError.class, () -> interval.x(-1));
-        assertThrows(AssertionError.class, () -> interval.x(21));
+        assertThrows(IllegalArgumentException.class, () -> interval.x(-1));
+        assertThrows(IllegalArgumentException.class, () -> interval.x(21));
     }
 
     @Test
@@ -122,7 +122,7 @@ class IntervalTest {
     void iWithWrongParams() {
         var interval = new Interval(2.0, 12.0, 20);
 
-        assertThrows(AssertionError.class, () -> interval.i(1.9));
-        assertThrows(AssertionError.class, () -> interval.i(12.3));
+        assertThrows(IllegalArgumentException.class, () -> interval.i(1.9));
+        assertThrows(IllegalArgumentException.class, () -> interval.i(12.3));
     }
 }

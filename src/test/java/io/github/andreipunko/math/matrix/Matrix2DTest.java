@@ -18,12 +18,12 @@ class Matrix2DTest {
 
     @Test
     void constructorWithInvalidParams() {
-        assertThrows(AssertionError.class, () -> new Matrix2D(0, 0));
-        assertThrows(AssertionError.class, () -> new Matrix2D(0, 5));
-        assertThrows(AssertionError.class, () -> new Matrix2D(-1, 5));
-        assertThrows(AssertionError.class, () -> new Matrix2D(5, 0));
-        assertThrows(AssertionError.class, () -> new Matrix2D(5, -1));
-        assertThrows(AssertionError.class, () -> new Matrix2D(-1, -1));
+        assertThrows(IllegalArgumentException.class, () -> new Matrix2D(0, 0));
+        assertThrows(IllegalArgumentException.class, () -> new Matrix2D(0, 5));
+        assertThrows(IllegalArgumentException.class, () -> new Matrix2D(-1, 5));
+        assertThrows(IllegalArgumentException.class, () -> new Matrix2D(5, 0));
+        assertThrows(IllegalArgumentException.class, () -> new Matrix2D(5, -1));
+        assertThrows(IllegalArgumentException.class, () -> new Matrix2D(-1, -1));
     }
 
     @Test
@@ -40,44 +40,44 @@ class Matrix2DTest {
     void getWithInvalidParams() {
         var m = new Matrix2D(2, 3);
 
-        assertThrows(AssertionError.class, () -> m.get(-1, -1));
-        assertThrows(AssertionError.class, () -> m.get(-1, 0));
-        assertThrows(AssertionError.class, () -> m.get(-1, 3));
-        assertThrows(AssertionError.class, () -> m.get(0, -1));
-        assertThrows(AssertionError.class, () -> m.get(0, 3));
-        assertThrows(AssertionError.class, () -> m.get(2, -1));
-        assertThrows(AssertionError.class, () -> m.get(2, 0));
-        assertThrows(AssertionError.class, () -> m.get(2, 3));
+        assertThrows(IllegalArgumentException.class, () -> m.get(-1, -1));
+        assertThrows(IllegalArgumentException.class, () -> m.get(-1, 0));
+        assertThrows(IllegalArgumentException.class, () -> m.get(-1, 3));
+        assertThrows(IllegalArgumentException.class, () -> m.get(0, -1));
+        assertThrows(IllegalArgumentException.class, () -> m.get(0, 3));
+        assertThrows(IllegalArgumentException.class, () -> m.get(2, -1));
+        assertThrows(IllegalArgumentException.class, () -> m.get(2, 0));
+        assertThrows(IllegalArgumentException.class, () -> m.get(2, 3));
     }
 
     @Test
     void getRowWithInvalidParams() {
         var m = new Matrix2D(2, 3);
 
-        assertThrows(AssertionError.class, () -> m.getRow(-1));
-        assertThrows(AssertionError.class, () -> m.getRow(2 * 3));
+        assertThrows(IllegalArgumentException.class, () -> m.getRow(-1));
+        assertThrows(IllegalArgumentException.class, () -> m.getRow(2 * 3));
     }
 
     @Test
     void setWithInvalidParams() {
         var m = new Matrix2D(2, 3);
 
-        assertThrows(AssertionError.class, () -> m.set(-1, -1, 21));
-        assertThrows(AssertionError.class, () -> m.set(-1, 0, 21));
-        assertThrows(AssertionError.class, () -> m.set(-1, 3, 21));
-        assertThrows(AssertionError.class, () -> m.set(0, -1, 21));
-        assertThrows(AssertionError.class, () -> m.set(0, 3, 21));
-        assertThrows(AssertionError.class, () -> m.set(2, -1, 21));
-        assertThrows(AssertionError.class, () -> m.set(2, 0, 21));
-        assertThrows(AssertionError.class, () -> m.set(2, 3, 21));
+        assertThrows(IllegalArgumentException.class, () -> m.set(-1, -1, 21));
+        assertThrows(IllegalArgumentException.class, () -> m.set(-1, 0, 21));
+        assertThrows(IllegalArgumentException.class, () -> m.set(-1, 3, 21));
+        assertThrows(IllegalArgumentException.class, () -> m.set(0, -1, 21));
+        assertThrows(IllegalArgumentException.class, () -> m.set(0, 3, 21));
+        assertThrows(IllegalArgumentException.class, () -> m.set(2, -1, 21));
+        assertThrows(IllegalArgumentException.class, () -> m.set(2, 0, 21));
+        assertThrows(IllegalArgumentException.class, () -> m.set(2, 3, 21));
     }
 
     @Test
     void setRowWithInvalidParams() {
         var m = new Matrix2D(2, 3);
 
-        assertThrows(AssertionError.class, () -> m.setRow(-1, new double[]{21}));
-        assertThrows(AssertionError.class, () -> m.setRow(2 * 3, new double[]{21}));
+        assertThrows(IllegalArgumentException.class, () -> m.setRow(-1, new double[]{21}));
+        assertThrows(IllegalArgumentException.class, () -> m.setRow(2 * 3, new double[]{21}));
     }
 
     @Test
@@ -132,11 +132,11 @@ class Matrix2DTest {
     void swapRowsWithInvalidParams() {
         var m = new Matrix2D(2, 3);
 
-        assertThrows(AssertionError.class, () -> m.swapRows(-1, 0));
-        assertThrows(AssertionError.class, () -> m.swapRows(2, 0));
-        assertThrows(AssertionError.class, () -> m.swapRows(0, -1));
-        assertThrows(AssertionError.class, () -> m.swapRows(0, 2));
-        assertThrows(AssertionError.class, () -> m.swapRows(1, 1));
+        assertThrows(IllegalArgumentException.class, () -> m.swapRows(-1, 0));
+        assertThrows(IllegalArgumentException.class, () -> m.swapRows(2, 0));
+        assertThrows(IllegalArgumentException.class, () -> m.swapRows(0, -1));
+        assertThrows(IllegalArgumentException.class, () -> m.swapRows(0, 2));
+        assertThrows(IllegalArgumentException.class, () -> m.swapRows(1, 1));
     }
 
     @Test
@@ -169,11 +169,11 @@ class Matrix2DTest {
     void swapColsWithInvalidParams() {
         var m = new Matrix2D(3, 2);
 
-        assertThrows(AssertionError.class, () -> m.swapCols(-1, 0));
-        assertThrows(AssertionError.class, () -> m.swapCols(2, 0));
-        assertThrows(AssertionError.class, () -> m.swapCols(0, -1));
-        assertThrows(AssertionError.class, () -> m.swapCols(0, 2));
-        assertThrows(AssertionError.class, () -> m.swapCols(1, 1));
+        assertThrows(IllegalArgumentException.class, () -> m.swapCols(-1, 0));
+        assertThrows(IllegalArgumentException.class, () -> m.swapCols(2, 0));
+        assertThrows(IllegalArgumentException.class, () -> m.swapCols(0, -1));
+        assertThrows(IllegalArgumentException.class, () -> m.swapCols(0, 2));
+        assertThrows(IllegalArgumentException.class, () -> m.swapCols(1, 1));
     }
 
     @Test
@@ -214,12 +214,12 @@ class Matrix2DTest {
     void setRowWithWrongParams() {
         var m = new Matrix2D(2, 3);
 
-        assertThrows(AssertionError.class, () -> m.setRow(-1, new double[7])); // wrong index (too small), wrong array size
-        assertThrows(AssertionError.class, () -> m.setRow(-1, new double[3])); // wrong index (too small)
-        assertThrows(AssertionError.class, () -> m.setRow(0, new double[7]));  // wrong array size
+        assertThrows(IllegalArgumentException.class, () -> m.setRow(-1, new double[7])); // wrong index (too small), wrong array size
+        assertThrows(IllegalArgumentException.class, () -> m.setRow(-1, new double[3])); // wrong index (too small)
+        assertThrows(IllegalArgumentException.class, () -> m.setRow(0, new double[7]));  // wrong array size
         assertDoesNotThrow(() -> m.setRow(0, new double[3]));
         assertDoesNotThrow(() -> m.setRow(1, new double[3]));
-        assertThrows(AssertionError.class, () -> m.setRow(2, new double[3]));  // wrong index (too big)
-        assertThrows(AssertionError.class, () -> m.setRow(2, new double[2]));  // wrong index (too big), wrong array size
+        assertThrows(IllegalArgumentException.class, () -> m.setRow(2, new double[3]));  // wrong index (too big)
+        assertThrows(IllegalArgumentException.class, () -> m.setRow(2, new double[2]));  // wrong index (too big), wrong array size
     }
 }

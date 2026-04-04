@@ -32,7 +32,9 @@ public class Matrix2D {
      * @throws IllegalArgumentException if m &lt;= 0 or n &lt;= 0
      */
     public Matrix2D(int m, int n) {
-        assert (m > 0 && n > 0);
+        if (m <= 0 || n <= 0) {
+            throw new IllegalArgumentException("m and n must be positive, got m=" + m + ", n=" + n);
+        }
 
         this.m = m;
         this.n = n;
@@ -48,7 +50,10 @@ public class Matrix2D {
      * @throws IllegalArgumentException if i &lt; 0 or i &gt;= m or j &lt; 0 or j &gt;= n
      */
     public void set(int i, int j, double value) {
-        assert (0 <= i && i < m && 0 <= j && j < n);
+        if (i < 0 || i >= m || j < 0 || j >= n) {
+            throw new IllegalArgumentException(
+                    "indices (i,j) out of bounds: (" + i + "," + j + "), matrix size " + m + "x" + n);
+        }
         data[i * n + j] = value;
     }
 
@@ -60,7 +65,12 @@ public class Matrix2D {
      * @throws IllegalArgumentException if i &lt; 0 or i &gt;= m or arr.length != n
      */
     public void setRow(int i, double[] arr) {
-        assert (0 <= i && i < m && arr.length == n);
+        if (i < 0 || i >= m) {
+            throw new IllegalArgumentException("row index i out of bounds: " + i + ", valid [0, " + (m - 1) + "]");
+        }
+        if (arr == null || arr.length != n) {
+            throw new IllegalArgumentException("row array length must be " + n + ", got " + (arr == null ? "null" : arr.length));
+        }
         System.arraycopy(arr, 0, data, i * n, arr.length);
     }
 
@@ -72,7 +82,9 @@ public class Matrix2D {
      * @throws IllegalArgumentException if i &lt; 0 or i &gt;= m
      */
     public double[] getRow(int i) {
-        assert (0 <= i && i < m);
+        if (i < 0 || i >= m) {
+            throw new IllegalArgumentException("row index i out of bounds: " + i + ", valid [0, " + (m - 1) + "]");
+        }
         return Arrays.copyOfRange(data, i * n, (i + 1) * n);
     }
 
@@ -85,7 +97,10 @@ public class Matrix2D {
      * @throws IllegalArgumentException if i &lt; 0 or i &gt;= m or j &lt; 0 or j &gt;= n
      */
     public double get(int i, int j) {
-        assert (0 <= i && i < m && 0 <= j && j < n);
+        if (i < 0 || i >= m || j < 0 || j >= n) {
+            throw new IllegalArgumentException(
+                    "indices (i,j) out of bounds: (" + i + "," + j + "), matrix size " + m + "x" + n);
+        }
         return data[i * n + j];
     }
 
@@ -124,7 +139,13 @@ public class Matrix2D {
      * @throws IllegalArgumentException if m1 &lt; 0 or m1 &gt;= m or m2 &lt; 0 or m2 &gt;= m or m1 = m2
      */
     public void swapRows(int m1, int m2) {
-        assert (0 <= m1 && m1 < m && 0 <= m2 && m2 < m && m1 != m2);
+        if (m1 < 0 || m1 >= m || m2 < 0 || m2 >= m) {
+            throw new IllegalArgumentException(
+                    "row indices out of bounds: (" + m1 + "," + m2 + "), valid [0, " + (m - 1) + "]");
+        }
+        if (m1 == m2) {
+            throw new IllegalArgumentException("row indices must differ, both are " + m1);
+        }
 
         var buff = new double[n];
         System.arraycopy(data, m1 * n, buff, 0, n);
@@ -140,9 +161,15 @@ public class Matrix2D {
      * @throws IllegalArgumentException if n1 &lt; 0 or n1 &gt;= n or n2 &lt; 0 or n2 &gt;= n or n1 = n2
      */
     public void swapCols(int n1, int n2) {
-        assert (0 <= n1 && n1 < n && 0 <= n2 && n2 < n && n1 != n2);
+        if (n1 < 0 || n1 >= n || n2 < 0 || n2 >= n) {
+            throw new IllegalArgumentException(
+                    "column indices out of bounds: (" + n1 + "," + n2 + "), valid [0, " + (n - 1) + "]");
+        }
+        if (n1 == n2) {
+            throw new IllegalArgumentException("column indices must differ, both are " + n1);
+        }
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < m; i++) {
             var tmp = data[i * n + n1];
             data[i * n + n1] = data[i * n + n2];
             data[i * n + n2] = tmp;
