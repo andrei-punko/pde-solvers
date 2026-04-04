@@ -149,22 +149,23 @@ class SolutionTest {
     /**
      * <pre>
      * Build solution for
-     * - space interval [10,13] with 3 steps &
-     * - time interval [2,6] with 2 steps
-     * - matrix:
-     *   [[50,80,90,99],
-     *    [30,70,120,125],
-     *    [45,56,78,786]]
+     * - space interval [10,13] with n=4 (5 nodes) and time [2,6] with n=3 (4 layers)
+     * - matrix (rows = time, cols = space), consistent with {@link Area}:
+     *   [[50,80,90,99,100],
+     *    [30,70,120,125,130],
+     *    [45,56,78,786,800],
+     *    [44,55,77,790,805]]
      * </pre>
      */
     private Solution<Equation> buildSolution() {
         var spaceSteps = 4;
         var timeSteps = 3;
 
-        var solutionMatrix = new Matrix2D(timeSteps, spaceSteps);
-        solutionMatrix.setRow(0, new double[]{50, 80, 90, 99});
-        solutionMatrix.setRow(1, new double[]{30, 70, 120, 125});
-        solutionMatrix.setRow(2, new double[]{45, 56, 78, 786});
+        var solutionMatrix = new Matrix2D(timeSteps + 1, spaceSteps + 1);
+        solutionMatrix.setRow(0, new double[]{50, 80, 90, 99, 100});
+        solutionMatrix.setRow(1, new double[]{30, 70, 120, 125, 130});
+        solutionMatrix.setRow(2, new double[]{45, 56, 78, 786, 800});
+        solutionMatrix.setRow(3, new double[]{44, 55, 77, 790, 805});
 
         var equation = new ParabolicEquation(10, 13, 6,
                 new DirichletBorderCondition(), new DirichletBorderCondition()) {
@@ -177,25 +178,29 @@ class SolutionTest {
 
     private static void checkUtAssertions(MatrixXY result) {
         assertThat(result.getM()).isEqualTo(2);
-        assertThat(result.getN()).isEqualTo(4);
+        assertThat(result.getN()).isEqualTo(5);
         assertThat(result.x(0)).isEqualTo(10);
         assertThat(result.x(1)).isEqualTo(10 + 3 / 4.);
         assertThat(result.x(2)).isEqualTo(10 + 6 / 4.);
         assertThat(result.x(3)).isEqualTo(10 + 9 / 4.);
+        assertThat(result.x(4)).isEqualTo(13);
         assertThat(result.y(0)).isEqualTo(45);
         assertThat(result.y(1)).isEqualTo(56);
         assertThat(result.y(2)).isEqualTo(78);
         assertThat(result.y(3)).isEqualTo(786);
+        assertThat(result.y(4)).isEqualTo(800);
     }
 
     private static void checkUxAssertions(MatrixXY result) {
         assertThat(result.getM()).isEqualTo(2);
-        assertThat(result.getN()).isEqualTo(3);
+        assertThat(result.getN()).isEqualTo(4);
         assertThat(result.x(0)).isEqualTo(2);
         assertThat(result.x(1)).isEqualTo(2 + 4 / 3.);
         assertThat(result.x(2)).isEqualTo(2 + 8 / 3.);
+        assertThat(result.x(3)).isEqualTo(6);
         assertThat(result.y(0)).isEqualTo(80);
         assertThat(result.y(1)).isEqualTo(70);
         assertThat(result.y(2)).isEqualTo(56);
+        assertThat(result.y(3)).isEqualTo(55);
     }
 }

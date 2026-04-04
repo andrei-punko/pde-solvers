@@ -45,7 +45,8 @@ public record Solution<E extends Equation>(
      * Saves solution data U(x,t) for specified time moments to a file.
      * Creates a set of spatial slices of the solution at different time points.
      * Each line in the output file contains spatial coordinates followed by
-     * solution values at different time moments.
+     * solution values at different time moments. All spatial columns of the solution matrix are written
+     * (same extent as {@link #gUt(int)} for a fixed time layer).
      *
      * @param fileName name of the file to save the data
      * @param t        array of time moments to save
@@ -66,7 +67,7 @@ public record Solution<E extends Equation>(
         }
 
         var sb = new StringBuilder();
-        for (var i = 0; i < area.xn(); i++) {
+        for (var i = 0; i < solution.getN(); i++) {
             sb.append(area.xx(i));
             for (var t_i : t) {
                 sb.append(" ").append(solution.get(area.ti(t_i), i));
@@ -95,7 +96,8 @@ public record Solution<E extends Equation>(
      * Saves solution data U(x,t) for specified spatial coordinates to a file.
      * Creates a set of temporal slices of the solution at different spatial points.
      * Each line in the output file contains time coordinates followed by
-     * solution values at different spatial points.
+     * solution values at different spatial points. All time rows of the solution matrix are written
+     * (same extent as {@link #gUx(int)} for a fixed spatial column).
      *
      * @param fileName name of the file to save the data
      * @param x        array of spatial coordinates to save
@@ -116,7 +118,7 @@ public record Solution<E extends Equation>(
         }
 
         var sb = new StringBuilder();
-        for (int i = 0; i < area.tn(); i++) {
+        for (int i = 0; i < solution.getM(); i++) {
             sb.append(area.tx(i));
             for (var x_i : x) {
                 sb.append(" ").append(solution.get(i, area.xi(x_i)));
