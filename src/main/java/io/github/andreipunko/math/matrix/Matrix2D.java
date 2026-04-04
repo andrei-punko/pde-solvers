@@ -1,7 +1,6 @@
 package io.github.andreipunko.math.matrix;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
 
@@ -15,7 +14,6 @@ import java.util.Arrays;
  * The matrix is stored internally as a single-dimensional array in row-major order,
  * where the element at position (i,j) is stored at index i*n + j in the data array.
  */
-@RequiredArgsConstructor
 public class Matrix2D {
 
     @Getter
