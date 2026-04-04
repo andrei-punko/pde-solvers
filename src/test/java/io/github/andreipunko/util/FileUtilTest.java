@@ -68,7 +68,7 @@ class FileUtilTest {
 
     @Test
     void saveMatrixWithConversionRowsToColumns() throws IOException {
-        final var fileName = "matrix-not-original.txt";
+        final var fileName = "matrix-rotated.txt";
         var m = new Matrix2D(2, 3);
         m.setRow(0, new double[]{50, 51, 52});
         m.setRow(1, new double[]{65, 66, 67});
