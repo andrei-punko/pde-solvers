@@ -49,7 +49,7 @@ where U = U(x,t) is the unknown function (displacement of string, etc)
 ```bash
 ./gradlew clean javadoc
 ```
-Check `./build/doc/javadoc` folder  
+Check `./build/docs/javadoc` folder  
 Online documentation is available [here](https://andrei-punko.github.io/pde-solvers/)
 
 ## Supported equation types
@@ -126,14 +126,14 @@ The version in this repository’s `build.gradle` (`version = …`) is the **cur
 <dependency>
   <groupId>io.github.andrei-punko</groupId>
   <artifactId>pde-solvers</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```gradle
-implementation 'io.github.andrei-punko:pde-solvers:1.0.3'
+implementation 'io.github.andrei-punko:pde-solvers:1.0.4'
 ```
 
 ### Code example
