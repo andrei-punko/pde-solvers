@@ -14,6 +14,12 @@ package io.github.andreipunko.math.pde.border;
 public class NeumannBorderCondition implements BorderCondition {
 
     /**
+     * Creates a Neumann boundary condition; override {@link #gdU_dx(double)} to set flux at the boundary.
+     */
+    public NeumannBorderCondition() {
+    }
+
+    /**
      * Returns the prescribed value of the spatial derivative at the boundary at time t.
      * This method should be overridden to provide the actual derivative value function.
      *

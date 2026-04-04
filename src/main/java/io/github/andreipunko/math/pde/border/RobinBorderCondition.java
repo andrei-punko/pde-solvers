@@ -16,6 +16,12 @@ package io.github.andreipunko.math.pde.border;
 public class RobinBorderCondition implements BorderCondition {
 
     /**
+     * Creates a Robin boundary condition; override {@link #gH()}, {@link #gTheta(double)} as needed.
+     */
+    public RobinBorderCondition() {
+    }
+
+    /**
      * Returns the coefficient h in the Robin boundary condition.
      * This coefficient represents the heat transfer coefficient in heat conduction
      * problems or the spring constant in mechanical problems.

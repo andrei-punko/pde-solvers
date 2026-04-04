@@ -14,6 +14,12 @@ import io.github.andreipunko.math.pde.equation.ParabolicEquation;
 public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEquation> {
 
     /**
+     * Creates a solver for parabolic equations using the implicit finite-difference scheme.
+     */
+    public ParabolicEquationSolver() {
+    }
+
+    /**
      * Solves parabolic partial differential equation using numerical method.
      * Uses implicit finite difference scheme with weights for derivative approximation.
      * Solution is found using the Thomas algorithm on each time step.

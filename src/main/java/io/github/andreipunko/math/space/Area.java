@@ -12,6 +12,8 @@ package io.github.andreipunko.math.space;
  */
 public record Area(Interval x, Interval t) {
     /**
+     * Validates that both intervals are non-null before the instance is created.
+     *
      * @throws IllegalArgumentException if x or t is null
      */
     public Area {

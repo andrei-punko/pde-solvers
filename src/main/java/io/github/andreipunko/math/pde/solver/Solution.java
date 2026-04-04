@@ -25,6 +25,8 @@ public record Solution<E extends Equation>(
         Matrix2D solution
 ) {
     /**
+     * Validates record components before the instance is created.
+     *
      * @throws IllegalArgumentException if equation, area or solution is null
      */
     public Solution {

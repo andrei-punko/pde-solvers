@@ -21,6 +21,12 @@ import io.github.andreipunko.math.space.Interval;
 public abstract class AbstractEquationSolver<E extends Equation> implements EquationSolver<E> {
 
     /**
+     * Constructor for use by concrete solver subclasses.
+     */
+    protected AbstractEquationSolver() {
+    }
+
+    /**
      * Builds a space-time computational domain for the equation solution.
      * Creates a grid with specified spatial and temporal step sizes.
      *

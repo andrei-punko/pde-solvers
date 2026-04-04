@@ -14,6 +14,12 @@ package io.github.andreipunko.math.pde.border;
 public class DirichletBorderCondition implements BorderCondition {
 
     /**
+     * Creates a Dirichlet boundary condition; override {@link #gU(double)} to set boundary values.
+     */
+    public DirichletBorderCondition() {
+    }
+
+    /**
      * Returns the prescribed value of the solution at the boundary at time t.
      * This method should be overridden to provide the actual boundary value function.
      *

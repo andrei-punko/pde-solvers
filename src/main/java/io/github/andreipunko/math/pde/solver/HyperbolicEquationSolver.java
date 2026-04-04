@@ -14,6 +14,12 @@ import io.github.andreipunko.math.pde.equation.HyperbolicEquation;
 public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicEquation> {
 
     /**
+     * Creates a solver for hyperbolic equations using the implicit three-layer scheme.
+     */
+    public HyperbolicEquationSolver() {
+    }
+
+    /**
      * Solves hyperbolic partial differential equation using numerical method.
      * The solution is found using a three-layer implicit finite difference scheme.
      * The algorithm consists of two main steps:

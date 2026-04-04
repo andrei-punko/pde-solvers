@@ -16,6 +16,12 @@ import java.util.stream.Collectors;
 public class FileUtil {
 
     /**
+     * Not used; static helpers only.
+     */
+    private FileUtil() {
+    }
+
+    /**
      * Save text data from StringBuilder instance into file
      *
      * @param sb       StringBuilder instance
