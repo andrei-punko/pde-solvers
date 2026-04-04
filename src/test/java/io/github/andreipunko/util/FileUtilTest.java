@@ -3,11 +3,15 @@ package io.github.andreipunko.util;
 import io.github.andreipunko.math.matrix.Matrix2D;
 import io.github.andreipunko.math.space.Interval;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static io.github.andreipunko.util.FileComparisonHelper.BUILD_PATH;
 import static io.github.andreipunko.util.FileComparisonHelper.checkGeneratedFileContent;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class FileUtilTest {
 
@@ -21,6 +25,13 @@ class FileUtilTest {
         FileUtil.serialize(sb, BUILD_PATH + fileName);
 
         checkGeneratedFileContent(fileName);
+    }
+
+    @Test
+    void serializeCreatesMissingParentDirectories(@TempDir Path temp) throws IOException {
+        var target = temp.resolve("a/b/c/out.txt");
+        FileUtil.serialize(new StringBuilder("content"), target.toString());
+        assertThat(Files.readString(target)).isEqualTo("content");
     }
 
     @Test

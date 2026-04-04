@@ -3,15 +3,17 @@ package io.github.andreipunko.util;
 import io.github.andreipunko.math.matrix.Matrix2D;
 import io.github.andreipunko.math.space.Interval;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Util to serialize data into files
+ * Utilities to write text data to files. All textual output uses UTF-8.
  */
 public class FileUtil {
 
@@ -22,12 +24,12 @@ public class FileUtil {
     }
 
     /**
-     * Save text data from StringBuilder instance into file
+     * Save text data from StringBuilder instance into file using UTF-8 encoding.
      *
      * @param sb       StringBuilder instance
-     * @param fileName name of file
+     * @param fileName name of file (parent directories are created if they do not exist)
      * @throws IllegalArgumentException if sb or fileName is null
-     * @throws IOException              if an I/O error occurs writing the file
+     * @throws IOException              if an I/O error occurs creating directories or writing the file
      */
     public static void serialize(StringBuilder sb, String fileName) throws IOException {
         if (sb == null) {
@@ -36,9 +38,12 @@ public class FileUtil {
         if (fileName == null) {
             throw new IllegalArgumentException("fileName must not be null");
         }
-        try (var writer = new FileWriter(fileName)) {
-            writer.write(sb.toString());
+        var path = Path.of(fileName);
+        var parent = path.getParent();
+        if (parent != null) {
+            Files.createDirectories(parent);
         }
+        Files.writeString(path, sb.toString(), StandardCharsets.UTF_8);
     }
 
     /**
