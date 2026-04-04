@@ -28,7 +28,8 @@ public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEqu
      * @param h   spatial step size (must be positive)
      * @param tau time step size (must be positive)
      * @return equation solution containing function values at all grid points
-     * @throws IllegalArgumentException if parameters h or tau are non-positive
+     * @throws IllegalArgumentException if parameters h or tau are invalid, or if a time-step tridiagonal system is
+     *                                  degenerate (see {@link AbstractEquationSolver#solve3DiagonalEquationsSystem})
      */
     @Override
     public Solution<ParabolicEquation> solve(ParabolicEquation eqn, double h, double tau) {

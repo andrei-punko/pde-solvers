@@ -4,6 +4,7 @@ import io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AbstractEquationSolverTest {
 
@@ -34,5 +35,20 @@ class AbstractEquationSolverTest {
                 new KappaNu(0, 12), new KappaNu(0, 24));
 
         assertThat(result).isEqualTo(new double[]{12.0, -0.875, -6.375, 24.0});
+    }
+
+    /**
+     * Forward sweep denominator C[1] - A[1]*Alpha[1] = 1 - 1*1 = 0 with Alpha[1] = kappa from left boundary.
+     */
+    @Test
+    void solve3DiagonalEquationsSystem_rejectsZeroForwardDenominator() {
+        double[] A = {0, 1};
+        double[] B = {0, 1};
+        double[] C = {0, 1};
+        double[] F = {0, 0};
+
+        assertThrows(IllegalArgumentException.class, () ->
+                AbstractEquationSolver.solve3DiagonalEquationsSystem(A, B, C, F,
+                        new KappaNu(1, 0), new KappaNu(0, 0)));
     }
 }

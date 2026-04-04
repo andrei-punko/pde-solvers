@@ -13,6 +13,9 @@ import io.github.andreipunko.math.space.Interval;
  * Abstract base class for partial differential equation solvers.
  * Provides common functionality and utility methods used by specific equation solvers.
  * Implements the core numerical methods and algorithms shared across different types of PDE solvers.
+ * <p>
+ * Step sizes passed to {@link #buildArea} are validated for finiteness and positivity only; physical or discrete
+ * stability of the chosen {@code h} and {@code tau} is not enforced (see package {@code io.github.andreipunko.math.pde.solver}).
  *
  * @param <E> the type of equation this solver handles
  * @see Equation
@@ -90,7 +93,9 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
      * @param leftCond  left boundary condition parameters
      * @param rightCond right boundary condition parameters
      * @return solution vector Y[i]
-     * @throws IllegalArgumentException if arrays have different lengths or invalid coefficients
+     * @throws IllegalArgumentException if arrays have different lengths, if coefficients are invalid, or if a forward /
+     *                                    right-boundary denominator is zero or numerically too small (singular or
+     *                                    ill-conditioned sweep)
      */
     public static double[] solve3DiagonalEquationsSystem(double[] A, double[] B, double[] C, double[] F,
                                                          KappaNu leftCond, KappaNu rightCond) {
@@ -118,19 +123,42 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
         Alpha[1] = leftCond.kappa;
         Beta[1] = leftCond.nu;
         for (int i = 1; i < N; i++) {
-            Alpha[i + 1] = B[i] / (C[i] - A[i] * Alpha[i]);
-            Beta[i + 1] = (A[i] * Beta[i] + F[i]) / (C[i] - A[i] * Alpha[i]);
+            double denom = C[i] - A[i] * Alpha[i];
+            Alpha[i + 1] = divideThomas(B[i], denom, "forward sweep (Alpha), row index " + i);
+            Beta[i + 1] = divideThomas(A[i] * Beta[i] + F[i], denom, "forward sweep (Beta), row index " + i);
         }
 
         // Backward phase:
         // - calculate Y[N] from border condition
         // - calculate Y[i] for i=N-1,N-2,...,1,0 using recurrent formula
         var Y = new double[N + 1];
-        Y[N] = (rightCond.nu + rightCond.kappa * Beta[N]) / (1 - rightCond.kappa * Alpha[N]);
+        double denomRight = 1 - rightCond.kappa * Alpha[N];
+        Y[N] = divideThomas(rightCond.nu + rightCond.kappa * Beta[N], denomRight, "right boundary (Y[N])");
         for (int i = N - 1; i >= 0; i--) {
             Y[i] = Alpha[i + 1] * Y[i + 1] + Beta[i + 1];
         }
         return Y;
+    }
+
+    /**
+     * Divides {@code numerator} by {@code denominator} for the Thomas algorithm, rejecting non-finite values and
+     * near-zero denominators relative to the magnitude of the operands.
+     */
+    private static double divideThomas(double numerator, double denominator, String stage) {
+        if (!Double.isFinite(denominator)) {
+            throw new IllegalArgumentException("Tridiagonal solver (" + stage + "): denominator is not finite: " + denominator);
+        }
+        double scale = Math.max(1.0, Math.abs(numerator) + Math.abs(denominator));
+        final double relTol = 1e-14;
+        if (Math.abs(denominator) <= relTol * scale) {
+            throw new IllegalArgumentException(
+                    "Tridiagonal solver (" + stage + "): denominator too small in magnitude: " + denominator);
+        }
+        double q = numerator / denominator;
+        if (!Double.isFinite(q)) {
+            throw new IllegalArgumentException("Tridiagonal solver (" + stage + "): quotient is not finite");
+        }
+        return q;
     }
 
     /**

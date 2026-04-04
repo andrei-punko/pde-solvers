@@ -93,6 +93,14 @@ Online documentation is available [here](https://andrei-punko.github.io/pde-solv
 - Efficient algorithm for solving tridiagonal systems of linear equations
 - Time complexity O(n), where n is the system size
 
+## Time step and spatial step (stability)
+
+The library checks only that `h` and `tau` are finite and positive. It does **not** enforce CFL-type or other
+problem-specific stability conditions. The parabolic and hyperbolic schemes here are **implicit**, which usually
+improves stability compared to explicit methods, but **accuracy** still depends on resolving the relevant scales:
+choose `h` and `tau` using your physics or standard numerical PDE references. If a tridiagonal system at a time step
+becomes singular or nearly singular, `IllegalArgumentException` may be thrown from the Thomas-algorithm helper.
+
 ## Library usage examples
 
 ### Parabolic equations
