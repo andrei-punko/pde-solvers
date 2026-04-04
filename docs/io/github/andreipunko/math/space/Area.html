@@ -124,7 +124,7 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.github.andreipunko.math.space.Interval,io.github.andreipunko.math.space.Interval)" class="member-name-link">Area</a><wbr>(<a href="Interval.html" title="class in io.github.andreipunko.math.space">Interval</a>&nbsp;x,
  <a href="Interval.html" title="class in io.github.andreipunko.math.space">Interval</a>&nbsp;t)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates an instance of a <code>Area</code> record class.</div>
+<div class="block">Validates that both intervals are non-null before the instance is created.</div>
 </div>
 </div>
 </section>
@@ -237,11 +237,10 @@ loadScripts(document, 'script');</script>
 <h3>Area</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Area</span><wbr><span class="parameters">(<a href="Interval.html" title="class in io.github.andreipunko.math.space">Interval</a>&nbsp;x,
  <a href="Interval.html" title="class in io.github.andreipunko.math.space">Interval</a>&nbsp;t)</span></div>
-<div class="block">Creates an instance of a <code>Area</code> record class.</div>
+<div class="block">Validates that both intervals are non-null before the instance is created.</div>
 <dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>x</code> - the value for the <a href="#param-x"><code>x</code></a> record component</dd>
-<dd><code>t</code> - the value for the <a href="#param-t"><code>t</code></a> record component</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if x or t is null</dd>
 </dl>
 </section>
 </li>

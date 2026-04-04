@@ -37,7 +37,7 @@ loadScripts(document, 'script');</script>
 <li>
 <p>Package:</p>
 <ul>
-<li>Description</li>
+<li><a href="#package-description">Description</a></li>
 <li>Related Packages</li>
 <li><a href="#class-summary">Classes and Interfaces</a></li>
 </ul>
@@ -48,7 +48,7 @@ loadScripts(document, 'script');</script>
 <div id="navbar-sub-list">
 <ul class="sub-nav-list">
 <li>Package:&nbsp;</li>
-<li>Description&nbsp;|&nbsp;</li>
+<li><a href="#package-description">Description</a>&nbsp;|&nbsp;</li>
 <li>Related Packages&nbsp;|&nbsp;</li>
 <li><a href="#class-summary">Classes and Interfaces</a></li>
 </ul>
@@ -68,6 +68,17 @@ loadScripts(document, 'script');</script>
 </div>
 <hr>
 <div class="package-signature">package <span class="element-name">io.github.andreipunko.math.pde.solver</span></div>
+<section class="package-description" id="package-description">
+<div class="block">Numerical PDE solvers using finite differences and the Thomas algorithm.
+ <p>
+ <b>Grid steps <code>h</code> and <code>tau</code>:</b> solvers only require positive finite steps and build a tensor-product
+ grid. They do <em>not</em> enforce physical stability conditions (such as CFL bounds typical of explicit schemes).
+ The implemented schemes are <em>implicit</em>, which generally improves stability relative to explicit methods,
+ but <em>accuracy</em> still depends on resolving the relevant space–time scales: <code>h</code> and <code>tau</code> should be
+ chosen using the problem physics or standard discretization theory. Poor choices can yield inaccurate results or
+ poorly conditioned tridiagonal systems; the latter may trigger
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link"><code>IllegalArgumentException</code></a> from <a href="AbstractEquationSolver.html#solve3DiagonalEquationsSystem(double%5B%5D,double%5B%5D,double%5B%5D,double%5B%5D,io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu,io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu)"><code>AbstractEquationSolver.solve3DiagonalEquationsSystem(double[], double[], double[], double[], io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu, io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu)</code></a>.</div>
+</section>
 <section class="summary">
 <ul class="summary-list">
 <li>

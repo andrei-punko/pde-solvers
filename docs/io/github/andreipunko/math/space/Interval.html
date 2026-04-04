@@ -93,8 +93,18 @@ loadScripts(document, 'script');</script>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Represents a one-dimensional interval with uniform discretization.
  This class is used to define spatial or temporal domains with a fixed step size
- or a specified number of points. It provides methods for coordinate-to-index
- and index-to-coordinate conversions.</div>
+ or a specified number of subdivisions. It provides methods for coordinate-to-index
+ and index-to-coordinate conversions.
+ <p>
+ <b>Step size <code>h</code> vs. subdivision count <code>n</code>:</b>
+ If the interval is built with a step <code>h</code> (constructor <a href="#%3Cinit%3E(double,double,double)"><code>Interval(double, double, double)</code></a>
+ or <a href="#reborn(double)"><code>reborn(double)</code></a>), then <code>n</code> is computed as
+ <code>(int) ((right - left) / h)</code> — the integer part of the length-to-step ratio.
+ Grid nodes are <code>x(i) = left + i * h</code> for <code>i = 0, 1, …, n</code>. The last node
+ <code>x(n)</code> satisfies <code>x(n) ≤ right</code>, but if <code>(right - left) / h</code> is not an integer,
+ then <code>x(n) &lt; right</code>: the declared <code>right</code> boundary is <em>not</em> necessarily a grid point.
+ To obtain a uniform mesh whose last node coincides exactly with <code>right</code>, use
+ <a href="#%3Cinit%3E(double,double,int)"><code>Interval(double, double, int)</code></a> instead (there <code>h = (right - left) / n</code>).</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -128,7 +138,7 @@ loadScripts(document, 'script');</script>
  double&nbsp;right,
  int&nbsp;n)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates an interval [left,right] with a specified number of points.</div>
+<div class="block">Creates an interval [left,right] with a specified number of subdivisions <code>n</code>.</div>
 </div>
 </div>
 </section>
@@ -162,7 +172,8 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#n()" class="member-name-link">n</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the number of points in the interval.</div>
+<div class="block">Returns the number of subdivisions along the interval: valid indices are <code>0 … n</code>
+ (<code>n + 1</code> grid nodes).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reborn(double)" class="member-name-link">reborn</a><wbr>(double&nbsp;h)</code></div>
@@ -173,7 +184,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reborn(int)" class="member-name-link">reborn</a><wbr>(int&nbsp;n)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Recreates the interval with a new number of points while maintaining
+<div class="block">Recreates the interval with a new subdivision count while maintaining
  the same boundaries.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
@@ -218,14 +229,16 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Interval</span><wbr><span class="parameters">(double&nbsp;left,
  double&nbsp;right,
  double&nbsp;h)</span></div>
-<div class="block">Creates an interval [left,right] with a specified step size.</div>
+<div class="block">Creates an interval [left,right] with a specified step size.
+ The subdivision count <code>n</code> is <code>(int) ((right - left) / h)</code>; the endpoint <code>right</code>
+ may lie beyond the last grid node when the ratio is not integral (see class documentation).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>left</code> - left boundary of the interval</dd>
 <dd><code>right</code> - right boundary of the interval</dd>
 <dd><code>h</code> - step size between points</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if right &lt;= left or h &lt;= 0</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if h &lt;= 0, if (right - left) &lt; h, or if left &gt;= right</dd>
 </dl>
 </section>
 </li>
@@ -235,15 +248,16 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Interval</span><wbr><span class="parameters">(double&nbsp;left,
  double&nbsp;right,
  int&nbsp;n)</span></div>
-<div class="block">Creates an interval [left,right] with a specified number of points.
- The step size is automatically calculated as (right - left) / n.</div>
+<div class="block">Creates an interval [left,right] with a specified number of subdivisions <code>n</code>.
+ The step size is <code>(right - left) / n</code>, so the last grid node equals <code>right</code>
+ (<code>x(n) == right</code>), unlike construction by a fixed step <code>h</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>left</code> - left boundary of the interval</dd>
 <dd><code>right</code> - right boundary of the interval</dd>
-<dd><code>n</code> - number of points in the interval</dd>
+<dd><code>n</code> - number of subdivisions (grid indices <code>0 … n</code>, i.e. <code>n + 1</code> nodes)</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if right &lt;= left or n &lt;= 0</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if left &gt;= right or n &lt;= 0</dd>
 </dl>
 </section>
 </li>
@@ -292,10 +306,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="n()">
 <h3>n</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">n</span>()</div>
-<div class="block">Returns the number of points in the interval.</div>
+<div class="block">Returns the number of subdivisions along the interval: valid indices are <code>0 … n</code>
+ (<code>n + 1</code> grid nodes). Either supplied to <a href="#%3Cinit%3E(double,double,int)"><code>Interval(double, double, int)</code></a>
+ or derived from step <code>h</code> as described in the class documentation.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>number of points n</dd>
+<dd>subdivision count <code>n</code></dd>
 </dl>
 </section>
 </li>
@@ -304,12 +320,14 @@ loadScripts(document, 'script');</script>
 <h3>reborn</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reborn</span><wbr><span class="parameters">(double&nbsp;h)</span></div>
 <div class="block">Recreates the interval with a new step size while maintaining
- the same boundaries. The number of points is automatically adjusted.</div>
+ the same boundaries. <code>n</code> is recomputed as <code>(int) ((right - left) / h)</code>
+ (same semantics as <a href="#%3Cinit%3E(double,double,double)"><code>Interval(double, double, double)</code></a>; the last node may lie strictly
+ inside <code>right</code> if the length is not a multiple of <code>h</code>).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>h</code> - new step size</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if h &lt;= 0</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if h &lt;= 0 or if (right - left) &lt; h</dd>
 </dl>
 </section>
 </li>
@@ -317,11 +335,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="reborn(int)">
 <h3>reborn</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reborn</span><wbr><span class="parameters">(int&nbsp;n)</span></div>
-<div class="block">Recreates the interval with a new number of points while maintaining
- the same boundaries. The step size is automatically adjusted.</div>
+<div class="block">Recreates the interval with a new subdivision count while maintaining
+ the same boundaries. Same semantics as <a href="#%3Cinit%3E(double,double,int)"><code>Interval(double, double, int)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>n</code> - new number of points</dd>
+<dd><code>n</code> - new subdivision count (must be positive)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if n &lt;= 0</dd>
 </dl>

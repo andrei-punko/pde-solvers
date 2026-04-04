@@ -221,7 +221,8 @@ loadScripts(document, 'script');</script>
 <dd><code>leftBorderCondition</code> - boundary condition at x = x1</dd>
 <dd><code>rightBorderCondition</code> - boundary condition at x = x2</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if x1 &gt;= x2 or t2 &lt;= 0</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if x1, x2 or t2 are not finite, if x1 &gt;= x2, if t2 &lt;= 0,
+                                  or if a border condition is null</dd>
 </dl>
 </section>
 </li>

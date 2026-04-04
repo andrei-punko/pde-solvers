@@ -106,7 +106,10 @@ loadScripts(document, 'script');</script>
 implements <a href="EquationSolver.html" title="interface in io.github.andreipunko.math.pde.solver">EquationSolver</a>&lt;E&gt;</span></div>
 <div class="block">Abstract base class for partial differential equation solvers.
  Provides common functionality and utility methods used by specific equation solvers.
- Implements the core numerical methods and algorithms shared across different types of PDE solvers.</div>
+ Implements the core numerical methods and algorithms shared across different types of PDE solvers.
+ <p>
+ Step sizes passed to <a href="#buildArea(io.github.andreipunko.math.pde.equation.Equation,double,double)"><code>buildArea(io.github.andreipunko.math.pde.equation.Equation, double, double)</code></a> are validated for finiteness and positivity only; physical or discrete
+ stability of the chosen <code>h</code> and <code>tau</code> is not enforced (see package <code>io.github.andreipunko.math.pde.solver</code>).</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -141,11 +144,15 @@ implements <a href="EquationSolver.html" title="interface in io.github.andreipun
 <section class="constructor-summary" id="constructor-summary">
 <h2>Constructor Summary</h2>
 <div class="caption"><span>Constructors</span></div>
-<div class="summary-table two-column-summary">
-<div class="table-header col-first">Constructor</div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier</div>
+<div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>protected </code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">AbstractEquationSolver</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructor for use by concrete solver subclasses.</div>
+</div>
 </div>
 </section>
 </li>
@@ -213,7 +220,8 @@ implements <a href="EquationSolver.html" title="interface in io.github.andreipun
 <li>
 <section class="detail" id="&lt;init&gt;()">
 <h3>AbstractEquationSolver</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AbstractEquationSolver</span>()</div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">AbstractEquationSolver</span>()</div>
+<div class="block">Constructor for use by concrete solver subclasses.</div>
 </section>
 </li>
 </ul>
@@ -240,7 +248,7 @@ implements <a href="EquationSolver.html" title="interface in io.github.andreipun
 <dt>Returns:</dt>
 <dd>the computational domain with defined grid points</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if parameters h or tau are non-positive</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if eqn is null, or if h or tau are not finite or not positive</dd>
 </dl>
 </section>
 </li>
@@ -291,7 +299,9 @@ implements <a href="EquationSolver.html" title="interface in io.github.andreipun
 <dt>Returns:</dt>
 <dd>solution vector Y[i]</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if arrays have different lengths or invalid coefficients</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if arrays have different lengths, if coefficients are invalid, or if a forward /
+                                    right-boundary denominator is zero or numerically too small (singular or
+                                    ill-conditioned sweep)</dd>
 </dl>
 </section>
 </li>
@@ -311,6 +321,7 @@ implements <a href="EquationSolver.html" title="interface in io.github.andreipun
 <dt>Returns:</dt>
 <dd>KappaNu record containing calculated parameters</dd>
 <dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if borderCondition is null</dd>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - if an unsupported boundary condition type is encountered</dd>
 </dl>
 </section>

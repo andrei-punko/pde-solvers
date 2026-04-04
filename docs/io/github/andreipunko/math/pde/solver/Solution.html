@@ -129,7 +129,7 @@ loadScripts(document, 'script');</script>
  <a href="../../space/Area.html" title="class in io.github.andreipunko.math.space">Area</a>&nbsp;area,
  <a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a>&nbsp;solution)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates an instance of a <code>Solution</code> record class.</div>
+<div class="block">Validates record components before the instance is created.</div>
 </div>
 </div>
 </section>
@@ -242,12 +242,10 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Solution</span><wbr><span class="parameters">(<a href="Solution.html" title="type parameter in Solution">E</a>&nbsp;equation,
  <a href="../../space/Area.html" title="class in io.github.andreipunko.math.space">Area</a>&nbsp;area,
  <a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a>&nbsp;solution)</span></div>
-<div class="block">Creates an instance of a <code>Solution</code> record class.</div>
+<div class="block">Validates record components before the instance is created.</div>
 <dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>equation</code> - the value for the <a href="#param-equation"><code>equation</code></a> record component</dd>
-<dd><code>area</code> - the value for the <a href="#param-area"><code>area</code></a> record component</dd>
-<dd><code>solution</code> - the value for the <a href="#param-solution"><code>solution</code></a> record component</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if equation, area or solution is null</dd>
 </dl>
 </section>
 </li>
@@ -263,17 +261,23 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="sUt(java.lang.String,double[])">
 <h3>sUt</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sUt</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
- double[]&nbsp;t)</span></div>
+ double[]&nbsp;t)</span>
+         throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
 <div class="block">Saves solution data U(x,t) for specified time moments to a file.
  Creates a set of spatial slices of the solution at different time points.
  Each line in the output file contains spatial coordinates followed by
- solution values at different time moments.</div>
+ solution values at different time moments. All spatial columns of the solution matrix are written
+ (same extent as <a href="#gUt(int)"><code>gUt(int)</code></a> for a fixed time layer).
+ <p>
+ Each <code>t</code> is mapped to a time-layer index via <a href="../../space/Area.html#ti(double)"><code>Area.ti(double)</code></a> (see <a href="../../space/Interval.html#i(double)"><code>Interval.i(double)</code></a>):
+ values are read from the <em>nearest grid time level at or to the left</em> of <code>t</code>, with no interpolation.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>fileName</code> - name of the file to save the data</dd>
 <dd><code>t</code> - array of time moments to save</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if any time moment is outside the solution domain</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if t is null, fileName is null, or any time is outside the solution domain</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if an I/O error occurs writing the file</dd>
 </dl>
 </section>
 </li>
@@ -281,15 +285,18 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="sUt(java.lang.String,double)">
 <h3>sUt</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sUt</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
- double&nbsp;t)</span></div>
+ double&nbsp;t)</span>
+         throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
 <div class="block">Saves solution data U(x) for a single time moment to a file.
- Creates a spatial slice of the solution at the specified time.</div>
+ Creates a spatial slice of the solution at the specified time.
+ Time is resolved on the grid like <a href="#sUt(java.lang.String,double%5B%5D)"><code>sUt(String, double[])</code></a> (via <a href="../../space/Area.html#ti(double)"><code>Area.ti(double)</code></a>).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>fileName</code> - name of the file to save the data</dd>
 <dd><code>t</code> - time moment to save</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the time moment is outside the solution domain</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if fileName is null or the time moment is outside the solution domain</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if an I/O error occurs writing the file</dd>
 </dl>
 </section>
 </li>
@@ -297,17 +304,23 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="sUx(java.lang.String,double[])">
 <h3>sUx</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sUx</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
- double[]&nbsp;x)</span></div>
+ double[]&nbsp;x)</span>
+         throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
 <div class="block">Saves solution data U(x,t) for specified spatial coordinates to a file.
  Creates a set of temporal slices of the solution at different spatial points.
  Each line in the output file contains time coordinates followed by
- solution values at different spatial points.</div>
+ solution values at different spatial points. All time rows of the solution matrix are written
+ (same extent as <a href="#gUx(int)"><code>gUx(int)</code></a> for a fixed spatial column).
+ <p>
+ Each <code>x</code> is mapped to a spatial column index via <a href="../../space/Area.html#xi(double)"><code>Area.xi(double)</code></a> (see <a href="../../space/Interval.html#i(double)"><code>Interval.i(double)</code></a>):
+ values are read from the <em>nearest grid point at or to the left</em> of <code>x</code>, with no interpolation.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>fileName</code> - name of the file to save the data</dd>
 <dd><code>x</code> - array of spatial coordinates to save</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if any spatial coordinate is outside the solution domain</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if x is null, fileName is null, or any coordinate is outside the solution domain</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if an I/O error occurs writing the file</dd>
 </dl>
 </section>
 </li>
@@ -315,15 +328,18 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="sUx(java.lang.String,double)">
 <h3>sUx</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sUx</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
- double&nbsp;x)</span></div>
+ double&nbsp;x)</span>
+         throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
 <div class="block">Saves solution data U(t) for a single spatial coordinate to a file.
- Creates a temporal slice of the solution at the specified spatial point.</div>
+ Creates a temporal slice of the solution at the specified spatial point.
+ Position is resolved on the grid like <a href="#sUx(java.lang.String,double%5B%5D)"><code>sUx(String, double[])</code></a> (via <a href="../../space/Area.html#xi(double)"><code>Area.xi(double)</code></a>).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>fileName</code> - name of the file to save the data</dd>
 <dd><code>x</code> - spatial coordinate to save</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the spatial coordinate is outside the solution domain</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if fileName is null or the spatial coordinate is outside the solution domain</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code> - if an I/O error occurs writing the file</dd>
 </dl>
 </section>
 </li>
@@ -332,7 +348,8 @@ loadScripts(document, 'script');</script>
 <h3>gUt</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../matrix/MatrixXY.html" title="class in io.github.andreipunko.math.matrix">MatrixXY</a></span>&nbsp;<span class="element-name">gUt</span><wbr><span class="parameters">(double&nbsp;t)</span></div>
 <div class="block">Retrieves a spatial slice of the solution at a specified time moment.
- Returns a matrix containing spatial coordinates and corresponding solution values.</div>
+ Returns a matrix containing spatial coordinates and corresponding solution values.
+ Uses <a href="../../space/Area.html#ti(double)"><code>Area.ti(double)</code></a> to pick the time layer (nearest grid time at or to the left of <code>t</code>), no interpolation.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>t</code> - time moment to get the slice for</dd>
@@ -364,7 +381,8 @@ loadScripts(document, 'script');</script>
 <h3>gUx</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../matrix/MatrixXY.html" title="class in io.github.andreipunko.math.matrix">MatrixXY</a></span>&nbsp;<span class="element-name">gUx</span><wbr><span class="parameters">(double&nbsp;x)</span></div>
 <div class="block">Retrieves a temporal slice of the solution at a specified spatial coordinate.
- Returns a matrix containing time coordinates and corresponding solution values.</div>
+ Returns a matrix containing time coordinates and corresponding solution values.
+ Uses <a href="../../space/Area.html#xi(double)"><code>Area.xi(double)</code></a> to pick the spatial column (nearest grid point at or to the left of <code>x</code>), no interpolation.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>x</code> - spatial coordinate to get the slice for</dd>

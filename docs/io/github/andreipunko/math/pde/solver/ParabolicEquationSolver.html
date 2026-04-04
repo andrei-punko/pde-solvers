@@ -131,7 +131,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">ParabolicEquationSolver</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a solver for parabolic equations using the implicit finite-difference scheme.</div>
+</div>
 </div>
 </section>
 </li>
@@ -177,6 +179,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>ParabolicEquationSolver</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ParabolicEquationSolver</span>()</div>
+<div class="block">Creates a solver for parabolic equations using the implicit finite-difference scheme.</div>
 </section>
 </li>
 </ul>
@@ -204,7 +207,8 @@ loadScripts(document, 'script');</script>
 <dt>Returns:</dt>
 <dd>equation solution containing function values at all grid points</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if parameters h or tau are non-positive</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if parameters h or tau are invalid, or if a time-step tridiagonal system is
+                                  degenerate (see <a href="AbstractEquationSolver.html#solve3DiagonalEquationsSystem(double%5B%5D,double%5B%5D,double%5B%5D,double%5B%5D,io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu,io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu)"><code>AbstractEquationSolver.solve3DiagonalEquationsSystem(double[], double[], double[], double[], io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu, io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu)</code></a>)</dd>
 </dl>
 </section>
 </li>

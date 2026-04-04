@@ -149,16 +149,20 @@ loadScripts(document, 'script');</script>
  double&nbsp;h,
  double&nbsp;tau)</span></div>
 <div class="block">Solves a partial differential equation using numerical methods.
- The solution is found on a space-time grid defined by the spatial and temporal step sizes.</div>
+ The solution is found on a space-time grid defined by the spatial and temporal step sizes.
+ <p>
+ Choosing <code>h</code> and <code>tau</code> is the caller's responsibility: the library does not check CFL-type or
+ other problem-specific stability bounds (see the package summary for <code>io.github.andreipunko.math.pde.solver</code>).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>eqn</code> - the partial differential equation to solve</dd>
-<dd><code>h</code> - spatial step size (must be positive)</dd>
-<dd><code>tau</code> - temporal step size (must be positive)</dd>
+<dd><code>eqn</code> - the partial differential equation to solve (must not be null)</dd>
+<dd><code>h</code> - spatial step size (must be finite and positive)</dd>
+<dd><code>tau</code> - temporal step size (must be finite and positive)</dd>
 <dt>Returns:</dt>
 <dd>Solution containing the numerical solution on the space-time grid</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if parameters h or tau are non-positive</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if eqn is null, or if h or tau are not finite or not positive, or if an
+                                  intermediate tridiagonal system is singular or numerically degenerate</dd>
 </dl>
 </section>
 </li>

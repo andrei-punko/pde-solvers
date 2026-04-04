@@ -57,7 +57,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Abstract base class for partial differential equation solvers.</div>
 </dd>
 <dt><a href="io/github/andreipunko/math/pde/solver/AbstractEquationSolver.html#%3Cinit%3E()" class="member-name-link">AbstractEquationSolver()</a> - Constructor for class io.github.andreipunko.math.pde.solver.<a href="io/github/andreipunko/math/pde/solver/AbstractEquationSolver.html" title="class in io.github.andreipunko.math.pde.solver">AbstractEquationSolver</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor for use by concrete solver subclasses.</div>
+</dd>
 <dt><a href="io/github/andreipunko/math/pde/solver/AbstractEquationSolver.KappaNu.html" class="type-name-link" title="class in io.github.andreipunko.math.pde.solver">AbstractEquationSolver.KappaNu</a> - Record Class in <a href="io/github/andreipunko/math/pde/solver/package-summary.html">io.github.andreipunko.math.pde.solver</a></dt>
 <dd>
 <div class="block">Record class to store boundary condition parameters for the tridiagonal algorithm.</div>
@@ -72,7 +74,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="io/github/andreipunko/math/space/Area.html#%3Cinit%3E(io.github.andreipunko.math.space.Interval,io.github.andreipunko.math.space.Interval)" class="member-name-link">Area(Interval, Interval)</a> - Constructor for record class io.github.andreipunko.math.space.<a href="io/github/andreipunko/math/space/Area.html" title="class in io.github.andreipunko.math.space">Area</a></dt>
 <dd>
-<div class="block">Creates an instance of a <code>Area</code> record class.</div>
+<div class="block">Validates that both intervals are non-null before the instance is created.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:B">B</h2>
@@ -100,7 +102,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Represents a Dirichlet boundary condition for partial differential equations.</div>
 </dd>
 <dt><a href="io/github/andreipunko/math/pde/border/DirichletBorderCondition.html#%3Cinit%3E()" class="member-name-link">DirichletBorderCondition()</a> - Constructor for class io.github.andreipunko.math.pde.border.<a href="io/github/andreipunko/math/pde/border/DirichletBorderCondition.html" title="class in io.github.andreipunko.math.pde.border">DirichletBorderCondition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a Dirichlet boundary condition; override <a href="io/github/andreipunko/math/pde/border/DirichletBorderCondition.html#gU(double)"><code>DirichletBorderCondition.gU(double)</code></a> to set boundary values.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:E">E</h2>
 <dl class="index">
@@ -137,10 +141,8 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="io/github/andreipunko/util/FileUtil.html" class="type-name-link" title="class in io.github.andreipunko.util">FileUtil</a> - Class in <a href="io/github/andreipunko/util/package-summary.html">io.github.andreipunko.util</a></dt>
 <dd>
-<div class="block">Util to serialize data into files</div>
+<div class="block">Utilities to write text data to files.</div>
 </dd>
-<dt><a href="io/github/andreipunko/util/FileUtil.html#%3Cinit%3E()" class="member-name-link">FileUtil()</a> - Constructor for class io.github.andreipunko.util.<a href="io/github/andreipunko/util/FileUtil.html" title="class in io.github.andreipunko.util">FileUtil</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/github/andreipunko/math/matrix/Matrix2D.html#fill(double)" class="member-name-link">fill(double)</a> - Method in class io.github.andreipunko.math.matrix.<a href="io/github/andreipunko/math/matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a></dt>
 <dd>
 <div class="block">Fills all elements of the matrix with the specified value.</div>
@@ -258,7 +260,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Solver for hyperbolic partial differential equations.</div>
 </dd>
 <dt><a href="io/github/andreipunko/math/pde/solver/HyperbolicEquationSolver.html#%3Cinit%3E()" class="member-name-link">HyperbolicEquationSolver()</a> - Constructor for class io.github.andreipunko.math.pde.solver.<a href="io/github/andreipunko/math/pde/solver/HyperbolicEquationSolver.html" title="class in io.github.andreipunko.math.pde.solver">HyperbolicEquationSolver</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a solver for hyperbolic equations using the implicit three-layer scheme.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
@@ -280,7 +284,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="io/github/andreipunko/math/space/Interval.html#%3Cinit%3E(double,double,int)" class="member-name-link">Interval(double, double, int)</a> - Constructor for class io.github.andreipunko.math.space.<a href="io/github/andreipunko/math/space/Interval.html" title="class in io.github.andreipunko.math.space">Interval</a></dt>
 <dd>
-<div class="block">Creates an interval [left,right] with a specified number of points.</div>
+<div class="block">Creates an interval [left,right] with a specified number of subdivisions <code>n</code>.</div>
 </dd>
 <dt><a href="io/github/andreipunko/math/matrix/package-summary.html">io.github.andreipunko.math.matrix</a> - package io.github.andreipunko.math.matrix</dt>
 <dd>&nbsp;</dd>
@@ -289,7 +293,9 @@ loadScripts(document, 'script');</script>
 <dt><a href="io/github/andreipunko/math/pde/equation/package-summary.html">io.github.andreipunko.math.pde.equation</a> - package io.github.andreipunko.math.pde.equation</dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/github/andreipunko/math/pde/solver/package-summary.html">io.github.andreipunko.math.pde.solver</a> - package io.github.andreipunko.math.pde.solver</dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Numerical PDE solvers using finite differences and the Thomas algorithm.</div>
+</dd>
 <dt><a href="io/github/andreipunko/math/space/package-summary.html">io.github.andreipunko.math.space</a> - package io.github.andreipunko.math.space</dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/github/andreipunko/util/package-summary.html">io.github.andreipunko.util</a> - package io.github.andreipunko.util</dt>
@@ -344,14 +350,17 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="io/github/andreipunko/math/space/Interval.html#n()" class="member-name-link">n()</a> - Method in class io.github.andreipunko.math.space.<a href="io/github/andreipunko/math/space/Interval.html" title="class in io.github.andreipunko.math.space">Interval</a></dt>
 <dd>
-<div class="block">Returns the number of points in the interval.</div>
+<div class="block">Returns the number of subdivisions along the interval: valid indices are <code>0 … n</code>
+ (<code>n + 1</code> grid nodes).</div>
 </dd>
 <dt><a href="io/github/andreipunko/math/pde/border/NeumannBorderCondition.html" class="type-name-link" title="class in io.github.andreipunko.math.pde.border">NeumannBorderCondition</a> - Class in <a href="io/github/andreipunko/math/pde/border/package-summary.html">io.github.andreipunko.math.pde.border</a></dt>
 <dd>
 <div class="block">Represents a Neumann boundary condition for partial differential equations.</div>
 </dd>
 <dt><a href="io/github/andreipunko/math/pde/border/NeumannBorderCondition.html#%3Cinit%3E()" class="member-name-link">NeumannBorderCondition()</a> - Constructor for class io.github.andreipunko.math.pde.border.<a href="io/github/andreipunko/math/pde/border/NeumannBorderCondition.html" title="class in io.github.andreipunko.math.pde.border">NeumannBorderCondition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a Neumann boundary condition; override <a href="io/github/andreipunko/math/pde/border/NeumannBorderCondition.html#gdU_dx(double)"><code>NeumannBorderCondition.gdU_dx(double)</code></a> to set flux at the boundary.</div>
+</dd>
 <dt><a href="io/github/andreipunko/math/pde/solver/AbstractEquationSolver.KappaNu.html#nu()" class="member-name-link">nu()</a> - Method in record class io.github.andreipunko.math.pde.solver.<a href="io/github/andreipunko/math/pde/solver/AbstractEquationSolver.KappaNu.html" title="class in io.github.andreipunko.math.pde.solver">AbstractEquationSolver.KappaNu</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./io/github/andreipunko/math/pde/solver/AbstractEquationSolver.KappaNu.html#param-nu"><code>nu</code></a> record component.</div>
@@ -374,7 +383,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Solver for parabolic partial differential equations.</div>
 </dd>
 <dt><a href="io/github/andreipunko/math/pde/solver/ParabolicEquationSolver.html#%3Cinit%3E()" class="member-name-link">ParabolicEquationSolver()</a> - Constructor for class io.github.andreipunko.math.pde.solver.<a href="io/github/andreipunko/math/pde/solver/ParabolicEquationSolver.html" title="class in io.github.andreipunko.math.pde.solver">ParabolicEquationSolver</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a solver for parabolic equations using the implicit finite-difference scheme.</div>
+</dd>
 <dt><a href="io/github/andreipunko/math/pde/solver/AbstractEquationSolver.html#prepare(io.github.andreipunko.math.pde.equation.Equation,io.github.andreipunko.math.space.Area)" class="member-name-link">prepare(Equation, Area)</a> - Method in class io.github.andreipunko.math.pde.solver.<a href="io/github/andreipunko/math/pde/solver/AbstractEquationSolver.html" title="class in io.github.andreipunko.math.pde.solver">AbstractEquationSolver</a></dt>
 <dd>
 <div class="block">Initializes the solution matrix with initial conditions.</div>
@@ -389,7 +400,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="io/github/andreipunko/math/space/Interval.html#reborn(int)" class="member-name-link">reborn(int)</a> - Method in class io.github.andreipunko.math.space.<a href="io/github/andreipunko/math/space/Interval.html" title="class in io.github.andreipunko.math.space">Interval</a></dt>
 <dd>
-<div class="block">Recreates the interval with a new number of points while maintaining
+<div class="block">Recreates the interval with a new subdivision count while maintaining
  the same boundaries.</div>
 </dd>
 <dt><a href="io/github/andreipunko/math/space/Interval.html#right()" class="member-name-link">right()</a> - Method in class io.github.andreipunko.math.space.<a href="io/github/andreipunko/math/space/Interval.html" title="class in io.github.andreipunko.math.space">Interval</a></dt>
@@ -401,7 +412,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Represents a Robin boundary condition for partial differential equations.</div>
 </dd>
 <dt><a href="io/github/andreipunko/math/pde/border/RobinBorderCondition.html#%3Cinit%3E()" class="member-name-link">RobinBorderCondition()</a> - Constructor for class io.github.andreipunko.math.pde.border.<a href="io/github/andreipunko/math/pde/border/RobinBorderCondition.html" title="class in io.github.andreipunko.math.pde.border">RobinBorderCondition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a Robin boundary condition; override <a href="io/github/andreipunko/math/pde/border/RobinBorderCondition.html#gH()"><code>RobinBorderCondition.gH()</code></a>, <a href="io/github/andreipunko/math/pde/border/RobinBorderCondition.html#gTheta(double)"><code>RobinBorderCondition.gTheta(double)</code></a> as needed.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
@@ -419,7 +432,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="io/github/andreipunko/util/FileUtil.html#serialize(java.lang.StringBuilder,java.lang.String)" class="member-name-link">serialize(StringBuilder, String)</a> - Static method in class io.github.andreipunko.util.<a href="io/github/andreipunko/util/FileUtil.html" title="class in io.github.andreipunko.util">FileUtil</a></dt>
 <dd>
-<div class="block">Save text data from StringBuilder instance into file</div>
+<div class="block">Save text data from StringBuilder instance into file using UTF-8 encoding.</div>
 </dd>
 <dt><a href="io/github/andreipunko/math/matrix/Matrix2D.html#set(int,int,double)" class="member-name-link">set(int, int, double)</a> - Method in class io.github.andreipunko.math.matrix.<a href="io/github/andreipunko/math/matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a></dt>
 <dd>
@@ -448,7 +461,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="io/github/andreipunko/math/pde/solver/Solution.html#%3Cinit%3E(E,io.github.andreipunko.math.space.Area,io.github.andreipunko.math.matrix.Matrix2D)" class="member-name-link">Solution(E, Area, Matrix2D)</a> - Constructor for record class io.github.andreipunko.math.pde.solver.<a href="io/github/andreipunko/math/pde/solver/Solution.html" title="class in io.github.andreipunko.math.pde.solver">Solution</a></dt>
 <dd>
-<div class="block">Creates an instance of a <code>Solution</code> record class.</div>
+<div class="block">Validates record components before the instance is created.</div>
 </dd>
 <dt><a href="io/github/andreipunko/math/pde/solver/EquationSolver.html#solve(E,double,double)" class="member-name-link">solve(E, double, double)</a> - Method in interface io.github.andreipunko.math.pde.solver.<a href="io/github/andreipunko/math/pde/solver/EquationSolver.html" title="interface in io.github.andreipunko.math.pde.solver">EquationSolver</a></dt>
 <dd>
