@@ -112,7 +112,7 @@ publishing {
                 licenses {
                     license {
                         name = 'MIT License'
-                        url = 'https://rem.mit-license.org/license.txt'
+                        url = 'https://opensource.org/licenses/MIT'
                     }
                 }
 
