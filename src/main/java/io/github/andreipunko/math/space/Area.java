@@ -11,6 +11,17 @@ package io.github.andreipunko.math.space;
  * @see Interval
  */
 public record Area(Interval x, Interval t) {
+    /**
+     * @throws IllegalArgumentException if x or t is null
+     */
+    public Area {
+        if (x == null) {
+            throw new IllegalArgumentException("spatial interval x must not be null");
+        }
+        if (t == null) {
+            throw new IllegalArgumentException("temporal interval t must not be null");
+        }
+    }
 
     /**
      * Returns the left boundary of the temporal domain.

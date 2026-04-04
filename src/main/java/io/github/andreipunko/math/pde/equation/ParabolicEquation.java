@@ -29,7 +29,7 @@ public class ParabolicEquation extends Equation {
      * @param t2                   right boundary of the temporal domain
      * @param leftBorderCondition  boundary condition at x = x1
      * @param rightBorderCondition boundary condition at x = x2
-     * @throws IllegalArgumentException if x1 &gt;= x2 or t2 &lt;= 0
+     * @throws IllegalArgumentException see {@link Equation#Equation(double, double, double, BorderCondition, BorderCondition)}
      */
     public ParabolicEquation(double x1, double x2, double t2,
                              BorderCondition leftBorderCondition,

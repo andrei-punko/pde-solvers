@@ -36,11 +36,24 @@ public abstract class Equation {
      * @param t2                   right boundary of the temporal domain
      * @param leftBorderCondition  boundary condition at x = x1
      * @param rightBorderCondition boundary condition at x = x2
-     * @throws IllegalArgumentException if x1 &gt;= x2 or t2 &lt;= 0
+     * @throws IllegalArgumentException if x1, x2 or t2 are not finite, if x1 &gt;= x2, if t2 &lt;= 0,
+     *                                  or if a border condition is null
      */
     public Equation(double x1, double x2, double t2,
                     BorderCondition leftBorderCondition,
                     BorderCondition rightBorderCondition) {
+        if (leftBorderCondition == null || rightBorderCondition == null) {
+            throw new IllegalArgumentException("border conditions must not be null");
+        }
+        if (!Double.isFinite(x1) || !Double.isFinite(x2) || !Double.isFinite(t2)) {
+            throw new IllegalArgumentException("x1, x2 and t2 must be finite: x1=" + x1 + ", x2=" + x2 + ", t2=" + t2);
+        }
+        if (x1 >= x2) {
+            throw new IllegalArgumentException("x1 must be < x2: x1=" + x1 + ", x2=" + x2);
+        }
+        if (t2 <= 0) {
+            throw new IllegalArgumentException("t2 must be positive, got: " + t2);
+        }
         this.x1 = x1;
         this.x2 = x2;
         this.t2 = t2;

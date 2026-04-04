@@ -28,9 +28,18 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
      * @param h   spatial step size (must be positive)
      * @param tau temporal step size (must be positive)
      * @return the computational domain with defined grid points
-     * @throws IllegalArgumentException if parameters h or tau are non-positive
+     * @throws IllegalArgumentException if eqn is null, or if h or tau are not finite or not positive
      */
     protected Area buildArea(Equation eqn, double h, double tau) {
+        if (eqn == null) {
+            throw new IllegalArgumentException("eqn must not be null");
+        }
+        if (!Double.isFinite(h) || h <= 0) {
+            throw new IllegalArgumentException("spatial step h must be finite and positive, got: " + h);
+        }
+        if (!Double.isFinite(tau) || tau <= 0) {
+            throw new IllegalArgumentException("time step tau must be finite and positive, got: " + tau);
+        }
         return new Area(
                 new Interval(eqn.getX1(), eqn.getX2(), h),
                 new Interval(0, eqn.getT2(), tau)
@@ -79,7 +88,21 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
      */
     public static double[] solve3DiagonalEquationsSystem(double[] A, double[] B, double[] C, double[] F,
                                                          KappaNu leftCond, KappaNu rightCond) {
-        int N = A.length;
+        if (A == null || B == null || C == null || F == null) {
+            throw new IllegalArgumentException("coefficient arrays A, B, C, F must not be null");
+        }
+        if (leftCond == null || rightCond == null) {
+            throw new IllegalArgumentException("boundary parameters leftCond and rightCond must not be null");
+        }
+        int nA = A.length;
+        if (nA != B.length || nA != C.length || nA != F.length) {
+            throw new IllegalArgumentException(
+                    "A, B, C, F must have the same length; got " + nA + ", " + B.length + ", " + C.length + ", " + F.length);
+        }
+        if (nA < 1) {
+            throw new IllegalArgumentException("system size must be at least 1, got: " + nA);
+        }
+        int N = nA;
         double[] Alpha = new double[N + 1];
         double[] Beta = new double[N + 1];
 
@@ -112,9 +135,13 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
      * @param h               spatial step size
      * @param time            current time point
      * @return KappaNu record containing calculated parameters
+     * @throws IllegalArgumentException if borderCondition is null
      * @throws IllegalStateException if an unsupported boundary condition type is encountered
      */
     protected KappaNu calcKappaNu(BorderCondition borderCondition, double h, double time) {
+        if (borderCondition == null) {
+            throw new IllegalArgumentException("borderCondition must not be null");
+        }
         return switch (borderCondition) {
             case DirichletBorderCondition condition -> new KappaNu(0, condition.gU(time));
 

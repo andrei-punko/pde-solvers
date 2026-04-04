@@ -2,7 +2,9 @@ package io.github.andreipunko.math.pde.solver;
 
 import io.github.andreipunko.math.matrix.Matrix2D;
 import io.github.andreipunko.math.matrix.MatrixXY;
+import io.github.andreipunko.math.pde.border.DirichletBorderCondition;
 import io.github.andreipunko.math.pde.equation.Equation;
+import io.github.andreipunko.math.pde.equation.ParabolicEquation;
 import io.github.andreipunko.math.space.Area;
 import io.github.andreipunko.math.space.Interval;
 import org.junit.jupiter.api.Test;
@@ -164,7 +166,10 @@ class SolutionTest {
         solutionMatrix.setRow(1, new double[]{30, 70, 120, 125});
         solutionMatrix.setRow(2, new double[]{45, 56, 78, 786});
 
-        return new Solution<>(null, new Area(
+        var equation = new ParabolicEquation(10, 13, 6,
+                new DirichletBorderCondition(), new DirichletBorderCondition()) {
+        };
+        return new Solution<>(equation, new Area(
                 new Interval(10, 13, spaceSteps),
                 new Interval(2, 6, timeSteps)
         ), solutionMatrix);

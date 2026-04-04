@@ -24,6 +24,20 @@ public record Solution<E extends Equation>(
         Area area,
         Matrix2D solution
 ) {
+    /**
+     * @throws IllegalArgumentException if equation, area or solution is null
+     */
+    public Solution {
+        if (equation == null) {
+            throw new IllegalArgumentException("equation must not be null");
+        }
+        if (area == null) {
+            throw new IllegalArgumentException("area must not be null");
+        }
+        if (solution == null) {
+            throw new IllegalArgumentException("solution matrix must not be null");
+        }
+    }
 
     /**
      * Saves solution data U(x,t) for specified time moments to a file.
@@ -33,9 +47,15 @@ public record Solution<E extends Equation>(
      *
      * @param fileName name of the file to save the data
      * @param t        array of time moments to save
-     * @throws IllegalArgumentException if any time moment is outside the solution domain
+     * @throws IllegalArgumentException if t is null, fileName is null, or any time is outside the solution domain
      */
     public void sUt(String fileName, double[] t) {
+        if (t == null) {
+            throw new IllegalArgumentException("time array t must not be null");
+        }
+        if (fileName == null) {
+            throw new IllegalArgumentException("fileName must not be null");
+        }
         for (var t_i : t) {
             if (t_i < area.tLeft() || t_i > area.tRight()) {
                 throw new IllegalArgumentException(
@@ -60,9 +80,12 @@ public record Solution<E extends Equation>(
      *
      * @param fileName name of the file to save the data
      * @param t        time moment to save
-     * @throws IllegalArgumentException if the time moment is outside the solution domain
+     * @throws IllegalArgumentException if fileName is null or the time moment is outside the solution domain
      */
     public void sUt(String fileName, double t) {
+        if (fileName == null) {
+            throw new IllegalArgumentException("fileName must not be null");
+        }
         sUt(fileName, new double[]{t});
     }
 
@@ -74,9 +97,15 @@ public record Solution<E extends Equation>(
      *
      * @param fileName name of the file to save the data
      * @param x        array of spatial coordinates to save
-     * @throws IllegalArgumentException if any spatial coordinate is outside the solution domain
+     * @throws IllegalArgumentException if x is null, fileName is null, or any coordinate is outside the solution domain
      */
     public void sUx(String fileName, double[] x) {
+        if (x == null) {
+            throw new IllegalArgumentException("spatial coordinate array x must not be null");
+        }
+        if (fileName == null) {
+            throw new IllegalArgumentException("fileName must not be null");
+        }
         for (var x_i : x) {
             if (x_i < area.xLeft() || x_i > area.xRight()) {
                 throw new IllegalArgumentException(
@@ -101,9 +130,12 @@ public record Solution<E extends Equation>(
      *
      * @param fileName name of the file to save the data
      * @param x        spatial coordinate to save
-     * @throws IllegalArgumentException if the spatial coordinate is outside the solution domain
+     * @throws IllegalArgumentException if fileName is null or the spatial coordinate is outside the solution domain
      */
     public void sUx(String fileName, double x) {
+        if (fileName == null) {
+            throw new IllegalArgumentException("fileName must not be null");
+        }
         sUx(fileName, new double[]{x});
     }
 
