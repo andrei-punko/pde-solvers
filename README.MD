@@ -116,6 +116,10 @@ becomes singular or nearly singular, `IllegalArgumentException` may be thrown fr
 
 ## How to use library in your project
 
+The **Maven** and **Gradle** snippets below use the latest **stable** version published to Maven Central.
+The version in this repository’s `build.gradle` (`version = …`) is the **current development** line
+(often a `-SNAPSHOT`) and may differ until the next release.
+
 ### Maven
 
 ```xml
