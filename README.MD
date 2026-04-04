@@ -129,7 +129,10 @@ implementation 'io.github.andrei-punko:pde-solvers:1.0.3'
 ```java
 import io.github.andreipunko.math.pde.border.DirichletBorderCondition;
 import io.github.andreipunko.math.pde.equation.ParabolicEquation;
+import io.github.andreipunko.math.pde.solver.ParabolicEquationSolver;
 import io.github.andreipunko.util.FileUtil;
+
+import java.io.IOException;
 
 class ParabolicEquationSolution {
 
@@ -141,7 +144,7 @@ class ParabolicEquationSolution {
     private final double h = L / 100.0;         // Space step
     private final double tau = TIME / 100.0;    // Time step
 
-    public void solve() {
+    public void solve() throws IOException {
         var diffusionEquation = buildParabolicEquation();
 
         var solution = new ParabolicEquationSolver()

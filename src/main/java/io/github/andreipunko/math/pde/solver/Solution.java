@@ -6,6 +6,8 @@ import io.github.andreipunko.math.pde.equation.Equation;
 import io.github.andreipunko.math.space.Area;
 import io.github.andreipunko.util.FileUtil;
 
+import java.io.IOException;
+
 /**
  * Record class representing a numerical solution of a partial differential equation
  * on a defined space-time domain. The solution is stored as a 2D matrix where rows
@@ -51,8 +53,9 @@ public record Solution<E extends Equation>(
      * @param fileName name of the file to save the data
      * @param t        array of time moments to save
      * @throws IllegalArgumentException if t is null, fileName is null, or any time is outside the solution domain
+     * @throws IOException              if an I/O error occurs writing the file
      */
-    public void sUt(String fileName, double[] t) {
+    public void sUt(String fileName, double[] t) throws IOException {
         if (t == null) {
             throw new IllegalArgumentException("time array t must not be null");
         }
@@ -84,8 +87,9 @@ public record Solution<E extends Equation>(
      * @param fileName name of the file to save the data
      * @param t        time moment to save
      * @throws IllegalArgumentException if fileName is null or the time moment is outside the solution domain
+     * @throws IOException              if an I/O error occurs writing the file
      */
-    public void sUt(String fileName, double t) {
+    public void sUt(String fileName, double t) throws IOException {
         if (fileName == null) {
             throw new IllegalArgumentException("fileName must not be null");
         }
@@ -102,8 +106,9 @@ public record Solution<E extends Equation>(
      * @param fileName name of the file to save the data
      * @param x        array of spatial coordinates to save
      * @throws IllegalArgumentException if x is null, fileName is null, or any coordinate is outside the solution domain
+     * @throws IOException              if an I/O error occurs writing the file
      */
-    public void sUx(String fileName, double[] x) {
+    public void sUx(String fileName, double[] x) throws IOException {
         if (x == null) {
             throw new IllegalArgumentException("spatial coordinate array x must not be null");
         }
@@ -135,8 +140,9 @@ public record Solution<E extends Equation>(
      * @param fileName name of the file to save the data
      * @param x        spatial coordinate to save
      * @throws IllegalArgumentException if fileName is null or the spatial coordinate is outside the solution domain
+     * @throws IOException              if an I/O error occurs writing the file
      */
-    public void sUx(String fileName, double x) {
+    public void sUx(String fileName, double x) throws IOException {
         if (fileName == null) {
             throw new IllegalArgumentException("fileName must not be null");
         }

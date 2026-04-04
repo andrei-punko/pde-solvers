@@ -5,6 +5,8 @@ import io.github.andreipunko.math.pde.equation.ParabolicEquation;
 import io.github.andreipunko.util.FileUtil;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
 import static java.lang.Math.exp;
@@ -36,7 +38,7 @@ class ParabolicEquationSolverNNTest {
     private final double EPSILON = C_MAX / 100.;
 
     @Test
-    void solve() {
+    void solve() throws IOException {
         var diffusionEquation = buildParabolicEquation();
 
         // Solve equation

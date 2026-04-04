@@ -5,6 +5,8 @@ import io.github.andreipunko.math.pde.equation.HyperbolicEquation;
 import io.github.andreipunko.util.FileUtil;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
@@ -36,7 +38,7 @@ class HyperbolicEquationSolverDDTest {
     private final double EPSILON = U_MAX / 33.;
 
     @Test
-    void solve() {
+    void solve() throws IOException {
         var waveEquation = buildHyperbolicEquation();
 
         // Solve equation

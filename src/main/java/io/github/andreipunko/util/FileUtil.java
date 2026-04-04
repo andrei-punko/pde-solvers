@@ -27,8 +27,9 @@ public class FileUtil {
      * @param sb       StringBuilder instance
      * @param fileName name of file
      * @throws IllegalArgumentException if sb or fileName is null
+     * @throws IOException              if an I/O error occurs writing the file
      */
-    public static void serialize(StringBuilder sb, String fileName) {
+    public static void serialize(StringBuilder sb, String fileName) throws IOException {
         if (sb == null) {
             throw new IllegalArgumentException("StringBuilder sb must not be null");
         }
@@ -37,8 +38,6 @@ public class FileUtil {
         }
         try (var writer = new FileWriter(fileName)) {
             writer.write(sb.toString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -49,8 +48,9 @@ public class FileUtil {
      * @param func     function y = y(x)
      * @param fileName name of file
      * @throws IllegalArgumentException if interval, func or fileName is null
+     * @throws IOException              if an I/O error occurs writing the file
      */
-    public static void saveFunc(Interval interval, Function<Double, Double> func, String fileName) {
+    public static void saveFunc(Interval interval, Function<Double, Double> func, String fileName) throws IOException {
         if (interval == null) {
             throw new IllegalArgumentException("interval must not be null");
         }
@@ -77,8 +77,9 @@ public class FileUtil {
      * @param yFunc        function y = y(t)
      * @param fileName     name of file
      * @throws IllegalArgumentException if any argument is null
+     * @throws IOException              if an I/O error occurs writing the file
      */
-    public static void saveFunc(Interval timeInterval, Function<Double, Double> xFunc, Function<Double, Double> yFunc, String fileName) {
+    public static void saveFunc(Interval timeInterval, Function<Double, Double> xFunc, Function<Double, Double> yFunc, String fileName) throws IOException {
         if (timeInterval == null) {
             throw new IllegalArgumentException("timeInterval must not be null");
         }
@@ -108,8 +109,9 @@ public class FileUtil {
      * @param fileName name of file
      * @param rotate   flag - rotate matrix or not before saving
      * @throws IllegalArgumentException if m or fileName is null
+     * @throws IOException              if an I/O error occurs writing the file
      */
-    public static void save(Matrix2D m, String fileName, boolean rotate) {
+    public static void save(Matrix2D m, String fileName, boolean rotate) throws IOException {
         if (m == null) {
             throw new IllegalArgumentException("matrix m must not be null");
         }
