@@ -71,8 +71,11 @@ javadoc {
     source = sourceSets.main.allJava
 }
 
-// Enable JavaDoc and Sources JAR generation
 java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    // Enable JavaDoc and Sources JAR generation
     withJavadocJar()
     withSourcesJar()
 }
