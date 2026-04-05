@@ -4,6 +4,7 @@ import io.github.andreipunko.math.matrix.Matrix2D;
 import io.github.andreipunko.math.matrix.MatrixXY;
 import io.github.andreipunko.math.pde.equation.Equation;
 import io.github.andreipunko.math.space.Area;
+import io.github.andreipunko.math.space.Interval;
 import io.github.andreipunko.util.FileUtil;
 
 import java.io.IOException;
@@ -46,11 +47,13 @@ public record Solution<E extends Equation>(
     /**
      * Saves solution data U(x,t) for specified time moments to a file.
      * Creates a set of spatial slices of the solution at different time points.
-     * Each line in the output file contains spatial coordinates followed by
+     * The file starts with {@code #}-comment lines describing columns, then numeric rows in US locale
+     * ({@link FileUtil#formatDouble(double)}).
+     * Each data line contains spatial coordinates followed by
      * solution values at different time moments. All spatial columns of the solution matrix are written
      * (same extent as {@link #gUt(int)} for a fixed time layer).
      * <p>
-     * Each {@code t} is mapped to a time-layer index via {@link Area#ti(double)} (see {@link io.github.andreipunko.math.space.Interval#i(double)}):
+     * Each {@code t} is mapped to a time-layer index via {@link Area#ti(double)} (see {@link Interval#i(double)}):
      * values are read from the <em>nearest grid time level at or to the left</em> of {@code t}, with no interpolation.
      *
      * @param fileName name of the file to save the data
@@ -73,12 +76,18 @@ public record Solution<E extends Equation>(
         }
 
         var sb = new StringBuilder();
+        sb.append("# pde-solvers: spatial slice U(x) at requested times (grid layer: nearest t at or to the left)\n");
+        sb.append("# columns: x");
+        for (var t_i : t) {
+            sb.append(" U(t=").append(FileUtil.formatDouble(t_i)).append(')');
+        }
+        sb.append('\n');
         for (var i = 0; i < solution.getN(); i++) {
-            sb.append(area.xx(i));
+            sb.append(FileUtil.formatDouble(area.xx(i)));
             for (var t_i : t) {
-                sb.append(" ").append(solution.get(area.ti(t_i), i));
+                sb.append(' ').append(FileUtil.formatDouble(solution.get(area.ti(t_i), i)));
             }
-            sb.append("\n");
+            sb.append('\n');
         }
         FileUtil.serialize(sb, fileName);
     }
@@ -103,11 +112,13 @@ public record Solution<E extends Equation>(
     /**
      * Saves solution data U(x,t) for specified spatial coordinates to a file.
      * Creates a set of temporal slices of the solution at different spatial points.
-     * Each line in the output file contains time coordinates followed by
+     * The file starts with {@code #}-comment lines describing columns, then numeric rows in US locale
+     * ({@link FileUtil#formatDouble(double)}).
+     * Each data line contains time coordinates followed by
      * solution values at different spatial points. All time rows of the solution matrix are written
      * (same extent as {@link #gUx(int)} for a fixed spatial column).
      * <p>
-     * Each {@code x} is mapped to a spatial column index via {@link Area#xi(double)} (see {@link io.github.andreipunko.math.space.Interval#i(double)}):
+     * Each {@code x} is mapped to a spatial column index via {@link Area#xi(double)} (see {@link Interval#i(double)}):
      * values are read from the <em>nearest grid point at or to the left</em> of {@code x}, with no interpolation.
      *
      * @param fileName name of the file to save the data
@@ -130,12 +141,18 @@ public record Solution<E extends Equation>(
         }
 
         var sb = new StringBuilder();
+        sb.append("# pde-solvers: temporal slice U(t) at requested positions (grid column: nearest x at or to the left)\n");
+        sb.append("# columns: t");
+        for (var x_i : x) {
+            sb.append(" U(x=").append(FileUtil.formatDouble(x_i)).append(')');
+        }
+        sb.append('\n');
         for (int i = 0; i < solution.getM(); i++) {
-            sb.append(area.tx(i));
+            sb.append(FileUtil.formatDouble(area.tx(i)));
             for (var x_i : x) {
-                sb.append(" ").append(solution.get(i, area.xi(x_i)));
+                sb.append(' ').append(FileUtil.formatDouble(solution.get(i, area.xi(x_i))));
             }
-            sb.append("\n");
+            sb.append('\n');
         }
         FileUtil.serialize(sb, fileName);
     }

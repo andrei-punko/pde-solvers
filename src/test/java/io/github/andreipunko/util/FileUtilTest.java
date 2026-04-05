@@ -107,7 +107,10 @@ class FileUtilTest {
         Files.createDirectories(out.getParent());
         try {
             FileUtil.save(m, out.toString(), true);
-            assertThat(Files.readString(out).trim()).isEqualTo("42.0");
+            var lines = Files.readAllLines(out);
+            var dataLines = lines.stream().filter(line -> !line.startsWith("#")).toList();
+
+            assertThat(dataLines).containsExactly(FileUtil.formatDouble(42));
         } finally {
             Files.deleteIfExists(out);
         }
