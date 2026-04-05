@@ -188,8 +188,8 @@ public class Interval {
         }
 
         var res = (int) ((x - left) / h);
-        if (res == n) {
-            return n - 1;
+        if (res >= n) {
+            return n;
         }
         return res;
     }

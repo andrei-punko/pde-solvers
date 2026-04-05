@@ -29,13 +29,11 @@ class HyperbolicEquationSolverDDTest {
     private final double U_MAX = 0.005;     // Max displacement, m
     private final double L = 0.100;         // Length of string, m
     private final double TIME = 25;         // Investigated time, sec
-    private final double C_coeff = 1e-2;    // c^2 = T/Ro
+    private final double C_coeff = 1e-2;    // Wave speed c (so Utt = c²Uxx via gK() = c²). Or “c²=T/ρ” in physics.
 
     private final double h = L / 2000.0;        // Space step
-    private final double tau = TIME / 1000.0;   // Time step
-
-    // We allow difference between numeric & analytic solution no more than 3% of max displacement value
-    private final double EPSILON = U_MAX / 33.;
+    private final double tau = TIME / 2000.0;   // Time step
+    private final double EPSILON = U_MAX / 80.;
 
     @Test
     void solve() throws IOException {
@@ -53,12 +51,14 @@ class HyperbolicEquationSolverDDTest {
         FileUtil.saveFunc(solution.area().x(), (x) -> analyticSolution(x, TIME), "./build/hyperbolic11-analytic.txt");
 
         // Compare numeric & analytic solutions
+        double maxAbsErr = 0d;
         for (var i = 0; i < numericU.getN(); i++) {
             var x = numericU.x(i);
             var numericY = numericU.y(i);
             var analyticY = analyticSolution(x, TIME);
-            assertThat(Math.abs(numericY - analyticY)).isLessThanOrEqualTo(EPSILON);
+            maxAbsErr = Math.max(maxAbsErr, Math.abs(numericY - analyticY));
         }
+        assertThat(maxAbsErr).isLessThanOrEqualTo(EPSILON);
     }
 
     private HyperbolicEquation buildHyperbolicEquation() {
@@ -102,7 +102,7 @@ class HyperbolicEquationSolverDDTest {
      *
      * @param x space coordinate
      * @param t time
-     * @return concentration C(x,t)
+     * @return displacement U(x,t)
      */
     private double analyticSolution(double x, double t) {
         var result = 0d;
