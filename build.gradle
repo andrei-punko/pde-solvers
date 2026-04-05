@@ -13,12 +13,6 @@ repositories {
     mavenCentral()
 }
 
-subprojects {
-    repositories {
-        mavenCentral()
-    }
-}
-
 dependencies {
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
@@ -59,10 +53,6 @@ jacocoTestReport {
         xml.required = true
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
     }
-}
-
-javadoc {
-    source = sourceSets.main.allJava
 }
 
 java {
