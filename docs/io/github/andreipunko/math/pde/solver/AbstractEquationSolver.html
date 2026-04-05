@@ -109,7 +109,7 @@ implements <a href="EquationSolver.html" title="interface in io.github.andreipun
  Implements the core numerical methods and algorithms shared across different types of PDE solvers.
  <p>
  Step sizes passed to <a href="#buildArea(io.github.andreipunko.math.pde.equation.Equation,double,double)"><code>buildArea(io.github.andreipunko.math.pde.equation.Equation, double, double)</code></a> are validated for finiteness and positivity only; physical or discrete
- stability of the chosen <code>h</code> and <code>tau</code> is not enforced (see package <code>io.github.andreipunko.math.pde.solver</code>).</div>
+ stability of the chosen <code>h</code> and <code>tau</code> is not enforced (see this package's summary documentation).</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -185,7 +185,7 @@ implements <a href="EquationSolver.html" title="interface in io.github.andreipun
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#prepare(io.github.andreipunko.math.pde.equation.Equation,io.github.andreipunko.math.space.Area)" class="member-name-link">prepare</a><wbr>(<a href="../equation/Equation.html" title="class in io.github.andreipunko.math.pde.equation">Equation</a>&nbsp;eqn,
  <a href="../../space/Area.html" title="class in io.github.andreipunko.math.space">Area</a>&nbsp;area)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Initializes the solution matrix with initial conditions.</div>
+<div class="block">Builds the grid <a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix"><code>Matrix2D</code></a> filled with the initial condition on the first time row.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double[]</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#solve3DiagonalEquationsSystem(double%5B%5D,double%5B%5D,double%5B%5D,double%5B%5D,io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu,io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu)" class="member-name-link">solve3DiagonalEquationsSystem</a><wbr>(double[]&nbsp;A,
@@ -257,15 +257,14 @@ implements <a href="EquationSolver.html" title="interface in io.github.andreipun
 <h3>prepare</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a></span>&nbsp;<span class="element-name">prepare</span><wbr><span class="parameters">(<a href="../equation/Equation.html" title="class in io.github.andreipunko.math.pde.equation">Equation</a>&nbsp;eqn,
  <a href="../../space/Area.html" title="class in io.github.andreipunko.math.space">Area</a>&nbsp;area)</span></div>
-<div class="block">Initializes the solution matrix with initial conditions.
- Creates a matrix to store the solution and sets the initial values
- based on the equation's initial condition.</div>
+<div class="block">Builds the grid <a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix"><code>Matrix2D</code></a> filled with the initial condition on the first time row.
+ The same instance is updated during the time march and passed into <a href="Solution.html#matrix()"><code>Solution.matrix()</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>eqn</code> - the equation to solve</dd>
-<dd><code>area</code> - the computational domain where solution will be found</dd>
+<dd><code>area</code> - the computational domain where the solution will be computed</dd>
 <dt>Returns:</dt>
-<dd>initialized matrix with initial conditions</dd>
+<dd>working grid matrix (becomes <a href="Solution.html#matrix()"><code>Solution.matrix()</code></a> in the returned <a href="Solution.html" title="class in io.github.andreipunko.math.pde.solver"><code>Solution</code></a>)</dd>
 </dl>
 </section>
 </li>

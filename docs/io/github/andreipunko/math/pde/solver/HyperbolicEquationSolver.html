@@ -209,7 +209,7 @@ loadScripts(document, 'script');</script>
 <dd><code>h</code> - spatial step size (must be positive)</dd>
 <dd><code>tau</code> - temporal step size (must be positive)</dd>
 <dt>Returns:</dt>
-<dd>solution containing function values at all grid points</dd>
+<dd><a href="Solution.html" title="class in io.github.andreipunko.math.pde.solver"><code>Solution</code></a> with function values on the grid in <a href="Solution.html#matrix()"><code>Solution.matrix()</code></a></dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if parameters h or tau are invalid, or if a time-step tridiagonal system is
                                   degenerate (see <a href="AbstractEquationSolver.html#solve3DiagonalEquationsSystem(double%5B%5D,double%5B%5D,double%5B%5D,double%5B%5D,io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu,io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu)"><code>AbstractEquationSolver.solve3DiagonalEquationsSystem(double[], double[], double[], double[], io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu, io.github.andreipunko.math.pde.solver.AbstractEquationSolver.KappaNu)</code></a>)</dd>

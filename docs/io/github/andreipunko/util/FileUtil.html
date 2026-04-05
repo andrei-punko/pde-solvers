@@ -91,7 +91,10 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">FileUtil</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Utilities to write text data to files. All textual output uses UTF-8.</div>
+<div class="block">Utilities to write text data to files. All textual output uses UTF-8.
+ <a href="#saveFunc(io.github.andreipunko.math.space.Interval,java.util.function.Function,java.lang.String)"><code>saveFunc(io.github.andreipunko.math.space.Interval, java.util.function.Function&lt;java.lang.Double, java.lang.Double&gt;, java.lang.String)</code></a>, <a href="#save(io.github.andreipunko.math.matrix.Matrix2D,java.lang.String,boolean)"><code>save(Matrix2D, String, boolean)</code></a>, and PDE <a href="../math/pde/solver/Solution.html" title="class in io.github.andreipunko.math.pde.solver"><code>Solution</code></a>
+ methods (<a href="../math/pde/solver/Solution.html#sUt(java.lang.String,double%5B%5D)"><code>Solution.sUt(String, double[])</code></a>, <a href="../math/pde/solver/Solution.html#sUx(java.lang.String,double%5B%5D)"><code>Solution.sUx(String, double[])</code></a>)
+ prefix a short <code>#</code> header and format numbers with <a href="#formatDouble(double)"><code>formatDouble(double)</code></a> (data comes from <a href="../math/pde/solver/Solution.html#matrix()"><code>Solution.matrix()</code></a>).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -106,32 +109,37 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#save(io.github.andreipunko.math.matrix.Matrix2D,java.lang.String,boolean)" class="member-name-link">save</a><wbr>(<a href="../math/matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a>&nbsp;m,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
- boolean&nbsp;rotate)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#formatDouble(double)" class="member-name-link">formatDouble</a><wbr>(double&nbsp;value)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Save matrix into file</div>
+<div class="block">Locale-independent numeric text for exports: US decimal point, <code>%.17g</code> (up to 17 significant digits).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#saveFunc(io.github.andreipunko.math.space.Interval,java.util.function.Function,java.lang.String)" class="member-name-link">saveFunc</a><wbr>(<a href="../math/space/Interval.html" title="class in io.github.andreipunko.math.space">Interval</a>&nbsp;interval,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;&nbsp;func,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#save(io.github.andreipunko.math.matrix.Matrix2D,java.lang.String,boolean)" class="member-name-link">save</a><wbr>(<a href="../math/matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a>&nbsp;m,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
+ boolean&nbsp;rotate)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Save function y(x) on given interval into file</div>
+<div class="block">Save matrix into file.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#saveFunc(io.github.andreipunko.math.space.Interval,java.util.function.Function,java.util.function.Function,java.lang.String)" class="member-name-link">saveFunc</a><wbr>(<a href="../math/space/Interval.html" title="class in io.github.andreipunko.math.space">Interval</a>&nbsp;timeInterval,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#saveFunc(io.github.andreipunko.math.space.Interval,java.util.function.Function,java.lang.String)" class="member-name-link">saveFunc</a><wbr>(<a href="../math/space/Interval.html" title="class in io.github.andreipunko.math.space">Interval</a>&nbsp;interval,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;&nbsp;func,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Save function y(x) on given interval into file.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#saveFunc(io.github.andreipunko.math.space.Interval,java.util.function.Function,java.util.function.Function,java.lang.String)" class="member-name-link">saveFunc</a><wbr>(<a href="../math/space/Interval.html" title="class in io.github.andreipunko.math.space">Interval</a>&nbsp;timeInterval,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;&nbsp;xFunc,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;&nbsp;yFunc,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Save function y(x) on given time interval into file for parameterized functions x(t) and y(t)</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#serialize(java.lang.StringBuilder,java.lang.String)" class="member-name-link">serialize</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html" title="class or interface in java.lang" class="external-link">StringBuilder</a>&nbsp;sb,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Save function y(x) on given time interval into file for parameterized functions x(t) and y(t).</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#serialize(java.lang.StringBuilder,java.lang.String)" class="member-name-link">serialize</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html" title="class or interface in java.lang" class="external-link">StringBuilder</a>&nbsp;sb,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Save text data from StringBuilder instance into file using UTF-8 encoding.</div>
 </div>
 </div>
@@ -151,6 +159,19 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="formatDouble(double)">
+<h3>formatDouble</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">formatDouble</span><wbr><span class="parameters">(double&nbsp;value)</span></div>
+<div class="block">Locale-independent numeric text for exports: US decimal point, <code>%.17g</code> (up to 17 significant digits).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>value</code> - number to format</dd>
+<dt>Returns:</dt>
+<dd>formatted string suitable for text export files</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="serialize(java.lang.StringBuilder,java.lang.String)">
 <h3>serialize</h3>
@@ -175,7 +196,8 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;&nbsp;func,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName)</span>
                      throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Save function y(x) on given interval into file</div>
+<div class="block">Save function y(x) on given interval into file. Lines starting with <code>#</code> describe columns;
+ data rows use <a href="#formatDouble(double)"><code>formatDouble(double)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>interval</code> - interval</dd>
@@ -195,7 +217,8 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;&nbsp;yFunc,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName)</span>
                      throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Save function y(x) on given time interval into file for parameterized functions x(t) and y(t)</div>
+<div class="block">Save function y(x) on given time interval into file for parameterized functions x(t) and y(t).
+ Lines starting with <code>#</code> describe columns; data rows use <a href="#formatDouble(double)"><code>formatDouble(double)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>timeInterval</code> - time interval</dd>
@@ -215,7 +238,8 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
  boolean&nbsp;rotate)</span>
                  throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
-<div class="block">Save matrix into file</div>
+<div class="block">Save matrix into file. Lines starting with <code>#</code> give dimensions and layout; data rows use
+ <a href="#formatDouble(double)"><code>formatDouble(double)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>m</code> - matrix to save</dd>

@@ -96,14 +96,13 @@ loadScripts(document, 'script');</script>
 <dt>Record Components:</dt>
 <dd><code><span id="param-equation">equation</span></code> - the partial differential equation that was solved</dd>
 <dd><code><span id="param-area">area</span></code> - the space-time domain where the solution was found</dd>
-<dd><code><span id="param-solution">solution</span></code> - the numerical solution stored as a 2D matrix</dd>
+<dd><code><span id="param-matrix">matrix</span></code> - grid values of the solution (same layout as above); must not be null</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Solution&lt;E extends <a href="../equation/Equation.html" title="class in io.github.andreipunko.math.pde.equation">Equation</a>&gt;</span>(<a href="Solution.html" title="type parameter in Solution">E</a> extends <a href="../equation/Equation.html" title="class in io.github.andreipunko.math.pde.equation">Equation</a>&nbsp;equation, <a href="../../space/Area.html" title="class in io.github.andreipunko.math.space">Area</a>&nbsp;area, <a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a>&nbsp;solution)
+<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Solution&lt;E extends <a href="../equation/Equation.html" title="class in io.github.andreipunko.math.pde.equation">Equation</a>&gt;</span>(<a href="Solution.html" title="type parameter in Solution">E</a> extends <a href="../equation/Equation.html" title="class in io.github.andreipunko.math.pde.equation">Equation</a>&nbsp;equation, <a href="../../space/Area.html" title="class in io.github.andreipunko.math.space">Area</a>&nbsp;area, <a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a>&nbsp;matrix)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
-<div class="block">Record class representing a numerical solution of a partial differential equation
- on a defined space-time domain. The solution is stored as a 2D matrix where rows
- represent time layers and columns represent spatial points.</div>
+<div class="block">Numerical PDE solution on a space-time domain: <a href="#equation()"><code>equation()</code></a>, <a href="#area()"><code>area()</code></a>, and
+ grid values <a href="#matrix()"><code>matrix()</code></a> (<a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix"><code>Matrix2D</code></a> — rows are time layers, columns are spatial nodes).</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -127,7 +126,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(E,io.github.andreipunko.math.space.Area,io.github.andreipunko.math.matrix.Matrix2D)" class="member-name-link">Solution</a><wbr>(<a href="Solution.html" title="type parameter in Solution">E</a>&nbsp;equation,
  <a href="../../space/Area.html" title="class in io.github.andreipunko.math.space">Area</a>&nbsp;area,
- <a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a>&nbsp;solution)</code></div>
+ <a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a>&nbsp;matrix)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Validates record components before the instance is created.</div>
 </div>
@@ -186,9 +185,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a hash code value for this object.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#solution()" class="member-name-link">solution</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#matrix()" class="member-name-link">matrix</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <a href="#param-solution"><code>solution</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="#param-matrix"><code>matrix</code></a> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sUt(java.lang.String,double)" class="member-name-link">sUt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileName,
@@ -241,11 +240,11 @@ loadScripts(document, 'script');</script>
 <h3 id="&lt;init&gt;(io.github.andreipunko.math.pde.equation.Equation,io.github.andreipunko.math.space.Area,io.github.andreipunko.math.matrix.Matrix2D)">Solution</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Solution</span><wbr><span class="parameters">(<a href="Solution.html" title="type parameter in Solution">E</a>&nbsp;equation,
  <a href="../../space/Area.html" title="class in io.github.andreipunko.math.space">Area</a>&nbsp;area,
- <a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a>&nbsp;solution)</span></div>
+ <a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a>&nbsp;matrix)</span></div>
 <div class="block">Validates record components before the instance is created.</div>
 <dl class="notes">
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if equation, area or solution is null</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if equation, area or matrix is null</dd>
 </dl>
 </section>
 </li>
@@ -265,8 +264,10 @@ loadScripts(document, 'script');</script>
          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
 <div class="block">Saves solution data U(x,t) for specified time moments to a file.
  Creates a set of spatial slices of the solution at different time points.
- Each line in the output file contains spatial coordinates followed by
- solution values at different time moments. All spatial columns of the solution matrix are written
+ The file starts with <code>#</code>-comment lines describing columns, then numeric rows in US locale
+ (<a href="../../../util/FileUtil.html#formatDouble(double)"><code>FileUtil.formatDouble(double)</code></a>).
+ Each data line contains spatial coordinates followed by
+ solution values at different time moments. All spatial columns of <a href="#matrix()"><code>matrix()</code></a> are written
  (same extent as <a href="#gUt(int)"><code>gUt(int)</code></a> for a fixed time layer).
  <p>
  Each <code>t</code> is mapped to a time-layer index via <a href="../../space/Area.html#ti(double)"><code>Area.ti(double)</code></a> (see <a href="../../space/Interval.html#i(double)"><code>Interval.i(double)</code></a>):
@@ -308,8 +309,10 @@ loadScripts(document, 'script');</script>
          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
 <div class="block">Saves solution data U(x,t) for specified spatial coordinates to a file.
  Creates a set of temporal slices of the solution at different spatial points.
- Each line in the output file contains time coordinates followed by
- solution values at different spatial points. All time rows of the solution matrix are written
+ The file starts with <code>#</code>-comment lines describing columns, then numeric rows in US locale
+ (<a href="../../../util/FileUtil.html#formatDouble(double)"><code>FileUtil.formatDouble(double)</code></a>).
+ Each data line contains time coordinates followed by
+ solution values at different spatial points. All time rows of <a href="#matrix()"><code>matrix()</code></a> are written
  (same extent as <a href="#gUx(int)"><code>gUx(int)</code></a> for a fixed spatial column).
  <p>
  Each <code>x</code> is mapped to a spatial column index via <a href="../../space/Area.html#xi(double)"><code>Area.xi(double)</code></a> (see <a href="../../space/Interval.html#i(double)"><code>Interval.i(double)</code></a>):
@@ -368,7 +371,7 @@ loadScripts(document, 'script');</script>
  Returns a matrix containing spatial coordinates and corresponding solution values.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>it</code> - index of the time layer in the solution matrix (0 &lt;= it &lt; M)</dd>
+<dd><code>it</code> - row index in <a href="#matrix()"><code>matrix()</code></a> (time layer; 0 &lt;= it &lt; <code>matrix.getM()</code>)</dd>
 <dt>Returns:</dt>
 <dd>MatrixXY containing the spatial slice of the solution</dd>
 <dt>Throws:</dt>
@@ -401,7 +404,7 @@ loadScripts(document, 'script');</script>
  Returns a matrix containing time coordinates and corresponding solution values.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>ix</code> - index of the spatial column in the solution matrix (0 &lt;= ix &lt; N)</dd>
+<dd><code>ix</code> - column index in <a href="#matrix()"><code>matrix()</code></a> (spatial node; 0 &lt;= ix &lt; <code>matrix.getN()</code>)</dd>
 <dt>Returns:</dt>
 <dd>MatrixXY containing the temporal slice of the solution</dd>
 <dt>Throws:</dt>
@@ -473,13 +476,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="solution()">
-<h3>solution</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a></span>&nbsp;<span class="element-name">solution</span>()</div>
-<div class="block">Returns the value of the <a href="#param-solution"><code>solution</code></a> record component.</div>
+<section class="detail" id="matrix()">
+<h3>matrix</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix">Matrix2D</a></span>&nbsp;<span class="element-name">matrix</span>()</div>
+<div class="block">Returns the value of the <a href="#param-matrix"><code>matrix</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the value of the <a href="#param-solution"><code>solution</code></a> record component</dd>
+<dd>the value of the <a href="#param-matrix"><code>matrix</code></a> record component</dd>
 </dl>
 </section>
 </li>

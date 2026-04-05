@@ -147,6 +147,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Fills all elements of the matrix with the specified value.</div>
 </dd>
+<dt><a href="io/github/andreipunko/util/FileUtil.html#formatDouble(double)" class="member-name-link">formatDouble(double)</a> - Static method in class io.github.andreipunko.util.<a href="io/github/andreipunko/util/FileUtil.html" title="class in io.github.andreipunko.util">FileUtil</a></dt>
+<dd>
+<div class="block">Locale-independent numeric text for exports: US decimal point, <code>%.17g</code> (up to 17 significant digits).</div>
+</dd>
 </dl>
 <h2 class="title" id="I:G">G</h2>
 <dl class="index">
@@ -321,6 +325,10 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
+<dt><a href="io/github/andreipunko/math/pde/solver/Solution.html#matrix()" class="member-name-link">matrix()</a> - Method in record class io.github.andreipunko.math.pde.solver.<a href="io/github/andreipunko/math/pde/solver/Solution.html" title="class in io.github.andreipunko.math.pde.solver">Solution</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./io/github/andreipunko/math/pde/solver/Solution.html#param-matrix"><code>matrix</code></a> record component.</div>
+</dd>
 <dt><a href="io/github/andreipunko/math/matrix/Matrix2D.html" class="type-name-link" title="class in io.github.andreipunko.math.matrix">Matrix2D</a> - Class in <a href="io/github/andreipunko/math/matrix/package-summary.html">io.github.andreipunko.math.matrix</a></dt>
 <dd>
 <div class="block">Represents a two-dimensional matrix of real numbers with fixed dimensions.</div>
@@ -388,7 +396,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="io/github/andreipunko/math/pde/solver/AbstractEquationSolver.html#prepare(io.github.andreipunko.math.pde.equation.Equation,io.github.andreipunko.math.space.Area)" class="member-name-link">prepare(Equation, Area)</a> - Method in class io.github.andreipunko.math.pde.solver.<a href="io/github/andreipunko/math/pde/solver/AbstractEquationSolver.html" title="class in io.github.andreipunko.math.pde.solver">AbstractEquationSolver</a></dt>
 <dd>
-<div class="block">Initializes the solution matrix with initial conditions.</div>
+<div class="block">Builds the grid <a href="io/github/andreipunko/math/matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix"><code>Matrix2D</code></a> filled with the initial condition on the first time row.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:R">R</h2>
@@ -420,15 +428,15 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="io/github/andreipunko/util/FileUtil.html#save(io.github.andreipunko.math.matrix.Matrix2D,java.lang.String,boolean)" class="member-name-link">save(Matrix2D, String, boolean)</a> - Static method in class io.github.andreipunko.util.<a href="io/github/andreipunko/util/FileUtil.html" title="class in io.github.andreipunko.util">FileUtil</a></dt>
 <dd>
-<div class="block">Save matrix into file</div>
+<div class="block">Save matrix into file.</div>
 </dd>
 <dt><a href="io/github/andreipunko/util/FileUtil.html#saveFunc(io.github.andreipunko.math.space.Interval,java.util.function.Function,java.lang.String)" class="member-name-link">saveFunc(Interval, Function&lt;Double, Double&gt;, String)</a> - Static method in class io.github.andreipunko.util.<a href="io/github/andreipunko/util/FileUtil.html" title="class in io.github.andreipunko.util">FileUtil</a></dt>
 <dd>
-<div class="block">Save function y(x) on given interval into file</div>
+<div class="block">Save function y(x) on given interval into file.</div>
 </dd>
 <dt><a href="io/github/andreipunko/util/FileUtil.html#saveFunc(io.github.andreipunko.math.space.Interval,java.util.function.Function,java.util.function.Function,java.lang.String)" class="member-name-link">saveFunc(Interval, Function&lt;Double, Double&gt;, Function&lt;Double, Double&gt;, String)</a> - Static method in class io.github.andreipunko.util.<a href="io/github/andreipunko/util/FileUtil.html" title="class in io.github.andreipunko.util">FileUtil</a></dt>
 <dd>
-<div class="block">Save function y(x) on given time interval into file for parameterized functions x(t) and y(t)</div>
+<div class="block">Save function y(x) on given time interval into file for parameterized functions x(t) and y(t).</div>
 </dd>
 <dt><a href="io/github/andreipunko/util/FileUtil.html#serialize(java.lang.StringBuilder,java.lang.String)" class="member-name-link">serialize(StringBuilder, String)</a> - Static method in class io.github.andreipunko.util.<a href="io/github/andreipunko/util/FileUtil.html" title="class in io.github.andreipunko.util">FileUtil</a></dt>
 <dd>
@@ -450,14 +458,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Sets the y-coordinate at the specified index.</div>
 </dd>
-<dt><a href="io/github/andreipunko/math/pde/solver/Solution.html#solution()" class="member-name-link">solution()</a> - Method in record class io.github.andreipunko.math.pde.solver.<a href="io/github/andreipunko/math/pde/solver/Solution.html" title="class in io.github.andreipunko.math.pde.solver">Solution</a></dt>
-<dd>
-<div class="block">Returns the value of the <a href="./io/github/andreipunko/math/pde/solver/Solution.html#param-solution"><code>solution</code></a> record component.</div>
-</dd>
 <dt><a href="io/github/andreipunko/math/pde/solver/Solution.html" class="type-name-link" title="class in io.github.andreipunko.math.pde.solver">Solution&lt;E&gt;</a> - Record Class in <a href="io/github/andreipunko/math/pde/solver/package-summary.html">io.github.andreipunko.math.pde.solver</a></dt>
 <dd>
-<div class="block">Record class representing a numerical solution of a partial differential equation
- on a defined space-time domain.</div>
+<div class="block">Numerical PDE solution on a space-time domain: <a href="io/github/andreipunko/math/pde/solver/Solution.html#equation()"><code>equation()</code></a>, <a href="io/github/andreipunko/math/pde/solver/Solution.html#area()"><code>area()</code></a>, and
+ grid values <a href="io/github/andreipunko/math/pde/solver/Solution.html#matrix()"><code>matrix()</code></a> (<a href="io/github/andreipunko/math/matrix/Matrix2D.html" title="class in io.github.andreipunko.math.matrix"><code>Matrix2D</code></a> — rows are time layers, columns are spatial nodes).</div>
 </dd>
 <dt><a href="io/github/andreipunko/math/pde/solver/Solution.html#%3Cinit%3E(E,io.github.andreipunko.math.space.Area,io.github.andreipunko.math.matrix.Matrix2D)" class="member-name-link">Solution(E, Area, Matrix2D)</a> - Constructor for record class io.github.andreipunko.math.pde.solver.<a href="io/github/andreipunko/math/pde/solver/Solution.html" title="class in io.github.andreipunko.math.pde.solver">Solution</a></dt>
 <dd>
