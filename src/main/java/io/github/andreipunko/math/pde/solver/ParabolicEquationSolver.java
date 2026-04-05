@@ -27,14 +27,14 @@ public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEqu
      * @param eqn parabolic partial differential equation to solve
      * @param h   spatial step size (must be positive)
      * @param tau time step size (must be positive)
-     * @return equation solution containing function values at all grid points
+     * @return {@link Solution} with function values on the grid in {@link Solution#matrix()}
      * @throws IllegalArgumentException if parameters h or tau are invalid, or if a time-step tridiagonal system is
      *                                  degenerate (see {@link AbstractEquationSolver#solve3DiagonalEquationsSystem})
      */
     @Override
     public Solution<ParabolicEquation> solve(ParabolicEquation eqn, double h, double tau) {
         var area = buildArea(eqn, h, tau);
-        var solution = prepare(eqn, area);
+        var matrix = prepare(eqn, area);
 
         int N = area.xn();
         var A = new double[N];
@@ -50,9 +50,9 @@ public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEqu
         for (int j = 0; j < area.tn(); j++) {
             for (int i = 1; i < N; i++) {
                 double
-                        _u = solution.get(j, i - 1),
-                        u = solution.get(j, i),
-                        u_ = solution.get(j, i + 1),
+                        _u = matrix.get(j, i - 1),
+                        u = matrix.get(j, i),
+                        u_ = matrix.get(j, i + 1),
 
                         _x = area.xx(i - 1),
                         x = area.xx(i),
@@ -74,8 +74,8 @@ public class ParabolicEquationSolver extends AbstractEquationSolver<ParabolicEqu
             var kappaNuLeft = calcKappaNu(eqn.getLeftBorderCondition(), h, time);
             var kappaNuRight = calcKappaNu(eqn.getRightBorderCondition(), h, time);
             var U = solve3DiagonalEquationsSystem(A, B, C, F, kappaNuLeft, kappaNuRight);
-            solution.setRow(nj, U);
+            matrix.setRow(nj, U);
         }
-        return new Solution<>(eqn, area, solution);
+        return new Solution<>(eqn, area, matrix);
     }
 }

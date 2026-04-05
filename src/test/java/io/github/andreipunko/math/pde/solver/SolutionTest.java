@@ -117,7 +117,7 @@ class SolutionTest {
         var solution = buildSolution();
 
         assertThrows(IllegalArgumentException.class, () -> solution.gUt(-1));
-        assertThrows(IllegalArgumentException.class, () -> solution.gUt(solution.solution().getM()));
+        assertThrows(IllegalArgumentException.class, () -> solution.gUt(solution.matrix().getM()));
     }
 
     @Test
@@ -143,7 +143,7 @@ class SolutionTest {
         var solution = buildSolution();
 
         assertThrows(IllegalArgumentException.class, () -> solution.gUx(-1));
-        assertThrows(IllegalArgumentException.class, () -> solution.gUx(solution.solution().getN()));
+        assertThrows(IllegalArgumentException.class, () -> solution.gUx(solution.matrix().getN()));
     }
 
     /**

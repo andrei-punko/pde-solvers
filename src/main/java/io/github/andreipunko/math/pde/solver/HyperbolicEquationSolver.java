@@ -31,14 +31,14 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
      * @param eqn hyperbolic partial differential equation to solve
      * @param h   spatial step size (must be positive)
      * @param tau temporal step size (must be positive)
-     * @return solution containing function values at all grid points
+     * @return {@link Solution} with function values on the grid in {@link Solution#matrix()}
      * @throws IllegalArgumentException if parameters h or tau are invalid, or if a time-step tridiagonal system is
      *                                  degenerate (see {@link AbstractEquationSolver#solve3DiagonalEquationsSystem})
      */
     @Override
     public Solution<HyperbolicEquation> solve(HyperbolicEquation eqn, double h, double tau) {
         var area = buildArea(eqn, h, tau);
-        var solution = prepare(eqn, area);
+        var matrix = prepare(eqn, area);
 
         int N = area.xn();
         var A = new double[N];
@@ -53,19 +53,19 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
                 _2h2_tau2 = 2 * Math.pow(h / tau, 2);
 
         // Set border conditions on layer 1
-        solution.set(1, 0, calcFirstLayerValue(eqn, tau, solution.get(0, 0), area.xLeft()));
-        solution.set(1, N, calcFirstLayerValue(eqn, tau, solution.get(0, N), area.xRight()));
+        matrix.set(1, 0, calcFirstLayerValue(eqn, tau, matrix.get(0, 0), area.xLeft()));
+        matrix.set(1, N, calcFirstLayerValue(eqn, tau, matrix.get(0, N), area.xRight()));
 
         // Calculate U value on layer 1 which needed to start finite-difference algorithm
         //
         for (int i = 1; i < N; i++) {
             double
-                    _u = solution.get(0, i - 1),
-                    u = solution.get(0, i),
-                    u_ = solution.get(0, i + 1),
+                    _u = matrix.get(0, i - 1),
+                    u = matrix.get(0, i),
+                    u_ = matrix.get(0, i + 1),
                     x = area.xx(i);
 
-            solution.set(1, i, u + tau * (eqn.gdU_dt0(x) + t_2 / eqn.gM(x, 0, u) * (
+            matrix.set(1, i, u + tau * (eqn.gdU_dt0(x) + t_2 / eqn.gM(x, 0, u) * (
                     eqn.gK(x, 0, u) / h2 * (_u - 2 * u + u_) + eqn.gV(x, 0, u) / _2h * (u_ - _u) + eqn.gF(x, 0, u))));
         }
 
@@ -74,9 +74,9 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
         for (int j = 0; j <= area.tn() - 2; j++) {
             for (int i = 1; i < N; i++) {
                 double
-                        _u = solution.get(j, i - 1),
-                        u = solution.get(j, i),
-                        u_ = solution.get(j, i + 1),
+                        _u = matrix.get(j, i - 1),
+                        u = matrix.get(j, i),
+                        u_ = matrix.get(j, i + 1),
 
                         x = area.xx(i),
                         t = area.tx(j),
@@ -90,7 +90,7 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
                 B[i] = Beta;
                 C[i] = Alpha + Beta - Gamma + Delta;
                 F[i] = _u * Alpha + u_ * Beta - u * (Alpha + Beta + Gamma + Delta)
-                        + 2 * (solution.get(j + 1, i) * Delta + eqn.gF(x, t, u) * h2);
+                        + 2 * (matrix.get(j + 1, i) * Delta + eqn.gF(x, t, u) * h2);
             }
 
             int nj = j + 2;
@@ -98,9 +98,9 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
             var kappaNuLeft = calcKappaNu(eqn.getLeftBorderCondition(), h, time);
             var kappaNuRight = calcKappaNu(eqn.getRightBorderCondition(), h, time);
             var U = solve3DiagonalEquationsSystem(A, B, C, F, kappaNuLeft, kappaNuRight);
-            solution.setRow(nj, U);
+            matrix.setRow(nj, U);
         }
-        return new Solution<>(eqn, area, solution);
+        return new Solution<>(eqn, area, matrix);
     }
 
     /**

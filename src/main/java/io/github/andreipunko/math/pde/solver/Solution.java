@@ -9,14 +9,15 @@ import io.github.andreipunko.util.FileUtil;
 
 import java.io.IOException;
 
+import static io.github.andreipunko.util.FileUtil.formatDouble;
+
 /**
- * Record class representing a numerical solution of a partial differential equation
- * on a defined space-time domain. The solution is stored as a 2D matrix where rows
- * represent time layers and columns represent spatial points.
+ * Numerical PDE solution on a space-time domain: {@link #equation()}, {@link #area()}, and
+ * grid values {@link #matrix()} ({@link Matrix2D} — rows are time layers, columns are spatial nodes).
  *
  * @param equation the partial differential equation that was solved
  * @param area     the space-time domain where the solution was found
- * @param solution the numerical solution stored as a 2D matrix
+ * @param matrix   grid values of the solution (same layout as above); must not be null
  * @param <E>      the type of equation that was solved
  * @see EquationSolver
  * @see Matrix2D
@@ -25,12 +26,12 @@ import java.io.IOException;
 public record Solution<E extends Equation>(
         E equation,
         Area area,
-        Matrix2D solution
+        Matrix2D matrix
 ) {
     /**
      * Validates record components before the instance is created.
      *
-     * @throws IllegalArgumentException if equation, area or solution is null
+     * @throws IllegalArgumentException if equation, area or matrix is null
      */
     public Solution {
         if (equation == null) {
@@ -39,8 +40,8 @@ public record Solution<E extends Equation>(
         if (area == null) {
             throw new IllegalArgumentException("area must not be null");
         }
-        if (solution == null) {
-            throw new IllegalArgumentException("solution matrix must not be null");
+        if (matrix == null) {
+            throw new IllegalArgumentException("matrix must not be null");
         }
     }
 
@@ -50,7 +51,7 @@ public record Solution<E extends Equation>(
      * The file starts with {@code #}-comment lines describing columns, then numeric rows in US locale
      * ({@link FileUtil#formatDouble(double)}).
      * Each data line contains spatial coordinates followed by
-     * solution values at different time moments. All spatial columns of the solution matrix are written
+     * solution values at different time moments. All spatial columns of {@link #matrix()} are written
      * (same extent as {@link #gUt(int)} for a fixed time layer).
      * <p>
      * Each {@code t} is mapped to a time-layer index via {@link Area#ti(double)} (see {@link Interval#i(double)}):
@@ -79,13 +80,13 @@ public record Solution<E extends Equation>(
         sb.append("# pde-solvers: spatial slice U(x) at requested times (grid layer: nearest t at or to the left)\n");
         sb.append("# columns: x");
         for (var t_i : t) {
-            sb.append(" U(t=").append(FileUtil.formatDouble(t_i)).append(')');
+            sb.append(" U(t=").append(formatDouble(t_i)).append(')');
         }
         sb.append('\n');
-        for (var i = 0; i < solution.getN(); i++) {
-            sb.append(FileUtil.formatDouble(area.xx(i)));
+        for (var i = 0; i < matrix.getN(); i++) {
+            sb.append(formatDouble(area.xx(i)));
             for (var t_i : t) {
-                sb.append(' ').append(FileUtil.formatDouble(solution.get(area.ti(t_i), i)));
+                sb.append(' ').append(formatDouble(matrix.get(area.ti(t_i), i)));
             }
             sb.append('\n');
         }
@@ -115,7 +116,7 @@ public record Solution<E extends Equation>(
      * The file starts with {@code #}-comment lines describing columns, then numeric rows in US locale
      * ({@link FileUtil#formatDouble(double)}).
      * Each data line contains time coordinates followed by
-     * solution values at different spatial points. All time rows of the solution matrix are written
+     * solution values at different spatial points. All time rows of {@link #matrix()} are written
      * (same extent as {@link #gUx(int)} for a fixed spatial column).
      * <p>
      * Each {@code x} is mapped to a spatial column index via {@link Area#xi(double)} (see {@link Interval#i(double)}):
@@ -144,13 +145,13 @@ public record Solution<E extends Equation>(
         sb.append("# pde-solvers: temporal slice U(t) at requested positions (grid column: nearest x at or to the left)\n");
         sb.append("# columns: t");
         for (var x_i : x) {
-            sb.append(" U(x=").append(FileUtil.formatDouble(x_i)).append(')');
+            sb.append(" U(x=").append(formatDouble(x_i)).append(')');
         }
         sb.append('\n');
-        for (int i = 0; i < solution.getM(); i++) {
-            sb.append(FileUtil.formatDouble(area.tx(i)));
+        for (int i = 0; i < matrix.getM(); i++) {
+            sb.append(formatDouble(area.tx(i)));
             for (var x_i : x) {
-                sb.append(' ').append(FileUtil.formatDouble(solution.get(i, area.xi(x_i))));
+                sb.append(' ').append(formatDouble(matrix.get(i, area.xi(x_i))));
             }
             sb.append('\n');
         }
@@ -191,24 +192,24 @@ public record Solution<E extends Equation>(
      * Retrieves a spatial slice of the solution at a specified time layer index.
      * Returns a matrix containing spatial coordinates and corresponding solution values.
      *
-     * @param it index of the time layer in the solution matrix (0 &lt;= it &lt; M)
+     * @param it row index in {@link #matrix()} (time layer; 0 &lt;= it &lt; {@code matrix.getM()})
      * @return MatrixXY containing the spatial slice of the solution
      * @throws IllegalArgumentException if the time layer index is out of bounds
      */
     public MatrixXY gUt(int it) {
-        int M = solution.getM();
+        int M = matrix.getM();
         if (it < 0 || it >= M) {
             throw new IllegalArgumentException(
                     "time layer index it out of bounds: " + it + ", valid [0, " + (M - 1) + "]");
         }
 
-        int N = solution.getN();
-        var matrix = new MatrixXY(N);
+        int N = matrix.getN();
+        var slice = new MatrixXY(N);
         for (int i = 0; i < N; i++) {
-            matrix.setX(i, area.xx(i));
-            matrix.setY(i, solution.get(it, i));
+            slice.setX(i, area.xx(i));
+            slice.setY(i, matrix.get(it, i));
         }
-        return matrix;
+        return slice;
     }
 
     /**
@@ -228,23 +229,23 @@ public record Solution<E extends Equation>(
      * Retrieves a temporal slice of the solution at a specified spatial column index.
      * Returns a matrix containing time coordinates and corresponding solution values.
      *
-     * @param ix index of the spatial column in the solution matrix (0 &lt;= ix &lt; N)
+     * @param ix column index in {@link #matrix()} (spatial node; 0 &lt;= ix &lt; {@code matrix.getN()})
      * @return MatrixXY containing the temporal slice of the solution
      * @throws IllegalArgumentException if the spatial column index is out of bounds
      */
     public MatrixXY gUx(int ix) {
-        int N = solution.getN();
+        int N = matrix.getN();
         if (ix < 0 || ix >= N) {
             throw new IllegalArgumentException(
                     "spatial column index ix out of bounds: " + ix + ", valid [0, " + (N - 1) + "]");
         }
 
-        int M = solution.getM();
-        var matrix = new MatrixXY(M);
+        int M = matrix.getM();
+        var slice = new MatrixXY(M);
         for (int i = 0; i < M; i++) {
-            matrix.setX(i, area.tx(i));
-            matrix.setY(i, solution.get(i, ix));
+            slice.setX(i, area.tx(i));
+            slice.setY(i, matrix.get(i, ix));
         }
-        return matrix;
+        return slice;
     }
 }

@@ -15,7 +15,7 @@ import io.github.andreipunko.math.space.Interval;
  * Implements the core numerical methods and algorithms shared across different types of PDE solvers.
  * <p>
  * Step sizes passed to {@link #buildArea} are validated for finiteness and positivity only; physical or discrete
- * stability of the chosen {@code h} and {@code tau} is not enforced (see package {@code io.github.andreipunko.math.pde.solver}).
+ * stability of the chosen {@code h} and {@code tau} is not enforced (see this package's summary documentation).
  *
  * @param <E> the type of equation this solver handles
  * @see Equation
@@ -56,13 +56,12 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
     }
 
     /**
-     * Initializes the solution matrix with initial conditions.
-     * Creates a matrix to store the solution and sets the initial values
-     * based on the equation's initial condition.
+     * Builds the grid {@link Matrix2D} filled with the initial condition on the first time row.
+     * The same instance is updated during the time march and passed into {@link Solution#matrix()}.
      *
      * @param eqn  the equation to solve
-     * @param area the computational domain where solution will be found
-     * @return initialized matrix with initial conditions
+     * @param area the computational domain where the solution will be computed
+     * @return working grid matrix (becomes {@link Solution#matrix()} in the returned {@link Solution})
      */
     protected Matrix2D prepare(Equation eqn, Area area) {
         // Create space for equation solution
