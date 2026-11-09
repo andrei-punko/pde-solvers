@@ -103,7 +103,7 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
             int nj = j + 2;
             var time = area.tx(nj);
             var kappaNuLeft = calcKappaNu(eqn.getLeftBorderCondition(), h, time);
-            var kappaNuRight = calcKappaNu(eqn.getRightBorderCondition(), h, time);
+            var kappaNuRight = calcKappaNu(eqn.getRightBorderCondition(), -h, time);
             var U = solve3DiagonalEquationsSystem(A, B, C, F, kappaNuLeft, kappaNuRight);
             matrix.setRow(nj, U);
         }

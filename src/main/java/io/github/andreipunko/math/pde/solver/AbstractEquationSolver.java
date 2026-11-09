@@ -166,7 +166,8 @@ public abstract class AbstractEquationSolver<E extends Equation> implements Equa
      * These parameters are used to incorporate different types of boundary conditions into the solution.
      *
      * @param borderCondition the boundary condition to process
-     * @param h               spatial step size
+     * @param h               signed step from the border node to its inner neighbour:
+     *                        {@code +h} for the left border, {@code -h} for the right border
      * @param time            current time point
      * @return KappaNu record containing calculated parameters
      * @throws IllegalArgumentException if borderCondition is null

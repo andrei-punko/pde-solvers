@@ -23,8 +23,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * Solution of heat transfer equation: Ut = ALPHA*Uxx for rod with length L
  * - constant thermal diffusivity coefficient ALPHA
- * - constant temperature T=T_OUT on the left border
- * - heat exchange with the environment with T=T_OUT on the right border
+ * - temperature T is counted from the environment temperature
+ * - constant temperature T=0 on the left border
+ * - heat exchange with the environment on the right border
  * - initial temperature with triangle profile: most heat concentrated in the center, with T_MAX max value (see method getU0(x))
  * </pre>
  */
@@ -34,7 +35,6 @@ class ParabolicEquationSolverDRTest {
     private final double ALPHA = 1.11e-4;   // Thermal diffusivity coefficient of Cu
     private final double H_CONV = 6.706;    // Convective heat transfer coefficient
     private final double T_MAX = 400;       // Peak value of starting temperature (triangle) profile
-    private final double T_OUT = 293;       // Environment space temperature
 
     private final double L = 0.1;           // Length of rod, m
     private final double TIME = 60;         // Investigated time, sec
@@ -75,11 +75,6 @@ class ParabolicEquationSolverDRTest {
             @Override
             public double gH() {
                 return -H_CONV / K;
-            }
-
-            @Override
-            public double gTheta(double t) {
-                return T_OUT;
             }
         };
 
@@ -150,27 +145,20 @@ class ParabolicEquationSolverDRTest {
     }
 
     /**
-     * Eigenvalue lambda_n of transcendent equation: lambda = H_CONV/K * tan( lambda*L )
+     * Eigenvalue lambda_n of transcendent equation: lambda = -H_CONV/K * tan( lambda*L )
      *
      * @param n number of coefficient
      * @return lambda_n value
      */
     private double lambda_n(int n) {
-        /*
-         For H_CONV = 6.706, K = 401 coefficients values we discovered numeric expression
-         for approx value of equation roots:
-            lambda_n = 15.697 + PI / L * (n - 1)
-         But decided to keep calculation of its value from first principles
-         and add cache for lambda values to speed up
-         */
         if (lambdaCache.containsKey(n)) {
             return lambdaCache.get(n);
         }
 
-        var lambda = PI / L * (n - 1);  // equations roots are periodic with period PI/L
+        var lambda = PI / L * (n - 0.5);  // n-th root lies in ((n-1/2)*PI/L, n*PI/L)
         while (true) {
             lambda += 0.5 * PI / L / 10000.;
-            if (lambda - H_CONV / K * tan(lambda * L) < 0) {
+            if (lambda + H_CONV / K * tan(lambda * L) > 0) {
                 lambdaCache.put(n, lambda);
                 return lambda;
             }
