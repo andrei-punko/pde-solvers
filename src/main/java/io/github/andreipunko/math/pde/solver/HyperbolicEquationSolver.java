@@ -83,7 +83,14 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
 
                         Alpha = eqn.gK(x, t, u) - eqn.gV(x, t, u) * h_2,
                         Beta = eqn.gK(x, t, u) + eqn.gV(x, t, u) * h_2,
-                        Gamma = h2_tau * eqn.gL(x, t, u),
+                        // Minus sign: in the assembled sweep equation the Gamma*(y_i^{j+2} - y_i^j) pair sits on
+                        // the opposite side of the spatial and Delta terms, so this negation is what makes the
+                        // discretized equation match the documented form
+                        // M*Utt + L*Ut = (K*Ux)_x + V*Ux + F (see Equation javadoc).
+                        // With a plus sign the scheme would solve M*Utt - L*Ut = ..., turning damping
+                        // into anti-damping (regression test: HyperbolicEquationSolverDampedDDTest,
+                        // https://github.com/andrei-punko/pde-solvers/issues/16).
+                        Gamma = -h2_tau * eqn.gL(x, t, u),
                         Delta = _2h2_tau2 * eqn.gM(x, t, u);
 
                 A[i] = Alpha;
