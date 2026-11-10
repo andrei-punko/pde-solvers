@@ -4,9 +4,59 @@
 [gradle-nexus/publish-plugin](https://github.com/gradle-nexus/publish-plugin): он создаёт staging-репозиторий,
 загружает артефакты и по **close/release** передаёт их в [Central Publisher](https://central.sonatype.com/publishing).
 
+Перед публикацией нужно один раз настроить учётные данные и GPG-подпись (см. ниже).
+
+## Настройка (один раз)
+
+### 1. Файл ~/.gradle/gradle.properties
+
+В корне репозитория есть `gradle.properties` с пустыми заготовками этих свойств — они нужны только
+как подсказка; реальные значения задаются в пользовательском файле, чтобы не коммитить секреты.
+
+```properties
+# Sonatype Central: User Token (username + password из «View User Tokens» на central.sonatype.com)
+ossrhUsername=your_token_username
+ossrhPassword=your_token_password
+
+# GPG signing
+signing.keyId=YOUR_GPG_KEY_ID
+signing.password=your_gpg_password
+signing.secretKeyRingFile=C:\Users\YourUsername\.gnupg\secring.gpg
+```
+
+Имена `ossrhUsername` / `ossrhPassword` жёстко заданы в `build.gradle` (см. блок `nexusPublishing`).
+Плагин по умолчанию ожидает другие свойства — `sonatypeUsername` / `sonatypePassword`, — но в этом
+проекте они не используются: берутся именно `ossrh*` из файла выше.
+
+### 2. Получение токена Sonatype
+
+1. Зайдите на https://central.sonatype.com/
+2. Войдите в систему
+3. Профиль → **View User Tokens**
+4. Создайте токен для публикации (нужны **Central Portal** токены, не устаревшие чисто «OSSRH» без портала)
+
+### 3. Настройка GPG
+
+1. Сгенерируйте GPG ключ для подписи артефактов (задайте passphrase).
+
+- Linux / macOS: `gpg --generate-key`
+- Windows: **Kleopatra** (состав [Gpg4win](https://www.gpg4win.org/))
+
+2. Если используете `signing.secretKeyRingFile`, убедитесь, что секретный ключ **экспортирован в файл**
+   (классический `secring.gpg` или экспорт из Kleopatra), и путь в `gradle.properties` верный.
+   Современный GPG хранит секреты в `pubring.kbx` и сам `secring.gpg` не создаёт — его нужно
+   экспортировать явно, например: `gpg --export-secret-keys <KEYID> > secring.gpg`.
+
+3. `signing.keyId` — обычно **последние 8 символов** hex-идентификатора ключа (`gpg --list-secret-keys`).
+
+Публичный ключ должен быть доступен для проверки подписи; при необходимости загрузите его на keyserver. Пример
+проверки ключа автора этого репозитория на keyserver:
+[Ubuntu Keyserver](https://keyserver.ubuntu.com/pks/lookup?search=82D90366AA81E56F4B3FFA06030AC339FCA11168&fingerprint=on&op=index).
+Для своего ключа ищите по fingerprint на [keyserver.ubuntu.com](https://keyserver.ubuntu.com/).
+
 ## Основной способ: Gradle
 
-Убедитесь, что в `build.gradle` указана **релизная** версия (не `-SNAPSHOT`), настроены учётные данные и GPG (ниже).
+Убедитесь, что в `build.gradle` указана **релизная** версия (не `-SNAPSHOT`).
 
 Одна команда — загрузка в Sonatype staging, закрытие и релиз в Maven Central:
 
@@ -30,48 +80,6 @@
 автоматически: нужен либо вызов **Manual API** после загрузки (например
 `POST .../manual/upload/defaultRepository/<namespace>` с тем же IP, что и при upload), либо плагин со **staging**
 (**close**), как у `publish-plugin`. Подробности: [OSSRH Staging API](https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/).
-
-## Настройка учетных данных
-
-### 1. Создайте файл ~/.gradle/gradle.properties
-
-```properties
-# Sonatype Central: User Token (username + password из «View User Tokens» на central.sonatype.com)
-ossrhUsername=your_token_username
-ossrhPassword=your_token_password
-
-# GPG signing
-signing.keyId=YOUR_GPG_KEY_ID
-signing.password=your_gpg_password
-signing.secretKeyRingFile=C:\\Users\\YourUsername\\.gnupg\\secring.gpg
-```
-
-Имена `ossrhUsername` / `ossrhPassword` заданы в `build.gradle` явно; плагин по умолчанию ожидает
-`sonatypeUsername` / `sonatypePassword` — у нас используются эти свойства для совместимости с уже настроенным файлом.
-
-### 2. Получение токена Sonatype
-
-1. Зайдите на https://central.sonatype.com/
-2. Войдите в систему
-3. Профиль → **View User Tokens**
-4. Создайте токен для публикации (нужны **Central Portal** токены, не устаревшие чисто «OSSRH» без портала)
-
-### 3. Настройка GPG
-
-1. Сгенерируйте GPG ключ для подписи артефактов (задайте passphrase).
-
-- Linux / macOS: `gpg --generate-key`
-- Windows: **Kleopatra** (состав [Gpg4win](https://www.gpg4win.org/))
-
-2. Если используете `signing.secretKeyRingFile`, убедитесь, что секретный ключ **экспортирован в файл**
-   (классический `secring.gpg` или экспорт из Kleopatra), и путь в `gradle.properties` верный.
-
-3. `signing.keyId` — обычно **последние 8 символов** hex-идентификатора ключа (`gpg --list-secret-keys`).
-
-Публичный ключ должен быть доступен для проверки подписи; при необходимости загрузите его на keyserver. Пример
-проверки ключа автора этого репозитория на keyserver:
-[Ubuntu Keyserver](https://keyserver.ubuntu.com/pks/lookup?search=82D90366AA81E56F4B3FFA06030AC339FCA11168&fingerprint=on&op=index).
-Для своего ключа ищите по fingerprint на [keyserver.ubuntu.com](https://keyserver.ubuntu.com/).
 
 ## Публикация версий (чеклист)
 
