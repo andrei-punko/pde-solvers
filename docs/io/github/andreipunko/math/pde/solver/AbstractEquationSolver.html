@@ -315,7 +315,8 @@ implements <a href="EquationSolver.html" title="interface in io.github.andreipun
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>borderCondition</code> - the boundary condition to process</dd>
-<dd><code>h</code> - spatial step size</dd>
+<dd><code>h</code> - signed step from the border node to its inner neighbour:
+                        <code>+h</code> for the left border, <code>-h</code> for the right border</dd>
 <dd><code>time</code> - current time point</dd>
 <dt>Returns:</dt>
 <dd>KappaNu record containing calculated parameters</dd>
