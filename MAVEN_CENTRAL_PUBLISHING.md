@@ -85,7 +85,13 @@ signing.secretKeyRingFile=C:\Users\YourUsername\.gnupg\secring.gpg
 
 ### 0. Версия и тег
 
-Поменяйте в `build.gradle` версию с `x.y.z-SNAPSHOT` на `x.y.z`, закоммитьте при необходимости, создайте тег `v.x.y.z`.
+Поменяйте в `build.gradle` версию с `x.y.z-SNAPSHOT` на `x.y.z`, закоммитьте при необходимости, создайте и
+запушьте тег `v.x.y.z`:
+
+```bash
+git tag v.x.y.z
+git push origin v.x.y.z   # без push тег останется только локально
+```
 
 ### 1. Переключиться на тег (опционально)
 
