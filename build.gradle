@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'io.github.andrei-punko'
-version = '1.0.5'
+version = '1.0.6-SNAPSHOT'
 
 repositories {
     mavenCentral()
