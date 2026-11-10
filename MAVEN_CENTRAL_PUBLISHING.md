@@ -113,6 +113,36 @@ git checkout v.x.y.z
 ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
 ```
 
+## Типичные проблемы
+
+**`closeSonatypeStagingRepository` / `closeAndReleaseSonatypeStagingRepository` падает (валидация)**
+
+Причины видны в статусе деплоя: [Central Portal → Deployments](https://central.sonatype.com/publishing/deployments).
+Чаще всего: отсутствуют sources/javadoc jar, битые или непроверяемые GPG-подписи, рядом с артефактом нет чек-сумм.
+Локально проверьте состав артефактов через `publishToMavenLocal` (см. чеклист выше).
+
+**401 Unauthorized при publishToSonatype**
+
+Учётные данные не приняты. Проверьте, что в `~/.gradle/gradle.properties` указаны **Central Portal** токены
+(профиль → View User Tokens), а не токены от старого OSSRH, и что имена свойств — `ossrhUsername` / `ossrhPassword`.
+
+**Версия `-SNAPSHOT` не проходит closeAndRelease**
+
+close/release применимы только к релизным версиям: сначала уберите суффикс `-SNAPSHOT` в `build.gradle`.
+Снапшот-репозиторий в `nexusPublishing` настроен отдельно (`snapshotRepositoryUrl`) и работает через
+`./gradlew publishToSonatype` без close.
+
+**После повторных запусков в UI копятся staging-репозитории**
+
+Каждый `publishToSonatype` создаёт новый staging-репозиторий; неудачные остаются открытыми. Их видно в
+[Deployments](https://central.sonatype.com/publishing/deployments), ненужные можно игнорировать или удалить из UI.
+
+**Подпись не проходит проверку (signature / key not found)**
+
+Публичный ключ должен быть доступен на keyserver, иначе портал не может проверить подпись. Локально проверьте,
+что `secring.gpg` действительно содержит секретный ключ (современный GPG хранит его в `pubring.kbx` — экспорт
+см. в разделе «Настройка GPG»), и что `signing.keyId` / `signing.password` верны.
+
 ## Альтернатива: загрузка bundle в портал
 
 Если по каким-то причинам Gradle-публикация недоступна, можно использовать **Publishing By Uploading a Bundle** по
