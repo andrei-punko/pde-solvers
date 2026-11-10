@@ -33,17 +33,17 @@ class ParabolicEquationSolverDRTest {
 
     private final double K = 401;           // Heat transfer rate of Cu
     private final double ALPHA = 1.11e-4;   // Thermal diffusivity coefficient of Cu
-    private final double H_CONV = 6.706;    // Convective heat transfer coefficient
+    private final double H_CONV = 4010;     // Convective heat transfer coefficient: (H/K)*L = 1, so Robin condition matters
     private final double T_MAX = 400;       // Peak value of starting temperature (triangle) profile
 
     private final double L = 0.1;           // Length of rod, m
     private final double TIME = 60;         // Investigated time, sec
 
     private final double h = L / 100.0;         // Space step
-    private final double tau = TIME / 100.0;    // Time step
+    private final double tau = TIME / 1000.0;   // Time step
 
-    // We allow difference between numeric & analytic solution no more than 1% of T_MAX value
-    private final double EPSILON = T_MAX / 100.;
+    // We allow difference between numeric & analytic solution no more than 0.1% of T_MAX value
+    private final double EPSILON = T_MAX / 1000.;
 
     @Test
     void solve() throws IOException {
@@ -128,7 +128,7 @@ class ParabolicEquationSolverDRTest {
     }
 
     /**
-     * Coefficient b_n of a Fourier sine series
+     * Coefficient b_n of eigenfunction expansion: b_n = Integral( U0*sin(lambda_n*x) ) / Integral( sin^2(lambda_n*x) )
      *
      * @param n number of coefficient
      * @return b_n value
@@ -141,7 +141,9 @@ class ParabolicEquationSolverDRTest {
             var x = dx * (i + 0.5);
             integral += getU0(x) * sin(lambda_n(n) * x) * dx;
         }
-        return 2. / L * integral;
+        var lambda = lambda_n(n);
+        var norm = L / 2 - sin(2 * lambda * L) / (4 * lambda);  // Integral of sin^2(lambda*x) over [0,L]
+        return integral / norm;
     }
 
     /**
