@@ -63,10 +63,15 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
                     _u = matrix.get(0, i - 1),
                     u = matrix.get(0, i),
                     u_ = matrix.get(0, i + 1),
-                    x = area.xx(i);
+                    _x = area.xx(i - 1),
+                    x = area.xx(i),
+                    x_ = area.xx(i + 1),
+                    K = eqn.gK(x, 0, u),
+                    _K = (K + eqn.gK(_x, 0, _u)) / 2.,
+                    K_ = (K + eqn.gK(x_, 0, u_)) / 2.;
 
             matrix.set(1, i, u + tau * (eqn.gdU_dt0(x) + t_2 / eqn.gM(x, 0, u) * (
-                    eqn.gK(x, 0, u) / h2 * (_u - 2 * u + u_) + eqn.gV(x, 0, u) / _2h * (u_ - _u) + eqn.gF(x, 0, u))));
+                    (K_ * (u_ - u) - _K * (u - _u)) / h2 + eqn.gV(x, 0, u) / _2h * (u_ - _u) + eqn.gF(x, 0, u))));
         }
 
         // Finite-difference algorithm implementation
@@ -78,11 +83,13 @@ public class HyperbolicEquationSolver extends AbstractEquationSolver<HyperbolicE
                         u = matrix.get(j, i),
                         u_ = matrix.get(j, i + 1),
 
+                        _x = area.xx(i - 1),
                         x = area.xx(i),
+                        x_ = area.xx(i + 1),
                         t = area.tx(j),
 
-                        Alpha = eqn.gK(x, t, u) - eqn.gV(x, t, u) * h_2,
-                        Beta = eqn.gK(x, t, u) + eqn.gV(x, t, u) * h_2,
+                        Alpha = (eqn.gK(x, t, u) + eqn.gK(_x, t, _u)) / 2. - eqn.gV(x, t, u) * h_2,
+                        Beta = (eqn.gK(x, t, u) + eqn.gK(x_, t, u_)) / 2. + eqn.gV(x, t, u) * h_2,
                         // Minus sign: in the assembled sweep equation the Gamma*(y_i^{j+2} - y_i^j) pair sits on
                         // the opposite side of the spatial and Delta terms, so this negation is what makes the
                         // discretized equation match the documented form
